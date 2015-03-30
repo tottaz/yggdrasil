@@ -1,0 +1,13 @@
+/**
+* @version 1.1
+* @package TEAR:FILL 1.1
+ * @copyright (C) 2009 by ThunderBear Design - All rights reserved!
+ * @license http://www.thunderbeardesign.com Copyrighted Commercial Software
+*/
+
+.icon-32-tbearfill_ignore {
+	background-image:url(../icons/unignore.png);
+}
+.icon-32-tbearfill_unignore {
+	background-image:url(../icons/ignore.png);
+}

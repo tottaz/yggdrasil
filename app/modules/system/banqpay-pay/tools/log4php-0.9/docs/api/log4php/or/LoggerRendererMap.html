@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class LoggerRendererMap</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class LoggerRendererMap</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Map class objects to an <a href="../../log4php/or/LoggerObjectRenderer.html">LoggerObjectRenderer</a>.</p>
+<p class="description"><p>Map class objects to an <a href="../../log4php/or/LoggerObjectRenderer.html">LoggerObjectRenderer</a>.</p></p>
+	<ul class="tags">
+				<li><span class="field">since:</span> 0.3</li>
+				<li><span class="field">version:</span> $Revision: 1.4 $</li>
+				<li><span class="field">author:</span> VxR &lt;<a href="mailto:vxr@vxr.it">mailto:vxr@vxr.it</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_log4php_or_LoggerRendererMap_php.html">Program_Root/log4php/or/LoggerRendererMap.php</a> (line <span class="field"><a href="../..//__filesource/fsource_log4php_or_log4php_or_LoggerRendererMap.php.html#a40">40</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+								<div class="var-title">
+					<span class="var-type"><a href="../../log4php/or/LoggerDefaultRenderer.html">LoggerDefaultRenderer</a></span>
+					<a href="#$defaultRenderer" title="details" class="var-name">$defaultRenderer</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$map" title="details" class="var-name">$map</a>
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+											<span class="method-result">LoggerRendererMap</span>
+										<a href="#LoggerRendererMap" title="details" class="method-name">LoggerRendererMap</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addRenderer" title="details" class="method-name">addRenderer</a>
+											(<span class="var-type"><a href="../../log4php/LoggerHierarchy.html">LoggerHierarchy</a></span>&nbsp;<span class="var-name">&$repository</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$renderedClassName</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$renderingClassName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">&$renderedClassName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">&$renderingClassName</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#clear" title="details" class="method-name">clear</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#findAndRender" title="details" class="method-name">findAndRender</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$o</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result"><a href="../../log4php/or/LoggerObjectRenderer.html">LoggerObjectRenderer</a></span>
+										<a href="#getByClassName" title="details" class="method-name">&amp;getByClassName</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$class</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getByObject" title="details" class="method-name">&amp;getByObject</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$o</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result"><a href="../../log4php/or/LoggerDefaultRenderer.html">LoggerDefaultRenderer</a></span>
+										<a href="#getDefaultRenderer" title="details" class="method-name">&amp;getDefaultRenderer</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#put" title="details" class="method-name">put</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$class</span>, <span class="var-type"><a href="../../log4php/or/LoggerObjectRenderer.html">LoggerObjectRenderer</a></span>&nbsp;<span class="var-name">$or</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#rendererExists" title="details" class="method-name">rendererExists</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$class</span>)
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$defaultRenderer" id="$defaultRenderer"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type"><a href="../../log4php/or/LoggerDefaultRenderer.html">LoggerDefaultRenderer</a></span>
+			<span class="var-name">$defaultRenderer</span>
+						(line <span class="line-number"><a href="../..//__filesource/fsource_log4php_or_log4php_or_LoggerRendererMap.php.html#a50">50</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$map" id="$map"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$map</span>
+						(line <span class="line-number"><a href="../..//__filesource/fsource_log4php_or_log4php_or_LoggerRendererMap.php.html#a45">45</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodLoggerRendererMap" id="LoggerRendererMap"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor LoggerRendererMap</span> (line <span class="line-number"><a href="../..//__filesource/fsource_log4php_or_log4php_or_LoggerRendererMap.php.html#a55">55</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor</p>
+<p class="description"><p>Constructor</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">LoggerRendererMap</span>
+		<span class="method-name">
+			LoggerRendererMap
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodaddRenderer" id="addRenderer"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">addRenderer</span> (line <span class="line-number"><a href="../..//__filesource/fsource_log4php_or_log4php_or_LoggerRendererMap.php.html#a70">70</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add a renderer to a hierarchy passed as parameter.</p>
+<p class="description"><p>Add a renderer to a hierarchy passed as parameter. Note that hierarchy must implement getRendererMap() and setRenderer() methods.</p></p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addRenderer
+		</span>
+					(<span class="var-type"><a href="../../log4php/LoggerHierarchy.html">LoggerHierarchy</a></span>&nbsp;<span class="var-name">&$repository</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$renderedClassName</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$renderingClassName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">&$renderedClassName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">&$renderingClassName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../log4php/LoggerHierarchy.html">LoggerHierarchy</a></span>
+				<span class="var-name">&$repository</span><span class="var-description">: a logger repository.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">&$renderedClassName</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">&$renderingClassName</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodclear" id="clear"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">clear</span> (line <span class="line-number"><a href="../..//__filesource/fsource_log4php_or_log4php_or_LoggerRendererMap.php.html#a156">156</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			clear
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodfindAndRender" id="findAndRender"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">findAndRender</span> (line <span class="line-number"><a href="../..//__filesource/fsource_log4php_or_log4php_or_LoggerRendererMap.php.html#a95">95</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Find the appropriate renderer for the class type of the <var>o</var> parameter.</p>
+<p class="description"><p>Find the appropriate renderer for the class type of the <var>o</var> parameter.
+ This is accomplished by calling the <a href="../../log4php/or/LoggerRendererMap.html#methodgetByObject">getByObject()</a> method if <var>o</var> is object or using <a href="../../log4php/or/LoggerDefaultRenderer.html">LoggerDefaultRenderer</a>. Once a renderer is found, it is applied on the object <var>o</var> and the result is returned as a string.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			findAndRender
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$o</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$o</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetByClassName" id="getByClassName"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getByClassName</span> (line <span class="line-number"><a href="../..//__filesource/fsource_log4php_or_log4php_or_LoggerRendererMap.php.html#a136">136</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Search the parents of <var>clazz</var> for a renderer.</p>
+<p class="description"><p>Search the parents of <var>clazz</var> for a renderer.
+ The renderer closest in the hierarchy will be returned. If no renderers could be found, then the default renderer is returned.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../log4php/or/LoggerObjectRenderer.html">LoggerObjectRenderer</a></span>
+		<span class="method-name">
+			&amp;getByClassName
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$class</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$class</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetByObject" id="getByObject"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getByObject</span> (line <span class="line-number"><a href="../..//__filesource/fsource_log4php_or_log4php_or_LoggerRendererMap.php.html#a121">121</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Syntactic sugar method that calls <a href="http://www.php.net/get_class">http://www.php.net/get_class</a> with the class of the object parameter.</p>
+<p class="description"><p>Syntactic sugar method that calls <a href="http://www.php.net/get_class">http://www.php.net/get_class</a> with the class of the object parameter.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			&amp;getByObject
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$o</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$o</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetDefaultRenderer" id="getDefaultRenderer"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getDefaultRenderer</span> (line <span class="line-number"><a href="../..//__filesource/fsource_log4php_or_log4php_or_LoggerRendererMap.php.html#a150">150</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../log4php/or/LoggerDefaultRenderer.html">LoggerDefaultRenderer</a></span>
+		<span class="method-name">
+			&amp;getDefaultRenderer
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodput" id="put"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">put</span> (line <span class="line-number"><a href="../..//__filesource/fsource_log4php_or_log4php_or_LoggerRendererMap.php.html#a166">166</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Register a <a href="../../log4php/or/LoggerObjectRenderer.html">LoggerObjectRenderer</a> for <var>clazz</var>.</p>
+<p class="description"><p>Register a <a href="../../log4php/or/LoggerObjectRenderer.html">LoggerObjectRenderer</a> for <var>clazz</var>.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			put
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$class</span>, <span class="var-type"><a href="../../log4php/or/LoggerObjectRenderer.html">LoggerObjectRenderer</a></span>&nbsp;<span class="var-name">$or</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$class</span>			</li>
+					<li>
+				<span class="var-type"><a href="../../log4php/or/LoggerObjectRenderer.html">LoggerObjectRenderer</a></span>
+				<span class="var-name">$or</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodrendererExists" id="rendererExists"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">rendererExists</span> (line <span class="line-number"><a href="../..//__filesource/fsource_log4php_or_log4php_or_LoggerRendererMap.php.html#a175">175</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			rendererExists
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$class</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$class</span>			</li>
+				</ul>
+		
+		
+	</div>
+						
+		</div>
+	</div>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Tue,  9 Dec 2003 23:49:49 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.2.2</a>
+	</p>
+	</div></body>
+</html>

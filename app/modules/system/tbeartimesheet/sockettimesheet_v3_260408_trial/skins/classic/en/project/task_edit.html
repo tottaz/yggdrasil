@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{PAGE_TITLE}</title>
+{__CSS_GLOBAL__}
+<style type="text/css">@import url('{SKINROOT}/javascript/{BROWSER}/calendar/calendar-blue.css');</style>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/calendar/calendar.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/calendar/calendar-en.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/calendar/calendar-setup.js"></script>
+
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/helpScript.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/tabScript.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/functions.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/ajaxScript.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/fieldSelection.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/treeview.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/dynifs.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/tiny_mce/tiny_mce.js"></script>
+
+<script>
+// AJAX CORNER
+
+function ajaxParser(){
+	if(request.readyState == 1){
+		document.getElementById('title').innerHTML = oriMessage + '&nbsp;&nbsp;&nbsp;<font id="executing"><img align="top" src="{SKINROOT}/images/executing.gif">Executing...</font>';
+	}
+	if(request.readyState == 4){ 
+		var result = request.responseText.split('regexAJAX');
+		document.getElementById('title').innerHTML = oriMessage;
+
+		if(document.getElementById('action').value == 'gencode') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('code').value = result[1];
+		}
+		if(document.getElementById('action').value == 'update') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('title').innerHTML = result[1];
+			document.getElementById('duration').innerHTML = result[2];
+			oriMessage = result[1];
+			document.getElementById('reload_structure').value = 1;
+		}
+		if(document.getElementById('action').value == 'update_members') {
+			submitMultiUnSelect(document.getElementById('source'),document.getElementById('target'));
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('allowedSelection').innerHTML = result[1];
+			document.getElementById('deniedSelection').innerHTML = result[2];
+			document.getElementById('member_detailsAJAX').innerHTML = result[3];
+			document.getElementById('task_permission').style.display = result[4];
+			document.getElementById('member_details').style.display = result[4];
+		}
+		if(document.getElementById('action').value == 'reload_structure') {
+			document.getElementById('listingPrjStructure').innerHTML = result[0];
+			document.getElementById('reload_structure').value = 0;
+		}
+		if(document.getElementById('action').value == 'update_permission') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			submitMultiUnSelect(document.getElementById('allowed'),document.getElementById('denied'));
+		}
+		if(document.getElementById('action').value == 'update_member_details') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+		}
+		if(document.getElementById('action').value == 'add_notes') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('listingNotesAJAX').innerHTML = result[1];
+		}
+		
+		if(document.getElementById('action').value == 'gethelp') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('helptitle').innerHTML = "Context Help";
+			document.getElementById('helpdata').innerHTML = result[1];
+			if(!document.getElementById('nohelp'))
+				document.getElementById('helpdetected').value = 1;			
+		}
+		if(document.getElementById('action').value == 'getlog') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('logtitle').innerHTML = "Log Data";
+			document.getElementById('logdata').innerHTML = result[1];
+		}
+
+		//CLEAR THE RELEVANT TEXTBOXES AFTER AJAX
+		document.getElementById('action').value = '';
+		enableButtons(document.forms[0]);
+		activateEditor('notes')
+	}
+	formParams = '';
+}
+
+function reloadStructure() {
+	if(document.getElementById('reload_structure').value == 1) {
+		ajaxMain(document.forms[0],'reload_structure');
+	}
+}
+
+function ajaxMain(formName,action){
+	if(action == 'update_members') {
+		submitMultiSelect(document.getElementById('source'),document.getElementById('target'),false);
+	}
+	if(action == 'update') {
+		if(!document.getElementById('name').value ||
+			!document.getElementById('code').value ||
+			!document.getElementById('start_date').value ||
+			!document.getElementById('end_date').value) {
+				alert("Enter Value In Required Fields (In Red)");
+				return false;
+		}
+		if(!checkStartEndDate('start_date','end_date'))
+			return false;
+	}
+	if(action == 'update_permission') {
+		submitMultiSelect(document.getElementById('denied'),document.getElementById('allowed'),false);
+	}
+	if(action == 'add_notes') {
+		deactivateEditors();
+		if(!document.getElementById('notes').value) {
+			alert('Enter Value in Notes');
+			activateEditor('notes');
+			return false;
+		}		
+	}
+	deactivateEditors();
+
+	document.getElementById('action').value = action;
+	getFormFields(formName);
+	if(formParams == '') {
+		for (i=0; i<formName.elements.length; i++) {
+			if(formName.elements[i].id) {
+				if(formName.elements[i].type == 'checkbox' || formName.elements[i].type == 'radio') {
+					 if(formName.elements[i].checked) {
+						formParams = formParams + "&" + formName.elements[i].id + "=" + encodeURIComponent(formName.elements[i].value);
+					}	
+				}
+				else {
+					formParams = formParams + "&" + formName.elements[i].id + "=" + encodeURIComponent(formName.elements[i].value);
+				}	
+			}	
+			else if(formName.elements[i].name) {
+				if(formName.elements[i].type == 'checkbox' || formName.elements[i].type == 'radio') {
+					 if(formName.elements[i].checked) {
+						formParams = formParams + "&" + formName.elements[i].name + "=" + encodeURIComponent(formName.elements[i].value);
+					}	
+				}
+				else {	
+					formParams = formParams + "&" + formName.elements[i].name + "=" + encodeURIComponent(formName.elements[i].value);
+				}	
+			}	
+		}
+	}
+
+	request.open('POST', '{AJAX_FORM_POST}', true); //THIS ONE FOR POST
+	request.onreadystatechange = ajaxParser;
+	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); //THIS ONE ADDED FOR POST ONLY
+	request.send(formParams); //THIS ONE FOR POST
+}
+// AJAX CORNER
+</script>
+<script>
+function enableTime(status) {
+	if(status) {
+		var statusObj = document.getElementById("status_radio");
+		if(statusObj.childNodes != null) { 
+			for(var i=0; i < statusObj.childNodes.length; i++) {
+				if(statusObj.childNodes[i].value == 'open')
+					statusObj.childNodes[i].checked = true;
+			}
+		}
+		showPropagateOpen('open');
+	}	 
+}
+function disableTime(status) {
+	if(status) {
+		document.getElementById('time_entry').checked = false;
+		showPropagateOpen('closed');
+	}
+}
+</script>
+<script>
+function showPropagateOpen(status) {
+	if(status == "open") {
+		document.getElementById('show_propagate_open').style.display='';
+	}
+	else if(status == "closed") {
+		document.getElementById('propagate_open').checked=false;
+		document.getElementById('show_propagate_open').style.display='none';
+	}
+}
+</script>
+</head>
+
+<body onload="showTab();">
+<table width="100%" cellpadding="0" cellspacing="2">
+	<tr>
+		<td><img src="{SKINROOT}/images/logo.gif" /></td>
+		<td height="100%" valign="bottom">
+			<table align="right" height="100%" cellspacing="5" cellpadding="0">
+			<tr>
+				<td class="td_top">Logged In: {FULL_NAME} |</td>
+				<td class="td_top">{ADMIN_USER_LINK}</td>
+				<td class="td_top">{LOGOUT_LINK}</td>
+			</tr></table>
+		</td>
+	</tr>
+	<tr><td class="spacer" colspan="2"></td></tr>
+</table>
+	
+<div class="div_top_menu">
+	{DIV_TOP_MENU}
+</div>
+	
+<div class="div_top_menu_foot"></div>
+<div id='submenu' class="div_sub_menu" align="right">Clock & Date Container</div>
+<script>startclock();</script>
+
+<table width="100%" height="100%"><tr><td nowrap valign="top">
+	<table width="100%" height="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="menu_table_parent">
+		<table class="menu_table_container">
+		<tr><td>
+			{SIDE_MENU}
+		</td></tr>
+		<tr><td>
+			<div id="menuAJAX" name="menuAJAX">
+				{QUICKLINKS_MENU}
+			</div>
+		</td></tr>
+		</table>
+		</td>
+		<td class="main_table">
+		<table width="100%" class="module_page_table">
+			<tr><td>
+				<H1 id='title' name='title'>{H1_TITLE}</H1>
+				<div id="div_breadcrumbs" name="div_breadcrumbs">{BREADCRUMBS}</div>
+				<div id="{MESSAGE_ID}" name="{MESSAGE_ID}" {MESSAGE_BOX}>{MESSAGE}</div>
+			</td></tr>
+			<tr><td height="10"></td></tr>
+			<tr><td nowrap>
+				<ul id="tablist" style="display:none">
+					<li><span class="current" onmouseover="overtab('sc1',this)" onmouseout="outtab('sc1',this)" onclick="return expandcontent('sc1', this)"><img title='tabimage' src="{SKINROOT}/images/{MENU_ICON}" align="absmiddle" />&nbsp;Configuration</span></li>
+					<li><span name='task_members' id='task_members'  onmouseover="overtab('sc2',this)" onmouseout="outtab('sc2',this)" onclick="return expandcontent('sc2', this)"><img title='tabimage' src="{SKINROOT}/images/members.gif" align="absmiddle" />&nbsp;Members</span></li>
+					<li><span onmouseover="overtab('sc3',this)" onmouseout="outtab('sc3',this)" onclick="reloadStructure();return expandcontent('sc3', this)"><img title='tabimage' src="{SKINROOT}/images/project_structure.gif" align="absmiddle" />&nbsp;Structure</span></li>
+					<li><span onmouseover="overtab('sc4',this)" onmouseout="outtab('sc4',this)" onclick="return expandcontent('sc4', this)"><img title='tabimage' src="{SKINROOT}/images/documents.gif" align="absmiddle" />&nbsp;Documents</span></li>
+					<li><span onmouseover="overtab('sc8',this)" onmouseout="outtab('sc8',this)" onclick="return expandcontent('sc8', this)"><img title='tabimage' src="{SKINROOT}/images/notes.gif" align="absmiddle" />&nbsp;Notes</span></li>
+					<li><span onmouseover="overtab('logsection',this)" onmouseout="outtab('logsection',this)" onclick="getLog();return expandcontent('logsection', this)"><img title='tabimage' src="{SKINROOT}/images/log.gif" align="absmiddle" />&nbsp;Log</span></li>
+					<li><span onmouseover="overtab('helpsection',this)" onmouseout="outtab('helpsection',this)" onclick="getHelp();return expandcontent('helpsection', this)"><img title='tabimage' src="{SKINROOT}/images/help.gif" align="absmiddle" />&nbsp;Help</span></li>
+				</ul>
+	
+				<DIV id="tabcontentcontainer">
+					<form name='addupdate' id='addupdate' {FORM_ACTION} method="post" onsubmit="submitonce(this)">
+					<input name="addupdateID" id="addupdateID" type="hidden" value="{ID}" />
+					<input name="parentType" id="parentType" type="hidden" value="{PARENT_TYPE}" />
+					<input name="task_parentID" id="task_parentID" type="hidden" value="{TASK_PARENT_ID}" />
+					<input name="projectID" id="projectID" type="hidden" value="{PROJECT_ID}" />
+					<input name="update_title" id="update_title" type="hidden" value="{UPDATE_TITLE}" />
+					<input name="action" id="action" type="hidden" />
+					<input name="submit_action" id="submit_action" type="hidden" value="{SUBMIT_ACTION}" />
+					<input name="messageID" id="messageID" value="{MESSAGE_ID}" type="hidden" />
+					<input name="reload_structure" id="reload_structure" type="hidden"/>
+					<input name="RoleID" id="RoleID" type="hidden"/>
+					<input name="UserID" id="UserID" type="hidden"/>
+					<input name="DepartmentID" id="DepartmentID" type="hidden"/>
+					<input name="task_type" id="task_type" type="hidden" value="{TASK_TYPE}"/>
+					<input name="helpdetected" id="helpdetected" type="hidden"/>
+					<input name="LogType" id="LogType" type="hidden" value="{LOGTYPE}"/>
+					<input name="LogAction" id="LogAction" type="hidden" value="{LOGACTION}"/>
+					<div id="sc1" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/{MENU_ICON}" align="absmiddle" />&nbsp;<span id='subtitle'>{H1_TITLE}</span></legend>
+							<div id="listingOutputAJAX">
+								<table nowrap cellspacing="0" cellpadding="3">
+									<tr > 
+										<th colspan="3">{TASK_TYPE} Information</th><th align="right"><input id="milestone" name="milestone" value='1' type="checkbox" {MILESTONE}>Milestone</th>
+									</tr>
+									<tr > 
+										<td id="field_required">{TASK_TYPE} Name:</td>
+										<td id="{TASK_TYPE} Name"><input class="textbox" type="text" id="name" name="name" value="{TASK_NAME}" size="30" maxlength="200" onKeyPress="return keyPress(event,'normaltext')"></td>
+										<td id="field_required">{TASK_TYPE} Code:</td>
+										<td id="{TASK_TYPE} Code"><input class="textbox" type="text" id="code" name="code" value="{TASK_CODE}" size="20" maxlength="20" onKeyPress="return keyPress(event,'normaltext')"> <a href="#"><img onclick="ajaxMain(document.forms[0],'gencode')" border="0" align="absmiddle" src="{SKINROOT}/images/codegen.gif"></a></td>
+									</tr>
+									<tr>		
+									  <td id="field_required">Start Date:</td>
+									  <td id="{TASK_TYPE} Start Date"><input value="{TASK_START_DATE}" class="textbox" id="start_date" name="start_date" type="text" size="12" maxlength="12" readonly> <img align="absmiddle" id="start_date_icon" src="{SKINROOT}/images/calendar.gif"></td>
+									  <td id="field_required">End Date:</td>
+									  <td id="{TASK_TYPE} End Date"><input value="{TASK_END_DATE}" class="textbox" id="end_date" name="end_date" type="text" size="12" maxlength="12" readonly> <img align="absmiddle" id="end_date_icon" src="{SKINROOT}/images/calendar.gif"></td>
+									<tr>		
+									  <td>Duration:</td>
+									  <td id="duration">{DURATION}</td>
+									  <td>Progress:</td>
+									  <td>{PROGRESS}</td>
+									</tr>
+									</tr>
+									<tr> 
+										<td id='field_textarea'>Description:</td>
+										<td colspan=3><textarea class="textbox" id="description" name="description" cols="65" rows="5" onKeyPress="return keyPress(event,'textarea')">{TASK_DESCRIPTION}</textarea></td>
+									</tr>
+									<tr  > 
+										<td>Phase:</td>
+										<td><select class="textbox" id="phase" name="phase">{DROPDOWN_TASK_PHASE}</select></td>
+										<td>{TASK_TYPE} Status:</td>
+										<td id="status_radio">
+											<input {TASK_PARENT_OPEN} onclick="showPropagateOpen('open')" type="radio" id="status" name="status" value="open" {TASK_OPEN}> Open 
+											<input onclick="disableTime(this.checked)" type="radio" id="status" name="status" value="closed" {TASK_CLOSED}> Closed
+										</td>
+									</tr>
+									<tr  >
+										<td>Billing Status:</td>
+										<td><input type="radio" id="billing" name="billing" value="billable" {STATUS_BILLABLE}>Billable <input type="radio" id="billing" name="billing" value="non_billable" {STATUS_NB}>Non-Billable <input type="radio" id="billing" name="billing" value="both" {STATUS_BOTH}>Both</td>
+										<td>Actual Hours:</td>
+										<td>{TASK_ACTUAL_HOUR}</td>
+									</tr>
+									<tr class='tr' >
+										<td {SHOW_TIMEENTRY}>Allow Time Entry:</td>
+										<td {SHOW_TIMEENTRY}><input onclick="enableTime(this.checked)" id="time_entry" name="time_entry" value='1' type="checkbox" {CHECKBOX_TIME_ENTRY}></td>
+									</tr>
+									<tr class='tr' {SHOW_TASK_PARENT}>
+										<td colspan=4 nowrap>Change {TASK_TYPE} Parent:&nbsp;
+										<select class="textbox" id="taskparent" name="taskparent">
+											{DROPDOWN_TASK_PARENT}
+										</select>
+										</td>
+									</tr>
+									<tr class='tr'  id="show_propagate_open" {SHOW_PROPAGATE_OPEN}>
+										<td colspan=4 nowrap>
+											<input type="checkbox" id="propagate_open" name="propagate_open" value="1"> Propagate Open Status To All Child?
+										</td>
+									</tr>
+								</table>	
+							</div>
+							<div id="listingButtonsAJAX">{SHOW_BUTTONS}</div>
+						</fieldset>
+					</div>
+					<div id="sc2" class="tabcontent">
+					<table nowrap cellspacing="0" cellpadding="3" width=10% height="10%"><tr><td valign="top">
+						<fieldset><legend><img src="{SKINROOT}/images/members.gif" align="absmiddle" />&nbsp;<span id='subtitle'>Current {TASK_TYPE} Members</span></legend>
+							<div>
+								<table nowrap cellspacing="0" cellpadding="3">
+									<tr><th colspan=3>Details</th></tr>
+									<tr><td colspan=3>
+										<table width="10" border="0" cellspacing="0" cellpadding="3" class='no-border'>
+											<tr class="td">
+												<td nowrap class="bold">
+													Selected <BR />
+													<div id='selectSelected'>
+														<select class="textbox" name="target[]" size="5" WIDTH=100 multiple="multiple" id="target">
+														{CURRENT_TEAM}
+														</select>
+													</div>
+												</td>
+												<td nowrap>
+													<table class="no-border" cellpadding="4">
+														<tr><td align="right" nowrap><a href=#><img title='Move Selection To The Left' border=0 src="{SKINROOT}/images/left_move.gif" onclick="javascript:copyToList('source','target');" /></a></td></tr>
+														<tr><td align="right" nowrap><a href=#><img title='Move Selection To The Right' border=0 src="{SKINROOT}/images/right_move.gif" onclick="javascript:copyToList('target','source');" /></a></td></tr>
+													</table>
+												</td>
+												<td nowrap class="bold">
+													Available<BR />
+													<div id='selectAvailable'>
+														<SELECT class="textbox" NAME="source[]" SIZE="5" multiple="multiple" WIDTH=100 id="source" >
+														{AVAILABLE_TEAM}
+														</SELECT>
+													</div>
+												</td>
+											</tr>
+										</table>	
+									</td></tr>															
+								</table>						
+								<input name="targetValue" id="targetValue" type="hidden" />
+								<input name="sourceValue" id="sourceValue" type="hidden" />
+								<table class="no-border"><tr><td nowrap>
+								<input type="checkbox" id="propagate_member" name="propagate_member" value="1"> Propagate current members to all child?<BR><BR>
+								<input onclick="ajaxMain(document.forms[0],'update_members');" class="buttons" onmouseover="this.className='buttons_over'" onmouseout="this.className='buttons'" id="update_members" name="update_members" type="button" value="Update Members"><BR><BR>
+								</td></tr></table>
+							</div>
+						</fieldset>
+						</td><td valign="top">
+						<fieldset id='task_permission' {SHOW_MEMBER_DETAILS}><legend><img src="{SKINROOT}/images/members.gif" align="absmiddle" />&nbsp;<span id='subtitle'>Current {TASK_TYPE} Permission</span></legend>
+							<div>
+								<table nowrap cellspacing="0" cellpadding="3">
+									<tr><th colspan=3>Details</th></tr>
+									<tr><td colspan=3>
+										<table width="10" border="0" cellspacing="0" cellpadding="3" class='no-border'>
+											<tr class="td">
+												<td nowrap class="bold">
+													Allowed <BR />
+													<div id='allowedSelection'>
+														<select class="textbox" name="allowed[]" size="5" WIDTH=100 multiple="multiple" id="allowed">
+															{GET_PERMISSION_ALLOW}
+														</select>
+													</div>
+												</td>
+												<td nowrap>
+													<table class="no-border" cellpadding="4">
+														<tr><td align="right" nowrap><a href=#><img title='Move Selection To The Left' border=0 src="{SKINROOT}/images/left_move.gif" onclick="javascript:copyToList('denied','allowed');" /></a></td></tr>
+														<tr><td align="right" nowrap><a href=#><img title='Move Selection To The Right' border=0 src="{SKINROOT}/images/right_move.gif" onclick="javascript:copyToList('allowed','denied');" /></a></td></tr>
+													</table>
+												</td>
+												<td nowrap class="bold">
+													Denied<BR />
+													<div id='deniedSelection'>
+														<SELECT class="textbox" NAME="denied[]" SIZE="5" multiple="multiple" WIDTH=100 id="denied" >
+															{GET_PERMISSION_DENY}
+														</SELECT>
+													</div>
+												</td>
+											</tr>
+										</table>	
+									</td></tr>															
+								</table>						
+								<table class="no-border"><tr><td nowrap>
+								<input type="checkbox" id="propagate_permission" name="propagate_permission" value="1"> Propagate current allow/deny rules to all child?<BR><BR>
+								<input onclick="ajaxMain(document.forms[0],'update_permission');" class="buttons" onmouseover="this.className='buttons_over'" onmouseout="this.className='buttons'" id="update_permission" name="update_permission" type="button" value="Update Permission">
+								</td></tr></table>
+							</div>
+						</fieldset>
+						</td></tr></table>
+						<fieldset id='member_details' {SHOW_MEMBER_DETAILS}><legend><img src="{SKINROOT}/images/members.gif" align="absmiddle" />&nbsp;<span id='subtitle'>Member Details</span></legend>
+							<div id="member_detailsAJAX">
+								<table nowrap cellspacing="0" cellpadding="3" width="50%">
+										<th nowrap>Name</th>
+										<th nowrap>Estimated Hours</th>
+										<th nowrap>Total Hours</th>
+										{MEMBER_DETAILS}
+								</table>					
+							</div>
+							<div><input onclick="ajaxMain(document.forms[0],'update_member_details');" class="buttons" onmouseover="this.className='buttons_over'" onmouseout="this.className='buttons'" id="update_details" name="update_details" type="button" value="Update Member Details"></div>
+						</fieldset>					
+					</div>
+					<div id="sc3" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/project_structure.gif" align="absmiddle" />&nbsp;<span id='subtitle'>Current Project Structure</span></legend>
+							<div>
+								<table nowrap cellspacing="0" cellpadding="3" class="no-border">
+									<div id="listingPrjStructure">
+										{PROJECT_DATA}
+									</div>	
+								</table>	
+							</div>
+						</fieldset>
+					</div>
+					<div id="sc4" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/documents.gif" align="absmiddle" />&nbsp;<span id='subtitle'>Documents - Max Upload Size {MAX_FILE_SIZE}</span></legend>
+							<div id="listingOutputAJAX">
+								<iframe width="100%" height="100%"
+									id="fileUpload" name="fileUpload"
+									src="task_editFILE.php"
+									onload="DYNIFS.resize('fileUpload',{INITIAL_HEIGHT})"
+									scrolling="auto" frameborder="0"
+									style="width:100%;height:100%;">
+								Sorry, your browser doesn't seem to support IFrames!
+								</iframe>
+							</div>
+						</fieldset>
+					</div>
+					<div id="sc8" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/notes.gif" align="absmiddle" />&nbsp;<span id='subtitle'>{TASK_TYPE} Notes</span></legend>
+							<div id="listingNotesAJAX">
+								{NOTES}
+							</div>
+							<div>
+								<table nowrap cellspacing="0" cellpadding="5" class="no-border">
+									<tr><td><textarea id="notes" name="notes" class="textbox" cols="50" rows="7" onKeyPress="return keyPress(event,'textarea')"></textarea>
+									<BR /><input id="enableDisableRTE" name="enableDisableRTE" onclick="toggleEditor('notes')" type="checkbox" value="" checked /> Enable / Disable RTE
+									</td></tr>
+									<tr><td><input onclick="ajaxMain(document.forms[0],'add_notes');" class="buttons" onmouseover="this.className='buttons_over'" onmouseout="this.className='buttons'" id="add_notes" name="add_notes" type="button" value="Add Notes"></td></tr>											
+								</table> 
+							</div>
+						</fieldset>
+					</div>
+					<div id="logsection" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/log.gif" align="absmiddle" /><span id='logtitle'>No Log Data In Session</span></legend>											
+						<div id="logdata">
+							<BR />
+							<input onclick='getLog()' id="submitButton" name="submitButton" type="button" class="buttons" onmouseover="this.className='buttons_over'" onmouseout="this.className='buttons'" value="Refresh Log Data">
+						</div>
+						</fieldset>	
+					</div>
+					<div id="helpsection" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/help.gif" align="absmiddle" /><span id='helptitle'>No Context Help Data In Session</span></legend>											
+						<div id="helpdata">
+							<BR />
+							<input onclick='getHelp()' id="submitButton" name="submitButton" type="button" class="buttons" onmouseover="this.className='buttons_over'" onmouseout="this.className='buttons'" value="Refresh Context Help">
+						</div>
+						</fieldset>	
+					</div>
+					</form>
+				</DIV>		
+			</td></tr>
+		</table>
+		</td> 
+	</tr>
+	</table>
+</td></tr></table>
+
+<script>var oriMessage = document.getElementById('title').innerHTML;</script>
+<script type="text/javascript">
+	Calendar.setup(
+		{
+			inputField 	: 	"start_date",
+			ifFormat	:	"{DATE_FORMAT}",
+			button		:	"start_date_icon"	
+		}
+	);
+	Calendar.setup(
+		{
+			inputField 	: 	"end_date",
+			ifFormat	:	"{DATE_FORMAT}",
+			button		:	"end_date_icon"	
+		}
+	);
+</script>
+<script>document.getElementById('fileUpload').style.height='1600px';</script>
+<script>activateEditor('notes')</script>
+</body>
+</html>

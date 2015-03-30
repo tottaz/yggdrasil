@@ -1,0 +1,87 @@
+<?php
+
+// HAWHAW example: HAW_select and HAW_hidden
+// Norbert Huffschmid
+// 1.5.2004
+
+include("zetapay/core/mobile/hawhaw.inc");  // Could need some checking if this exists..	
+
+if (!isset($_REQUEST['pass']))
+{
+  // pass 1
+
+  $myPage = new HAW_deck("Example 5");
+  $myPage->use_simulator();
+
+  $myForm = new HAW_form($_SERVER['PHP_SELF']); 
+
+  $myText = new HAW_text("What do you want to eat?");
+  $mySelect = new HAW_select("input1", HAW_SELECT_POPUP);
+  $mySelect->add_option("Pizza", "pizza");
+  $mySelect->add_option("Sushi", "sushi");
+  $mySelect->add_option("Pasta", "pasta");
+  $mySelect->add_option("Sandwich", "sandwich");
+  
+  $myHidden = new HAW_hidden("pass", "2");
+  $mySubmit = new HAW_submit("Continue");
+
+  $myForm->add_text($myText);
+  $myForm->add_select($mySelect);
+  $myForm->add_hidden($myHidden);
+  $myForm->add_submit($mySubmit);
+
+
+  $myPage->add_form($myForm);
+
+  $myPage->create_page();
+}
+
+if (isset($_REQUEST['pass']) && ($_REQUEST['pass'] == 2))
+{
+  // 1st input was entered - pass 2
+
+  $myPage = new HAW_deck("Example 5");
+  $myPage->use_simulator();
+
+  $myForm = new HAW_form($_SERVER['PHP_SELF']); 
+
+  $myText = new HAW_text("And what do you want to drink?");
+
+  $mySelect = new HAW_select("input2", HAW_SELECT_SPIN);
+  $mySelect->add_option("Coke", "coke");
+  $mySelect->add_option("Beer", "beer");
+  $mySelect->add_option("Wine", "wine");
+  
+  $myHidden1 = new HAW_hidden("input1", $_REQUEST['input1']);
+  $myHidden2 = new HAW_hidden("pass", "3");
+
+  $mySubmit = new HAW_submit("Continue");
+                             
+  $myForm->add_text($myText);
+  $myForm->add_input($mySelect);
+  $myForm->add_hidden($myHidden1);
+  $myForm->add_hidden($myHidden2);
+  $myForm->add_submit($mySubmit);
+
+  $myPage->add_form($myForm);
+
+  $myPage->create_page();
+}
+
+if (isset($_REQUEST['pass']) && ($_REQUEST['pass'] == 3))
+{
+  // 2nd input was entered - 1st input was transmitted again - pass 3
+
+  $myPage = new HAW_deck("Example 5", HAW_ALIGN_CENTER);
+  $myPage->use_simulator();
+
+  $myText1 = new HAW_text("You ordered " . $_REQUEST['input1'] . " with " . $_REQUEST['input2'] . ".",
+                          HAW_TEXTFORMAT_BOLD);
+  $myText2 = new HAW_text("Your order will arrive in 30 minutes.");
+  $myPage->add_text($myText1);
+  $myPage->add_text($myText2);
+
+  $myPage->create_page();
+}
+
+?>

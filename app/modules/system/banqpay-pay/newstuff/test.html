@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<META HTTP-EQUIV="Expires" CONTENT="Fri, Jan 01 1900 00:00:00 GMT">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META http-equiv="content-language" content="en">
+<META name="author" content="">
+<META HTTP-EQUIV="Reply-to" CONTENT="@.com">
+<META name="generator" content="PHPEd 3.1">
+<META NAME="description" CONTENT="">
+<META name="keywords" content="">
+<META NAME="Creation_Date" CONTENT="08/15/2000">
+<META name="revisit-after" content="15 days">
+<title>Untitled</title>
+<link rel="stylesheet" type="text/css" href="my.css">
+</head>
+<body>
+<?
+<script language="javascript1.2">
+
+var newWin3 = null;
+function doContactID() {
+    var ContactID = document.forms.BoothUpd.ContactID.value;
+    var URL = '../code/GetVals.php?Filename=Contacts&IDname=ContactID&IDval=' + ContactID + '&Fields=Company,Type,RepID';
+    var params = 'top=20,left=80,width=300,height=200,minimized=yes,resizable=yes,
+    scrollbars=no,titlebar=no,menubar=no,status=no';
+    if (!newWin3 || newWin3.closed) {
+        newWin3 = window.open(URL,"",params);
+    }
+    if (newWin3.opener == null) {
+        newWin3.opener = self;
+    }
+    newWin3.focus();
+}
+
+
+function checkContactID() {
+    var ContactID = document.forms.Form1.ContactID.value;
+    var WasContactID = document.forms.Form1.WasContactID.value;
+    if (ContactID != WasContactID) {
+        doContactID();
+    }
+}
+</script>
+?>
+</body>
+</html>

@@ -1,0 +1,376 @@
+/*
+* ***** BEGIN LICENSE BLOCK *****
+* Version: MPL 1.1
+*
+* The contents of this file are subject to the Mozilla Public
+* License Version 1.1 ("License"); you may not use this file except in
+* compliance with the License. You may obtain a copy of the License at
+* http://www.zimbra.com/license
+*
+* Software distributed under the License is distributed on an "AS IS"
+* basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+* the License for the specific language governing rights and limitations
+* under the License.
+*
+* The Original Code is: Zimbra AJAX Toolkit.
+*
+* The Initial Developer of the Original Code is Zimbra, Inc.
+* Portions created by Zimbra are Copyright (C) 2005 Zimbra, Inc.
+* All Rights Reserved.
+*
+* Contributor(s):
+*
+* ***** END LICENSE BLOCK *****
+*/
+
+
+ /*
+* Conventions
+*
+* - Classes that start with "Dwt" have a corollary Javascript object.
+* - Use one line if there is only one selector and one declaration. Otherwise, indent each declaration on its own line.
+* - Group selectors to avoid repetition of styles, as appropriate (ie group within a section). That means you may have
+*   to look at more than one definition to figure out all the applicable styles, but it lets you give the styles a 
+*   hierarchy. That way, you're more likely to need to change a style in just one place.
+* - Use shorthand styles when possible (font, margin, padding, etc).
+* - When grouping selectors that correspond to our Javascript objects, show inheritance by using a different line for
+*   each level of inheritance. CSS doesn't care about our object hierarchy, but doing that enhances readability.
+* - Use decimal RGB values for colors that don't have names.
+* - Modifiers are lower case, whether they're a class (eg .activated) or tacked on (eg -selected).
+*
+* Classes are laid out in the following general order:
+*	- HTML elements
+*	- General app stuff (shell, overlays, banner)
+*	- Widgets that tend toward abstract (minimal subclassing), such as tool tips and sashes
+*	- Heavier use widgets such as buttons and dialogs
+*		- General widget stuff, then specialized subclasses
+*	- List views, with common stuff first
+*	- Other views (lots of them)
+*	- Miscellaneous stuff that multiple apps might use (objects, autocomplete)
+*	- Modifiers
+*
+* Many of the Dwt widgets don't have corresponding classes here, since they are only subclassed. If you create and
+* display one of those widgets, you'll have to add a class for it.
+*/
+
+/* 
+* HTML elements - use for global declarations
+*/
+
+/* Global ELEMENT declarations */
+P, TD, DIV, SPAN, SELECT, INPUT, TEXTAREA {
+	font-size: 8pt;
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+}
+
+BODY {
+	margin: 0px;
+}
+
+FORM {
+	margin: 0;
+	padding: 0;
+}
+
+/* Horizontal separator */
+.horizSep {
+	border-bottom: 1px solid rgb(102, 102, 102);
+        margin: 10px 0;
+	width: 100%;
+}
+/* Vertical separator */
+.vertSep {
+	border-left: 1px ridge rgb(200, 200, 200);
+	height: 100%;
+}
+
+/* Vertical space */
+DIV.vSpace {
+	margin: 10px 0;
+}
+
+/* 
+* Drag N Drop
+*/
+
+.DndIcon {
+	filter:alpha(opacity=70)
+		   progid:DXImageTransform.Microsoft.Shadow(color=black,direction=135,strength=8);
+	-moz-opacity:0.7;
+	opacity:0.7;
+}
+
+.DropNotAllowed {
+	border: 2px solid red;
+	background-color: white;	
+	filter:alpha(opacity=70)
+		   progid:DXImageTransform.Microsoft.Shadow(color=black,direction=135,strength=8);
+	-moz-opacity:0.7;
+	opacity:0.7;	
+}
+.DropAllowed {
+	border: 2px solid green;
+	background-color: white;	
+	filter:alpha(opacity=70)
+		   progid:DXImageTransform.Microsoft.Shadow(color=black,direction=135,strength=8);
+	-moz-opacity:0.7;
+	opacity:0.7;
+}
+
+
+.MainShell {
+	background-color: rgb(37, 87, 173);
+    width: 100%;
+    height: 100%;
+}
+
+.BusyOverlay table, .VeilOverlay table {
+	filter:alpha(opacity=50);
+	-moz-opacity:0.5;
+	opacity:0.5;
+}
+.BusyOverlay table {
+	cursor: wait;
+	background-color: transparent;
+}
+.VeilOverlay table {
+	cursor: not-allowed;
+	background-color: white;
+}
+.CurtainOverlay table {
+	background-color: rgb(37, 87, 173);
+}
+
+/*
+* for tooltips
+*/
+.hover_frame_table 		{	border-collapse:collapse;	padding:0;	}
+.hover_spacer_TL	 	{	width:12;		height:12;}
+.hover_spacer_T 		{	width:100%;		height:16;}
+.hover_spacer_TR	 	{	width:20;		height:16;}
+.hover_spacer_L	 		{	width:20;		height:100%;}
+.hover_spacer_R 		{	width:20;		height:100%;}
+.hover_spacer_BL	 	{	width:20;		height:20;}
+.hover_spacer_B 		{	width:100%;		height:20;}
+.hover_spacer_BR	 	{	width:20;		height:20;}
+.hover_contents 	{								}
+.hover_tip_top 		{		position: absolute;		}
+.hover_tip_bottom 	{		position: relative;		}
+
+/*
+* Tool Bars
+*/
+
+.ToolBar {
+	background-color: rgb(198, 197, 215);
+	width: 100%;
+	filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr=#FFF0F0F0,endColorStr=#FF9997B5);
+}
+
+/*
+* Buttons
+*/
+
+.TBButton {
+	border: 1px solid rgb(198, 197, 215);
+}
+.TBButton-activated {
+	background-image:url(/ajax/examples/common/img/hiRes/dwt/ButtonUp__H.gif);
+	border: 1px solid;
+	border-color: #E0E0E0 #555555 #555555 #E0E0E0;
+}
+.TBButton-triggered {
+	background-image:url(/ajax/examples/common/img/hiRes/dwt/ButtonDown__H.gif);
+	border:1px solid;
+	border-color: #555555 #E0E0E0 #E0E0E0 #555555;
+}
+.TBButton-toggled {
+	background-image:url(/ajax/examples/common/img/hiRes/dwt/ButtonDown__H.gif);
+	border:1px solid;
+	border-color: #555555 #E0E0E0 #E0E0E0 #555555;
+}
+
+.DisabledText { color: rgb(130, 130, 130); }
+
+/* DwtHtmlEditor */
+.DwtHtmlEditor .DwtHtmlEditorTextArea {
+	font: 10pt monospace;
+	padding: 1px;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	border: 1px solid black;
+}
+.DwtHtmlEditor .DwtHtmlEditorIFrame {
+	background-color: white;
+	width: 100%;
+	border: 1px solid black;
+}
+
+
+/* DwtColorPicker */
+.DwtColorPicker { border: 1px solid rgb(124, 124, 148); }
+.DwtColorPicker table td img { border: 1px none black; }
+
+
+/*
+* Menus
+*/
+
+.DwtMenu {
+	border: solid rgb(189, 189, 189) 1px;
+}
+.DwtMenu {background-color: rgb(198, 197, 215);}
+.DwtMenuItem {background-color: transparent;}
+.DwtMenuItem-selected, .DwtMenuItem-IconArea-selected, .DwtMenuItem-CheckedArea-selected {
+	background-color: rgb(249, 221, 135);
+}
+.DwtMenuItem-IconArea, .DwtMenuItem-CheckedArea {background-color: rgb(198, 197, 215);}
+.DwtMenuItem-Separator {background-color: rgb(124, 124, 148);}
+.DwtMenuItem .Text, .DwtMenuItem .DisabledText, .DwtMenuItem-selected .Text {
+	font: menu;
+}
+.DwtMenuItem .DisabledText {color: rgb(130, 130, 130);}
+
+
+/* Calendar */
+.DwtCalendar {background-color: white;}
+
+.DwtCalendarTitle, .DwtCalendarTitleCol, .DwtCalendarButton, .DwtCalendarDay-selected {
+	background-color: rgb(198, 197, 215);
+}
+
+.DwtCalendarTitleCol {width: 10em;}
+
+.DwtCalendarButton {font-weight: bold; font-size: 4pt;}	
+				   
+.DwtCalendarDow {border-bottom: 2px solid rgb(198, 197, 215);} 
+
+.DwtCalendarDay {border: 1px solid white;}
+
+.DwtCalendarDay-selected {border: 1px solid rgb(198, 197, 215);}
+
+.DwtCalendarDay-activated {
+	background-color: rgb(249, 221, 135);
+	border: 1px solid rgb(249, 221, 135);
+}
+.DwtCalendarDay-triggered {
+	background-color: rgb(240, 160, 38);
+	border: 1px solid rgb(240, 160, 38);
+}
+
+.DwtCalendarDay-today {border: 1px solid red;}
+
+.DwtCalendarDay-grey {color: rgb(125, 125, 125);}
+.DwtCalendarDay-hilited {font-weight: bold;}
+
+
+/* DwtSelect */
+.DwtSelect {  
+	cursor: default;
+	overflow:hidden;
+	height:20px;
+	background-image:url(/ajax/examples/common/img/hiRes/dwt/ButtonUp__H.gif);
+	border: 1px solid;
+	border-color: #E0E0E0 #555555 #555555 #E0E0E0;
+	min-width:40px;
+}
+
+.DwtSelect-activated {  
+	cursor: default;
+	overflow:hidden;
+	height:20px;
+	background-image:url(/ajax/examples/common/img/hiRes/dwt/ButtonDown__H.gif);
+	border: 1px solid;
+	border-color: #E0E0E0 #555555 #555555 #E0E0E0;
+	min-width:40px;
+}
+
+.DwtSelect-triggered {  
+	cursor: default;
+	overflow:hidden;
+	height:20px;
+	background-image:url(/ajax/examples/common/img/hiRes/dwt/ButtonDown__H.gif);
+	border:1px solid;
+	border-color: #555555 #E0E0E0 #E0E0E0 #555555;
+	min-width:40px;
+}
+
+
+.DwtSelect table,
+.DwtSelect-activated table,
+.DwtSelect-triggered table,
+.DwtSelect-disabled table {
+	border-spacing:none;
+	border-collapse: collapse;
+	width:100%;
+	text-align:center;
+	table-layout:fixed;
+	padding:0px;
+}
+
+.DwtSelect .Text,
+.DwtSelect-activated .Text,
+.DwtSelect-triggered .Text {
+	padding: 2px;
+	text-align:left;
+	padding-left:4px;
+	overflow:hidden;
+}
+
+.DwtSelect-disabled .Text{
+	padding: 2px;
+	text-align:left;
+	padding-left:4px;
+	overflow:hidden;
+	color:#CCCCCC;
+}
+
+
+.DwtSelect.disabled {
+	border:1px solid #CCCCCC;
+}
+
+.dropDownCell { 
+	width: 16px;
+}
+
+
+.DwtSelectMenu table { 
+	width:99%;
+}
+
+.DwtSelectMenu .DwtMenuItem-text {
+	text-align:left;
+	padding-left:4px;
+}
+
+.DwtSelectMenu .DwtMenuItem-leftFill {
+	width:19px;
+}
+
+.DwtSelectMenu .DwtMenuItem-selected {
+	background-color: #ADD6D6;
+	color:black;
+	cursor: default;
+}
+
+.DwtSelectMenu .DwtMenuItem-selected .DwtMenuItem-text{
+	cursor: default;
+}
+
+.DwtSelectMenu .DwtMenuItem {
+	border: 1px solid white;
+	background-color: white;
+	cursor: default;
+}
+
+
+.DwtSelectMenu { 
+	background-color:white;
+	border-top: 1px solid #CCCCCC;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+	border-left: 1px solid #CCCCCC;
+	position : absolute;
+}

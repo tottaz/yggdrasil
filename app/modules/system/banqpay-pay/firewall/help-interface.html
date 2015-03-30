@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC 
+  "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Interface Help</title>
+<meta name="Author" content="Scott Morizot" /></head>
+<body>
+
+<h2 align="center">Interfaces</h2>
+
+<p>The interfaces are the network devices that connect to the Internet
+or a local network.  Typically, the first ethernet card, <i>eth0</i>,
+is connected to the Internet.  However, with a dial-up connection, the
+<i>ppp</i> interface might be used instead.</p>
+
+<p>If your firewall runs on a gateway for an internal network, the
+internal interface is typically connected to the second ethernet card,
+<i>eth1</i>.</p>
+
+<p>Finally, the '+' symbol may be used instead of the interface number to
+refer to all instances of that interface type.  For example, using
+ppp+ instead of ppp0 or ppp1 will apply the rules to all the ppp
+interfaces. If you are generating a script for a single system that
+sometimes uses a dail-up connection and other times uses a network
+connection, just specify + for the interface to match every
+interface.</p>
+
+<p align="center"><a href="javascript:window.close();">
+Close Window
+</a></p>
+
+</body>
+</html>
+

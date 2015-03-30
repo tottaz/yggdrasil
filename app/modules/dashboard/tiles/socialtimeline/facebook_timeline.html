@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="demo.css" />
+        <link rel="stylesheet" type="text/css" href="../files/css/timeline.css" />
+        <link rel="stylesheet" type="text/css" href="../files/css/timeline_light.css" />
+        <script type="text/javascript" src="../files/javascript/jquery.js"></script>
+        <script type="text/javascript" src="../files/javascript/timeline.min.js"></script>
+        <script type="text/javascript" src="demo.js"></script>
+        <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js"></script>
+        <script type="text/javascript">
+            String.prototype.parseURL = function() {
+                return this.replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&~\?\/.=]+/g, function(url) {
+                    return url.link(url);
+                });
+            };
+
+            $(document).ready(function() {
+                var search = 'Envato';
+
+                var access_token     = ''; // see: https://graph.facebook.com/oauth/access_token?client_id={app-id}&client_secret={app-secret}&grant_type=client_credentials
+                var facebook_page_id = 185704501540425;
+                var api_url          = '/' + facebook_page_id + '/posts';
+                var api_option       = {'access_token':access_token}
+
+
+                if (!access_token) {
+                    alert("You need a Facebook App Access Token:\r\n https://graph.facebook.com/oauth/access_token?client_id={app-id}&client_secret={app-secret}&grant_type=client_credentials");
+                    return;
+                }
+
+                /*
+                // KEYWORD SEARCH
+                var facebook_search  = 'Envato';
+                var api_url          = '/search';
+                var api_option       = {'q':facebook_search, 'access_token':access_token, 'type':'post'};
+                */
+
+                FB.api(api_url, api_option, function(data) {
+
+                    // Get Timeline data via Facebook API
+                    var timeline_data = [];
+
+                    if (!data || ! data.data || !data.data.length) {
+                        alert('no results found, please try another search keyword');
+                        return;
+                    }
+
+                    $(data.data).each(function(index, facebook_data) {
+                        if (facebook_data.message && facebook_data.from.id) {
+                            var date = facebook_data.updated_time.split('-');
+                            var year  = date[0];
+                            var month = date[1];
+                            var day   = date[2].substr(0, 2);
+
+                            var content = '<div class="facebook_left_column"><img class="facebook_profile" src="https://graph.facebook.com/'+facebook_data.from.id+'/picture?type=square" /></div>';
+
+                            content += '<div class="facebook_right_column">';
+
+                            if (facebook_data.message) {
+                                content += '<div class="facebook_content">' + facebook_data.message.substr(0, 300).parseURL() + '</div>';
+                            }
+                            if (facebook_data.picture) {
+                                if (!facebook_data.name && !facebook_data.caption && !facebook_data.description) {
+                                    var container_class = "facebook_post facebook_post_single_picture";
+                                } else {
+                                    var container_class = 'facebook_post';
+                                }
+
+                                content += '<div class="' + container_class + '">' +
+                                               '<img class="facebook_picture" align="left" src="' + facebook_data.picture +  '" />' +
+                                               '<div class="description_container">' +
+                                                   (facebook_data.name ? '<a href="' + facebook_data.link + '">' + facebook_data.name + '</a>' : '') +
+                                                   (facebook_data.caption ? '<div class="facebook_caption">' + facebook_data.caption + '</div>' : '') +
+                                                   (facebook_data.description ? '<div class="facebook_description">' + facebook_data.description + '</div>' : '') +
+                                               '</div>' +
+                                           '</div>';
+                            }
+
+                            content += '</div>';
+
+                            timeline_data.push({
+                                type:     'blog_post',
+                                date:     year + '-' + month + '-' + day,
+                                title:    facebook_data.from.name,
+                                width:    400,
+                                content:  content
+                            });
+                        }
+                    });
+
+
+                   // Timeline
+                    var options = {
+                        animation:   true,
+                        lightbox:    true,
+                        showYear:    true,
+                        allowDelete: false,
+                        columnMode:  'dual'
+                    };
+
+                    var timeline = new Timeline($('#timeline'), timeline_data);
+                    timeline.setOptions(options);
+                    timeline.display();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="config">
+            <select id="theme">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="red">Red</option>
+            </select>
+        </div>
+        <div id="timeline"></div>
+    </body>
+</html>

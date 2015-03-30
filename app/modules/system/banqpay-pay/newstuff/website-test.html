@@ -1,0 +1,40 @@
+<html>
+<head>
+<meta  name=vs_targetSchema  content="http://schemas.microsoft.com/intellisense/ie5">
+<script  id="clientEventHandlersJS"  language="javascript">
+<!--
+// global variable for subwindow reference
+var w;
+function openNewWindow( ) {
+      if (!w || w.closed) {
+        w = window.open("","NewWindow","status,height=200,width=300");
+        // delay writing until window exists in IE/Windows
+        setTimeout("openNewWindow( )", 50);
+    } else if (w.focus) {
+        // window is already open and focusable, so bring it to the front
+        w.focus( );
+    }
+    // write HTML to new window document
+    w.location.href="HTMLPage7_1.htm";
+    w.document.close( ); // close layout stream
+}
+
+function Button1_onclick() {
+      openNewWindow();
+}
+
+function Button2_onclick() {
+      document.all.txtParentName.value = w.document.getElementById("txtName").value;
+}
+
+//-->
+            </script>
+      </head>
+      <body>
+            <form  id="form1">
+                  Enter Name:<input  id="txtParentName"  type=text>
+                  <input  type="button"  value="Show"  id="Button1" name="Button1"  onclick="return Button1_onclick()">
+                  <input  type="button"  value="Get"  id="Button2"  name="Button2"  onclick="return Button2_onclick()">
+            </form>
+      </body>
+</html>

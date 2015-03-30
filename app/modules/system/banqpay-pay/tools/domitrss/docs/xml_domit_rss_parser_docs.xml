@@ -1,0 +1,4149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
+<book>
+  <title>The DOMIT! RSS Parser Manual</title>
+
+  <chapter>
+    <title>Overview of RSS</title>
+
+    <section>
+      <title>Intro to RSS</title>
+
+      <para><ulink url="http://blogs.law.harvard.edu/tech/rss">RSS</ulink>, --
+      variously known as <emphasis>Real Simple Syndication</emphasis>,
+      <emphasis>RDF SIte Summary</emphasis>, or <emphasis>Rich Site
+      Summary</emphasis> -- is an <ulink
+      url="http://www.xml.com/axml/testaxml.htm">XML</ulink>-based web
+      syndication format originally developed by Netscape. It allows you
+      to:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>create lists of online content</para>
+        </listitem>
+
+        <listitem>
+          <para>describe the content</para>
+        </listitem>
+
+        <listitem>
+          <para>link to the content</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>RSS files, also know as <emphasis>feeds</emphasis>, are placed on
+      a static URL where users can subscribe using an application called an
+      <emphasis>RSS Reader</emphasis> or <emphasis>RSS Aggregator</emphasis>.
+      These applications periodically query the URL for updated content and
+      present it to the user in a readable format.</para>
+
+      <para>RSS is widely used by news organizations, who use it to publish
+      daily lists of articles. Blogger articles and web site updates are also
+      commonly summarized in RSS format.</para>
+
+      <para>There have been a number of versions of RSS over its lifetime. All
+      versions, however, share a common set of core features.</para>
+    </section>
+
+    <section>
+      <title>RSS Structure</title>
+
+      <para>The following is a sample feed from the BBC news site, posted at
+      the URL <ulink
+      url="http://www.bbc.co.uk/syndication/feeds/news/ukfs_news/technology/rss091.xml">http://www.bbc.co.uk/syndication/feeds/news/ukfs_news/technology/rss091.xml</ulink><programlisting>&lt;?xml version="1.0" encoding="ISO-8859-1" ?&gt;
+&lt;rss version="2.0"&gt;
+    &lt;channel&gt;
+        &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+        &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+        &lt;description&gt;Updated every minute of every day&lt;/description&gt;
+        &lt;language&gt;en-gb&lt;/language&gt;
+        &lt;lastBuildDate&gt;Sat, 30 Jul 05 09:28:38 GMT&lt;/lastBuildDate&gt;
+        &lt;copyright&gt;Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/1/hi/help/rss/4498287.stm for terms and conditions of reuse&lt;/copyright&gt;
+        &lt;docs&gt;http://www.bbc.co.uk/syndication/&lt;/docs&gt;
+        &lt;ttl&gt;15&lt;/ttl&gt;
+        &lt;image&gt;
+            &lt;title&gt;BBC News&lt;/title&gt;
+            &lt;url&gt;http://news.bbc.co.uk/nol/shared/img/bbc_news_120x60.gif&lt;/url&gt;
+            &lt;link&gt;http://news.bbc.co.uk&lt;/link&gt;
+        &lt;/image&gt;
+        &lt;item&gt;
+            &lt;title&gt;GTA sex scandal hits Australia&lt;/title&gt;
+            &lt;description&gt;Grand Theft Auto: San Andreas has effectively been banned in Australia because of secret sex scenes.&lt;/description&gt;
+            &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/4728261.stm&lt;/link&gt;
+            &lt;guid isPermaLink="false"&gt;http://news.bbc.co.uk/1/hi/technology/4728261.stm&lt;/guid&gt;
+            &lt;pubDate&gt;Fri, 29 Jul 05 13:20:35 GMT&lt;/pubDate&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+            &lt;title&gt;FBI holds eight on piracy charge&lt;/title&gt;
+            &lt;description&gt;The US authorities have charged eight people with the illegal trading of copyrighted material over the net.&lt;/description&gt;
+            &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/4727919.stm&lt;/link&gt;
+            &lt;guid isPermaLink="false"&gt;http://news.bbc.co.uk/1/hi/technology/4727919.stm&lt;/guid&gt;
+            &lt;pubDate&gt;Fri, 29 Jul 05 12:14:24 GMT&lt;/pubDate&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+            &lt;title&gt;Spacewalk to test shuttle repair&lt;/title&gt;
+            &lt;description&gt;Astronauts on space shuttle Discovery are getting ready to carry out the mission's first spacewalk.&lt;/description&gt;
+            &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/sci/tech/4730129.stm&lt;/link&gt;
+            &lt;guid isPermaLink="false"&gt;http://news.bbc.co.uk/1/hi/sci/tech/4730129.stm&lt;/guid&gt;
+            &lt;pubDate&gt;Sat, 30 Jul 05 03:26:17 GMT&lt;/pubDate&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+            &lt;title&gt;Cisco curbs security researcher&lt;/title&gt;
+            &lt;description&gt;A security researcher has agreed never to talk about flaws in Cisco software that controls internet routers.&lt;/description&gt;
+            &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/4727021.stm&lt;/link&gt;
+            &lt;guid isPermaLink="false"&gt;http://news.bbc.co.uk/1/hi/technology/4727021.stm&lt;/guid&gt;
+            &lt;pubDate&gt;Fri, 29 Jul 05 09:14:00 GMT&lt;/pubDate&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+            &lt;title&gt;Net addresses come to Earth&lt;/title&gt;
+            &lt;description&gt;Net addresses are starting to reveal how they are linked to the real world.&lt;/description&gt;
+            &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/4665351.stm&lt;/link&gt;
+            &lt;guid isPermaLink="false"&gt;http://news.bbc.co.uk/1/hi/technology/4665351.stm&lt;/guid&gt;
+            &lt;pubDate&gt;Fri, 29 Jul 05 08:07:17 GMT&lt;/pubDate&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+            &lt;title&gt;Tiny customers 'won't get money'&lt;/title&gt;
+            &lt;description&gt;Customers who paid for undelivered orders of Tiny and Time PCs are "unlikely" to get their money back.&lt;/description&gt;            
+            &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/business/4727143.stm&lt;/link&gt;
+            &lt;guid isPermaLink="false"&gt;http://news.bbc.co.uk/1/hi/business/4727143.stm&lt;/guid&gt;
+            &lt;pubDate&gt;Fri, 29 Jul 05 12:04:34 GMT&lt;/pubDate&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+            &lt;title&gt;Teens spurn e-mail for messaging&lt;/title&gt;
+            &lt;description&gt;Instant messaging, rather than e-mail, is the preferred way for US teenagers to stay in touch, research shows.&lt;/description&gt;
+            &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/4719083.stm&lt;/link&gt;
+            &lt;guid isPermaLink="false"&gt;http://news.bbc.co.uk/1/hi/technology/4719083.stm&lt;/guid&gt;
+            &lt;pubDate&gt;Thu, 28 Jul 05 10:29:13 GMT&lt;/pubDate&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+            &lt;title&gt;Fake Tube safety e-mail spreads&lt;/title&gt;
+            &lt;description&gt;Mobile users are warned about an e-mail which claims to have safety information about calling from the Tube.&lt;/description&gt;
+            &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/4724101.stm&lt;/link&gt;
+            &lt;guid isPermaLink="false"&gt;http://news.bbc.co.uk/1/hi/technology/4724101.stm&lt;/guid&gt;
+            &lt;pubDate&gt;Thu, 28 Jul 05 11:26:48 GMT&lt;/pubDate&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+            &lt;title&gt;Digital rights group gets going&lt;/title&gt;
+            &lt;description&gt;Net veterans plan to create a UK group that campaigns to protect digital rights and freedoms.&lt;/description&gt;
+            &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/4724089.stm&lt;/link&gt;
+            &lt;guid isPermaLink="false"&gt;http://news.bbc.co.uk/1/hi/technology/4724089.stm&lt;/guid&gt;
+            &lt;pubDate&gt;Thu, 28 Jul 05 12:05:20 GMT&lt;/pubDate&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+            &lt;title&gt;Hollywood hails digital film deal&lt;/title&gt;
+            &lt;description&gt;Movie studios reach a "milestone" deal to allow digital projectors to replace reels of film.&lt;/description&gt;
+            &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/film/4724335.stm&lt;/link&gt;
+            &lt;guid isPermaLink="false"&gt;http://news.bbc.co.uk/1/hi/entertainment/film/4724335.stm&lt;/guid&gt;
+            &lt;pubDate&gt;Thu, 28 Jul 05 12:40:29 GMT&lt;/pubDate&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+            &lt;title&gt;Price falls push Sony into loss&lt;/title&gt;
+            &lt;description&gt;Sony falls into the red for the three months to June, hit by fall in prices for televisions and DVD recorders.&lt;/description&gt;
+            &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/business/4723567.stm&lt;/link&gt;
+            &lt;guid isPermaLink="false"&gt;http://news.bbc.co.uk/1/hi/business/4723567.stm&lt;/guid&gt;
+            &lt;pubDate&gt;Thu, 28 Jul 05 12:52:36 GMT&lt;/pubDate&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+            &lt;title&gt;Profits tumble at gamer Nintendo&lt;/title&gt;
+            &lt;description&gt;Nintendo's first quarter profits drop as its new DS console fails to plug the gap left by waning GameCube sales. &lt;/description&gt;
+            &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/business/4724083.stm&lt;/link&gt;
+            &lt;guid isPermaLink="false"&gt;http://news.bbc.co.uk/1/hi/business/4724083.stm&lt;/guid&gt;
+            &lt;pubDate&gt;Thu, 28 Jul 05 11:09:54 GMT&lt;/pubDate&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+           &lt;title&gt;Awards to applaud women in tech&lt;/title&gt;
+            &lt;description&gt;Top women in technology are to be recognised in the first Blackberry Women and Technology awards.&lt;/description&gt;
+            &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/4718703.stm&lt;/link&gt;
+            &lt;guid isPermaLink="false"&gt;http://news.bbc.co.uk/1/hi/technology/4718703.stm&lt;/guid&gt;
+            &lt;pubDate&gt;Wed, 27 Jul 05 08:11:31 GMT&lt;/pubDate&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+            &lt;title&gt;HP decides to stop selling iPods&lt;/title&gt;
+            &lt;description&gt;Hewlett-Packard announces that it is to stop selling HP-branded iPods in line with a change in strategy.&lt;/description&gt;
+            &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/business/4729907.stm&lt;/link&gt;
+            &lt;guid isPermaLink="false"&gt;http://news.bbc.co.uk/1/hi/business/4729907.stm&lt;/guid&gt;
+            &lt;pubDate&gt;Fri, 29 Jul 05 21:07:03 GMT&lt;/pubDate&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+            &lt;title&gt;New services boost profits at BT&lt;/title&gt;
+            &lt;description&gt;Telecoms giant BT Group dials  up a 21% rise in quarterly pre-tax profits thanks to a "new wave" of revenues.&lt;/description&gt;
+            &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/business/4723343.stm&lt;/link&gt;
+            &lt;guid isPermaLink="false"&gt;http://news.bbc.co.uk/1/hi/business/4723343.stm&lt;/guid&gt;
+            &lt;pubDate&gt;Thu, 28 Jul 05 08:13:05 GMT&lt;/pubDate&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+            &lt;title&gt;Napster launches radio song sales&lt;/title&gt;
+            &lt;description&gt;Online music service Napster teams with satellite station XM to enable listeners to buy the music they hear.&lt;/description&gt;
+            &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/4724287.stm&lt;/link&gt;
+            &lt;guid isPermaLink="false"&gt;http://news.bbc.co.uk/1/hi/entertainment/music/4724287.stm&lt;/guid&gt;
+            &lt;pubDate&gt;Thu, 28 Jul 05 11:23:13 GMT&lt;/pubDate&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+            &lt;title&gt;Downloading 'myths' challenged&lt;/title&gt;
+            &lt;description&gt;People who illegally download music spend much more on legal downloads than average fans, a study shows.&lt;/description&gt;
+            &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/4718249.stm&lt;/link&gt;
+            &lt;guid isPermaLink="false"&gt;http://news.bbc.co.uk/1/hi/technology/4718249.stm&lt;/guid&gt;
+            &lt;pubDate&gt;Wed, 27 Jul 05 08:10:56 GMT&lt;/pubDate&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+            &lt;title&gt;Game over for Tapwave's Zodiac&lt;/title&gt;
+            &lt;description&gt;Catch up with the latest news from the world of video gaming.&lt;/description&gt;
+            &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/2207229.stm&lt;/link&gt;
+            &lt;guid isPermaLink="false"&gt;http://news.bbc.co.uk/1/hi/technology/2207229.stm&lt;/guid&gt;
+            &lt;pubDate&gt;Fri, 29 Jul 05 16:50:25 GMT&lt;/pubDate&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+            &lt;title&gt;Animated capers aim to please&lt;/title&gt;
+            &lt;description&gt;Reviews of two of the latest games aimed at children.&lt;/description&gt;
+            &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/4696167.stm&lt;/link&gt;
+            &lt;guid isPermaLink="false"&gt;http://news.bbc.co.uk/1/hi/technology/4696167.stm&lt;/guid&gt;
+            &lt;pubDate&gt;Tue, 19 Jul 05 11:06:54 GMT&lt;/pubDate&gt;
+        &lt;/item&gt;
+    &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+
+      <para>In the next sections we will discuss some of the main elements of
+      an RSS feed.</para>
+
+      <section>
+        <title>XML Declaration</title>
+
+        <para>Since an RSS document is also an XML document, each RSS document
+        is required to begin with an XML declaration:</para>
+
+        <para><programlisting>&lt;?xml version="1.0" encoding="ISO-8859-1" ?&gt;</programlisting></para>
+
+        <para>In common practice, this statement is often omitted.</para>
+      </section>
+
+      <section>
+        <title>rss Element</title>
+
+        <para>The root element of an RSS document is named
+        <emphasis>rss</emphasis>. The rss element contains a single, mandatory
+        attribute named <emphasis>version</emphasis>, which specifies the
+        version of RSS that the document conforms to.</para>
+
+        <para><programlisting>&lt;rss version='0.94'&gt;
+...rss content continues here
+&lt;/rss&gt;</programlisting></para>
+      </section>
+
+      <section>
+        <title><emphasis role="bold">channel</emphasis> Element</title>
+
+        <para>An RSS document is required to contain a single
+        <emphasis>channel</emphasis> element, which is a container for the
+        publication data:</para>
+
+        <para><programlisting>&lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+
+        <para><remark>Note: Occasionally, you may see (non-standard) use of
+        multiple channels.</remark></para>
+      </section>
+
+      <section>
+        <title>Required Channel Elements</title>
+
+        <para>Each channel is required to include three elements:
+        <emphasis>title</emphasis>, <emphasis>link</emphasis>, and
+        <emphasis>description</emphasis>. They may appear in any order.</para>
+
+        <section>
+          <title><emphasis role="bold">title</emphasis> Element</title>
+
+          <para>The <emphasis>title</emphasis> element contains a short title
+          for the channel.</para>
+
+          <para><programlisting> &lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    <emphasis role="bold">&lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;</emphasis>
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">link</emphasis> Element</title>
+
+          <para>The <emphasis>link</emphasis> element contains the URL of
+          website hosting the feed</para>
+
+          <para><programlisting> &lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+    <emphasis role="bold">&lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;</emphasis>
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">description</emphasis> Element</title>
+
+          <para>The <emphasis>description</emphasis> element contains a
+          description of the channel.</para>
+
+          <para><programlisting> &lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+    &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+    <emphasis role="bold">&lt;description&gt;Updated every minute of every day&lt;/description&gt;</emphasis>
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+        </section>
+      </section>
+
+      <section>
+        <title>Optional Channel Elements</title>
+
+        <para>There are also a number of optional elements available for a
+        channel. They may appear in any order.</para>
+
+        <section>
+          <title><emphasis role="bold">language</emphasis> Element</title>
+
+          <para>The <emphasis>language</emphasis> element describes the
+          language of the feed.</para>
+
+          <para><programlisting> &lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+    &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+    &lt;description&gt;Updated every minute of every day&lt;/description&gt;
+    <emphasis role="bold">&lt;language&gt;en-gb&lt;/language&gt;</emphasis>
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+
+          <para>Permissible value for the language element are those <ulink
+          url="http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes">defined
+          by the W3C</ulink>, or the following list:</para>
+
+          <para><programlisting>Afrikaans: af
+Albanian: sq
+Basque: eu
+Belarusian: be
+Bulgarian: bg
+Catalan: ca
+Chinese (Simplified): zh-cn
+Chinese (Traditional): zh-tw
+Croatian: hr
+Czech: cs
+Danish: da
+Dutch: nl
+Dutch (Belgium): nl-be
+Dutch (Netherlands): nl-nl
+English: en
+English (Australia): en-au
+English (Belize): en-bz
+English (Canada): en-ca
+English (Ireland): en-ie
+English (Jamaica): en-jm
+English (New Zealand): en-nz
+English (Phillipines): en-ph
+English (South Africa): en-za
+English (Trinidad): en-tt
+English (United Kingdom): en-gb
+English (United States): en-us
+English (Zimbabwe): en-zw
+Estonian: et
+Faeroese: fo
+Finnish: fi
+French: fr
+French (Belgium): fr-be
+French (Canada): fr-ca
+French (France): fr-fr
+French (Luxembourg): fr-lu
+French (Monaco): fr-mc
+French (Switzerland): fr-ch
+Galician: gl 
+Gaelic: gd 
+German: de 
+German (Austria): de-at 
+German (Germany): de-de 
+German (Liechtenstein): de-li 
+German (Luxembourg): de-lu 
+German (Switzerland): de-ch 
+Greek: el 
+Hawaiian: haw 
+Hungarian: hu 
+Icelandic: is 
+Indonesian: in 
+Irish: ga 
+Italian: it 
+Italian (Italy): it-it 
+Italian (Switzerland): it-ch 
+Japanese: ja 
+Korean: ko 
+Macedonian: mk 
+Norwegian: no 
+Polish: pl 
+Portuguese: pt 
+Portuguese (Brazil): pt-br 
+Portuguese (Portugal): pt-pt 
+Romanian: ro 
+Romanian (Moldova): ro-mo 
+Romanian (Romania): ro-ro 
+Russian: ru 
+Russian (Moldova): ru-mo 
+Russian (Russia): ru-ru 
+Serbian: sr 
+Slovak: sk 
+Slovenian: sl 
+Spanish: es 
+Spanish (Argentina): es-ar 
+Spanish (Bolivia): es-bo 
+Spanish (Chile): es-cl 
+Spanish (Colombia): es-co 
+Spanish (Costa Rica): es-cr 
+Spanish (Dominican Republic): es-do 
+Spanish (Ecuador): es-ec 
+Spanish (El Salvador): es-sv 
+Spanish (Guatemala): es-gt 
+Spanish (Honduras): es-hn 
+Spanish (Mexico): es-mx 
+Spanish (Nicaragua): es-ni 
+Spanish (Panama): es-pa 
+Spanish (Paraguay): es-py 
+Spanish (Peru): es-pe 
+Spanish (Puerto Rico): es-pr 
+Spanish (Spain): es-es 
+Spanish (Uruguay): es-uy 
+Spanish (Venezuela)es-ve 
+Swedish: sv 
+Swedish (Finland): sv-fi 
+Swedish (Sweden): sv-se 
+Turkish: tr 
+Ukranian: uk</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">copyright</emphasis> Element</title>
+
+          <para>The <emphasis>copyright</emphasis> element contains a
+          copyright statement for the RSS content.</para>
+
+          <para><programlisting> &lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+    &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+    &lt;description&gt;Updated every minute of every day&lt;/description&gt;
+    &lt;language&gt;en-gb&lt;/language&gt;
+    <emphasis role="bold">&lt;copyright&gt;Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/1/hi/help/rss/4498287.stm for terms and conditions of reuse&lt;/copyright&gt;</emphasis>
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">managingEditor</emphasis>
+          Element</title>
+
+          <para>The <emphasis>managingEditor</emphasis> element contains the
+          email address of the person responsible for editorial
+          content.</para>
+
+          <para><programlisting> &lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+    &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+    &lt;description&gt;Updated every minute of every day&lt;/description&gt;
+    &lt;language&gt;en-gb&lt;/language&gt;
+    &lt;copyright&gt;Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/1/hi/help/rss/4498287.stm for terms and conditions of reuse&lt;/copyright&gt;
+    <emphasis role="bold">&lt;managingEditor&gt;john.doe@bbc.co.uk&lt;/managingEditor&gt;</emphasis>
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">webMaster</emphasis> Element</title>
+
+          <para>The <emphasis>webmaster</emphasis> element contains the email
+          address of the person responsible for maintaining the channel
+          technically.</para>
+
+          <para><programlisting> &lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+    &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+    &lt;description&gt;Updated every minute of every day&lt;/description&gt;
+    &lt;language&gt;en-gb&lt;/language&gt;
+    &lt;copyright&gt;Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/1/hi/help/rss/4498287.stm for terms and conditions of reuse&lt;/copyright&gt;
+    &lt;managingEditor&gt;john.doe@bbc.co.uk&lt;/managingEditor&gt;
+    <emphasis role="bold">&lt;webMaster&gt;jane.doe@bbc.co.uk&lt;/webMaster&gt;</emphasis>
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">pubDate</emphasis> Element</title>
+
+          <para>The <emphasis>pubDate</emphasis> element contains the
+          publication date/time for the channel. This must conform to the
+          <ulink url="http://asg.web.cmu.edu/rfc/rfc822.html">RFC 822 Date and
+          Time Specification</ulink> (although the year may be expressed in
+          either two or four characters).</para>
+
+          <para><programlisting> &lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+    &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+    &lt;description&gt;Updated every minute of every day&lt;/description&gt;
+    &lt;language&gt;en-gb&lt;/language&gt;
+    &lt;copyright&gt;Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/1/hi/help/rss/4498287.stm for terms and conditions of reuse&lt;/copyright&gt;
+    &lt;managingEditor&gt;john.doe@bbc.co.uk&lt;/managingEditor&gt;
+    &lt;webMaster&gt;jane.doe@bbc.co.uk&lt;/webMaster&gt;
+    <emphasis role="bold">&lt;pubDate&gt;Sat, 30 Jul 05 09:00:00 GMT&lt;/pubDate&gt;</emphasis>
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">lastBuildDate</emphasis>
+          Element</title>
+
+          <para>The <emphasis>lastBuildDate</emphasis> element contains the
+          last time that the content in the channel changed. This must also
+          conform to the <ulink
+          url="http://asg.web.cmu.edu/rfc/rfc822.html">RFC 822 Date and Time
+          Specification</ulink>.</para>
+
+          <para><programlisting> &lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+    &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+    &lt;description&gt;Updated every minute of every day&lt;/description&gt;
+    &lt;language&gt;en-gb&lt;/language&gt;
+    &lt;copyright&gt;Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/1/hi/help/rss/4498287.stm for terms and conditions of reuse&lt;/copyright&gt;
+    &lt;managingEditor&gt;john.doe@bbc.co.uk&lt;/managingEditor&gt;
+    &lt;webMaster&gt;jane.doe@bbc.co.uk&lt;/webMaster&gt;
+    &lt;pubDate&gt;Sat, 30 Jul 05 09:00:00 GMT&lt;/pubDate&gt;
+    <emphasis role="bold">&lt;lastBuildDate&gt;Sat, 30 Jul 05 09:28:38 GMT&lt;/lastBuildDate&gt;</emphasis>
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">category</emphasis> Element</title>
+
+          <para>The <emphasis>category</emphasis> element contains a
+          forward-slash separated string describing:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>a category that the feed belongs to</para>
+            </listitem>
+
+            <listitem>
+              <para>the position of that category within a taxonomy</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>An optional attribute, <emphasis>domain</emphasis>, contains
+          an URL pointing to a description of the taxonomy.</para>
+
+          <para><programlisting> &lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+    &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+    &lt;description&gt;Updated every minute of every day&lt;/description&gt;
+    &lt;language&gt;en-gb&lt;/language&gt;
+    &lt;copyright&gt;Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/1/hi/help/rss/4498287.stm for terms and conditions of reuse&lt;/copyright&gt;
+    &lt;managingEditor&gt;john.doe@bbc.co.uk&lt;/managingEditor&gt;
+    &lt;webMaster&gt;jane.doe@bbc.co.uk&lt;/webMaster&gt;
+    &lt;pubDate&gt;Sat, 30 Jul 05 09:00:00 GMT&lt;/pubDate&gt;
+    &lt;lastBuildDate&gt;Sat, 30 Jul 05 09:28:38 GMT&lt;/lastBuildDate&gt;
+    <emphasis role="bold">&lt;category domain="http://www.superopendirectory.com/"&gt;news/science/technology&lt;/category&gt;</emphasis>
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+
+          <para>In the above example, the feed belongs to a category named
+          <emphasis>technology</emphasis>, which is a subcategory of
+          <emphasis>news</emphasis> and <emphasis>science</emphasis>. A
+          description of the taxonomy can be found on the domain
+          <emphasis>http://www.superopendirectory.com/</emphasis>.</para>
+
+          <para>You can include as many categories elements as you
+          like.</para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">generator</emphasis> Element</title>
+
+          <para>The <emphasis>generator</emphasis> element contains the name
+          of the program used to generate the RSS feed:</para>
+
+          <para><programlisting> &lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+    &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+    &lt;description&gt;Updated every minute of every day&lt;/description&gt;
+    &lt;language&gt;en-gb&lt;/language&gt;
+    &lt;copyright&gt;Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/1/hi/help/rss/4498287.stm for terms and conditions of reuse&lt;/copyright&gt;
+    &lt;managingEditor&gt;john.doe@bbc.co.uk&lt;/managingEditor&gt;
+    &lt;webMaster&gt;jane.doe@bbc.co.uk&lt;/webMaster&gt;
+    &lt;pubDate&gt;Sat, 30 Jul 05 09:00:00 GMT&lt;/pubDate&gt;
+    &lt;lastBuildDate&gt;Sat, 30 Jul 05 09:28:38 GMT&lt;/lastBuildDate&gt;
+    &lt;category domain="http://www.superopendirectory.com/"&gt;news/science/technology&lt;/category&gt;
+    <emphasis role="bold">&lt;generator&gt;RSSKY Feed Generator&lt;/generator&gt;</emphasis>
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">docs</emphasis> Element</title>
+
+          <para>The <emphasis>docs</emphasis> element contains the URL for the
+          documentation of the RSS format of the feed:</para>
+
+          <para><programlisting> &lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+    &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+    &lt;description&gt;Updated every minute of every day&lt;/description&gt;
+    &lt;language&gt;en-gb&lt;/language&gt;
+    &lt;copyright&gt;Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/1/hi/help/rss/4498287.stm for terms and conditions of reuse&lt;/copyright&gt;
+    &lt;managingEditor&gt;john.doe@bbc.co.uk&lt;/managingEditor&gt;
+    &lt;webMaster&gt;jane.doe@bbc.co.uk&lt;/webMaster&gt;
+    &lt;pubDate&gt;Sat, 30 Jul 05 09:00:00 GMT&lt;/pubDate&gt;
+    &lt;lastBuildDate&gt;Sat, 30 Jul 05 09:28:38 GMT&lt;/lastBuildDate&gt;
+    &lt;category domain="http://www.superopendirectory.com/"&gt;news/science/technology&lt;/category&gt;
+    &lt;generator&gt;RSSKY Feed Generator&lt;/generator&gt;
+    <emphasis role="bold">&lt;docs&gt;http://blogs.law.harvard.edu/tech/rss&lt;/docs&gt;</emphasis>
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">cloud</emphasis> Element</title>
+
+          <para>The <emphasis>cloud</emphasis> element allows users to
+          register for a web service which will send notification when a feed
+          has been updated.</para>
+
+          <para>The web service can be implemented in HTTP-POST, XML-RPC or
+          SOAP 1.1</para>
+
+          <para>The cloud element contains five attributes containing
+          parameters required for querying of the web service:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>domain - the domain where the web service resides</para>
+            </listitem>
+
+            <listitem>
+              <para>port - the TCP port the web service is listening on</para>
+            </listitem>
+
+            <listitem>
+              <para>path - the path, relative to the domain, where the web
+              service resides</para>
+            </listitem>
+
+            <listitem>
+              <para>registerProcedure - the name of the web service method to
+              be called</para>
+            </listitem>
+
+            <listitem>
+              <para>protocol - the protocol of the web service, either
+              <emphasis role="bold">xml-rpc</emphasis>, or <emphasis
+              role="bold">soap</emphasis></para>
+            </listitem>
+          </itemizedlist>
+
+          <para>The web service returns <emphasis role="bold">true</emphasis>
+          if the subscription is successful. By convention, registrations
+          expire after 25 hours. Users should reregister every 24 hours for
+          each subscription.</para>
+
+          <para>The following is an example of the cloud syntax:</para>
+
+          <para><programlisting> &lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+    &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+    &lt;description&gt;Updated every minute of every day&lt;/description&gt;
+    &lt;language&gt;en-gb&lt;/language&gt;
+    &lt;copyright&gt;Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/1/hi/help/rss/4498287.stm for terms and conditions of reuse&lt;/copyright&gt;
+    &lt;managingEditor&gt;john.doe@bbc.co.uk&lt;/managingEditor&gt;
+    &lt;webMaster&gt;jane.doe@bbc.co.uk&lt;/webMaster&gt;
+    &lt;pubDate&gt;Sat, 30 Jul 05 09:00:00 GMT&lt;/pubDate&gt;
+    &lt;lastBuildDate&gt;Sat, 30 Jul 05 09:28:38 GMT&lt;/lastBuildDate&gt;
+    &lt;category domain="http://www.superopendirectory.com/"&gt;news/science/technology&lt;/category&gt;
+    &lt;generator&gt;RSSKY Feed Generator&lt;/generator&gt;
+    &lt;docs&gt;http://blogs.law.harvard.edu/tech/rss&lt;/docs&gt;
+    <emphasis role="bold">&lt;cloud domain="xml-rpc.bbc.co.uk" port="80" path="/RPC2" registerProcedure="xmlStorageSystem.rssPleaseNotify" protocol="xml-rpc" /&gt;</emphasis>
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+
+          <para>Above, an xml-rpc query, calling the method
+          <function>xmlStorageSystem.rssPleaseNotify</function>, would be sent
+          to xml-rpc.bbc.co.uk/RPC2 on port 80. The user's application would
+          be responsible for understanding the specific detail of how the web
+          service method is to be called.</para>
+
+          <para>A good description of how the cloud interface is implemented
+          can be found at Dave Winer's Radio Userland site at: <ulink
+          url="http://backend.userland.com/publishSubscribeWalkthrough">http://backend.userland.com/publishSubscribeWalkthrough</ulink></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">ttl</emphasis> Element</title>
+
+          <para>The <emphasis>ttl</emphasis> (time to live) element describes
+          the maximum number of minutes that a feed reader should cache the
+          feed contents before refreshing:</para>
+
+          <para><programlisting> &lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+    &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+    &lt;description&gt;Updated every minute of every day&lt;/description&gt;
+    &lt;language&gt;en-gb&lt;/language&gt;
+    &lt;copyright&gt;Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/1/hi/help/rss/4498287.stm for terms and conditions of reuse&lt;/copyright&gt;
+    &lt;managingEditor&gt;john.doe@bbc.co.uk&lt;/managingEditor&gt;
+    &lt;webMaster&gt;jane.doe@bbc.co.uk&lt;/webMaster&gt;
+    &lt;pubDate&gt;Sat, 30 Jul 05 09:00:00 GMT&lt;/pubDate&gt;
+    &lt;lastBuildDate&gt;Sat, 30 Jul 05 09:28:38 GMT&lt;/lastBuildDate&gt;
+    &lt;category domain="http://www.superopendirectory.com/"&gt;news/science/technology&lt;/category&gt;
+    &lt;generator&gt;RSSKY Feed Generator&lt;/generator&gt;
+    &lt;docs&gt;http://blogs.law.harvard.edu/tech/rss&lt;/docs&gt;
+    &lt;cloud domain="xml-rpc.bbc.co.uk" port="80" path="/RPC2" registerProcedure="xmlStorageSystem.rssPleaseNotify" protocol="xml-rpc" /&gt;
+    <emphasis role="bold">&lt;ttl&gt;15&lt;/ttl&gt;</emphasis>
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">image</emphasis> Element</title>
+
+          <para>The <emphasis>image</emphasis> element specifies the URL of a
+          GIF, JPEG or PNG image that can be displayed with the
+          channel.</para>
+
+          <para>It contains three required elements:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>&lt;url&gt; - the url of the image</para>
+            </listitem>
+
+            <listitem>
+              <para>&lt;title&gt; - the title of the image (is used as the
+              value of the <emphasis>alt</emphasis> tag when the image is
+              displayed in HTML format)</para>
+            </listitem>
+
+            <listitem>
+              <para>&lt;link&gt; - the URL of the channel (when displayed in
+              HTML format, clicking on the image will navigate to this
+              location)</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>The <emphasis>image</emphasis> element also contains three
+          optional elements:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>&lt;width&gt; - the width of the image</para>
+            </listitem>
+
+            <listitem>
+              <para>&lt;height&gt; - the height of the image</para>
+            </listitem>
+
+            <listitem>
+              <para>&lt;description&gt; - a description the image/channel
+              (when displayed in HTML format, is the title of the image
+              link)</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>For example:</para>
+
+          <para><programlisting> &lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+    &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+    &lt;description&gt;Updated every minute of every day&lt;/description&gt;
+    &lt;language&gt;en-gb&lt;/language&gt;
+    &lt;copyright&gt;Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/1/hi/help/rss/4498287.stm for terms and conditions of reuse&lt;/copyright&gt;
+    &lt;managingEditor&gt;john.doe@bbc.co.uk&lt;/managingEditor&gt;
+    &lt;webMaster&gt;jane.doe@bbc.co.uk&lt;/webMaster&gt;
+    &lt;pubDate&gt;Sat, 30 Jul 05 09:00:00 GMT&lt;/pubDate&gt;
+    &lt;lastBuildDate&gt;Sat, 30 Jul 05 09:28:38 GMT&lt;/lastBuildDate&gt;
+    &lt;category domain="http://www.superopendirectory.com/"&gt;news/science/technology&lt;/category&gt;
+    &lt;generator&gt;RSSKY Feed Generator&lt;/generator&gt;
+    &lt;docs&gt;http://blogs.law.harvard.edu/tech/rss&lt;/docs&gt;
+    &lt;cloud domain="xml-rpc.bbc.co.uk" port="80" path="/RPC2" registerProcedure="xmlStorageSystem.rssPleaseNotify" protocol="xml-rpc" /&gt;
+    &lt;ttl&gt;15&lt;/ttl&gt;
+    <emphasis role="bold">&lt;image&gt;
+      &lt;url&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/images/feedimage.jpg&lt;/url&gt;
+      &lt;title&gt;BBC Technology News&lt;/title&gt;
+      &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+      &lt;width&gt;200&lt;/width&gt;
+      &lt;height&gt;200&lt;/height&gt;
+      &lt;description&gt;Today's BBC technology news&lt;/description&gt;
+    &lt;/image&gt; </emphasis>   
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">rating</emphasis> Element</title>
+
+          <para>The <emphasis>rating</emphasis> element describes the <ulink
+          url="http://www.w3.org/PICS/">PICS</ulink> rating for the channel.
+          PICS is a W3C specification for metadata with internet content.
+          associating. It is rarely used in RSS feeds, but here is an
+          example:</para>
+
+          <para><programlisting> &lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+    &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+    &lt;description&gt;Updated every minute of every day&lt;/description&gt;
+    &lt;language&gt;en-gb&lt;/language&gt;
+    &lt;copyright&gt;Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/1/hi/help/rss/4498287.stm for terms and conditions of reuse&lt;/copyright&gt;
+    &lt;managingEditor&gt;john.doe@bbc.co.uk&lt;/managingEditor&gt;
+    &lt;webMaster&gt;jane.doe@bbc.co.uk&lt;/webMaster&gt;
+    &lt;pubDate&gt;Sat, 30 Jul 05 09:00:00 GMT&lt;/pubDate&gt;
+    &lt;lastBuildDate&gt;Sat, 30 Jul 05 09:28:38 GMT&lt;/lastBuildDate&gt;
+    &lt;category domain="http://www.superopendirectory.com/"&gt;news/science/technology&lt;/category&gt;
+    &lt;generator&gt;RSSKY Feed Generator&lt;/generator&gt;
+    &lt;docs&gt;http://blogs.law.harvard.edu/tech/rss&lt;/docs&gt;
+    &lt;cloud domain="xml-rpc.bbc.co.uk" port="80" path="/RPC2" registerProcedure="xmlStorageSystem.rssPleaseNotify" protocol="xml-rpc" /&gt;
+    &lt;ttl&gt;15&lt;/ttl&gt;
+    &lt;image&gt;
+      &lt;url&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/images/feedimage.jpg&lt;/url&gt;
+      &lt;title&gt;BBC Technology News&lt;/title&gt;
+      &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+      &lt;width&gt;200&lt;/width&gt;
+      &lt;height&gt;200&lt;/height&gt;
+      &lt;description&gt;Today's BBC technology news&lt;/description&gt;
+    &lt;/image&gt;
+    <emphasis role="bold">&lt;rating&gt;(PICS-1.1 "http://www.classify.org/safesurf/" l r (SS~~000 1))&lt;/rating&gt;</emphasis>
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">textInput</emphasis> Element</title>
+
+          <para>The <emphasis>textInput</emphasis> element describes a text
+          input box that can be associated with the channel. It's purpose is
+          somewhat obscure, but you can use it to define items like a search
+          or user feedback field.</para>
+
+          <para>The textInput element contains four required element:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>&lt;title&gt; - The label of the submit button for the
+              text input field</para>
+            </listitem>
+
+            <listitem>
+              <para>&lt;description&gt; - A description of the text input
+              field</para>
+            </listitem>
+
+            <listitem>
+              <para>&lt;name&gt; - The name of the text object and the text
+              input area</para>
+            </listitem>
+
+            <listitem>
+              <para>&lt;link&gt; - The URL of the script that is called by
+              clicking on the submit button</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>Below is an example of defining a search field for the RSS
+          channel:</para>
+
+          <para><programlisting> &lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+    &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+    &lt;description&gt;Updated every minute of every day&lt;/description&gt;
+    &lt;language&gt;en-gb&lt;/language&gt;
+    &lt;copyright&gt;Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/1/hi/help/rss/4498287.stm for terms and conditions of reuse&lt;/copyright&gt;
+    &lt;managingEditor&gt;john.doe@bbc.co.uk&lt;/managingEditor&gt;
+    &lt;webMaster&gt;jane.doe@bbc.co.uk&lt;/webMaster&gt;
+    &lt;pubDate&gt;Sat, 30 Jul 05 09:00:00 GMT&lt;/pubDate&gt;
+    &lt;lastBuildDate&gt;Sat, 30 Jul 05 09:28:38 GMT&lt;/lastBuildDate&gt;
+    &lt;category domain="http://www.superopendirectory.com/"&gt;news/science/technology&lt;/category&gt;
+    &lt;generator&gt;RSSKY Feed Generator&lt;/generator&gt;
+    &lt;docs&gt;http://blogs.law.harvard.edu/tech/rss&lt;/docs&gt;
+    &lt;cloud domain="xml-rpc.bbc.co.uk" port="80" path="/RPC2" registerProcedure="xmlStorageSystem.rssPleaseNotify" protocol="xml-rpc" /&gt;
+    &lt;ttl&gt;15&lt;/ttl&gt;
+    &lt;image&gt;
+      &lt;url&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/images/feedimage.jpg&lt;/url&gt;
+      &lt;title&gt;BBC Technology News&lt;/title&gt;
+      &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+      &lt;width&gt;200&lt;/width&gt;
+      &lt;height&gt;200&lt;/height&gt;
+      &lt;description&gt;Today's BBC technology news&lt;/description&gt;
+    &lt;/image&gt;
+    &lt;rating&gt;(PICS-1.1 "http://www.classify.org/safesurf/" l r (SS~~000 1))&lt;/rating&gt;
+    <emphasis role="bold">&lt;textinput&gt;
+      &lt;title&gt;Search&lt;/title&gt;
+      &lt;description&gt;Search the BBC technology site&lt;/description&gt;
+      &lt;name&gt;"searchform"&lt;/name&gt;
+      &lt;link&gt;"http://www.google.com/search"&lt;/link&gt;
+    &lt;/textinput&gt;</emphasis>
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+
+          <para><remark>Note: Most feed readers ignore the textInput
+          data.</remark></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">skipHours</emphasis> Element</title>
+
+          <para>The <emphasis>skipHours</emphasis> element contains up to 24
+          &lt;hour&gt; subelements, each marking an hour that queries of the
+          feed can be skipped. The allowable range is between 0 and 23.</para>
+
+          <para>The following example instructs readers not to query the feed
+          from between 1:00 and 3:00 AM.</para>
+
+          <para><programlisting> &lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+    &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+    &lt;description&gt;Updated every minute of every day&lt;/description&gt;
+    &lt;language&gt;en-gb&lt;/language&gt;
+    &lt;copyright&gt;Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/1/hi/help/rss/4498287.stm for terms and conditions of reuse&lt;/copyright&gt;
+    &lt;managingEditor&gt;john.doe@bbc.co.uk&lt;/managingEditor&gt;
+    &lt;webMaster&gt;jane.doe@bbc.co.uk&lt;/webMaster&gt;
+    &lt;pubDate&gt;Sat, 30 Jul 05 09:00:00 GMT&lt;/pubDate&gt;
+    &lt;lastBuildDate&gt;Sat, 30 Jul 05 09:28:38 GMT&lt;/lastBuildDate&gt;
+    &lt;category domain="http://www.superopendirectory.com/"&gt;news/science/technology&lt;/category&gt;
+    &lt;generator&gt;RSSKY Feed Generator&lt;/generator&gt;
+    &lt;docs&gt;http://blogs.law.harvard.edu/tech/rss&lt;/docs&gt;
+    &lt;cloud domain="xml-rpc.bbc.co.uk" port="80" path="/RPC2" registerProcedure="xmlStorageSystem.rssPleaseNotify" protocol="xml-rpc" /&gt;
+    &lt;ttl&gt;15&lt;/ttl&gt;
+    &lt;image&gt;
+      &lt;url&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/images/feedimage.jpg&lt;/url&gt;
+      &lt;title&gt;BBC Technology News&lt;/title&gt;
+      &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+      &lt;width&gt;200&lt;/width&gt;
+      &lt;height&gt;200&lt;/height&gt;
+      &lt;description&gt;Today's BBC technology news&lt;/description&gt;
+    &lt;/image&gt;
+    &lt;rating&gt;(PICS-1.1 "http://www.classify.org/safesurf/" l r (SS~~000 1))&lt;/rating&gt;
+    &lt;textinput&gt;
+      &lt;title&gt;Search&lt;/title&gt;
+      &lt;description&gt;Search the BBC technology site&lt;/description&gt;
+      &lt;name&gt;"searchform"&lt;/name&gt;
+      &lt;link&gt;"http://www.google.com/search"&lt;/link&gt;
+    &lt;/textinput&gt;
+    <emphasis role="bold">&lt;skipHours&gt;
+      &lt;hour&gt;1&lt;/hour&gt;
+      &lt;hour&gt;2&lt;/hour&gt;
+    &lt;/skipHours&gt;</emphasis>
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">skipDays</emphasis> Element</title>
+
+          <para>The <emphasis>skipDays</emphasis> element contains up to 7
+          &lt;day&gt; subelements, each marking a day of the week that queries
+          of the feed can be skipped. Allowable values are: Monday, Tuesday,
+          Wednesday, Thursday, Friday, Saturday or Sunday.</para>
+
+          <para>The following example instructs readers not to query the feed
+          on Sunday.</para>
+
+          <para><programlisting> &lt;rss version='2.0'&gt;
+  &lt;channel&gt;
+    &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+    &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+    &lt;description&gt;Updated every minute of every day&lt;/description&gt;
+    &lt;language&gt;en-gb&lt;/language&gt;
+    &lt;copyright&gt;Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/1/hi/help/rss/4498287.stm for terms and conditions of reuse&lt;/copyright&gt;
+    &lt;managingEditor&gt;john.doe@bbc.co.uk&lt;/managingEditor&gt;
+    &lt;webMaster&gt;jane.doe@bbc.co.uk&lt;/webMaster&gt;
+    &lt;pubDate&gt;Sat, 30 Jul 05 09:00:00 GMT&lt;/pubDate&gt;
+    &lt;lastBuildDate&gt;Sat, 30 Jul 05 09:28:38 GMT&lt;/lastBuildDate&gt;
+    &lt;category domain="http://www.superopendirectory.com/"&gt;news/science/technology&lt;/category&gt;
+    &lt;generator&gt;RSSKY Feed Generator&lt;/generator&gt;
+    &lt;docs&gt;http://blogs.law.harvard.edu/tech/rss&lt;/docs&gt;
+    &lt;cloud domain="xml-rpc.bbc.co.uk" port="80" path="/RPC2" registerProcedure="xmlStorageSystem.rssPleaseNotify" protocol="xml-rpc" /&gt;
+    &lt;ttl&gt;15&lt;/ttl&gt;
+    &lt;image&gt;
+      &lt;url&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/images/feedimage.jpg&lt;/url&gt;
+      &lt;title&gt;BBC Technology News&lt;/title&gt;
+      &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+      &lt;width&gt;200&lt;/width&gt;
+      &lt;height&gt;200&lt;/height&gt;
+      &lt;description&gt;Today's BBC technology news&lt;/description&gt;
+    &lt;/image&gt;
+    &lt;rating&gt;(PICS-1.1 "http://www.classify.org/safesurf/" l r (SS~~000 1))&lt;/rating&gt;
+    &lt;textinput&gt;
+      &lt;title&gt;Search&lt;/title&gt;
+      &lt;description&gt;Search the BBC technology site&lt;/description&gt;
+      &lt;name&gt;"searchform"&lt;/name&gt;
+      &lt;link&gt;"http://www.google.com/search"&lt;/link&gt;
+    &lt;/textinput&gt;
+    &lt;skipHours&gt;
+      &lt;hour&gt;1&lt;/hour&gt;
+      &lt;hour&gt;2&lt;/hour&gt;
+    &lt;/skipHours&gt;
+    <emphasis role="bold">&lt;skipDays&gt;
+      &lt;day&gt;Sunday&lt;/day&gt;
+    &lt;/skipDays&gt;</emphasis>
+    ...rss content continues here
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+        </section>
+      </section>
+
+      <section>
+        <title><emphasis role="bold">Item</emphasis> Element</title>
+
+        <para>A channel can contain any number of <emphasis>item</emphasis>
+        elements. An item describes a single item of syndicated content, such
+        as a news article or blog entry.</para>
+
+        <para><programlisting>&lt;rss version ='2.0'&gt;
+  &lt;channel&gt;
+        &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+        &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+        &lt;description&gt;Updated every minute of every day&lt;/description&gt;
+        &lt;language&gt;en-gb&lt;/language&gt;
+        &lt;lastBuildDate&gt;Sat, 30 Jul 05 09:28:38 GMT&lt;/lastBuildDate&gt;
+        &lt;copyright&gt;Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/1/hi/help/rss/4498287.stm for terms and conditions of reuse&lt;/copyright&gt;
+        &lt;docs&gt;http://www.bbc.co.uk/syndication/&lt;/docs&gt;
+        &lt;ttl&gt;15&lt;/ttl&gt;
+        &lt;image&gt;
+            &lt;title&gt;BBC News&lt;/title&gt;
+            &lt;url&gt;http://news.bbc.co.uk/nol/shared/img/bbc_news_120x60.gif&lt;/url&gt;
+            &lt;link&gt;http://news.bbc.co.uk&lt;/link&gt;
+        &lt;/image&gt;
+        <emphasis role="bold">&lt;item&gt;
+          ...item content here
+        &lt;/item&gt;</emphasis>
+        <emphasis role="bold">&lt;item&gt;
+          ...item content here
+        &lt;/item&gt;</emphasis>
+        <emphasis role="bold">&lt;item&gt;
+          ...item content here
+        &lt;/item&gt;</emphasis>
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting>All subelements of item are optional; however,
+        there must exist at least one <emphasis>title</emphasis> or
+        <emphasis>description</emphasis> element must be present. In such a
+        case, the item content can be self-contained -- that is, the entire
+        article content included in the description tag (in entity encoded
+        HTML, if necessary).</para>
+
+        <para>The following sections describe the various elements permitted
+        in an item element.</para>
+
+        <section>
+          <title><emphasis role="bold">title</emphasis> Element</title>
+
+          <para>The <emphasis>title</emphasis> element contains a short title
+          for the item:</para>
+
+          <para><programlisting>&lt;item&gt;
+  <emphasis role="bold">&lt;title&gt;Napster launches radio song sales&lt;/title&gt;</emphasis>
+&lt;/item&gt;</programlisting><remark>Note: since RSS is an XML-based format,
+          you must ensure that illegal XML characters such as ampersands
+          (&amp;) are either properly escaped, or the element text is
+          contained by a CDATA Section.</remark></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">link</emphasis> Element</title>
+
+          <para>The <emphasis>link</emphasis> element contains the URL where
+          the article can be found:</para>
+
+          <para><programlisting>&lt;item&gt;
+  &lt;title&gt;Napster launches radio song sales&lt;/title&gt;
+  <emphasis role="bold">&lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/4724287.stm&lt;/link&gt;</emphasis>
+&lt;/item&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">description</emphasis> Element</title>
+
+          <para>The <emphasis>description</emphasis> element contains a
+          description of the contents of the article:</para>
+
+          <para><programlisting>&lt;item&gt;
+  &lt;title&gt;Napster launches radio song sales&lt;/title&gt;
+  &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/4724287.stm&lt;/link&gt;
+  <emphasis role="bold">&lt;description&gt;Online music service Napster teams with satellite station XM to enable listeners to buy the music they hear.&lt;/description&gt;</emphasis>
+&lt;/item&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">author</emphasis> Element</title>
+
+          <para>The <emphasis>author</emphasis> element contains the email
+          address of the author of the article:</para>
+
+          <para><programlisting>&lt;item&gt;
+  &lt;title&gt;Napster launches radio song sales&lt;/title&gt;
+  &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/4724287.stm&lt;/link&gt;
+  &lt;description&gt;Online music service Napster teams with satellite station XM to enable listeners to buy the music they hear.&lt;/description&gt;
+  <emphasis role="bold">&lt;author&gt;shaunfanning@napster.com&lt;/author&gt;</emphasis>
+&lt;/item&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">category</emphasis> Element</title>
+
+          <para>The <emphasis>category</emphasis> element is identical in
+          format to the category element for a channel. Please refer to
+          section 2.5.7.</para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">comments</emphasis> element</title>
+
+          <para>The <emphasis>comments</emphasis> element contains an URL for
+          comments pertaining to the article:</para>
+
+          <para><programlisting>&lt;item&gt;
+  &lt;title&gt;Napster launches radio song sales&lt;/title&gt;
+  &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/4724287.stm&lt;/link&gt;
+  &lt;description&gt;Online music service Napster teams with satellite station XM to enable listeners to buy the music they hear.&lt;/description&gt;
+  &lt;author&gt;shaunfanning@napster.com&lt;/author&gt;
+  <emphasis role="bold">&lt;comments&gt;http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/4724287_comments.stm&lt;/comments&gt;</emphasis>
+&lt;/item&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">enclosure</emphasis> Element</title>
+
+          <para>The <emphasis>enclosure</emphasis> element describes a media
+          object -- such as a audio or video file -- associated with the
+          article.</para>
+
+          <para>It has three attribute parameters:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>url - the URL of the media object</para>
+            </listitem>
+
+            <listitem>
+              <para>length - the length in bytes of the media object</para>
+            </listitem>
+
+            <listitem>
+              <para>type - the mime type of the media object</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>To describe an mp3 file associated with the article, for
+          instance:</para>
+
+          <para><programlisting>&lt;item&gt;
+  &lt;title&gt;Napster launches radio song sales&lt;/title&gt;
+  &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/4724287.stm&lt;/link&gt;
+  &lt;description&gt;Online music service Napster teams with satellite station XM to enable listeners to buy the music they hear.&lt;/description&gt;
+  &lt;author&gt;shaunfanning@napster.com&lt;/author&gt;
+  &lt;comments&gt;http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/4724287_comments.stm&lt;/comments&gt;
+  <emphasis role="bold">&lt;enclosure url="http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/fanningspeaks.mp3" length="12216320" type="audio/mpeg" /&gt;</emphasis>
+&lt;/item&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">guid</emphasis> Element</title>
+
+          <para>The <emphasis>guid</emphasis> element assigns a global unique
+          identifier to the article -- an ID that differentiates it from all
+          other articles. It generally comes in the form of an http
+          URL.</para>
+
+          <para>It has one optional attribute,
+          <emphasis>isPermaLink</emphasis>. If isPermaLink is set to <emphasis
+          role="bold">true</emphasis>, it means that the guid is an actual
+          HTTP URL that the user can visit to view the article. For
+          instance:</para>
+
+          <para><programlisting>&lt;item&gt;
+  &lt;title&gt;Napster launches radio song sales&lt;/title&gt;
+  &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/4724287.stm&lt;/link&gt;
+  &lt;description&gt;Online music service Napster teams with satellite station XM to enable listeners to buy the music they hear.&lt;/description&gt;
+  &lt;author&gt;shaunfanning@napster.com&lt;/author&gt;
+  &lt;comments&gt;http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/4724287_comments.stm&lt;/comments&gt;
+  &lt;enclosure url="http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/fanningspeaks.mp3" length="12216320" type="audio/mpeg" /&gt;
+  &lt;guid isPermalink="true"&gt;http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/4724287.stm&lt;/isPermaLink&gt;
+&lt;/item&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">pubDate</emphasis> Element</title>
+
+          <para>The <emphasis>pubDate</emphasis> element for an item is
+          identical in format to the pubDate element for a channel. Please see
+          section for more information.</para>
+
+          <para><programlisting>&lt;item&gt;
+  &lt;title&gt;Napster launches radio song sales&lt;/title&gt;
+  &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/4724287.stm&lt;/link&gt;
+  &lt;description&gt;Online music service Napster teams with satellite station XM to enable listeners to buy the music they hear.&lt;/description&gt;
+  &lt;author&gt;shaunfanning@napster.com&lt;/author&gt;
+  &lt;comments&gt;http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/4724287_comments.stm&lt;/comments&gt;
+  &lt;enclosure url="http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/fanningspeaks.mp3" length="12216320" type="audio/mpeg" /&gt;
+  &lt;guid isPermalink="true"&gt;http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/4724287.stm&lt;/isPermaLink&gt;
+  <emphasis role="bold">&lt;pubDate&gt;Wed, 27 Jul 05 08:10:56 GMT&lt;/pubDate&gt;</emphasis>
+&lt;/item&gt;</programlisting></para>
+        </section>
+
+        <section>
+          <title><emphasis role="bold">source</emphasis> Element</title>
+
+          <para>The <emphasis>source</emphasis> element for an item indictes
+          that the article was derived from another news feed., and the URL of
+          that feed.</para>
+
+          <para>It's value is the title of the source feed. It also has a
+          single required attribute, <emphasis>url</emphasis>, which specifies
+          the URL of the source feed.</para>
+
+          <para><programlisting>&lt;item&gt;
+  &lt;title&gt;Napster launches radio song sales&lt;/title&gt;
+  &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/4724287.stm&lt;/link&gt;
+  &lt;description&gt;Online music service Napster teams with satellite station XM to enable listeners to buy the music they hear.&lt;/description&gt;
+  &lt;author&gt;shaunfanning@napster.com&lt;/author&gt;
+  &lt;comments&gt;http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/4724287_comments.stm&lt;/comments&gt;
+  &lt;enclosure url="http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/fanningspeaks.mp3" length="12216320" type="audio/mpeg" /&gt;
+  &lt;guid isPermalink="true"&gt;http://news.bbc.co.uk/go/rss/-/1/hi/entertainment/music/4724287.stm&lt;/isPermaLink&gt;
+  &lt;pubDate&gt;Wed, 27 Jul 05 08:10:56 GMT&lt;/pubDate&gt;
+  <emphasis role="bold">&lt;source url='http://www.wired.com/rss.xml'&gt;Wired Online&lt;/source&gt;</emphasis>
+&lt;/item&gt;</programlisting></para>
+        </section>
+      </section>
+
+      <section>
+        <title>Extending RSS</title>
+
+        <para>RSS 2.0 adds the capability to extend the RSS specification. A
+        RSS feed may contain non-standard elements if they are defined in a
+        namespace.</para>
+
+        <para>The following example adds metadata items from the Dublin Core
+        specification:</para>
+
+        <para><programlisting>&lt;?xml version="1.0" encoding="ISO-8859-1" ?&gt;
+&lt;rss version="2.0" <emphasis role="bold">xmlns:dc="http://purl.org/dc/elements/1.1/"</emphasis>&gt;
+    &lt;channel&gt;
+        &lt;title&gt;BBC News | Technology | UK Edition&lt;/title&gt;
+        &lt;link&gt;http://news.bbc.co.uk/go/rss/-/1/hi/technology/default.stm&lt;/link&gt;
+        &lt;description&gt;Updated every minute of every day&lt;/description&gt;
+        <emphasis role="bold">&lt;dc:language&gt;en-us&lt;/dc:language&gt;
+        &lt;dc:creator/&gt;
+        &lt;dc:rights&gt;Copyright 2004&lt;/dc:rights&gt;</emphasis>
+        ...</programlisting></para>
+      </section>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Installing DOMIT! RSS</title>
+
+    <section>
+      <title>What is DOMIT! RSS?</title>
+
+      <para>There are five main flavors of the RSS specification -- 0.9, 0.91,
+      0.92, 1.0, and 2.0 -- and understanding the subtleties of the variations
+      between each version can be daunting. To confuse matters even more,
+      improperly formed RSS documents are a common occurrence.</para>
+
+      <para>The aim of DOMIT! RSS is to consolidate these variances under a
+      single API, and thus allow you to programatically pull data from any RSS
+      feed, no matter what the version, with complete consistency.</para>
+
+      <para>Another advantage of using DOMIT! RSS is that it piggybacks on top
+      of the <ulink url="http://www.engageinteractive.com/domit/">DOMIT! XML
+      parser</ulink>. You therefore have available, in addition to the DOMIT!
+      RSS API, the standard methods and properties of the <ulink
+      url="http://www.w3.org/TR/DOM-Level-2-Core/">Document Object
+      Model</ulink>.</para>
+
+      <para>DOMIT! RSS also includes such features as a caching system that
+      stores feeds locally, only refreshing them from the source URL at
+      specified intervals.</para>
+
+      <para>DOMIT! RSS comes in two versions:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>The main DOMIT! RSS library, which exposes the full power of
+          the API but is weightier than you may require in some
+          circumstances.</para>
+        </listitem>
+
+        <listitem>
+          <para>The DOMIT! RSS Lite library, which exposes only a subset of
+          the API (that pertaining to title, link, and description elements)
+          and is consequently lighterweight and faster.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>DOMIT! RSS is written in pure PHP, so it should work identically
+      from PHP 4.0 and up without the need to install for PHP
+      extensions.</para>
+    </section>
+
+    <section>
+      <title>Installing DOMIT! RSS</title>
+
+      <para>Since DOMIT! RSS is not an extension, it requires no special setup
+      on your web server. You will, however, need to have the following files
+      present on your server filesystem:<itemizedlist>
+          <listitem>
+            <para><filename>xml_domit_rss_shared.php</filename> - shared code
+            for DOMIT! RSS and DOMIT! RSS Lite</para>
+          </listitem>
+
+          <listitem>
+            <para><filename>xml_domit_rss.php</filename> - the main DOMIT! RSS
+            code</para>
+          </listitem>
+
+          <listitem>
+            <para><filename>xml_domit_rss_lite.php</filename> - main DOMIT!
+            RSS Lite code</para>
+          </listitem>
+
+          <listitem>
+            <para><filename>php_text_cache.php</filename> - required if you
+            want to render your XML as a normalized (whitespace formatted)
+            string or if you want to use the parseXML method of
+            DOMIT_Document.</para>
+          </listitem>
+
+          <listitem>
+            <para><filename>php_file_utilities.php</filename> - generic file
+            input / output utilities</para>
+          </listitem>
+
+          <listitem>
+            <para><filename>php_http_client_generic.php</filename> - generic
+            http client class</para>
+          </listitem>
+
+          <listitem>
+            <para><filename>php_http_client_include.php</filename> - include
+            file for http client class</para>
+          </listitem>
+
+          <listitem>
+            <para><filename>php_http_connector.php</filename> - helper class
+            for php_http_client</para>
+          </listitem>
+
+          <listitem>
+            <para><filename>php_http_exceptions.php</filename> - http
+            exceptions class</para>
+          </listitem>
+
+          <listitem>
+            <para><filename>php_http_proxy.php</filename> - http proxy
+            class</para>
+          </listitem>
+
+          <listitem>
+            <para><filename>php_http_status_codes.php</filename> - HTTP status
+            codes for the http proxy class</para>
+          </listitem>
+        </itemizedlist>You will also need to download the latest version of
+      the <ulink url="http://www.engageinteractive.com/domit/">DOMIT! XML
+      parser</ulink> and install it in the same directory as DOMIT! RSS. You
+      must use a version of DOMIT! no earlier than 1.0.</para>
+    </section>
+
+    <section>
+      <title>Including the DOMIT! RSS Library in your Scripts</title>
+
+      <para>To use DOMIT! RSS in your scripts, include the file
+      <filename>xml_domit_rss.php</filename>.</para>
+
+      <para><programlisting>require_once('somepath/xml_domit_rss.php');</programlisting></para>
+
+      <para>To use DOMIT! RSS Lite in your scripts, include the file
+      <filename>xml_domit_rss_lite.php</filename>.</para>
+
+      <para><programlisting>require_once('somepath/xml_domit_rss_lite.php');</programlisting></para>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Loading a DOMIT! RSS Document</title>
+
+    <section>
+      <title>Instantiating and Populating a DOMIT! RSS Document</title>
+
+      <para>In DOMIT! RSS, an RSS Document is represented by the
+      <function>xml_domit_rss_document</function> (or
+      <function>xml_domit_rss_document_lite</function>) class.</para>
+
+      <section>
+        <title>Instantiating and Parsing a DOMIT! RSS Document</title>
+
+        <para>You create an instance of the
+        <function>xml_domit_rss_document</function> class in the same way as
+        any other PHP class, using the <emphasis role="bold">new</emphasis>
+        keyword.</para>
+
+        <para>The easiest was to both instantiate an RSS document and
+        simultaneously parse it, is to pass in the URL or filename of the feed
+        as the first parameter:</para>
+
+        <programlisting>//instantiate RSS document, and parse feed at http://www.somesite.com/rss.xml
+$rssdoc =&amp; new xml_domit_rss_document('http://www.somesite.com/rss.xml');</programlisting>
+
+        <para>A DOMIT! RSS Lite document is instantiated similarly:</para>
+
+        <para><programlisting>//instantiate RSS Lite document, and parse feed at http://www.somesite.com/rss.xml
+$rssdoc =&amp; new xml_domit_rss_lite_document('http://www.somesite.com/rss.xml');</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>loadRSS</function></title>
+
+        <para>Processing an RSS feed from an URL can also be broken into two
+        steps:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>a DOMIT! RSS Document is first created</para>
+          </listitem>
+
+          <listitem>
+            <para>the <function>loadRSS</function> method is called</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>For example:</para>
+
+        <para><programlisting>//instantiate RSS document
+$rssdoc =&amp; new xml_domit_rss_document();
+
+//parse feed at http://www.somesite.com/rss.xml
+$success = $rssdoc-&gt;loadRSS('http://www.somesite.com/rss.xml');</programlisting>If
+        the document is successfully parsed, <function>loadRSS</function>
+        returns <emphasis role="bold">true</emphasis>.</para>
+      </section>
+
+      <section>
+        <title><function>parseRSS</function></title>
+
+        <para>The <function>parseRSS</function> method works in exactly the
+        same way as <function>loadRSS</function>; however, it takes an RSS
+        <emphasis>string</emphasis> as a parameter, rather than an URL.</para>
+
+        <para>For example:</para>
+
+        <para><programlisting>//instantiate RSS document
+$rssdoc =&amp; new xml_domit_rss_document();
+
+//string containing the text of an RSS feed
+$myRSS = "&lt;rss version='0.95'&gt;\n\t
+            &lt;channel&gt;\n\t\t
+              &lt;title&gt;My Feed&lt;/title&gt;\n\t\t
+              &lt;link&gt;http://www.myfeed.com/rss.xml&lt;/link&gt;\n\t\t
+              &lt;description&gt;This is my silly RSS feed&lt;/description&gt;\n\t\t
+              &lt;item&gt;\n\t\t\t
+                &lt;title&gt;Thoughts for July 29, 2005&lt;/title&gt;\n\t\t\t
+                &lt;link&gt;http://www.myfeed.com/20050729.html&lt;/link&gt;\n\t\t\t
+                &lt;description&gt;Musings about the link between RSS, existentialism, and egg salad sandwiches.&lt;/description&gt;\n\t\t
+              &lt;/item&gt;\n\t
+            &lt;/channel&gt;\n
+          &lt;/rss&gt;";
+
+//parse RSS string
+$success = $rssdoc-&gt;parseRSS($myRSS);</programlisting></para>
+      </section>
+
+      <section>
+        <title>Setting the Cache Location and Duration</title>
+
+        <para>DOMIT! RSS, by default, will cache a copy of your feed on the
+        local filesystem and use this cached copy to draw its data from,
+        rather than continually access a remote URL.</para>
+
+        <para>There are two parameters available for configuring the
+        cache:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>the cache location, which by default is set to './' (the
+            same directory as DOMIT! RSS)</para>
+          </listitem>
+
+          <listitem>
+            <para>the cache duration, which by default is set to 3600 seconds
+            (one hour)</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>If you would like to use cache values other than the defaults
+        provided, you can pass in a new cache location and duration when
+        instantiating a DOMIT! RSS document:</para>
+
+        <para><programlisting>//instantiate RSS document
+//also set cache directory to ../cachefiles/ and cache duration to 2 hours 
+$rssdoc =&amp; new xml_domit_rss_document('http://www.somesite.com/rss.xml', '../cachefiles/', 7200);</programlisting></para>
+
+        <para>The same can be done using the <function>loadRSS</function>
+        method:</para>
+
+        <para><programlisting>//instantiate RSS document
+$rssdoc =&amp; new xml_domit_rss_document();
+
+//parse feed at http://www.somesite.com/rss.xml
+//also set cache directory to ../cachefiles/ and cache duration to 2 hours
+$success = $rssdoc-&gt;loadRSS('http://www.somesite.com/rss.xml', '../cachefiles/', 7200);</programlisting></para>
+      </section>
+    </section>
+
+    <section>
+      <title>Optional Settings for Loading RSS Data</title>
+
+      <para>Sometimes the default approach to populating a DOMIT! RSS Document
+      is insufficient. At times more flexibility is required.</para>
+
+      <para>By default, DOMIT! RSS uses the PHP function
+      <function>get_file_contents</function> or standard PHP file input
+      streams to retrieve the contents of an RSS feed. However, under certain
+      consitions, both of these approaches can fail when passed a remote
+      URL.</para>
+
+      <para>A number of additional options exist to deal with these
+      possibilities.</para>
+
+      <section>
+        <title><function>useHTTPClient:</function> Forcing DOMIT! RSS to use
+        an HTTP Client</title>
+
+        <para>As of version 0.5, DOMIT! RSS comes bundled with the
+        <computeroutput>php_http_client</computeroutput> library, written by
+        <ulink url="http://www.engageinteractive.com/">Engage
+        Interactive</ulink>. The <function>useHTTPClient</function> method
+        allows you to force DOMIT! RSS into establishing a standard HTTP
+        connection to the web server hosting the XML file:<programlisting>//instantiate DOMIT! RSS document 
+$rssdoc =&amp; new xml_domit_rss_document();
+
+//specify that an HTTP client should be used to retrieve XML
+$rssdoc-&gt;useHTTPClient(true); 
+
+//call loadRSS method as usual
+$success = $rssdoc-&gt;loadRSS("http://www.engageinteractive.com/rssfeed.xml"); </programlisting></para>
+
+        <para>The HTTP connection will be attempted on port 80.</para>
+      </section>
+
+      <section>
+        <title><function>setRSSTimeout</function>: Setting a timeout for
+        obtaining feed data</title>
+
+        <para>Sometimes when you attempt to obtain RSS data from a remote
+        site, the server is slow or unavailable. Either you are unable to
+        establish a connection, or the connection is so slow that your own
+        site appears to be hanging.</para>
+
+        <para>The <function>setRSSTimeout</function> method allows you to set
+        a timeout value for obtaining RSS data, beyond which the value
+        returned by loadRSS will be <emphasis role="bold">false</emphasis>.
+        </para>
+
+        <para>The following example times out after 10 seconds of
+        unsuccessfully being able to retrieve data from the remote url:</para>
+
+        <para><programlisting>//instantiate DOMIT! RSS document 
+$rssdoc =&amp; new xml_domit_rss_document();
+
+//set a timeout value of 10 seconds
+$rssdoc-&gt;setRSSTimeout(10); 
+
+//call loadRSS method
+$success = $rssdoc-&gt;loadRSS("http://www.engageinteractive.com/rssfeed.xml");
+
+if ($success) {
+  //process RSS
+}
+else {
+  //no RSS to process; possibly a timeout
+}</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>setConnection</function>: Manually specifying HTTP
+        connection parameters</title>
+
+        <para>If you need to establish an HTTP connection to retrieve your RSS
+        data, but the <function>useHTTPClient</function> method does not
+        provide enough flexibility, the <function>setConnection</function>
+        method of a DOMIT! RSS document can be used to manually set the
+        parameters of the connection.</para>
+
+        <programlisting>$rssdoc =&amp; new xml_domit_rss_document();
+
+//establish HTTP connection on port 955
+$rssdoc-&gt;setConnection('http://www.engageinteractive.com', '/', '955');
+
+//call loadRSS method as usual
+$success = $rssdoc-&gt;loadRSS("http://www.engageinteractive.com/rssfeed.xml");</programlisting>
+
+        <para>In the above example, an HTTP connection will be established on
+        port 955 of host
+        <emphasis>http://www.engageinteractive.com</emphasis>. You can also
+        use a raw IP address for the host, such as
+        <emphasis>http://198.162.0.10</emphasis></para>
+
+        <para>Note that you can also pass in a user name and password to the
+        <function>setConnection</function> method, if you must use HTTP
+        Authorization to establish your connection. For more about HTTP
+        Authorization, please see the entry on the
+        <function>setAuthorization</function> method.</para>
+      </section>
+
+      <section>
+        <title><function>setAuthorization</function>: Using basic HTTP
+        authorization with your connection</title>
+
+        <para>The HTTP specification allows for a basic (i.e., not
+        particularly secure) type of authorization called <emphasis>HTTP
+        Authorization</emphasis>. If the RSS file that you require is
+        protected by this sort of authentication, you can use the
+        <function>setAuthorization</function> method of DOMIT! RSS.</para>
+
+        <para><function>setAuthorization</function> is used in conjunction
+        with the <function>setConnection</function> method, and requires that
+        you provide a plain text username and password:</para>
+
+        <programlisting>$rssdoc =&amp; new xml_domit_rss_document();
+
+//establish HTTP connection on port 955
+$rssdoc-&gt;setConnection('http://www.engageinteractive.com', '/', '955');
+
+//set user name and password for authorization
+$rssdoc-&gt;setAuthorization('johnheinstein', 'mypassword');
+
+//call loadRSS method as usual
+$success = $rssdoc-&gt;loadRSS("http://www.engageinteractive.com/rssfeed.xml");</programlisting>
+      </section>
+
+      <section>
+        <title><function>setProxyConnection</function>: Retrieving XML data
+        through a proxy server</title>
+
+        <para>An <emphasis>HTTP proxy</emphasis> is a server that acts as an
+        intermediary between an HTTP client (a user's browser) and the
+        Internet. It is used to enforce security, administrative control, and
+        caching services.</para>
+
+        <para>If you are behind a firewall, for instance, and must connect to
+        a proxy server to access web based resources, then the
+        <function>setProxyConnection</function> method will allow you to
+        access such data.</para>
+
+        <para>The <function>setProxyConnection</function> method works inn
+        exactly the same way as <function>setConnection</function>:</para>
+
+        <programlisting>$rssdoc =&amp; new xml_domit_rss_document();
+
+//establish proxy connection at http://www.myproxyconnection.com on port 1060
+$rssdoc-&gt;setProxyConnection('http://www.myproxyconnection.com', '/', '1060');
+
+//call loadRSS method as usual
+$success = $rssdoc-&gt;loadRSS("http://www.engageinteractive.com/rssfeed.xml");</programlisting>
+      </section>
+
+      <section>
+        <title><function>setProxyAuthorization</function>: Using basic HTTP
+        authorization with your proxy</title>
+
+        <para>The <function>setProxyAuthorization</function> is called in
+        exactly the same way as <function>setAuthorization</function>. Just
+        provide a valid user name and password:</para>
+
+        <programlisting>$rssdoc =&amp; new xml_domit_rss_document();
+
+//establish proxy connection at http://www.myproxyconnection.com on port 1060
+$rssdoc-&gt;setProxyConnection('http://www.myproxyconnection.com', '/', '1060');
+
+//set user name and password for authorization
+$rssdoc-&gt;setProxyAuthorization('johnheinstein', 'mypassword');
+
+//call loadRSS method as usual
+$success = $rssdoc-&gt;loadRSS("http://www.engageinteractive.com/rssfeed.xml");</programlisting>
+      </section>
+    </section>
+
+    <section>
+      <title>Error Handling</title>
+
+      <para>When an exception occurs in DOMIT! RSS -- perhaps as a result of a
+      remote server being down or malformed XML -- you have a number of
+      options available for displaying these errors.</para>
+
+      <section>
+        <title><function>xml_domit_rss_exception::setErrorMode</function></title>
+
+        <para>The <function>xml_domit_rss_exception::setErrorMode</function>
+        method allows you to define the behavior of DOMIT! RSS when an
+        exception occurs. It takes a single parameter -- an integer or
+        interger constant representing the error mode:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">DOMIT_RSS_ONERROR_CONTINUE</emphasis>
+            (1) - specifies that DOMIT! RSS should continue processing after
+            an exception occurs. This is the default behavior.</para>
+          </listitem>
+
+          <listitem>
+            <para><emphasis role="bold">DOMIT_RSS_ONERROR_DIE</emphasis> (2) -
+            specifies that DOMIT! RSS should die and display the error message
+            after an exception occurs.</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>For example:</para>
+
+        <para><programlisting>$rssdoc =&amp; new xml_domit_rss_document();
+
+//sets DOMIT! RSS to die on an exception
+xml_domit_rss_exception::setErrorMode(DOMIT_RSS_ONERROR_DIE);</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>xml_domit_rss_exception::setErrorLog</function></title>
+
+        <para>The <function>xml_domit_rss_exception::setErrorLog</function>
+        method allows you to specify a file to which error messages are logged
+        and timestamped. This is a useful feature for debugging RSS feed
+        problems.</para>
+
+        <para>It takes two parameters:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>a boolean specifying whether logging should be turned on
+            (true) or off (false)</para>
+          </listitem>
+
+          <listitem>
+            <para>a string containing the absolute or relative path of the
+            error log file.</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>The following example specifies that errors are to be logged to
+        the file 'rssErrorLog.txt':</para>
+
+        <para><programlisting>$rssdoc =&amp; new xml_domit_rss_document();
+
+//specifies that error logging is to be enabled and the error log filename
+xml_domit_rss_exception::setErrorLog(true, 'rssErrorLog.txt');</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>xml_domit_rss_exception::setErrorHandler</function></title>
+
+        <para>If you would like to set a custom error handler for DOMIT! RSS,
+        you can use the
+        <function>xml_domit_rss_exception::setErrorHandler</function>
+        method.</para>
+
+        <para>It takes a single parameter -- the method to handle the
+        error.</para>
+
+        <para>The custom errorhandler method must have the following method
+        signature...</para>
+
+        <para><computeroutput>function myCustomErrorHandler($errorNum,
+        $errorString) </computeroutput></para>
+
+        <para>...where <computeroutput>$errorNum</computeroutput> is an
+        integer signifying the number of the error, and
+        <function>$errorString</function> is a string giving a description of
+        the error.</para>
+
+        <para>For example, if you wrote a function to handle your DOMIT! RSS
+        errors that looked like this:</para>
+
+        <para><programlisting>function myErrorHandler($errorNum, $errorString) {
+  echo "The error number is " . $errorNum . " and " the error string is " . $errorString;
+}</programlisting></para>
+
+        <para>You could invoke it like this:</para>
+
+        <para><programlisting>xml_domit_rss_exception::setErrorHandler("myErrorHandler");</programlisting></para>
+
+        <para>If the <function>myErrorHandler</function> function was a method
+        of a class named <function>ErrorHandlers</function> rather than a
+        standalone function, you could invoke setErrorHandler like
+        this:</para>
+
+        <para><programlisting>xml_domit_rss_exception::setErrorHandler(array("ErrorHandlers", "myErrorHandler"));</programlisting></para>
+      </section>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Extracting Data from a DOMIT! RSS Document</title>
+
+    <para>Once you have successfully loaded a DOMIT! RSS document, you are
+    ready to begin extracting feed data.</para>
+
+    <para>We will use this RSS document for the following examples:</para>
+
+    <para><programlisting>&lt;?xml version="1.0"?&gt;
+&lt;rss version='0.95'&gt;
+  &lt;channel&gt;
+    &lt;title&gt;My Feed&lt;/title&gt;
+    &lt;link&gt;http://www.myfeed.com/rss.xml&lt;/link&gt;
+    &lt;description&gt;This is my silly RSS feed&lt;/description&gt;
+    &lt;language&gt;en-ca&lt;/language&gt;
+    &lt;copyright&gt;2005 John Heinstein&lt;/copyright&gt;
+    &lt;managingEditor&gt;johnkarl@nbnet.nb.ca&lt;/managingEditor&gt;
+    &lt;webMaster&gt;johnkarl@nbnet.nb.ca&lt;/webMaster&gt;
+    &lt;pubDate&gt;Sat, 30 Jul 05 13:20:35 GMT&lt;/pubDate&gt;
+    &lt;lastBuildDate&gt;Sat, 30 Jul 05 13:20:35 GMT&lt;/lastBuildDate&gt;
+    &lt;generator&gt;RSSky Feed Generator&lt;/generator&gt;
+    &lt;docs&gt;http://www.myfeed.com/rss/docs.html&lt;/docs&gt;
+    &lt;cloud domain="www.myfeed.com" port="80" path="/rss" registerProcedure="rssSystem.rssPleaseNotify" protocol="xml-rpc" /&gt;
+    &lt;ttl&gt;20&lt;/ttl&gt;
+    &lt;rating&gt;(PICS-1.1 "http://www.classify.org/safesurf/" l r (SS~~000 1))&lt;/rating&gt;
+    &lt;image&gt;
+      &lt;title&gt;My Feed&lt;/title&gt;
+      &lt;url&gt;http://www.myfeed.com/rss/myfeed.jpg&lt;/url&gt;
+      &lt;link&gt;http://www.myfeed.com/&lt;/link&gt;
+      &lt;width&gt;100&lt;/width&gt;
+      &lt;height&gt;70&lt;/height&gt;
+      &lt;description&gt;Picture of John&lt;/description&gt;
+    &lt;/image&gt;
+    &lt;textinput&gt;
+      &lt;title&gt;Search&lt;/title&gt;
+      &lt;description&gt;Search the My Feed site&lt;/description&gt;
+      &lt;name&gt;searchform&lt;/name&gt;
+      &lt;link&gt;http://www.google.com/search&lt;/link&gt;
+    &lt;/textinput&gt;
+    &lt;skipDays&gt;
+      &lt;day&gt;Friday&lt;/day&gt;
+      &lt;day&gt;Saturday&lt;/day&gt;
+      &lt;day&gt;Sunday&lt;/day&gt;
+    &lt;/skipDays&gt;
+    &lt;skipHours&gt;
+      &lt;hour&gt;16&lt;/hour&gt;
+    &lt;/skipHours&gt;
+    &lt;category domain="http://www.superopendirectory.com/"&gt;philosophy/humor&lt;/category&gt;
+    &lt;category domain="http://www.superopendirectory.com/"&gt;philosophy/hogwash&lt;/category&gt;
+    &lt;item&gt;
+      &lt;title&gt;Thoughts for July 29, 2005&lt;/title&gt;
+      &lt;link&gt;http://www.myfeed.com/20050729.html&lt;/link&gt;
+      &lt;description&gt;Musings about the link between RSS, existentialism, and egg salad sandwiches.&lt;/description&gt;
+      &lt;author&gt;johnkarl@nbnet.nb.ca&lt;/author&gt;
+      &lt;comments&gt;http://www.myfeed.com/comments/20050729.html&lt;/comments&gt;
+      &lt;enclosure url="http://www.myfeed.com/audio/20050729.mp3" length="12216320" type="audio/mpeg" /&gt;
+      &lt;guid isPermaLink="true"&gt;http://www.myfeed.com/20050729.html&lt;/guid&gt;
+      &lt;pubDate&gt;Fri, 29 Jul 05 14:15:16 GMT&lt;/pubDate&gt;  
+      &lt;source url="http://mindsaye.ca/rss/20050729.html"&gt;The Minds Aye&lt;/source&gt;     
+    &lt;/item&gt;
+    &lt;item&gt;
+      &lt;title&gt;Thoughts for July 30, 2005&lt;/title&gt;
+      &lt;link&gt;http://www.myfeed.com/20050730.html&lt;/link&gt;
+      &lt;description&gt;What if the earth were round not flat?&lt;/description&gt;
+      &lt;author&gt;johnkarl@nbnet.nb.ca&lt;/author&gt;
+      &lt;comments&gt;http://www.myfeed.com/comments/20050730.html&lt;/comments&gt;
+      &lt;enclosure url="http://www.myfeed.com/audio/20050730.mp3" length="12216320" type="audio/mpeg" /&gt;
+      &lt;guid isPermaLink="true"&gt;http://www.myfeed.com/20050730.html&lt;/guid&gt; 
+      &lt;pubDate&gt;Sat, 30 Jul 05 13:20:35 GMT&lt;/pubDate&gt; 
+      &lt;source url="http://mindsaye.ca/rss/20050730.html"&gt;The Minds Aye&lt;/source&gt;      
+    &lt;/item&gt;
+  &lt;/channel&gt;
+&lt;/rss&gt;</programlisting></para>
+
+    <section>
+      <title>Document Level Methods</title>
+
+      <para>There are several methods available to you for obtaining document
+      level information: <function>parsedBy</function>,
+      <function>getVersion</function>, and
+      <function>getRSSVersion</function>.</para>
+
+      <section>
+        <title><function>parsedBy</function></title>
+
+        <para>To determine whether DOMIT! RSS or DOMIT! RSS Lite was used to
+        parse your document, you can use the <function>parsedBy
+        </function>method:<programlisting>$rssParser = $rssdoc-&gt;parsedBy();</programlisting></para>
+
+        <para>The <function>parsedBy</function> method returns a string with a
+        value of either <emphasis>DOMIT_RSS</emphasis> or
+        <emphasis>DOMIT_RSS_LITE</emphasis>.</para>
+      </section>
+
+      <section>
+        <title><function>getVersion</function></title>
+
+        <para>The <function>getVersion</function> method returns the version
+        number of the current install of DOMIT! RSS.</para>
+
+        <para><programlisting>$myVersion = $rssdoc-&gt;getVersion();</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>getRSSVersion</function></title>
+
+        <para>The <function>getRSSVersion</function> method returns the
+        version of the RSS specification that the current document is
+        structured on.</para>
+
+        <para><programlisting>$myRSSVersion = $rssdoc-&gt;getRSSVersion();</programlisting></para>
+      </section>
+    </section>
+
+    <section>
+      <title>Displaying a String Representation of RSS Content</title>
+
+      <para>A text representation of an RSS document or any of its elements
+      can be displayed using the
+      <computeroutput><function>toString</function></computeroutput> and
+      <computeroutput><function>toNormalizedString</function></computeroutput>
+      methods.</para>
+
+      <section>
+        <title><function>toString</function></title>
+
+        <para>We can display an unformatted string representation of an RSS
+        document using the <function>toString</function> method :</para>
+
+        <programlisting>//instantiate RSS document, and parse feed at http://www.somesite.com/rss.xml
+require_once('xml_domit_rss.php');
+$rssdoc =&amp; new xml_domit_rss_document('http://www.somesite.com/rss.xml');
+
+//echo document to browser
+echo $rssdoc-&gt;toString(true);</programlisting>
+
+        <para>The following string will be echoed to the browser
+        window:</para>
+
+        <programlisting>&lt;&lt;rss version="0.95"&gt;&lt;channel&gt;&lt;title&gt;My Feed&lt;/title&gt;&lt;link&gt;http://www.myfeed.com/rss.xml&lt;/link&gt;&lt;description&gt;This is my silly RSS feed&lt;/description&gt;&lt;language&gt;en-ca&lt;/language&gt;&lt;copyright&gt;2005 John Heinstein&lt;/copyright&gt;&lt;managingEditor&gt;johnkarl@nbnet.nb.ca&lt;/managingEditor&gt;&lt;webMaster&gt;johnkarl@nbnet.nb.ca&lt;/webMaster&gt;&lt;pubDate&gt;Sat, 30 Jul 05 13:20:35 GMT&lt;/pubDate&gt;&lt;lastBuildDate&gt;Sat, 30 Jul 05 13:20:35 GMT&lt;/lastBuildDate&gt;&lt;generator&gt;RSSky Feed Generator&lt;/generator&gt;&lt;docs&gt;http://www.myfeed.com/rss/docs.html&lt;/docs&gt;&lt;cloud domain="www.myfeed.com" port="80" path="/rss" registerProcedure="rssSystem.rssPleaseNotify" protocol="xml-rpc" /&gt;&lt;ttl&gt;20&lt;/ttl&gt;&lt;rating&gt;(PICS-1.1 "http://www.classify.org/safesurf/" l r (SS~~000 1))&lt;/rating&gt;&lt;image&gt;&lt;title&gt;My Feed&lt;/title&gt;&lt;url&gt;http://www.myfeed.com/rss/myfeed.jpg&lt;/url&gt;&lt;link&gt;http://www.myfeed.com/&lt;/link&gt;&lt;width&gt;100&lt;/width&gt;&lt;height&gt;70&lt;/height&gt;&lt;description&gt;Picture of John&lt;/description&gt;&lt;/image&gt;&lt;textinput&gt;&lt;title&gt;Search&lt;/title&gt;&lt;description&gt;Search the My Feed site&lt;/description&gt;&lt;name&gt;searchform&lt;/name&gt;&lt;link&gt;http://www.google.com/search&lt;/link&gt;&lt;/textinput&gt;&lt;skipDays&gt;&lt;day&gt;Friday&lt;/day&gt;&lt;day&gt;Saturday&lt;/day&gt;&lt;day&gt;Sunday&lt;/day&gt;&lt;/skipDays&gt;&lt;skipHours&gt;&lt;hour&gt;16&lt;/hour&gt;&lt;/skipHours&gt;&lt;category domain="http://www.superopendirectory.com/"&gt;philosophy/humor&lt;/category&gt;&lt;category domain="http://www.superopendirectory.com/"&gt;philosophy/hogwash&lt;/category&gt;&lt;item&gt;&lt;title&gt;Thoughts for July 29, 2005&lt;/title&gt;&lt;link&gt;http://www.myfeed.com/20050729.html&lt;/link&gt;&lt;description&gt;Musings about the link between RSS, existentialism, and egg salad sandwiches.&lt;/description&gt;&lt;author&gt;johnkarl@nbnet.nb.ca&lt;/author&gt;&lt;comments&gt;http://www.myfeed.com/comments/20050729.html&lt;/comments&gt;&lt;enclosure url="http://www.myfeed.com/audio/20050729.mp3" length="12216320" type="audio/mpeg" /&gt;&lt;guid isPermaLink="true"&gt;http://www.myfeed.com/20050729.html&lt;/guid&gt;&lt;pubDate&gt;Fri, 29 Jul 05 14:15:16 GMT&lt;/pubDate&gt;&lt;source url="http://mindsaye.ca/rss/20050729.html"&gt;The Minds Aye&lt;/source&gt;&lt;/item&gt;&lt;item&gt;&lt;title&gt;Thoughts for July 30, 2005&lt;/title&gt;&lt;link&gt;http://www.myfeed.com/20050730.html&lt;/link&gt;&lt;description&gt;What if the earth were round not flat?&lt;/description&gt;&lt;author&gt;johnkarl@nbnet.nb.ca&lt;/author&gt;&lt;comments&gt;http://www.myfeed.com/comments/20050730.html&lt;/comments&gt;&lt;enclosure url="http://www.myfeed.com/audio/20050730.mp3" length="12216320" type="audio/mpeg" /&gt;&lt;guid isPermaLink="true"&gt;http://www.myfeed.com/20050730.html&lt;/guid&gt;&lt;pubDate&gt;Sat, 30 Jul 05 13:20:35 GMT&lt;/pubDate&gt;&lt;source url="http://mindsaye.ca/rss/20050730.html"&gt;The Minds Aye&lt;/source&gt;&lt;/item&gt;&lt;/channel&gt;&lt;/rss&gt;</programlisting>
+
+        <para>The first parameter of <function>toString</function> , if set to
+        <emphasis role="bold">true</emphasis>, converts special HTML
+        characters into their encoded version (i.e. <emphasis>&amp;</emphasis>
+        into <emphasis>&amp;amp;</emphasis>) so that they will display
+        properly in a browser.</para>
+
+        <para>If you would like unconverted raw text to be output (for
+        instance, when echoing to a command line interface) substitute a value
+        of <emphasis role="bold">false</emphasis>:</para>
+
+        <para><programlisting>echo $rssdoc-&gt;toString(false);</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>toNormalizedString</function></title>
+
+        <para>One drawback of the <function>toString</function> output is that
+        it is not particularly readable, since all text of the node is
+        compressed into one line. The <function>toNormalizedString</function>
+        method will output text that is much more nicely formatted:</para>
+
+        <programlisting>//instantiate RSS document, and parse feed at http://www.somesite.com/rss.xml
+require_once('xml_domit_rss.php');
+$rssdoc =&amp; new xml_domit_rss_document('http://www.somesite.com/rss.xml');
+
+//echo document to browser
+echo $rssdoc-&gt;toNormalizedString(true);</programlisting>
+
+        <para>The following string will be echoed to the browser
+        window:</para>
+
+        <programlisting>&lt;rss version="0.95"&gt;
+    &lt;channel&gt;
+        &lt;title&gt;My Feed&lt;/title&gt;
+        &lt;link&gt;http://www.myfeed.com/rss.xml&lt;/link&gt;
+        &lt;description&gt;This is my silly RSS feed&lt;/description&gt;
+        &lt;language&gt;en-ca&lt;/language&gt;
+        &lt;copyright&gt;2005 John Heinstein&lt;/copyright&gt;
+        &lt;managingEditor&gt;johnkarl@nbnet.nb.ca&lt;/managingEditor&gt;
+        &lt;webMaster&gt;johnkarl@nbnet.nb.ca&lt;/webMaster&gt;
+        &lt;pubDate&gt;Sat, 30 Jul 05 13:20:35 GMT&lt;/pubDate&gt;
+        &lt;lastBuildDate&gt;Sat, 30 Jul 05 13:20:35 GMT&lt;/lastBuildDate&gt;
+        &lt;generator&gt;RSSky Feed Generator&lt;/generator&gt;
+        &lt;docs&gt;http://www.myfeed.com/rss/docs.html&lt;/docs&gt;
+        &lt;cloud domain="www.myfeed.com" port="80" path="/rss" registerProcedure="rssSystem.rssPleaseNotify" protocol="xml-rpc" /&gt;
+        &lt;ttl&gt;20&lt;/ttl&gt;
+        &lt;rating&gt;(PICS-1.1 "http://www.classify.org/safesurf/" l r (SS~~000 1))&lt;/rating&gt;
+        &lt;image&gt;
+            &lt;title&gt;My Feed&lt;/title&gt;
+            &lt;url&gt;http://www.myfeed.com/rss/myfeed.jpg&lt;/url&gt;
+            &lt;link&gt;http://www.myfeed.com/&lt;/link&gt;
+            &lt;width&gt;100&lt;/width&gt;
+            &lt;height&gt;70&lt;/height&gt;
+            &lt;description&gt;Picture of John&lt;/description&gt;
+        &lt;/image&gt;
+        &lt;textinput&gt;
+            &lt;title&gt;Search&lt;/title&gt;
+            &lt;description&gt;Search the My Feed site&lt;/description&gt;
+            &lt;name&gt;searchform&lt;/name&gt;
+            &lt;link&gt;http://www.google.com/search&lt;/link&gt;
+        &lt;/textinput&gt;
+        &lt;skipDays&gt;
+            &lt;day&gt;Friday&lt;/day&gt;
+            &lt;day&gt;Saturday&lt;/day&gt;
+            &lt;day&gt;Sunday&lt;/day&gt;
+        &lt;/skipDays&gt;
+        &lt;skipHours&gt;
+            &lt;hour&gt;16&lt;/hour&gt;
+        &lt;/skipHours&gt;
+        &lt;category domain="http://www.superopendirectory.com/"&gt;philosophy/humor&lt;/category&gt;
+        &lt;category domain="http://www.superopendirectory.com/"&gt;philosophy/hogwash&lt;/category&gt;
+        &lt;item&gt;
+            &lt;title&gt;Thoughts for July 29, 2005&lt;/title&gt;
+            &lt;link&gt;http://www.myfeed.com/20050729.html&lt;/link&gt;
+            &lt;description&gt;Musings about the link between RSS, existentialism, and egg salad sandwiches.&lt;/description&gt;
+            &lt;author&gt;johnkarl@nbnet.nb.ca&lt;/author&gt;
+            &lt;comments&gt;http://www.myfeed.com/comments/20050729.html&lt;/comments&gt;
+            &lt;enclosure url="http://www.myfeed.com/audio/20050729.mp3" length="12216320" type="audio/mpeg" /&gt;
+            &lt;guid isPermaLink="true"&gt;http://www.myfeed.com/20050729.html&lt;/guid&gt;
+            &lt;pubDate&gt;Fri, 29 Jul 05 14:15:16 GMT&lt;/pubDate&gt;
+            &lt;source url="http://mindsaye.ca/rss/20050729.html"&gt;The Minds Aye&lt;/source&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+            &lt;title&gt;Thoughts for July 30, 2005&lt;/title&gt;
+            &lt;link&gt;http://www.myfeed.com/20050730.html&lt;/link&gt;
+            &lt;description&gt;What if the earth were round not flat?&lt;/description&gt;
+            &lt;author&gt;johnkarl@nbnet.nb.ca&lt;/author&gt;
+            &lt;comments&gt;http://www.myfeed.com/comments/20050730.html&lt;/comments&gt;
+            &lt;enclosure url="http://www.myfeed.com/audio/20050730.mp3" length="12216320" type="audio/mpeg" /&gt;
+            &lt;guid isPermaLink="true"&gt;http://www.myfeed.com/20050730.html&lt;/guid&gt;
+            &lt;pubDate&gt;Sat, 30 Jul 05 13:20:35 GMT&lt;/pubDate&gt;
+            &lt;source url="http://mindsaye.ca/rss/20050730.html"&gt;The Minds Aye&lt;/source&gt;
+        &lt;/item&gt;
+    &lt;/channel&gt;
+&lt;/rss&gt;</programlisting>
+
+        <para>As with the <function>toString</function> method, passing a
+        value of <emphasis role="bold">false</emphasis> into
+        <function>toNormalizedString</function> outputs text that is not
+        formatted for HTML display.</para>
+      </section>
+    </section>
+
+    <section>
+      <title>Accessing Channels</title>
+
+      <para>Once you have instantiated and populated a DOMIT! RSS Document
+      from an RSS feed, you are able to traverse the hierarchy of the document
+      and access the element data. The first element that you must access is
+      the <emphasis>channel</emphasis> element.</para>
+
+      <section>
+        <title>getChannelCount</title>
+
+        <para>Although officially, only a single channel is allowed in an RSS
+        document, in common practice you will occasionally encounter more than
+        one channel.</para>
+
+        <para>The <function>getChannelCount</function> method determines how
+        many channels exist in an RSS document, allowing you to
+        programmatically loop through each channel and extract
+        information:</para>
+
+        <para><programlisting>//instantiate RSS document
+$rssdoc =&amp; new xml_domit_rss_document('http://www.somesite.com/rss.xml');
+
+//get number of channels
+<emphasis role="bold">$numChannels = $rssdoc-&gt;getChannelCount();</emphasis>
+
+//echo channel count to browser
+echo "Number of channels is: " . $numChannels;
+
+//set up a loop to iterate through each channel
+for ($i = 0; $i &lt; $numChannels; $i++) {
+  //process current channel...
+}</programlisting></para>
+
+        <para>The result:</para>
+
+        <para><programlisting>Number of channels is: 1</programlisting></para>
+      </section>
+
+      <section>
+        <title>getChannel</title>
+
+        <para>Once you have determined the number of channels that exist in an
+        RSS document, you can obtain a reference to a particular channel using
+        the <function>getChannel</function> method:</para>
+
+        <para><function>getChannel</function> takes a single parameter -- an
+        integer specifying the index of the requested channel.</para>
+
+        <para><programlisting>//instantiate RSS document
+$rssdoc =&amp; new xml_domit_rss_document('http://www.somesite.com/rss.xml');
+
+//get number of channels
+$numChannels = $rssdoc-&gt;getChannelCount();
+
+//set up a loop to iterate through each channel
+for ($i = 0; $i &lt; $numChannels; $i++) {
+  //obtain a reference to the current channel
+  <emphasis role="bold">$currChannel =&amp; $rssdoc-&gt;getChannel($i);</emphasis>
+  
+  //echo current channel to browser
+  echo $currChannel-&gt;toNormalizedString(true);
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>&lt;channel&gt;
+    &lt;title&gt;My Feed&lt;/title&gt;
+    &lt;link&gt;http://www.myfeed.com/rss.xml&lt;/link&gt;
+    &lt;description&gt;This is my silly RSS feed&lt;/description&gt;
+    &lt;language&gt;en-ca&lt;/language&gt;
+    &lt;copyright&gt;2005 John Heinstein&lt;/copyright&gt;
+    &lt;managingEditor&gt;johnkarl@nbnet.nb.ca&lt;/managingEditor&gt;
+    &lt;webMaster&gt;johnkarl@nbnet.nb.ca&lt;/webMaster&gt;
+    &lt;pubDate&gt;Sat, 30 Jul 05 13:20:35 GMT&lt;/pubDate&gt;
+    &lt;lastBuildDate&gt;Sat, 30 Jul 05 13:20:35 GMT&lt;/lastBuildDate&gt;
+    &lt;generator&gt;RSSky Feed Generator&lt;/generator&gt;
+    &lt;docs&gt;http://www.myfeed.com/rss/docs.html&lt;/docs&gt;
+    &lt;cloud domain="www.myfeed.com" port="80" path="/rss" registerProcedure="rssSystem.rssPleaseNotify" protocol="xml-rpc" /&gt;
+    &lt;ttl&gt;20&lt;/ttl&gt;
+    &lt;rating&gt;(PICS-1.1 "http://www.classify.org/safesurf/" l r (SS~~000 1))&lt;/rating&gt;
+    &lt;image&gt;
+        &lt;title&gt;My Feed&lt;/title&gt;
+        &lt;url&gt;http://www.myfeed.com/rss/myfeed.jpg&lt;/url&gt;
+        &lt;link&gt;http://www.myfeed.com/&lt;/link&gt;
+        &lt;width&gt;100&lt;/width&gt;
+        &lt;height&gt;70&lt;/height&gt;
+        &lt;description&gt;Picture of John&lt;/description&gt;
+    &lt;/image&gt;
+    &lt;textinput&gt;
+        &lt;title&gt;Search&lt;/title&gt;
+        &lt;description&gt;Search the My Feed site&lt;/description&gt;
+        &lt;name&gt;searchform&lt;/name&gt;
+        &lt;link&gt;"http://www.google.com/search"&lt;/link&gt;
+    &lt;/textinput&gt;
+    &lt;skipDays&gt;
+        &lt;day&gt;Friday&lt;/day&gt;
+        &lt;day&gt;Saturday&lt;/day&gt;
+        &lt;day&gt;Sunday&lt;/day&gt;
+    &lt;/skipDays&gt;
+    &lt;skipHours&gt;
+        &lt;hour&gt;16&lt;/hour&gt;
+    &lt;/skipHours&gt;
+    &lt;category domain="http://www.superopendirectory.com/"&gt;philosophy/humor&lt;/category&gt;
+    &lt;category domain="http://www.superopendirectory.com/"&gt;philosophy/hogwash&lt;/category&gt;
+    &lt;item&gt;
+        &lt;title&gt;Thoughts for July 29, 2005&lt;/title&gt;
+        &lt;link&gt;http://www.myfeed.com/20050729.html&lt;/link&gt;
+        &lt;description&gt;Musings about the link between RSS, existentialism, and egg salad sandwiches.&lt;/description&gt;
+        &lt;author&gt;johnkarl@nbnet.nb.ca&lt;/author&gt;
+        &lt;comments&gt;http://www.myfeed.com/comments/20050729.html&lt;/comments&gt;
+        &lt;enclosure url="http://www.myfeed.com/audio/20050729.mp3" length="12216320" type="audio/mpeg" /&gt;
+        &lt;guid isPermaLink="true"&gt;http://www.myfeed.com/20050729.html&lt;/guid&gt;
+        &lt;pubDate&gt;Fri, 29 Jul 05 14:15:16 GMT&lt;/pubDate&gt;
+        &lt;source url="http://mindsaye.ca/rss/20050729.html"&gt;The Minds Aye&lt;/source&gt;
+    &lt;/item&gt;
+    &lt;item&gt;
+        &lt;title&gt;Thoughts for July 30, 2005&lt;/title&gt;
+        &lt;link&gt;http://www.myfeed.com/20050730.html&lt;/link&gt;
+        &lt;description&gt;What if the earth were round not flat?&lt;/description&gt;
+        &lt;author&gt;johnkarl@nbnet.nb.ca&lt;/author&gt;
+        &lt;comments&gt;http://www.myfeed.com/comments/20050730.html&lt;/comments&gt;
+        &lt;enclosure url="http://www.myfeed.com/audio/20050730.mp3" length="12216320" type="audio/mpeg" /&gt;
+        &lt;guid isPermaLink="true"&gt;http://www.myfeed.com/20050730.html&lt;/guid&gt;
+        &lt;pubDate&gt;Sat, 30 Jul 05 13:20:35 GMT&lt;/pubDate&gt;
+        &lt;source url="http://mindsaye.ca/rss/20050730.html"&gt;The Minds Aye&lt;/source&gt;
+    &lt;/item&gt;
+&lt;/channel&gt;</programlisting></para>
+      </section>
+    </section>
+
+    <section>
+      <title>Accessing the Required Elements of a Channel</title>
+
+      <para>A channel is required, at minimum, to contain
+      <emphasis>title</emphasis>, <emphasis>link</emphasis>, and
+      <emphasis>description</emphasis> elements. The
+      <function>getTitle</function>, <function>getLink</function>, and
+      <function>getDescription</function> methods can be used to access the
+      data in these elements.</para>
+
+      <section>
+        <title><function>getTitle</function></title>
+
+        <para>The <function>getTitle</function> method will return the title
+        of a channel:</para>
+
+        <para><programlisting>//instantiate RSS document
+$rssdoc =&amp; new xml_domit_rss_document('http://www.somesite.com/rss.xml');
+
+//get number of channels
+$numChannels = $rssdoc-&gt;getChannelCount();
+
+//set up a loop to iterate through each channel
+for ($i = 0; $i &lt; $numChannels; $i++) {
+  //obtain a reference to the current channel
+  $currChannel =&amp; $rssdoc-&gt;getChannel($i);
+  
+  //echo title of channel
+  <emphasis role="bold">echo $currChannel-&gt;getTitle();</emphasis>
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>My Feed</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>getLink</function></title>
+
+        <para>The <function>getLink</function> method will return the link of
+        a channel:</para>
+
+        <para><programlisting>//instantiate RSS document
+$rssdoc =&amp; new xml_domit_rss_document('http://www.somesite.com/rss.xml');
+
+//get number of channels
+$numChannels = $rssdoc-&gt;getChannelCount();
+
+//set up a loop to iterate through each channel
+for ($i = 0; $i &lt; $numChannels; $i++) {
+  //obtain a reference to the current channel
+  $currChannel =&amp; $rssdoc-&gt;getChannel($i);
+  
+  //echo link of channel
+  <emphasis role="bold">echo $currChannel-&gt;getLink();</emphasis>
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>http://www.myfeed.com/rss.xml</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>getDescription</function></title>
+
+        <para>The <function>getDescription</function> method will return a
+        description of a channel:</para>
+
+        <para><programlisting>//instantiate RSS document
+$rssdoc =&amp; new xml_domit_rss_document('http://www.somesite.com/rss.xml');
+
+//get number of channels
+$numChannels = $rssdoc-&gt;getChannelCount();
+
+//set up a loop to iterate through each channel
+for ($i = 0; $i &lt; $numChannels; $i++) {
+  //obtain a reference to the current channel
+  $currChannel =&amp; $rssdoc-&gt;getChannel($i);
+  
+  //echo description of channel
+  <emphasis role="bold">echo $currChannel-&gt;getDescription();</emphasis>
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>This is my silly RSS feed</programlisting></para>
+      </section>
+    </section>
+
+    <section>
+      <title>Accessing the Optional Elements of a Channel</title>
+
+      <para>The RSS specification documents a number of additional elements
+      such as 'language' and 'copyright' that can belong to a channel. The
+      following sections detail how the data in these elements can be
+      accessed.</para>
+
+      <section>
+        <title><function>hasElement</function></title>
+
+        <para>You are often be certain whether a nonrequired element is
+        present in any particular RSS feed.</para>
+
+        <para>The <function>hasElement</function> method allows you to test
+        for the existence of a named element. <function>hasElement</function>
+        takes a single parameter -- the name of the element whose existence
+        you are testing for.</para>
+
+        <para>If , for instance, you want to determine if the element
+        <emphasis>copyright</emphasis> belonged to a channel, you could do
+        this:</para>
+
+        <para><programlisting>$doesCopyrightExist = $currentChannel-&gt;hasElement('copyright');</programlisting></para>
+
+        <para>If the <emphasis>copyright</emphasis> element is found,
+        <emphasis role="bold">true</emphasis> is returned.</para>
+      </section>
+
+      <section>
+        <title><function>getLanguage</function></title>
+
+        <para>The <function>getLanguage</function> method returns the language
+        of a channel.</para>
+
+        <para><programlisting>//check if language element exists
+if ($currChannel-&gt;hasElement('language')) {
+
+  //echo language to browser
+  <emphasis role="bold">echo $currChannel-&gt;getLanguage();</emphasis>
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>en-ca</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>getCopyright</function></title>
+
+        <para>The <function>getCopyright</function> method returns the
+        copyright statement of a channel.</para>
+
+        <para><programlisting>//check if copyright element exists
+if ($currChannel-&gt;hasElement('copyright')) {
+
+  //echo copyright to browser
+  <emphasis role="bold">echo $currChannel-&gt;getCopyright();</emphasis>
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>2005 John Heinstein</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>getManagingEditor</function></title>
+
+        <para>The <function>getManagingEditor</function> method returns the
+        email address of the managing editor of a channel.</para>
+
+        <para><programlisting>//check if managing editor element exists
+if ($currChannel-&gt;hasElement('managingEditor')) {
+
+  //echo managing editor to browser
+  <emphasis role="bold">echo $currChannel-&gt;getManagingEditor();</emphasis>
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>johnkarl@nbnet.nb.ca</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>getWebMaster</function></title>
+
+        <para>The <function>getLanguage</function> method returns the email
+        address of the webmaster of a channel.</para>
+
+        <para><programlisting>//check if webmaster element exists
+if ($currChannel-&gt;hasElement('webMaster')) {
+
+  //echo webmaster to browser
+  <emphasis role="bold">echo $currChannel-&gt;getWebMaster();</emphasis>
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>johnkarl@nbnet.nb.ca</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>getPubDate</function></title>
+
+        <para>The <function>getPubDate</function> method returns the language
+        of a channel.</para>
+
+        <para><programlisting>//check if pubDate element exists
+if ($currChannel-&gt;hasElement('pubDate')) {
+
+  //echo pubDate to browser
+ <emphasis role="bold"> echo $currChannel-&gt;getPubDate();</emphasis>
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>Sat, 30 Jul 05 13:20:35 GMT</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>getLastBuildDate</function></title>
+
+        <para>The <function>getLastBuildDate</function> method returns the
+        last build date of a channel.</para>
+
+        <para><programlisting>//check if lastBuildDate element exists
+if ($currChannel-&gt;hasElement('lastBuildDate')) {
+
+  //echo lastBuildDate to browser
+  <emphasis role="bold">echo $currChannel-&gt;getLastBuildDate();</emphasis>
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>Sat, 30 Jul 05 13:20:35 GMT</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>getGenerator</function></title>
+
+        <para>The <function>getGenerator</function> method returns the name of
+        the program which generated the RSS of a channel.</para>
+
+        <para><programlisting>//check if generator element exists
+if ($currChannel-&gt;hasElement('generator')) {
+
+  //echo generator to browser
+  <emphasis role="bold">echo $currChannel-&gt;getGenerator();</emphasis>
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>RSSky Feed Generator</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>getDocs</function></title>
+
+        <para>The <function>getDocs</function> method returns the URL at which
+        to find the docs for the channel.</para>
+
+        <para><programlisting>//check if docs element exists
+if ($currChannel-&gt;hasElement('docs')) {
+
+  //echo docs to browser
+  <emphasis role="bold">echo $currChannel-&gt;getDocs();</emphasis>
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>http://www.myfeed.com/rss/docs.html</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>getCloud</function></title>
+
+        <para>The <function>getCloud</function> method returns the a reference
+        to a web service for the channel which notifies the user when changes
+        to the channel have been made.</para>
+
+        <para><programlisting>//check if cloud element exists
+if ($currChannel-&gt;hasElement('cloud')) {
+
+  //get a reference to the cloud
+  <emphasis role="bold">$myCloud =&amp; $currChannel-&gt;getCloud();</emphasis>
+}</programlisting>Once a reference to the cloud object has been acquired, you
+        can use the methods of the cloud -- <function>getDomain</function>,
+        <function>getPort</function>, <function>getPath</function>,
+        <function>getRegisterProcedure</function>, and
+        <function>getProtocol</function> -- to extract its data:</para>
+
+        <section>
+          <title><function>getDomain</function></title>
+
+          <para>The <function>getDomain</function> method of a cloud allows
+          you to retrieve its domain:</para>
+
+          <para><programlisting>//check if cloud element exists
+if ($currChannel-&gt;hasElement('cloud')) {
+
+  //get a reference to the cloud
+  $myCloud =&amp; $currChannel-&gt;getCloud();
+
+  //echo domain of the cloud
+  <emphasis role="bold">echo $myCloud-&gt;getDomain();</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>www.myfeed.com</programlisting></para>
+        </section>
+
+        <section>
+          <title><function>getPort</function></title>
+
+          <para>The <function>getPort</function> method of a cloud allows you
+          to retrieve its port:</para>
+
+          <para><programlisting>//check if cloud element exists
+if ($currChannel-&gt;hasElement('cloud')) {
+
+  //get a reference to the cloud
+  $myCloud =&amp; $currChannel-&gt;getCloud();
+
+  //echo port of the cloud
+  e<emphasis role="bold">cho $myCloud-&gt;getPort();</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>80</programlisting></para>
+        </section>
+
+        <section>
+          <title><function>getPath</function></title>
+
+          <para>The <function>getPath</function> method of a cloud allows you
+          to retrieve its path:</para>
+
+          <para><programlisting>//check if cloud element exists
+if ($currChannel-&gt;hasElement('cloud')) {
+
+  //get a reference to the cloud
+  $myCloud =&amp; $currChannel-&gt;getCloud();
+
+  //echo path of the cloud
+  <emphasis role="bold">echo $myCloud-&gt;getPath();</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>/rss</programlisting></para>
+        </section>
+
+        <section>
+          <title><function>getRegisterProcedure</function></title>
+
+          <para>The <function>getRegisterProcedure</function> method of a
+          cloud allows you to retrieve its procedure:</para>
+
+          <para><programlisting>//check if cloud element exists
+if ($currChannel-&gt;hasElement('cloud')) {
+
+  //get a reference to the cloud
+  $myCloud =&amp; $currChannel-&gt;getCloud();
+
+  //echo register procedure of the cloud
+  <emphasis role="bold">echo $myCloud-&gt;getRegisterProcedure();</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>rssSystem.rssPleaseNotify</programlisting></para>
+        </section>
+
+        <section>
+          <title><function>getProtocol</function></title>
+
+          <para>The <function>getProtocol</function> method of a cloud allows
+          you to retrieve its protocol:</para>
+
+          <para><programlisting>//check if cloud element exists
+if ($currChannel-&gt;hasElement('cloud')) {
+
+  //get a reference to the cloud
+  $myCloud =&amp; $currChannel-&gt;getCloud();
+
+  //echo protocol of the cloud
+  <emphasis role="bold">echo $myCloud-&gt;getProtocol();</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>xml-rpc</programlisting></para>
+        </section>
+      </section>
+
+      <section>
+        <title><function>getTTL</function></title>
+
+        <para>The <function>getTTL</function> method returns the time to live
+        of a channel.</para>
+
+        <para><programlisting>//check if ttl element exists
+if ($currChannel-&gt;hasElement('ttl')) {
+
+  //echo ttl to browser
+  echo $currChannel-&gt;getTTL();
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>20</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>getImage</function></title>
+
+        <para>The <function>getImage</function> method returns the a reference
+        to the image for the channel:</para>
+
+        <para><programlisting>//check if image element exists
+if ($currChannel-&gt;hasElement('image')) {
+
+  //get a reference to the image
+  <emphasis role="bold">$myImage =&amp; $currChannel-&gt;getImage();</emphasis>
+}</programlisting>Once a reference to the image object has been acquired, you
+        can use the methods of the image -- <function>getTitle</function>,
+        <function>getLink</function>, <function>getUrl</function>,
+        <function>getWidth</function>, <function>getHeight</function>, and
+        <function>getDescription</function> -- to extract its data:</para>
+
+        <section>
+          <title><function>getTitle</function></title>
+
+          <para>The <function>getTitle</function> method of an image allows
+          you to retrieve its title:</para>
+
+          <para><programlisting>//check if image element exists
+if ($currChannel-&gt;hasElement('image')) {
+
+  //get a reference to the image
+  $myImage =&amp; $currChannel-&gt;getImage();
+
+  //echo title of the image
+  <emphasis role="bold">echo $myImage-&gt;getTitle();</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>My Feed</programlisting></para>
+        </section>
+
+        <section>
+          <title><function>getLink</function></title>
+
+          <para>The <function>getLink</function> method of an image allows you
+          to retrieve the link representing the channel:</para>
+
+          <para><programlisting>//check if image element exists
+if ($currChannel-&gt;hasElement('image')) {
+
+  //get a reference to the image
+  $myImage =&amp; $currChannel-&gt;getImage();
+
+  //echo link of the image
+  <emphasis role="bold">echo $myImage-&gt;getLink();</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>http://www.myfeed.com/</programlisting></para>
+        </section>
+
+        <section>
+          <title><function>getUrl</function></title>
+
+          <para>The <function>getUrl</function> method of an image allows you
+          to retrieve the URL of the image:</para>
+
+          <para><programlisting>//check if image element exists
+if ($currChannel-&gt;hasElement('image')) {
+
+  //get a reference to the image
+  $myImage =&amp; $currChannel-&gt;getImage();
+
+  //echo URL of the image
+  <emphasis role="bold">$echo $myImage-&gt;getUrl();</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>http://www.myfeed.com/rss/myfeed.jpg</programlisting></para>
+        </section>
+
+        <section>
+          <title><function>getWidth</function></title>
+
+          <para>The <function>getWidth</function> method of an image allows
+          you to retrieve the width of the image:</para>
+
+          <para><programlisting>//check if image element exists
+if ($currChannel-&gt;hasElement('image')) {
+
+  //get a reference to the image
+  $myImage =&amp; $currChannel-&gt;getImage();
+
+  //echo width of the image
+  <emphasis role="bold">echo $myImage-&gt;getWidth();</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>100</programlisting></para>
+
+          <para><remark>Note: The maximum width of an image is 144px; the
+          default width is 88.</remark></para>
+        </section>
+
+        <section>
+          <title><function>getHeight</function></title>
+
+          <para>The <function>getHeight</function> method of an image allows
+          you to retrieve the height of the image:</para>
+
+          <para><programlisting>//check if image element exists
+if ($currChannel-&gt;hasElement('image')) {
+
+  //get a reference to the image
+  $myImage =&amp; $currChannel-&gt;getImage();
+
+  //echo height of the image
+  <emphasis role="bold">echo $myImage-&gt;getHeight();</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>70</programlisting></para>
+
+          <para><remark>Note: The maximum height of an image is 400px; the
+          default height is 31.</remark></para>
+        </section>
+
+        <section>
+          <title><function>getDescription</function></title>
+
+          <para>The <function>getDescription</function> method of an image
+          allows you to retrieve a description of the image:</para>
+
+          <para><programlisting>//check if image element exists
+if ($currChannel-&gt;hasElement('image')) {
+
+  //get a reference to the image
+  $myImage =&amp; $currChannel-&gt;getImage();
+
+  //echo description of the image
+  <emphasis role="bold">echo $myCloud-&gt;getDecription();</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>Picture of John</programlisting></para>
+        </section>
+      </section>
+
+      <section>
+        <title><function>getRating</function></title>
+
+        <para>The <function>getRating</function> method returns the PICS
+        rating of a channel.</para>
+
+        <para><programlisting>//check if rating element exists
+if ($currChannel-&gt;hasElement('rating')) {
+
+  //echo rating to browser
+  echo $currChannel-&gt;getRating()
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>(PICS-1.1 "http://www.classify.org/safesurf/" l r (SS~~000 1))</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>getTextInput</function></title>
+
+        <para>The <function>getTextInput</function> method returns the a
+        reference to the text input for the channel:</para>
+
+        <para><programlisting>//check if image element exists
+if ($currChannel-&gt;hasElement('textInput')) {
+
+  //get a reference to the text input
+  <emphasis role="bold">$myImage =&amp; $currChannel-&gt;getTextInput();</emphasis>
+}</programlisting>Once a reference to the text input object has been acquired,
+        you can use its methods -- <function>getTitle</function>,
+        <function>getDescription, getName</function>, and
+        <function>getLink</function> -- to extract its data:</para>
+
+        <section>
+          <title><function>getTitle</function></title>
+
+          <para>The <function>getTitle</function> method of a text input
+          allows you to retrieve its title:</para>
+
+          <para><programlisting>//check if text input element exists
+if ($currChannel-&gt;hasElement('textInput')) {
+
+  //get a reference to the text input
+  $myTextInput =&amp; $currChannel-&gt;getTextInput();
+
+  //get title of the text input
+  <emphasis role="bold">$myTitle = $myTextInput-&gt;getTitle();</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>Search</programlisting></para>
+        </section>
+
+        <section>
+          <title><function>getDescription</function></title>
+
+          <para>The <function>getDescription</function> method of a text input
+          allows you to retrieve its description:</para>
+
+          <para><programlisting>//check if text input element exists
+if ($currChannel-&gt;hasElement('textInput')) {
+
+  //get a reference to the text input
+  $myTextInput =&amp; $currChannel-&gt;getTextInput();
+
+  //get title of the text input
+  $myTitle = $myTextInput-&gt;getTitle();
+
+  //get description of the text input
+  <emphasis role="bold">$myDescription = $myTextInput-&gt;getDescription();</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>Search the My Feed site</programlisting></para>
+        </section>
+
+        <section>
+          <title><function>getName</function></title>
+
+          <para>The <function>getName</function> method of a text input allows
+          you to retrieve the name of its Submit button:</para>
+
+          <para><programlisting>//check if text input element exists
+if ($currChannel-&gt;hasElement('textInput')) {
+
+  //get a reference to the text input
+  $myTextInput =&amp; $currChannel-&gt;getTextInput();
+
+  //get title of the text input
+  $myTitle = $myTextInput-&gt;getTitle();
+
+  //get description of the text input
+  $myDescription = $myTextInput-&gt;getDescription();
+
+  //get name of the text input
+  <emphasis role="bold">$myName = $myTextInput-&gt;getName();</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>searchform</programlisting></para>
+        </section>
+
+        <section>
+          <title><function>getLink</function></title>
+
+          <para>The <function>getLink</function> method of a text input allows
+          you to retrieve the URL of the script that is called when the Submit
+          button is clicked:</para>
+
+          <para><programlisting>//check if text input element exists
+if ($currChannel-&gt;hasElement('textInput')) {
+
+  //get a reference to the text input
+  $myTextInput =&amp; $currChannel-&gt;getTextInput();
+
+  //get title of the text input
+  $myTitle = $myTextInput-&gt;getTitle();
+
+  //get description of the text input
+  $myDescription = $myTextInput-&gt;getDescription();
+
+  //get name of the text input
+  $myName = $myTextInput-&gt;getName();
+
+  //get link of the text input
+  <emphasis role="bold">$myLink = $myTextInput-&gt;getLink();</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>http://www.google.com/search</programlisting></para>
+        </section>
+      </section>
+
+      <section>
+        <title><function>getSkipDays</function></title>
+
+        <para>The <function>getSkipDays</function> method returns the a
+        reference to the skipDays object for the channel:</para>
+
+        <para><programlisting>//check if skipDays element exists
+if ($currChannel-&gt;hasElement('skipDays')) {
+
+  //get a reference to the skipDays object
+  <emphasis role="bold">$mySkipDays =&amp; $currChannel-&gt;getSkipDays();</emphasis>
+}</programlisting>Once a reference to the skipDays object has been acquired,
+        you can use its methods -- <function>getSkipDayCount</function>, and
+        <function>getSkipDay</function> -- to extract its data.</para>
+
+        <section>
+          <title><function>getSkipDayCount</function></title>
+
+          <para>The <function>getSkipDayCount </function>method of skipDays
+          returns the number of child <emphasis>day</emphasis>
+          elements:</para>
+
+          <para><programlisting>//check if skipDays element exists
+if ($currChannel-&gt;hasElement('skipDays')) {
+
+  //get a reference to the skipDays object
+  $mySkipDays =&amp; $currChannel-&gt;getSkipDays();
+
+  //get number of child day elements
+  <emphasis role="bold">$numDays = $mySkipDays-&gt;getSkipDayCount();</emphasis>
+
+  //echo number of days to browser
+  echo $numDays;
+
+  //set up loop to iterate through days
+  for ($i = 0; $i &lt; $numDays; $i++) {
+    //process each day element
+  }
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>3</programlisting></para>
+        </section>
+
+        <section>
+          <title><function>getSkipDay</function></title>
+
+          <para>The <function>getSkipDay </function>method of skipDays returns
+          the value of the day element at the specified index. It takes a
+          single parameter -- an integer specifying the index of the day
+          element whose data you wish to access:</para>
+
+          <para><programlisting>//check if skipDays element exists
+if ($currChannel-&gt;hasElement('skipDays')) {
+
+  //get a reference to the skipDays object
+  $mySkipDays =&amp; $currChannel-&gt;getSkipDays();
+
+  //get number of child day elements
+  $numDays = $mySkipDays-&gt;getSkipDayCount();
+
+  //set up loop to iterate through days
+  for ($i = 0; $i &lt; $numDays; $i++) {
+
+    //echo day item to browser
+    echo <emphasis role="bold">$mySkipDays-&gt;getSkipDay($i)</emphasis> . "\n&lt;br /&gt;";
+  }
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>Friday
+Saturday
+Sunday </programlisting></para>
+        </section>
+      </section>
+
+      <section>
+        <title><function>getSkipHours</function></title>
+
+        <para>The <function>getSkipHours</function> method returns the a
+        reference to the skipHours object for the channel:</para>
+
+        <para><programlisting>//check if skipHours element exists
+if ($currChannel-&gt;hasElement('skipHours')) {
+
+  //get a reference to the skipHours object
+  <emphasis role="bold">$mySkipHours =&amp; $currChannel-&gt;getSkipHours();</emphasis>
+}</programlisting>Once a reference to the skipHours object has been acquired,
+        you can use its methods -- <function>getSkipHourCount</function>, and
+        <function>getSkipHour</function> -- to extract its data.</para>
+
+        <section>
+          <title><function>getSkipHourCount</function></title>
+
+          <para>The <function>getSkipHourCount </function>method of skipHours
+          returns the number of child <emphasis>hour</emphasis>
+          elements:</para>
+
+          <para><programlisting>//check if skipHours element exists
+if ($currChannel-&gt;hasElement('skipHours')) {
+
+  //get a reference to the skipHours object
+  $mySkipHours =&amp; $currChannel-&gt;getSkipHours();
+
+  //get number of child hour elements
+  <emphasis role="bold">$numHours = $mySkipHours-&gt;getSkipHourCount();</emphasis>
+
+  //echo num hours to browser
+  echo $numHours;
+
+  //set up loop to iterate through hours
+  for ($i = 0; $i &lt; $numHours; $i++) {
+    //process each hour element
+  }
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>1</programlisting></para>
+        </section>
+
+        <section>
+          <title><function>getSkipHour</function></title>
+
+          <para>The <function>getSkipHour </function>method of skipHours
+          returns the value of the hour element at the specified index. It
+          takes a single parameter -- an integer specifying the index of the
+          hour element whose data you wish to access:</para>
+
+          <para><programlisting>//check if skipHours element exists
+if ($currChannel-&gt;hasElement('skipHours')) {
+
+  //get a reference to the skipHours object
+  $mySkipHours =&amp; $currChannel-&gt;getSkipHours();
+
+  //get number of child hour elements
+  $numHours = $mySkipHours-&gt;getSkipHourCount();
+
+  //set up loop to iterate through hours
+  for ($i = 0; $i &lt; $numHours; $i++) {
+
+    //echo day item to browser
+    echo "day: " . <emphasis role="bold">$mySkipHours-&gt;getSkipHour($i)</emphasis> . "\n&lt;br /&gt;";
+  }
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>16 </programlisting></para>
+        </section>
+      </section>
+
+      <section>
+        <title><function>getCategoryCount</function> and
+        <function>getCategory</function></title>
+
+        <para>A channel can have multiple category elements. The
+        <function>getCategoryCount</function> method indicates how many exist
+        in the current channel:</para>
+
+        <para><programlisting>//get number of categories
+$numCategories =&amp; $currChannel-&gt;getCategoryCount();
+
+//set up loop to iterate through categories
+for ($j=0; $j &lt; $numCategories; $j++) {
+  //process categories
+}</programlisting></para>
+
+        <para>Once you have determined the number of categories and set up a
+        loop to iterate through each one, you can use the
+        <function>getCategory</function> method to retrieve individual
+        cateogry elements:</para>
+
+        <para><programlisting>//get number of categories
+$numCategories =&amp; $currChannel-&gt;getCategoryCount();
+
+//set up loop to iterate through categories
+for ($j=0; $j &lt; $numCategories; $j++) {
+
+  //get current category
+  <emphasis role="bold">$currCategory =&amp; $currChannel-&gt;getCategory($j);</emphasis>
+
+  //echo to browser
+  echo $currCategory-&gt;toNormalizedString(true);
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>&lt;category domain="http://www.superopendirectory.com/"&gt;philosophy/humor&lt;/category&gt;
+
+&lt;category domain="http://www.superopendirectory.com/"&gt;philosophy/hogwash&lt;/category&gt;</programlisting></para>
+
+        <para>A category has two methods at its disposal:
+        <function>getCategory</function> and
+        <function>getDomain</function>.</para>
+
+        <section>
+          <title><function>getCategory</function> (method of Category
+          Class)</title>
+
+          <para>The <function>getCategory</function> method of a category
+          returns the text of the category:</para>
+
+          <para><programlisting>//get number of categories
+$numCategories =&amp; $currChannel-&gt;getCategoryCount();
+
+//set up loop to iterate through categories
+for ($j=0; $j &lt; $numCategories; $j++) {
+
+  //get current category
+  $currCategory =&amp; $currChannel-&gt;getCategory($j);
+
+  //echo category text to browser
+  <emphasis role="bold">echo $currCategory-&gt;getCategory() . "\n&lt;br /&gt;";</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>philosophy/humor
+philosophy/hogwash</programlisting></para>
+        </section>
+
+        <section>
+          <title><function>getDomain</function></title>
+
+          <para>The <function>getDomain</function> method of a category
+          returns the domain attribute of the category, or an empty string if
+          one does not exist:</para>
+
+          <para><programlisting>//get number of categories
+$numCategories =&amp; $currChannel-&gt;getCategoryCount();
+
+//set up loop to iterate through categories
+for ($j=0; $j &lt; $numCategories; $j++) {
+
+  //get current category
+  $currCategory =&amp; $currChannel-&gt;getCategory($j);
+
+  //echo domain to browser
+  <emphasis role="bold">echo $currCategory-&gt;getDomain() . "\n&lt;br /&gt;";</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>http://www.superopendirectory.com/
+http://www.superopendirectory.com/ </programlisting></para>
+        </section>
+      </section>
+    </section>
+
+    <section>
+      <title>Accessing the Items of a Channel</title>
+
+      <para>With a reference to a channel in hand, you are able to loop
+      through the items of that channel and extract the item data. The process
+      is almost identical to looping through the channels of an RSS
+      document.</para>
+
+      <section>
+        <title><function>getItemCount</function></title>
+
+        <para>The <function>getItemCount</function> method determines how many
+        items exist in a channel, allowing you to programmatically loop
+        through each item and extract information:</para>
+
+        <para><programlisting>//instantiate RSS document
+$rssdoc =&amp; new xml_domit_rss_document('http://www.somesite.com/rss.xml');
+
+//get number of channels
+$numChannels = $rssdoc-&gt;getChannelCount();
+
+//set up a loop to iterate through each channel
+for ($i = 0; $i &lt; $numChannels; $i++) {
+  //obtain a reference to the current channel
+  $currChannel =&amp; $rssdoc-&gt;getChannel($i);
+  
+  //get number of items
+  <emphasis role="bold">$numItems = $currChannel-&gt;getItemCount();</emphasis>
+
+  //set up a loop to iterate through each item
+  for ($j = 0; $j &lt; $numItems; $j++) {
+    //process item data
+  }
+}</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>getItem</function></title>
+
+        <para>Once you have determined the number of items that exist in a
+        channel, you can obtain a reference to a particular item using the
+        <function>getItem</function> method:</para>
+
+        <para><function>getitem</function> takes a single parameter -- an
+        integer specifying the index of the requested item.</para>
+
+        <para><programlisting>//instantiate RSS document
+$rssdoc =&amp; new xml_domit_rss_document('http://www.somesite.com/rss.xml');
+
+//get number of channels
+$numChannels = $rssdoc-&gt;getChannelCount();
+
+//set up a loop to iterate through each channel
+for ($i = 0; $i &lt; $numChannels; $i++) {
+  //obtain a reference to the current channel
+  $currChannel =&amp; $rssdoc-&gt;getChannel($i);
+  
+  //get number of items
+  $numItems = $currChannel-&gt;getItemCount();
+
+  //set up a loop to iterate through each item
+  for ($j = 0; $j &lt; $numItems; $j++) {
+    //get reference to current item`
+    <emphasis role="bold">$currItem =&amp; $currChannel-&gt;getItem($j);</emphasis>
+
+    //echo to browser
+    echo $currItem-&gt;toNormalizedString(true);
+  }
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>&lt;item&gt;
+    &lt;title&gt;Thoughts for July 29, 2005&lt;/title&gt;
+    &lt;link&gt;http://www.myfeed.com/20050729.html&lt;/link&gt;
+    &lt;description&gt;Musings about the link between RSS, existentialism, and egg salad sandwiches.&lt;/description&gt;
+    &lt;author&gt;johnkarl@nbnet.nb.ca&lt;/author&gt;
+    &lt;comments&gt;http://www.myfeed.com/comments/20050729.html&lt;/comments&gt;
+    &lt;enclosure url="http://www.myfeed.com/audio/20050729.mp3" length="12216320" type="audio/mpeg" /&gt;
+    &lt;guid isPermaLink="true"&gt;http://www.myfeed.com/20050729.html&lt;/guid&gt;
+    &lt;pubDate&gt;Fri, 29 Jul 05 14:15:16 GMT&lt;/pubDate&gt;
+    &lt;source url="http://mindsaye.ca/rss/20050729.html"&gt;The Minds Aye&lt;/source&gt;
+&lt;/item&gt;
+
+&lt;item&gt;
+    &lt;title&gt;Thoughts for July 30, 2005&lt;/title&gt;
+    &lt;link&gt;http://www.myfeed.com/20050730.html&lt;/link&gt;
+    &lt;description&gt;What if the earth were round not flat?&lt;/description&gt;
+    &lt;author&gt;johnkarl@nbnet.nb.ca&lt;/author&gt;
+    &lt;comments&gt;http://www.myfeed.com/comments/20050730.html&lt;/comments&gt;
+    &lt;enclosure url="http://www.myfeed.com/audio/20050730.mp3" length="12216320" type="audio/mpeg" /&gt;
+    &lt;guid isPermaLink="true"&gt;http://www.myfeed.com/20050730.html&lt;/guid&gt;
+    &lt;pubDate&gt;Sat, 30 Jul 05 13:20:35 GMT&lt;/pubDate&gt;
+    &lt;source url="http://mindsaye.ca/rss/20050730.html"&gt;The Minds Aye&lt;/source&gt;
+&lt;/item&gt;
+</programlisting></para>
+      </section>
+    </section>
+
+    <section>
+      <title>Accessing the Required Elements of an Item</title>
+
+      <para>An item is required to contain at least one
+      <emphasis>title</emphasis>, <emphasis>link</emphasis>, or
+      <emphasis>description</emphasis> elements. Commonly, all three are
+      included.</para>
+
+      <para>The <function>getTitle</function>, <function>getLink</function>,
+      and <function>getDescription</function> methods can be used to access
+      the data in these elements.<programlisting>//RSS doc parsed and channels iterated through already...
+$currChannel =&amp; $rssdoc-&gt;getChannel($i);
+  
+//get number of items
+$numItems = $rssdoc-&gt;getItemCount();
+
+//set up a loop to iterate through each item
+for ($j = 0; $j &lt; $numItems; $j++) {
+  //get reference to current item
+  $currItem =&amp; $currChannel-&gt;getItem($j);
+
+  <emphasis role="bold">//echo title to browser
+  echo "title: " . $currItem-&gt;getTitle() . "\n&lt;br /&gt;";
+
+  //echo link to browser
+  echo "link: " . $currItem-&gt;getLink() . "\n&lt;br /&gt;";
+
+  //echo description to browser
+  echo "description: " . $currItem-&gt;getDescription() . "\n&lt;br /&gt;\n&lt;br /&gt;";</emphasis>
+}</programlisting></para>
+
+      <para>The result is:</para>
+
+      <para><programlisting>title: Thoughts for July 29, 2005
+link: http://www.myfeed.com/20050729.html
+description: Musings about the link between RSS, existentialism, and egg salad sandwiches.
+
+title: Thoughts for July 30, 2005
+link: http://www.myfeed.com/20050730.html
+description: What if the earth were round not flat? </programlisting></para>
+    </section>
+
+    <section>
+      <title>Accessing Optional Elements of an Item</title>
+
+      <para>The RSS specification documents a number of additional elements
+      such as 'author' and 'coments' that can belong to an item. The following
+      sections detail how the data in these elements can be accessed.</para>
+
+      <section>
+        <title><function>getAuthor</function></title>
+
+        <para>The <function>getAuthor</function> method of an item returns the
+        email address of the author of the item:</para>
+
+        <para><programlisting>//check if author element exists
+if ($currItem-&gt;hasElement('author')) {
+
+  //echo author text to browser
+  <emphasis role="bold">echo $currItem-&gt;getAuthor() . "\n&lt;br /&gt;";</emphasis>
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>johnkarl@nbnet.nb.ca
+johnkarl@nbnet.nb.ca </programlisting></para>
+      </section>
+
+      <section>
+        <title><function>getComments</function></title>
+
+        <para>The <function>getComments</function> method of an item returns
+        an URL for user comments:</para>
+
+        <para><programlisting>//check if comments element exists
+if ($currItem-&gt;hasElement('comments')) {
+
+  //echo comments URL to browser
+  <emphasis role="bold">echo $currItem-&gt;getComments() . "\n&lt;br /&gt;";</emphasis>
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>http://www.myfeed.com/comments/20050729.html
+http://www.myfeed.com/comments/20050730.html </programlisting></para>
+      </section>
+
+      <section>
+        <title><function>getEnclosure</function></title>
+
+        <para>The <function>getEnclosure</function> method returns the a
+        reference to the enclosure object -- media such as an mp3 file -- for
+        the item:</para>
+
+        <para><programlisting>//check if enclosure element exists
+if ($currItem-&gt;hasElement('enclosure')) {
+
+  //get a reference to the enclosure object
+  <emphasis role="bold">$myEnclosure =&amp; $currItem-&gt;getEnclosure();</emphasis>
+}</programlisting>Once a reference to the enclosure object has been acquired,
+        you can use its methods -- <function>getUrl</function>,
+        <function>getLength</function>, and <function>getType</function> -- to
+        extract its data.</para>
+
+        <section>
+          <title>getUrl</title>
+
+          <para>The <function>getUrl</function> method of an enclosure returns
+          the URL of the enclosure:</para>
+
+          <para><programlisting>//check if enclosure element exists
+if ($currItem-&gt;hasElement('enclosure')) {
+
+  //get a reference to the enclosure object
+  $myEnclosure =&amp; $currItem-&gt;getEnclosure();
+
+  //echo URL of enclosure to browser
+  <emphasis role="bold">echo $myEnclosure-&gt;getUrl() . "\n&lt;br /&gt;";</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>http://www.myfeed.com/audio/20050729.mp3
+http://www.myfeed.com/audio/20050730.mp3 </programlisting></para>
+        </section>
+
+        <section>
+          <title>getLength</title>
+
+          <para>The <function>getLength</function> method of an enclosure
+          returns the length in bytes of the enclosure:</para>
+
+          <para><programlisting>//check if enclosure element exists
+if ($currItem-&gt;hasElement('enclosure')) {
+
+  //get a reference to the enclosure object
+  $myEnclosure =&amp; $currItem-&gt;getEnclosure();
+
+  //echo length of enclosure to browser
+  <emphasis role="bold">echo $myEnclosure-&gt;getLength() . "\n&lt;br /&gt;";</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>12216320
+12216320 </programlisting></para>
+        </section>
+
+        <section>
+          <title>getType</title>
+
+          <para>The <function>getType</function> method of an enclosure
+          returns its mime type:</para>
+
+          <para><programlisting>//check if enclosure element exists
+if ($currItem-&gt;hasElement('enclosure')) {
+
+  //get a reference to the enclosure object
+  $myEnclosure =&amp; $currItem-&gt;getEnclosure();
+
+  //echo mime type of enclosure to browser
+  <emphasis role="bold">echo $myEnclosure-&gt;getType() . "\n&lt;br /&gt;";</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>audio/mpeg
+audio/mpeg </programlisting></para>
+        </section>
+      </section>
+
+      <section>
+        <title><function>getGUID</function></title>
+
+        <para>The <function>getGUID</function> method returns the a reference
+        to a global unique identifier for the item:</para>
+
+        <para><programlisting>//check if enclosure element exists
+if ($currItem-&gt;hasElement('guid')) {
+
+  //get a reference to the guid object
+  <emphasis role="bold">$myGUID =&amp; $currItem-&gt;getGUID();</emphasis>
+}</programlisting>Once a reference to the guid object has been acquired, you
+        can use its methods -- <function>getGUID</function> and
+        <function>isPermaLink</function> -- to extract its data.</para>
+
+        <section>
+          <title>getGUID</title>
+
+          <para>The <function>getGUID</function> method of a guid returns a
+          global unique identifier, usually in the form of an URL:</para>
+
+          <para><programlisting>//check if guid element exists
+if ($currItem-&gt;hasElement('guid')) {
+
+  //get a reference to the guid object
+  $myEnclosure =&amp; $currItem-&gt;getGUID();
+
+  //echo guid of guid to browser
+  <emphasis role="bold">echo $myGUID-&gt;getGUID() . "\n&lt;br /&gt;";</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>Thttp://www.myfeed.com/20050729.html
+http://www.myfeed.com/20050730.html </programlisting></para>
+        </section>
+
+        <section>
+          <title>isPermaLink</title>
+
+          <para>The <function>isPermaLink</function> method of a guid returns
+          returns <emphasis role="bold">true</emphasis> if the GUID is a
+          permanent link to the item:</para>
+
+          <para><programlisting>//check if guid element exists
+if ($currItem-&gt;hasElement('guid')) {
+
+  //get a reference to the guid object
+  $myEnclosure =&amp; $currItem-&gt;getGUID();
+
+  //output to browser if guid is permalink or not
+  <emphasis role="bold">echo ($myGUID-&gt;isPermalink() ? "Is permalink" : "Is not permalink") . "\n&lt;br /&gt;";</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>Is permalink
+Is permalink </programlisting></para>
+        </section>
+      </section>
+
+      <section>
+        <title><function>getPubDate</function></title>
+
+        <para>The <function>getPubDate</function> method of an item returns
+        the date of publication:</para>
+
+        <para><programlisting>//check if pubDate element exists
+if ($currItem-&gt;hasElement('pubDate')) {
+
+  //echo pubDate to browser
+  <emphasis role="bold">echo $currItem-&gt;getPubDate() . "\n&lt;br /&gt;";</emphasis>
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>Fri, 29 Jul 05 14:15:16 GMT
+Sat, 30 Jul 05 13:20:35 GMT</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>getSource</function></title>
+
+        <para>The <function>getSource</function> method returns the source
+        feed from which the item is derived:</para>
+
+        <para><programlisting>//check if source element exists
+if ($currItem-&gt;hasElement('source')) {
+
+  //get a reference to the source object
+  <emphasis role="bold">$mySource =&amp; $currItem-&gt;getSource();</emphasis>
+}</programlisting>Once a reference to the source object has been acquired, you
+        can use its methods -- <function>getSource</function> and
+        <function>getUrl</function> -- to extract its data.</para>
+
+        <section>
+          <title>getSource</title>
+
+          <para>The <function>getSource</function> method of a source object
+          returns the title of the source feed:</para>
+
+          <para><programlisting>//check if source element exists
+if ($currItem-&gt;hasElement('source')) {
+
+  //get a reference to the source object
+  $mySource =&amp; $currItem-&gt;getSource();
+
+  //echo title of source to browser
+  <emphasis role="bold">echo $mySource-&gt;getSource() . "\n&lt;br /&gt;";</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>The Minds Aye
+The Minds Aye </programlisting></para>
+        </section>
+
+        <section>
+          <title>getUrl</title>
+
+          <para>The <function>getUrl</function> method of a source object
+          returns the URL of the source feed:</para>
+
+          <para><programlisting>//check if source element exists
+if ($currItem-&gt;hasElement('source')) {
+
+  //get a reference to the source object
+  $mySource =&amp; $currItem-&gt;getSource();
+
+  //echo URL of source to browser
+  <emphasis role="bold">echo $mySource-&gt;getUrl() . "\n&lt;br /&gt;";</emphasis>
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>http://mindsaye.ca/rss/20050729.html
+http://mindsaye.ca/rss/20050730.html </programlisting></para>
+        </section>
+      </section>
+
+      <section>
+        <title><function>getCategoryCount</function> and
+        <function>getCategory</function></title>
+
+        <para>The <function>getCategoryCount</function> and
+        <function>getCategory</function> methods of an item are identical to
+        those of the channel element. Please see section 5.17 for more
+        information.</para>
+      </section>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Other Methods for Accessing RSS Data</title>
+
+    <para>The accessor methods that we have just reviewed are simple and
+    convenient ways of extracting data from an RSS document.</para>
+
+    <para>DOMIT! RSS also provides a number of additional methods that allow
+    you to query and interact programmatically with your RSS data.</para>
+
+    <para><remark>Note: We will continue to use the sample RSS document from
+    the previous section</remark></para>
+
+    <section>
+      <title><function>getElementList</function></title>
+
+      <para>For any RSS element that contains subelements -- such as channel,
+      item, or image -- DOMIT! RSS generates a PHP array of subelement names,
+      which is referred to as an <emphasis>element list</emphasis>.</para>
+
+      <para>The <function>getElementList</function> method returns a reference
+      to this element list.</para>
+
+      <para>If, for instance, you want to find out what elements belonged to a
+      channel, you could do this:</para>
+
+      <para><programlisting>//get array of element names under a channel
+$elementList = $currChannel-&gt;getElementList();
+
+//echo array to browser
+echo "&lt;pre&gt;";
+print_r ($elementList);
+echo "&lt;/pre&gt;";</programlisting></para>
+
+      <para>The result is:</para>
+
+      <para><programlisting>Array
+(
+    [0] =&gt; title
+    [1] =&gt; link
+    [2] =&gt; description
+    [3] =&gt; language
+    [4] =&gt; copyright
+    [5] =&gt; managingeditor
+    [6] =&gt; webmaster
+    [7] =&gt; pubdate
+    [8] =&gt; lastbuilddate
+    [9] =&gt; generator
+    [10] =&gt; docs
+    [11] =&gt; cloud
+    [12] =&gt; ttl
+    [13] =&gt; rating
+    [14] =&gt; image
+    [15] =&gt; textinput
+    [16] =&gt; skipdays
+    [17] =&gt; skiphours
+    [18] =&gt; item
+    [19] =&gt; category
+)</programlisting></para>
+
+      <para>The output of the <function>getElementList</function> method
+      contains the names of each subelement of the channel.</para>
+
+      <para>You can use the PHP array method <function>count</function>
+      together with <function>getElementList</function> to iterate through the
+      subelements of an element:</para>
+
+      <para><programlisting>$elementList =&amp; $currChannel-&gt;getElementList();
+$numElements = count($elementList);
+
+for ($i = 0; $i &lt; $numElements; $i++) {
+
+  //get current element name
+  $currElementName =&amp; $elementList[$i];
+  
+  //echo name to browser
+  echo $currElementName . "\n&lt;br /&gt;";
+}</programlisting></para>
+
+      <para>The result is:</para>
+
+      <para><programlisting>title
+link
+description
+language
+copyright
+managingeditor
+webmaster
+pubdate
+lastbuilddate
+generator
+docs
+cloud
+ttl
+rating
+image
+textinput
+skipdays
+skiphours
+item
+category</programlisting></para>
+    </section>
+
+    <section>
+      <title>DOMIT! RSS and RSS Type</title>
+
+      <para>DOMIT! RSS distinguishes four basic <emphasis>types</emphasis> of
+      RSS elements:</para>
+
+      <para><emphasis role="bold">Simple RSS element</emphasis>:</para>
+
+      <para>A simple RSS element is:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>defined by the RSS specification, and</para>
+        </listitem>
+
+        <listitem>
+          <para>composed of a single child text node with no attributes</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>For example:</para>
+
+      <para><programlisting>&lt;language&gt;en-us&lt;/language&gt;</programlisting></para>
+
+      <para>The following elements are considered Simple RSS Elements:
+      'title', 'link', 'description', 'language', 'copyright',
+      'managingEditor', 'webmaster', 'pubDate', 'lastBuildDate', 'generator',
+      'docs', 'ttl', 'rating', 'lastBuildDate', 'author', 'comments',
+      'pubDate'.</para>
+
+      <para><emphasis role="bold">Complex RSS Element:</emphasis></para>
+
+      <para>A complex RSS element is:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>defined by the RSS specification, and</para>
+        </listitem>
+
+        <listitem>
+          <para>contains child elements and/or attributes</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>For example:</para>
+
+      <para><programlisting>&lt;image&gt;
+  &lt;title&gt;Developer&lt;/title&gt;
+  &lt;link&gt;http://www.internetnews.com&lt;/link&gt;
+  &lt;url&gt;http://www.engageinteractive.com/domit/domitBanner.gif&lt;/url&gt;
+  &lt;width&gt;150&lt;/width&gt;
+  &lt;height&gt;50&lt;/height&gt;
+  &lt;description&gt;The blah blah blah de blah&lt;/description&gt;
+&lt;/image&gt;</programlisting></para>
+
+      <para>The following elements are considered Complex RSS Elements:
+      ''generator', 'cloud', 'image', 'textInput', 'enclosure', 'source',
+      'guid', 'skipDays', 'skipHours'.</para>
+
+      <para><emphasis role="bold">Custom RSS Element:</emphasis></para>
+
+      <para>A Custom RSS element is any element that is not defined by the RSS
+      spec. For example:</para>
+
+      <para><programlisting>&lt;dc:creator&gt;John Heinstein&lt;/dc:creator&gt;</programlisting></para>
+
+      <para><emphasis role="bold">RSS Collection:</emphasis></para>
+
+      <para>An RSS Collection describes multiple instances of RSS elements at
+      the same level of hierarchy. For example:</para>
+
+      <para><programlisting>&lt;dc:creator&gt;John Heinstein&lt;/dc:creator&gt;
+&lt;dc:creator&gt;Brad Parks&lt;/dc:creator&gt;
+&lt;dc:creator&gt;Liz Goulard&lt;/dc:creator&gt;</programlisting></para>
+    </section>
+
+    <section>
+      <title>Determining RSS Type</title>
+
+      <para>Knowing the RSS type of an element allows you to programatically
+      apply DOMIT! RSS methods specific to that type.</para>
+
+      <para>There are three DOMIT! RSS methods that allow you to determine
+      type: <function>isSimpleRSSElement</function>,
+      <function>isCustomRSSElement</function>, and
+      <function>isCollection</function>.</para>
+
+      <section>
+        <title><function>isSimpleRSSElement</function> and
+        <function>getElementText</function></title>
+
+        <para>The <function>isSimpleRSSElement</function> method take a single
+        parameter -- an element name -- and returns <emphasis
+        role="bold">true</emphasis> if the element name is a simple RSS
+        element:</para>
+
+        <para><programlisting>echo $currChannel-&gt;isSimpleRSSElement('language');</programlisting></para>
+
+        <para>The above example returns <emphasis
+        role="bold">true</emphasis>.</para>
+
+        <para>If you know the element is of Simple type, you can use the
+        <function>getElementText</function> method to retrieve its value.
+        getElementText takes a single parameter -- the name of the
+        element:</para>
+
+        <para><programlisting>if ($currChannel-&gt;isSimpleRSSElement('language')) {
+
+  //echo value of language element to browser
+  <emphasis role="bold">echo $currChannel-&gt;getElementText('language');</emphasis>
+}</programlisting></para>
+
+        <para>The return value is:</para>
+
+        <para><programlisting>en-ca</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>isCustomRSSElement</function> and
+        <function>getElement</function></title>
+
+        <para>The <function>isCustomRSSElement</function> method take a single
+        parameter -- an element name -- and returns <emphasis
+        role="bold">true</emphasis> if the element name is a custom RSS
+        element:</para>
+
+        <para><programlisting>echo $currChannel-&gt;isCustomRSSElement('image');</programlisting></para>
+
+        <para>The above example returns <emphasis
+        role="bold">true</emphasis>.</para>
+
+        <para>You cannot use the <function>getElementText</function> method to
+        extract data from a Complex type of RSS element. You must instead
+        obtain a reference to that element and use the methods specific to
+        that Complex type to extract its data</para>
+
+        <para>The <function>getElement</function> method can be used to return
+        an object reference to an element. <function>getElement</function>
+        takes a single parameter -- the name of the element to be
+        retrieved:</para>
+
+        <para><programlisting>if ($currChannel-&gt;isCustomRSSElement('dc:creator')) {
+
+  //obtain reference to the dc:creator element
+  <emphasis role="bold">$myElement =&amp; $currChannel-&gt;getElement('dc:creator');</emphasis>
+
+  //echo to browser
+  echo $myElement-&gt;toNormalizedString(true);
+}</programlisting></para>
+
+        <para>The result, if a dc:creator node from the Dublin Core was
+        present:</para>
+
+        <para><programlisting>&lt;dc:creator&gt;John Heinstein&lt;/dc:creator&gt;</programlisting></para>
+
+        <para>With an object reference in hand, you can then use the DOM
+        methods to extract the data for that object. For a dc:crfeator
+        element, you might do this:</para>
+
+        <para><programlisting>if ($currChannel-&gt;isCustomRSSElement('dc:creator')) {
+
+  //obtain reference to the dc:creator element
+  $myElement =&amp; $currChannel-&gt;getElement('dc:creator');
+
+  //echo dc:creator content to browser using the DOMIT getText method
+  echo $myElement-&gt;getText();
+}</programlisting></para>
+
+        <para>The result is:</para>
+
+        <para><programlisting>John Heinstein</programlisting></para>
+      </section>
+
+      <section>
+        <title><function>isCollection</function></title>
+
+        <para>The <function>isCollection</function> method take a single
+        parameter -- an element name -- and returns <emphasis
+        role="bold">true</emphasis> if the element name is an RSS
+        collection:</para>
+
+        <para><programlisting>echo $currChannel-&gt;isCollection('category');</programlisting></para>
+
+        <para>The above example returns <emphasis
+        role="bold">true</emphasis>.</para>
+
+        <para>If you have determined that an element name represents an RSS
+        collection, then the following methods are available for extracting
+        data from the elements of the collection.</para>
+
+        <section>
+          <title><function>getElement</function></title>
+
+          <para>You can also use the <function>getElement</function> method to
+          return an object reference to a collection:</para>
+
+          <para><programlisting>if ($currChannel-&gt;isCollection('category')) {
+
+  //get object reference to collection
+  <emphasis role="bold">$myCollection =&amp; $currChannel-&gt;getElement('category');</emphasis>
+
+  //process collection...
+}</programlisting></para>
+        </section>
+
+        <section>
+          <title><function>getElementCount</function> and
+          <function>getElementAt</function></title>
+
+          <para>Once you have obtained a reference to a collection, you can
+          use the <function>getElementCount</function> method to determine the
+          number of members of that collection.</para>
+
+          <para>A for loop can then be used to iterate through the members of
+          the collection. The <function>getElementAt</function> method will
+          allow you to access the collection members by index: :</para>
+
+          <para><programlisting>if ($currChannel-&gt;isCollection('category')) {
+
+  //get object reference to collection
+  $myCollection =&amp; $currChannel-&gt;getElement('category');
+
+  //get number of collection members
+  <emphasis role="bold">$numMembers = $myCollection-&gt;getElementCount();</emphasis>
+
+  //iterate through members of collection
+  for ($i = 0; $i &lt; $numMembers; $i++) {
+
+    //get reference to each member
+    <emphasis role="bold">$currMember =&amp; $myCollection-&gt;getElementAt($i);</emphasis> 
+
+    //echo to browser
+    echo $currMember-&gt;toNormalizedString(true);
+  }
+}</programlisting></para>
+
+          <para>The result is:</para>
+
+          <para><programlisting>&lt;category domain="http://www.superopendirectory.com/"&gt;philosophy/humor&lt;/category&gt;
+&lt;category domain="http://www.superopendirectory.com/"&gt;philosophy/hogwash&lt;/category&gt;</programlisting></para>
+        </section>
+      </section>
+    </section>
+
+    <section>
+      <title>Navigating an RSS Document by RSS Type</title>
+
+      <para>Navigating through an RSS Document by RSS type involves:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>obtaining a list of available elements</para>
+        </listitem>
+
+        <listitem>
+          <para>iterating through the elements in the list</para>
+        </listitem>
+
+        <listitem>
+          <para>determining the RSS type of each element</para>
+        </listitem>
+
+        <listitem>
+          <para>querying each element for data, based on the RSS type of that
+          element</para>
+        </listitem>
+      </itemizedlist>
+
+      <section>
+        <title>Step 1: Get an Element List</title>
+
+        <para>First, an element list is obtained using the
+        <function>getElementList</function> method:<programlisting>//get array of element names under a channel
+$elementList = $currChannel-&gt;getElementList();</programlisting></para>
+      </section>
+
+      <section>
+        <title>Step 2: Construct a Loop Over the Element List</title>
+
+        <para>Secondly, a loop is constructed over the element list, and the
+        element name is obtained at each iteration:</para>
+
+        <para><programlisting>$elementList =&amp; $currChannel-&gt;getElementList();
+$numElements = count($elementList);
+
+for ($i = 0; $i &lt; $numElements; $i++) {
+
+  //get current element name
+  $currElementName =&amp; $elementList[$i];
+}</programlisting></para>
+      </section>
+
+      <section>
+        <title>Step 3: Test for RSS Type</title>
+
+        <para>Thirdly, the element is sorted into one of the four categories
+        of RSS type, using the <function>isSimpleRSSElement</function>,
+        <function>isCustomRSSElement</function>, and
+        <function>isCollection</function> methods:</para>
+
+        <para><programlisting>$elementList =&amp; $currChannel-&gt;getElementList();
+$numElements = count($elementList);
+
+for ($i = 0; $i &lt; $numElements; $i++) {
+
+  //get current element name
+  $currElementName =&amp; $elementList[$i];
+  
+  if (<emphasis role="bold">$currChannel-&gt;isSimpleRSSElement($currElementName)</emphasis>) { 
+    //element is a simple RSS element
+  }
+  else if (<emphasis role="bold">$currChannel-&gt;isCustomRSSElement($currElementName)</emphasis>) { 
+    //element is a custom RSS element
+  }
+  else if (<emphasis role="bold">$currChannel-&gt;isCollection($currElementName)</emphasis>) { 
+    //element is a collection of RSS elements
+  }
+  else { 
+    //element is a complex RSS element
+  }
+}</programlisting></para>
+      </section>
+
+      <section>
+        <title>Step 4: Query Elements with Methods Specific to Their
+        Type</title>
+
+        <para>The last step is to process elements according to the methods of
+        their RSS type.</para>
+
+        <para><programlisting>$elementList =&amp; $currChannel-&gt;getElementList();
+$numElements = count($elementList);
+
+for ($i = 0; $i &lt; $numElements; $i++) {
+
+  //get current element name
+  $currElementName =&amp; $elementList[$i];
+  
+  if ($currChannel-&gt;isSimpleRSSElement($currElementName)) { 
+    //element is a simple RSS element
+    //use getElementText to get value
+    <emphasis role="bold">$myValue = $currChannel-&gt;getElementText($currElementName);</emphasis>
+  }
+  else if ($currChannel-&gt;isCustomRSSElement($currElementName)) { 
+    //element is a custom RSS element
+    //treat as a DOM node
+    <emphasis role="bold">$currElement =&amp; $currChannel-&gt;getElement($currElementName);
+    
+    switch($currElementName) {
+      case 'dc:creator':
+        $myValue = $currElement-&gt;getText();
+        break;
+ 
+      case 'cost':
+        $myValue1 = $currElement-&gt;firstChild-&gt;nodeValue;
+        $myValue2 = $currElement-&gt;getAttribute('currency'); 
+        break;
+    }</emphasis>
+  }
+  else if ($currChannel-&gt;isCollection($currElementName)) { 
+    //element is a collection of RSS elements
+    <emphasis role="bold">$myCollection =&amp; $currChannel-&gt;getElement('category');
+
+    //get number of collection members
+    $numMembers = $myCollection-&gt;getElementCount();
+    
+    //iterate through members of collection
+    for ($i = 0; $i &lt; $numMembers; $i++) {
+
+      //get reference to each member
+      $currMember =&amp; $myCollection-&gt;getElementAt($i); 
+
+      //process member of collection
+    }</emphasis>
+  }
+  else { 
+    //element is a complex RSS element
+    //get reference to element
+    <emphasis role="bold">$element =&amp; $currChannel-&gt;getElement($currElement);
+    
+    switch (strtolower($currElement)) {
+      case DOMIT_RSS_ELEMENT_IMAGE:
+        //process image element
+        break;
+      case DOMIT_RSS_ELEMENT_CLOUD:
+        //process cloud element
+        break;
+      case DOMIT_RSS_ELEMENT_TEXTINPUT:
+        //process textinput element
+        break;
+      case DOMIT_RSS_ELEMENT_ENCLOSURE:
+        //process enclosure element
+        break;
+      case DOMIT_RSS_ELEMENT_SOURCE:
+        //process source element
+        break;
+      case DOMIT_RSS_ELEMENT_GUID:
+        //process guid element
+        break;
+      case DOMIT_RSS_ELEMENT_SKIPHOURS:
+        //process skipHours element
+        break;
+      case DOMIT_RSS_ELEMENT_SKIPDAYS:
+        //process skipDays element
+        break;
+  }</emphasis>
+}</programlisting></para>
+      </section>
+    </section>
+
+    <section>
+      <title><function>isRSSDefined</function></title>
+
+      <para>The <function>isRSSDefined</function> method is a quick way to
+      test if a child element name is defined by the RSS specification.</para>
+
+      <para>It returns <emphasis role="bold">true</emphasis> if the element is
+      defined in the RSS specification. For example:</para>
+
+      <para><programlisting>echo ($currChannel-&gt;isRSSDefined('image') ? "Is defined." : "Is not defined.");</programlisting></para>
+
+      <para>The result is:</para>
+
+      <para><programlisting>Is defined.</programlisting></para>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Using DOM Methods with DOMIT! RSS</title>
+
+    <para>The nodes of a DOMIT! RSS document are all available to the
+    underlying DOM parser, DOMIT!.</para>
+
+    <para>To access an RSS element as a DOM node at any time, use the
+    <function>node</function> property of that element.</para>
+
+    <para>For example, to access an entire DOMIT! RSS document as a DOM
+    document node:</para>
+
+    <para><programlisting>//instantiate RSS document
+$rssdoc =&amp; new xml_domit_rss_document('http://www.somesite.com/rss.xml');
+
+//access underlying XML document
+$xmldoc =&amp; $rssdoc-&gt;node;</programlisting></para>
+  </chapter>
+
+  <chapter>
+    <title>DOMIT! RSS Roadmap</title>
+
+    <para>Some of the plans for DOMIT include:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>proper handling of namespaces</para>
+      </listitem>
+
+      <listitem>
+        <para>Conditional-Get support</para>
+      </listitem>
+
+      <listitem>
+        <para>modules for non-RSS specifications such as Atom, Dublin
+        Core</para>
+      </listitem>
+
+      <listitem>
+        <para>support for SSL</para>
+      </listitem>
+
+      <listitem>
+        <para>gzip encoding support</para>
+      </listitem>
+    </itemizedlist>
+  </chapter>
+
+  <chapter>
+    <title>Contributing to DOMIT! RSS</title>
+
+    <para>DOMIT! RSS has only been made possible through the suggestions, bug
+    reports, and code submissions of others.</para>
+
+    <para>If you would like to contribute to DOMIT! RSS or join the DOMIT! RSS
+    team, please email <email>johnkarl@nbnet.nb.ca</email></para>
+  </chapter>
+</book>

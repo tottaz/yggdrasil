@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module context-root="/ZimbraWebClient" name="ZimbraWebClient"
+    archive="zimbra.war" type="WEB" id="myeclipse.1081981431083">
+    <attributes>
+        <attribute name="webrootdir" value="WebRoot"/>
+    </attributes>
+</project-module>

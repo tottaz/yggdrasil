@@ -1,0 +1,26 @@
+/* --- static menu styles ---
+note:
+	1. not all browsers render styles the same way so try out your style sheet
+	on different browsers before publishing;
+style naming convention:
+	m<zero based menu number>l<zero based level number>i|o<for inner or outer tag>
+*/
+
+/* all levels inner */
+.minner {
+	font: 12px Tahoma, Verdana, sans-serif;
+	text-decoration : none;
+	padding: 4px;
+	color: black;
+}
+/* all levels outer */
+.moout {
+	text-decoration : none;
+	border : 1px solid #666666;
+	background: #ffffff;
+}
+.moover {
+	text-decoration : none;
+	border : 1px solid #666666;
+	background: #cccccc;
+}

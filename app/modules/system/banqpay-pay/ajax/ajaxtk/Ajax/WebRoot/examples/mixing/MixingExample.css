@@ -1,0 +1,153 @@
+/*
+* ***** BEGIN LICENSE BLOCK *****
+* Version: MPL 1.1
+*
+* The contents of this file are subject to the Mozilla Public
+* License Version 1.1 ("License"); you may not use this file except in
+* compliance with the License. You may obtain a copy of the License at
+* http://www.zimbra.com/license
+*
+* Software distributed under the License is distributed on an "AS IS"
+* basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+* the License for the specific language governing rights and limitations
+* under the License.
+*
+* The Original Code is: Zimbra AJAX Toolkit.
+*
+* The Initial Developer of the Original Code is Zimbra, Inc.
+* Portions created by Zimbra are Copyright (C) 2005 Zimbra, Inc.
+* All Rights Reserved.
+*
+* Contributor(s):
+*
+* ***** END LICENSE BLOCK *****
+*/
+
+
+/*
+* Conventions
+*
+* - Classes that start with "Dwt" have a corollary Javascript object.
+* - Use one line if there is only one selector and one declaration. Otherwise, indent each declaration on its own line.
+* - Group selectors to avoid repetition of styles, as appropriate (ie group within a section). That means you may have
+*   to look at more than one definition to figure out all the applicable styles, but it lets you give the styles a 
+*   hierarchy. That way, you're more likely to need to change a style in just one place.
+* - Use shorthand styles when possible (font, margin, padding, etc).
+* - When grouping selectors that correspond to our Javascript objects, show inheritance by using a different line for
+*   each level of inheritance. CSS doesn't care about our object hierarchy, but doing that enhances readability.
+* - Use decimal RGB values for colors that don't have names.
+* - Modifiers are lower case, whether they're a class (eg .activated) or tacked on (eg -selected).
+*
+* Classes are laid out in the following general order:
+*	- HTML elements
+*	- General app stuff (shell, overlays, banner)
+*	- Widgets that tend toward abstract (minimal subclassing), such as tool tips and sashes
+*	- Heavier use widgets such as buttons and dialogs
+*		- General widget stuff, then specialized subclasses
+*	- List views, with common stuff first
+*	- Other views (lots of them)
+*	- Miscellaneous stuff that multiple apps might use (objects, autocomplete)
+*	- Modifiers
+*
+* Many of the Dwt widgets don't have corresponding classes here, since they are only subclassed. If you create and
+* display one of those widgets, you'll have to add a class for it.
+*/
+
+/* 
+* HTML elements - use for global declarations
+*/
+
+/* Global ELEMENT declarations */
+P, TD, DIV, SPAN, SELECT, INPUT, TEXTAREA {
+	font-size: 8pt;
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+}
+
+BODY {
+	margin: 0px;
+}
+
+FORM {
+	margin: 0;
+	padding: 0;
+}
+
+/* Horizontal separator */
+.horizSep {
+	border-bottom: 1px solid rgb(102, 102, 102);
+        margin: 10px 0;
+	width: 100%;
+}
+/* Vertical separator */
+.vertSep {
+	border-left: 1px ridge rgb(200, 200, 200);
+	height: 100%;
+}
+
+/* Vertical space */
+DIV.vSpace {
+	margin: 10px 0;
+}
+
+
+.MainShell {
+	background-color: pink;
+    width: 100%;
+    height: 100%;
+}
+
+.BusyOverlay table, .VeilOverlay table {
+	filter:alpha(opacity=50);
+	-moz-opacity:0.5;
+	opacity:0.5;
+}
+.BusyOverlay table {
+	cursor: wait;
+	background-color: transparent;
+}
+.VeilOverlay table {
+	cursor: not-allowed;
+	background-color: white;
+}
+.CurtainOverlay table {
+	background-color: white;
+}
+
+/*
+* for tooltips
+*/
+.hover_frame_table 		{	border-collapse:collapse;	padding:0;	}
+.hover_spacer_TL	 	{	width:12;		height:12;}
+.hover_spacer_T 		{	width:100%;		height:16;}
+.hover_spacer_TR	 	{	width:20;		height:16;}
+.hover_spacer_L	 		{	width:20;		height:100%;}
+.hover_spacer_R 		{	width:20;		height:100%;}
+.hover_spacer_BL	 	{	width:20;		height:20;}
+.hover_spacer_B 		{	width:100%;		height:20;}
+.hover_spacer_BR	 	{	width:20;		height:20;}
+.hover_contents 	{								}
+.hover_tip_top 		{		position: absolute;		}
+.hover_tip_bottom 	{		position: relative;		}
+
+/*
+* Buttons
+*/
+
+.DwtButton {
+	border: 1px solid rgb(198, 197, 215);
+}
+.DwtButton-activated {
+	background-image:url(/ajax/examples/mixing/img/hiRes/img/bg_button_up.gif);
+	border: 1px solid;
+	border-color: #E0E0E0 #555555 #555555 #E0E0E0;
+}
+.DwtButton-triggered {
+	background-image:url(/ajax/examples/mixing/img/hiRes/img/bg_button_down.gif);
+	border:1px solid;
+	border-color: #555555 #E0E0E0 #E0E0E0 #555555;
+}
+.DwtButton-toggled {
+	background-image:url(/ajax/examples/mixing/img/hiRes/img/bg_button_down.gif);
+	border:1px solid;
+	border-color: #555555 #E0E0E0 #E0E0E0 #555555;
+}

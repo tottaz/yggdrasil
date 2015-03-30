@@ -1,0 +1,48 @@
+<!-- BEGIN: main -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>example 1</title>
+<meta http-equiv="Content-Language" content="en" />
+<meta name="GENERATOR" content="Co-Comp Ltd" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<!-- $Id: ex1.xtpl,v 1.3 2005/04/07 12:02:51 cocomp Exp $ -->
+<body>
+<p>This is a simple replace test. the text in bold should contain "TEST": <b>{VARIABLE}</b><br />
+now a dynamic block test:<br />
+	<!-- BEGIN: block1 -->
+	this is block 1.<br />
+	<!-- END: block1 -->
+	<!-- BEGIN: block2 -->
+	this is block 2.<br />
+	<!-- END: block2 -->
+</p>
+	<!-- BEGIN: block3#You can comment a block like this -->
+	<table border="1">
+		<tr>
+			<td>id</td>
+			<td>{DATA.ID}</td>
+		</tr>
+		<tr>
+			<td>name</td>
+			<td>{DATA.NAME#You can comment tags like this}</td>
+		</tr>
+		<tr>
+			<td>age</td>
+			<td>{DATA.AGE}</td>
+		</tr>
+	</table>
+	<!-- END: block3#Or comment it here too -->
+<p><br />
+global variables can be parsed directly into the html without assigns:<br />
+$_SERVER['HTTP_HOST']={PHP._SERVER.HTTP_HOST}<br />
+$_SERVER['PHP_SELF']={PHP._SERVER.PHP_SELF}<br />
+$_SERVER['HTTP_USER_AGENT']={PHP._SERVER.HTTP_USER_AGENT}<br />
+etc..<br />
+(<span style="color: red;">note</span> that these variables are scanned in the constructor when creating the XTemplate object!
+so if you need some variables which you have set after creating the template object, you need to call <b>$xtpl->scan_globals()</b>
+before parsing the actual block!</p>
+</body>
+</html>
+<!-- END: main -->

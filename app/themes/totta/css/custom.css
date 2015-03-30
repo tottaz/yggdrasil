@@ -1,0 +1,468 @@
+/* Hidden iframe */
+body {
+	padding-top: 24px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+
+#header{ top:24px; }
+
+.hidden_iframe {
+	display: block;
+	position: absolute;
+	top: 0px;
+	left: -1000px;
+}
+
+.hidden_iframe iframe {
+	width: 100px;
+}
+
+.flag_small {
+	float: left;
+	height: 14px;
+	width: 16px;
+	margin-right: 4px;
+	background: url(flags.png) no-repeat 0px -1px;
+}
+
+/* Media items */
+.media_list {
+	margin: 20px 0px;
+}
+.media_list .media_item {
+	display: block;
+	border: 1px solid #E3E3E3;
+	background: #fbfbfb;
+	color: #999;
+	margin-bottom: 20px;
+}
+.media_list .media_item .media_save_status {
+	display: block;
+	text-align: right;
+	padding: 6px 12px 0 0;
+}
+.media_list .media_item form {
+	display: block;
+	
+}
+.media_list .media_item .form_row {
+	overflow: hidden;
+	padding: 6px 12px;
+}
+.media_list .media_item .form_item {
+	display: block;
+	float: left;
+	margin-right: 10px;
+}
+.media_list .media_item .form_item label {
+	display: block;
+	height: 13px;
+	font: bold 10px/13px verdana;
+	color: #999;
+	text-transform: uppercase;
+}
+.input_text_l {
+	width: 260px;
+}
+.input_text_m {
+	width: 160px;
+}
+.input_text_s {
+	width: 110px;
+}
+
+
+/* CONTENT */
+.content .news_item_infohead {
+	font: 11px verdana;
+	color: #999;
+	margin: 4px 0px 16px 0px;
+}
+
+.content #console {
+	font: 11px "courier new";
+	color: #555;
+	height: 160px;
+	overflow: auto;
+}
+
+.content .tabbar {
+	border-bottom: 1px dotted #cbcbcb;
+	height: 26px;
+	margin-bottom: 10px;
+	padding: 0px 10px;
+}
+.content .tabbar .item {
+	display: block;
+	float: left;
+	margin-left: 6px;
+	padding: 0px 10px;
+	font: bold 12px/26px verdana;
+	text-decoration: none;
+	color: #65CC01;
+	height: 25px;
+	border: 1px dotted #cbcbcb;
+	background: #D6FFAF;
+}
+
+.content .tabbar .active {
+	display: block;
+	float: left;
+	margin-left: 6px;
+	padding: 0px 10px;
+	font: 12px/26px verdana;
+	text-decoration: none;
+	color: #999;
+	height: 25px;
+	border: 1px dotted #cbcbcb;
+	border-bottom: 1px solid #fff;
+	background: #fff;
+}
+
+.content h2.green_title {
+	font: bold 12px verdana;
+	text-transform: uppercase;
+	color: #65CC01;
+	margin: 20px 0 10px 0;
+}
+
+.content .search_filter_bar select {
+	width: 160px;
+}
+
+.content .search_daterange_bar {
+	margin-bottom: 10px;
+}
+
+.content .search_daterange_bar .input_year {
+	width: 40px;
+}
+
+.content .search_daterange_bar select {
+	width: 60px;
+}
+
+.content, .content input, .content select {
+	font: 12px/20px verdana;
+	color: #333;
+}
+
+.content .export_links a {
+	display: block;
+	border: 1px solid #ccc;
+	background: #f4f4f4;
+	cursor: pointer;
+	margin: 0 0 10px 0;
+	padding: 2px 4px;
+	text-decoration: none;
+	text-align: center;
+	width: 120px;
+	color: #333;	
+}
+
+.content h2.green_title {
+	margin-top: 20px;
+}
+
+.content h2.green_title:first-child {
+	margin-top: 10px;
+}
+
+.content .code_param_block {
+	border: 1px solid #e3e3e3;
+	background: white;
+	margin: 20px 0;
+	padding: 6px 0;
+}
+
+.content .page_nav_bar {
+	display: block;
+	overflow: hidden;
+}
+
+.content .page_nav_bar .pre {
+	color: #999;
+	float: left;
+	font: bold 12px/30px verdana;
+	padding: 0px 10px;
+}
+
+.content .page_nav_bar a {
+	display: block;
+	float: left;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	border: 1px solid #e3e3e3;
+	font: 12px/20px verdana;
+	background: #f4f4f4;
+	color: #999;
+	text-decoration: none;
+	margin: 4px;
+	border-radius: 3px;
+}
+
+.content .page_nav_bar a.selected {
+	background: white;
+	font-weight: bold;
+	color: #333;
+}
+
+.content .code_filter_block {
+	height: 40px;
+}
+
+.content .code_filter_block .pre {
+	color: #999;
+	float: left;
+	font: bold 12px/30px verdana;
+	padding: 0px 10px;
+}
+
+.content .code_filter_block select {
+	display: block;
+	float: left;
+	width: 100px;
+	color: #777;
+	font: 12px verdana;
+	margin: 6px 2px 0 2px;
+	height: 20px;
+}
+
+.content .code_filter_block .input_year {
+	display: block;
+	float: left;
+	width: 40px;
+	color: #777;
+	font: 12px verdana;
+	margin: 6px 2px 0 2px;
+}
+
+.content .code_filter_block .input_month {
+	width: 60px;
+}
+
+.content .code_filter_block .input_day {
+	width: 40px;
+}
+
+.content .code_filter_block .input_submit {
+	display: block;
+	float: left;
+	margin: 4px 2px 0 20px;
+}
+
+.content .cronjob_log {
+	width: 100%;
+}
+
+.content .cronjob_log th {
+	text-align: left;
+	font: bold 12px verdana;
+	color: #555;
+	margin: 2px 0px;
+	height: 24px;
+	padding: 2px 6px;
+	background: #fff;
+	border: 1px solid #eee;
+}
+
+.content .cronjob_log td {
+	margin: 2px 0px;
+	height: 20px;
+	padding: 2px 6px;
+	font: 12px/20px verdana;
+	color: #555;
+	background: #fff;
+	border: 1px solid #eee;
+}
+
+/* HITWORDS TABLE */
+.content .hitword_edit_table th {
+	text-align: left;
+	font: bold 12px verdana;
+	color: #555;
+	margin: 2px 0px;
+	height: 24px;
+	padding: 2px 6px;
+	background: #fff;
+	border: 1px solid #eee;
+}
+
+.content .hitword_edit_table td {
+	margin: 2px 0px;
+	height: 20px;
+	padding: 2px 6px;
+	font: 12px/20px verdana;
+	color: #555;
+	background: #fff;
+	border: 1px solid #eee;
+}
+
+.content .hitword_edit_table td .input_text {
+	width: 400px;
+}
+
+/* ADMIN PAGES */
+.content .keyword_block .keyword {
+	margin: 2px 0px;
+	height: 20px;
+	padding: 2px 6px;
+	font: 12px/20px verdana;
+}
+
+.content .keyword_block .right {
+	float: right;
+	color: #555;
+}
+
+.content .keyword_block .right a {
+	color: #555;
+	text-decoration: none;
+}
+
+.content .keyword_block .right a:hover {
+	text-decoration: underline;
+	color: #333;
+}
+
+.content .wire_block .wire {
+	margin: 2px 0px;
+	height: 20px;
+	padding: 2px 6px;
+	font: 12px/20px verdana;
+	background: #fff;
+	border: 1px solid #eee;
+}
+
+.content .wire_block .right {
+	float: right;
+	color: #555;
+}
+
+.content .wire_block .right a {
+	color: #555;
+	text-decoration: none;
+}
+
+.content .wire_block .right a:hover {
+	text-decoration: underline;
+	color: #333;
+}
+
+.content .timeline_input .block {
+	margin: 4px 10px;
+}
+.content .timeline_buttons {
+	margin: 10px 10px 4px 10px;
+}
+
+/* Form */
+form {
+  margin: 0 0 20px;
+}
+
+/*=========================================================================
+  Header
+//=======================================================================*/
+
+#topheader{
+	position:fixed;
+	top:0;
+	width:100%;
+	background-color:#000;
+	z-index:999;
+}
+
+#topheader .user-nav{
+	float:right;
+	overflow:hidden;
+}
+#topheader .user-nav li{
+	float:left;
+	background:url(../img/separator01.gif) no-repeat;
+	display:inline;
+	padding:0 14px 3px 18px;
+	margin:0 1px 0 -1px;
+	font-size:12px;
+	line-height:20px;
+	font-weight:bold;
+	font-family: "Helvetica Neue", Helvetica, Arial, Sans-serif;
+}
+#topheader .user-nav li a{
+	color:#fff;
+	float:left;
+	overflow:hidden;
+	padding-bottom:1px;
+}
+
+#topheader .user-nav li a:hover{
+	padding:0;
+	border-bottom:1px solid #fff;
+}
+
+/*=========================================================================
+  Footer
+//=======================================================================*/
+#footer{
+	position:relative;
+	overflow:hidden;
+	background:#222;
+	border-top:6px solid #e0e0e0;
+	color:#888;
+}
+#footer-wrap{
+	padding:50px 0 20px;
+}
+#footer h1, #footer h2, #footer h3, #footer h4, #footer h5, #footer h6, #footer a{
+	color:#888;
+}
+#footer a:hover{
+	color:#ccc;
+}
+.scrollTop {	
+	background: none repeat scroll 0 0 #959595;
+    bottom: 10%;
+    position: fixed;
+    right: 10px;
+    z-index: 999;
+	display:none;
+}
+.scrollTop a{	
+	background:url(../img/to-top.png) no-repeat center center #959595;
+    display: block;
+    padding: 10px;
+    height: 32px;
+    width: 32px;
+	text-indent:-9999px;
+}
+.scrollTop a:hover{
+	background-color:#00ADEE;
+}
+
+.filter {font-size: 120%; float:right; padding: 0 0 5px 0;}
+
+.crewlistdata {
+
+    padding: 30px 0 0 20px;
+}
+
+/* ================ */
+/* = Port and agent pages = */
+/* ================ */
+
+
+.portagent {
+    margin: 10px 0 20px 40px;
+
+}
+
+.portagent h2 {font-size: 2.5em; display:block; padding: 10px 0 5px 0;}
+.portagent h3 {font-size: 2em; padding: 10px 0 5px 0;}
+.portagent h4 {font-size: 150%;}
+.portagent .portinfo {font-size: 1.2em; margin: 10px 0 0 0;}
+.portinfo p {margin: 5px 0 5px 0;}
+
+
+.portagent textarea {
+    float: none;
+}

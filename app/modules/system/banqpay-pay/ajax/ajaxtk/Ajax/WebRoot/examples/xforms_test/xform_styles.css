@@ -1,0 +1,376 @@
+/*
+* ***** BEGIN LICENSE BLOCK *****
+* Version: MPL 1.1
+*
+* The contents of this file are subject to the Mozilla Public
+* License Version 1.1 ("License"); you may not use this file except in
+* compliance with the License. You may obtain a copy of the License at
+* http://www.zimbra.com/license
+*
+* Software distributed under the License is distributed on an "AS IS"
+* basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+* the License for the specific language governing rights and limitations
+* under the License.
+*
+* The Original Code is: Zimbra AJAX Toolkit.
+*
+* The Initial Developer of the Original Code is Zimbra, Inc.
+* Portions created by Zimbra are Copyright (C) 2005 Zimbra, Inc.
+* All Rights Reserved.
+*
+* Contributor(s):
+*
+* ***** END LICENSE BLOCK *****
+*/
+
+
+.xform_container {
+	position:relative;
+}
+
+.xform_table_fullsize {
+	border-collapse:collapse;
+	padding:0;
+	width:100%;
+	height:100%;
+}
+
+/* NEW */
+
+	.contactHeader	{
+		font-size:18px;
+		background-color:lightblue;
+		color:black;
+		padding:5px;
+	}
+
+	.companyName	{
+		font-size:14px;
+		padding:5px;
+		//border-bottom:1px solid black;
+		margin-bottom:5px;
+	}
+
+	.contactCell	{
+		vertical-align:top;
+	}
+
+	.contactOutput	{
+		font-size:14px;
+		width:100%;
+	}
+	
+	.contactLabelRight	{
+		vertical-align:top;
+		width:100px;
+		padding-left:20px;
+		overflow:hidden;
+	}
+
+	.contactLabelLeft {
+		vertical-align:top;
+		width:30px;
+		padding-left:5px;
+		overflow:hidden;
+	}
+
+	.contactAnchor	{
+		font-size:14px;
+	}
+
+
+
+	
+	.xform_table {
+		border-collapse:collapse;
+		padding:0;
+	}
+	.xform_composite_table {
+		border-collapse:collapse;
+		padding:0;
+	}
+	
+	.xform_separator {
+		width:100%;
+		height:1;
+		border-bottom:1px solid black;
+	}
+	
+
+.xform_button_grid_small_table {
+	border-collapse:collapse;
+	padding:0;
+}
+.xform_button_grid_small_table td {
+	padding:0;
+}
+
+.xform_button_grid_small_button {
+	cursor:pointer;
+	width:12px;
+	height:12px;
+	padding:3px;
+	background-color:white;
+	border:1px outset gray;
+	margin:1px;
+	text-align:center;
+}
+.xform_button_grid_small_button_selected {
+	cursor:pointer;
+	width:12px;
+	height:12px;
+	padding:3px;
+	background-color:gray;
+	border:1px inset gray;
+	margin:1px;
+	text-align:center;
+}
+
+.xform_button_grid_medium_td {
+}
+
+.xform_button_grid_medium_button {
+	cursor:pointer;
+	white-space:nowrap;
+	overflow:hidden;
+	width:40px;
+	padding:3px;
+	background-color:white;
+	border:1px outset gray;
+	text-align:center;
+}
+.xform_button_grid_medium_button_selected {
+	cursor:pointer;
+	white-space:nowrap;
+	overflow:hidden;
+	width:40px;
+	padding:3px;
+	background-color:gray;
+	border:1px inset gray;
+	text-align:center;
+}
+
+
+
+.xform_button_grid_tab_table {
+	border-collapse:collapse;
+	padding:0;
+}
+.xform_button_grid_tab_table td {
+	padding:0;
+}
+.xform_button_grid_tab {}
+.xform_button_grid_tab_button,
+.xform_button_grid_tab_button_selected {
+	cursor:pointer;
+	white-space: nowrap;
+	padding-top:3px;padding-bottom:3px;
+	padding-left:10px;padding-right:10px;
+	background-color:#CCCCCC;
+	border:1px outset black;
+	text-align:center;
+}
+.xform_button_grid_tab_button  {
+	height:13px;
+}	
+.xform_button_grid_tab_button_selected {
+	background-color:white;
+	border:1px outset black;
+	border-top:1px solid #666666;
+	border-bottom:1px solid white;
+	height:15px;
+}
+
+
+.xform_button_grid_tab_start,
+.xform_button_grid_tab_end{
+	height:15px;
+	padding-top:3px;padding-bottom:3px;
+	padding-left:10px;padding-right:10px;
+	border-bottom:1px solid black;
+}
+
+	
+	
+.oselect, .oselect_check {
+	cursor:pointer;
+	background-color:white;
+}
+.oselect_table,
+.oselect_check_table {
+	border-collapse:collapse;
+	background-color:white;
+	border-left:1px solid #EEEEEE;
+	border-top:1px solid #EEEEEE;
+	border-right:1px solid gray;
+	border-bottom:1px solid gray;
+	padding:0;
+}
+.oselect_table TD,
+.oselect_check_table TD {
+	padding:0;
+}
+.oselect_display {
+	white-space:nowrap;
+	overflow:hidden;
+	margin-left:4px;
+	margin-right:4px;
+}
+.oselect_arrow_button {
+	width:16;
+	height:16;
+	background-image:url(oselect_down_arrow.gif);
+}
+.oselect_menu {
+	position:absolute;
+	z-index:10000000000;
+	cursor:pointer;
+	border-bottom:1px outset gray;
+	border-right:1px outset gray;
+}
+.oselect_choice_table,
+.oselect_check_choice_table {
+	border-collapse:collapse;
+	border:1px solid black;
+}
+.oselect_choice {
+	background-color:white;
+	color:black;
+	padding-top:4px;
+	padding-bottom:4px;
+	padding-left:5px;
+	padding-right:20px;
+	margin:1px;
+	white-space:nowrap;
+}
+.oselect_choice_selected {
+	color:black;
+	background-color:FFFF66;
+	padding-top:4px;
+	padding-bottom:4px;
+	padding-left:5px;
+	padding-right:20px;
+	margin:1px;
+}
+.oselect_choice_check {
+	background-color:white;
+	color:black;
+	padding-top:4px;
+	padding-bottom:4px;
+	margin:1px;
+	white-space:nowrap;
+}
+.oselect_choice_selected_check {
+	color:black;
+	background-color:FFFF66;
+	padding-top:4px;
+	padding-bottom:4px;
+	margin:1px;
+}
+
+.oselect_check_choice {
+	background-color:white;
+	color:black;
+	padding:4px;
+	white-space:nowrap;
+}
+.oselect_check_choice_selected {
+	color:black;
+	background-color:FFFF66;
+	padding:4px;
+}
+
+
+
+
+
+
+.card_border_table {
+	border-collapse:collapse;
+	padding:0;
+}
+
+
+.card_contents {
+	position:relative;
+	/* position up and to the left to center w/in the margins */
+	Xtop:-3; Xleft:-3;
+}
+
+.card_contents_table {
+	width:100%;
+}
+
+
+.card_spacer_c		{ width:10; 	height:10;		overflow:hidden;	}
+.card_spacer_h		{ width:100%;					Xoverflow:hidden;	}
+.card_spacer_v		{ 				height:100%;	Xoverflow:hidden;	}
+.card_spacer_m		{ width:100%; 	height:100%;	overflow:hidden;	}
+
+.card_TL		{ width:10;		height:10;		background-image:url(images/card_TL.png);		}
+.card_TM		{ width:100%;	height:10;		background-image:url(images/card_TM.png);		}
+.card_TR		{ width:10;		height:10;		background-image:url(images/card_TR.png);		}
+
+.card_ML		{ width:10;		height:100%;	background-image:url(images/card_ML.png);		}
+.card_MM		{ width:100%; 	height:100%;	background-color:white; 	vertical-align:top;	}
+.card_MR		{ width:10;		height:100%;	background-image:url(images/card_MR.png);		}
+
+.card_BL		{ width:10;		height:10;		background-image:url(images/card_BL.png);		}
+.card_BM		{ width:100%;	height:10;		background-image:url(images/card_BM.png);		}
+.card_BR		{ width:10;		height:10;		background-image:url(images/card_BR.png);		}
+
+
+.selected_card_sizer_TL	{ width:10; 	height:10;	overflow:hidden;				}
+.selected_card_sizer_BR	{ width:10; 	height:10; 	overflow:hidden;				}
+.selected_card_TL		{ width:10;		height:10;		background-image:url(images/selected_card_TL.png);		}
+.selected_card_TM		{ width:100%;	height:10;		background-image:url(images/selected_card_TM.png);		}
+.selected_card_TR		{ width:10;		height:10;		background-image:url(images/selected_card_TR.png);		}
+
+.selected_card_ML		{ width:10;		height:100%;	background-image:url(images/selected_card_ML.png);		}
+.selected_card_MM		{ width:100%; 	height:100%;	background-color:white; 	vertical-align:top;	}
+.selected_card_MR		{ width:10;		height:100%;	background-image:url(images/selected_card_MR.png);		}
+
+.selected_card_BL		{ width:10;		height:10;		background-image:url(images/selected_card_BL.png);		}
+.selected_card_BM		{ width:100%;	height:10;		background-image:url(images/selected_card_BM.png);		}
+.selected_card_BR		{ width:10;		height:10;		background-image:url(images/selected_card_BR.png);		}
+
+
+
+
+.balloon_frame 			{	Xposition:absolute;	Xwidth:100%;	Xheight:100%;	z-index:1;	}
+.balloon_frame_table 	{	Xposition:absolute; width:100%;	height:100%;	
+							border-collapse:collapse;	padding:0;			}
+.TL_balloon_contents {
+	position:relative;
+	Xleft:-5;
+	Xtop:2;
+	Xmargin-bottom:5px;
+	z-index:2;
+	border:1px solid red;
+}
+
+.balloon_spacer_c	 	{	width:20;		height:20;}
+.balloon_spacer_h 		{	width:100%;		height:20;}
+.balloon_spacer_v 		{	width:20;		height:100%;}
+.balloon_spacer_m 		{	width:100%;		height:100%; background-color:#EEEEEE;}
+
+
+/*		the following are generated dynamically in the live system */
+
+.TL_balloon_tip	{ width:20;		height:65;		background-image:url(images/TL_balloon_tip.png);	 }
+
+.balloon_TL	{ width:20;		height:20;		background-image:url(images/balloon_TL.png);	}
+.balloon_TM	{ width:20;		height:20;		background-image:url(images/balloon_TM.png);	}
+.balloon_TR	{ width:20;		height:20;		background-image:url(images/balloon_TR.png);	}
+
+.balloon_ML	{ width:20;		height:10;		background-image:url(images/balloon_ML.png);	}
+.balloon_MM	{ width:20;		height:10;		background-image:url(images/balloon_MM.png);	}
+.balloon_MR	{ width:20;		height:10;		background-image:url(images/balloon_MR.png);	}
+
+.balloon_BL	{ width:20;		height:20;		background-image:url(images/balloon_BL.png);	}
+.balloon_BM	{ width:100%;	height:20;		background-image:url(images/balloon_BM.png);	}
+.balloon_BR	{ width:20;		height:20;		background-image:url(images/balloon_BR.png);	}
+
+/* end dynamic */
+
+

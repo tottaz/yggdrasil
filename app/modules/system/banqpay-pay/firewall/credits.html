@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC 
+  "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>IPTables-Tutorial</title>
+<meta name="Author" content="Scott Morizot" /></head>
+<body>
+
+<h2 align="center">IPTables-Tutorial</h2>
+
+<p>A closer look at the ideas and approaches gleaned from <i>Oskar
+Andreasson's IPTables-Tutorial</i> is warranted. His tutorial
+influenced the direction of the Easy Firewall Generator more than any
+other single work. That's not surprising. The <i>IPTables-Tutorial</i>
+was one of the first works produced after the original netfilter HOWTOs.
+It has significantly impacted many subsequent works.</p>
+
+<p>The three most significant influences on Easy Firewall Generator
+are listed below.</p>
+
+<p><ul>
+
+<li>The basic idea of using separate chains for each type of packet is
+presented in the <i>iptables-tutorial</i>. This generator does not
+implement it exactly the same way and further applies the concept to
+outbound packets traversing the FORWARD chain, but the 
+<i>iptables-tutorial</i> is the original source of the idea.</li>
+
+<li>The idea of dropping NEW tcp packets that are not flagged as SYN
+packets is one I found only in the <i>iptables-tutorial</i>. Although I
+altered the manner in which it was invoked, I incorporated the general
+concept into this generator.</li>
+
+<li>The style of writing and organizing iptables rules used in the
+<i>iptables-tutorial</i> is, in my opinion, the clearest and easiest to
+read of all the styles I've seen. As such, I adopted that style for use
+in this generator.</li>
+
+</ul></p>
+
+<p>If you have questions or issues with iptables that are not addressed
+by this generator, the <i>IPTables-Tutorial</i> is the best starting
+point for additional research.  A link to it is maintained in the
+Resources page.</p>
+
+<p align="center"><a href="javascript:window.close();">
+Close Window
+</a></p>
+
+</body>
+</html>
+

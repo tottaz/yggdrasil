@@ -1,0 +1,21 @@
+RewriteEngine on
+# Automatic parsing of all *.haw HAWHAW XML files on webserver
+# http://www.banqpay.com/zetapay/xml/hawxy.php?code=www.banqpay.com/test.haw
+# -> http://www.banqpay.com/test.haw
+# DO NOT CHANGE NEXT LINE (do not rewrite requests from HAWXY (endless loop!))
+RewriteCond %{HTTP_USER_AGENT}  !^HAWXY.*$
+# MODIFY THE FOLLOWING LINE ACCORDING YOUR SERVER NAME
+RewriteRule (.*)\.haw$ /xml/hawxy.php?code=http://www.banqpay.com/$1.haw [L,QSA]
+
+# MIME Types for WAP 
+
+# For PHP 4.x, use this:
+AddType application/x-httpd-php .wml
+
+# For normal WML pages.
+AddType text/vnd.wap.wml .wml 
+
+# For WML embedded graphics.
+AddType image/vnd.wap.wbmp .wbmp
+
+# End MIME Types for WAP 

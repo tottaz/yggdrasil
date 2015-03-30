@@ -1,0 +1,1 @@
+<?php include FCPATH.'app/config/constants.php';

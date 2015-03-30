@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC 
+  "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Help - DNS Server</title>
+<meta name="Author" content="Scott Morizot" /></head>
+<body>
+
+<h2 align="center">Help - DNS Server</h2>
+
+<p>This option will generate the rules that will allow inbound DNS
+queries.  These are UDP queries to port 53.  It will also generate a
+rule in the tcp_inbound chain to allow inbound tcp packets to port 53.
+However, this rule is commented by default.  DNS queries are typically
+UDP and that's the most commonly used protocol.  However, if you need to
+enable zone transfers, you will need to allow TCP connections.  You can
+simply uncomment the rule in the tcp_inbound chain.  However, you may
+wish to tweak it so only those servers you wish to allow to perform zone
+transfers are allowed in through the firewall.</p>
+
+<p align="center"><a href="javascript:window.close();">
+Close Window
+</a></p>
+
+</body>
+</html>
+

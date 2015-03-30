@@ -1,0 +1,182 @@
+<script>
+
+//Pop-under window- By JavaScript Kit
+//Credit notice must stay intact for use
+//Visit http://javascriptkit.com for this script
+
+//specify page to pop-under
+var popunder="http://yahoo.com"
+
+//specify popunder window features
+//set 1 to enable a particular feature, 0 to disable
+var winfeatures="width=800,height=510,scrollbars=1,resizable=1,toolbar=1,location=1,menubar=1,status=1,directories=0"
+
+//Pop-under only once per browser session? (0=no, 1=yes)
+//Specifying 0 will cause popunder to load every time page is loaded
+var once_per_session=0
+
+///No editing beyond here required/////
+
+function get_cookie(Name) {
+  var search = Name + "="
+  var returnvalue = "";
+  if (document.cookie.length > 0) {
+    offset = document.cookie.indexOf(search)
+    if (offset != -1) { // if cookie exists
+      offset += search.length
+      // set index of beginning of value
+      end = document.cookie.indexOf(";", offset);
+      // set index of end of cookie value
+      if (end == -1)
+         end = document.cookie.length;
+      returnvalue=unescape(document.cookie.substring(offset, end))
+      }
+   }
+  return returnvalue;
+}
+
+function loadornot(){
+if (get_cookie('popunder')==''){
+loadpopunder()
+document.cookie="popunder=yes"
+}
+}
+
+function loadpopunder(){
+win2=window.open(popunder,"",winfeatures)
+win2.blur()
+window.focus()
+}
+
+if (once_per_session==0)
+loadpopunder()
+else
+loadornot()
+
+</script>
+
+Insert the following code into the <body> of the MAIN page (the page that will launch the remote
+<script>
+<!--
+function remote(){
+/*Credit: JavaScript Kit www.javascriptkit.com more JavaScripts here.*/
+win2=window.open("remote.htm","","width=150,height=350,scrollbars")
+win2.creator=self
+}
+//-->
+</script>
+<form>
+<input type="button" value="Launch remote!" onClick="remote()">
+</form>
+
+
+Copy the below code and save it as remote.htm. This is the file you should edit- simply change the URLs in function remote2 below to your own
+
+<html>
+<head>
+<title>Remote Control</title>
+<script>
+<!--
+function remote2(url){
+window.opener.location=url
+}
+//-->
+</script>
+</head>
+
+
+<body bgcolor="ffffff">
+<div align="left">
+
+<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFF00">
+  <tr>
+    <td width="100%"><p align="center"><strong><big><font face="Arial">Remote Control</font></big></strong></td>
+  </tr>
+</table>
+</div>
+
+<p align="left"><font face="Arial" size="2"><a
+href="javascript:remote2('../javaindex.htm')"><strong>JavaScript Tutorials</strong></a></font></p>
+
+<p align="left"><font face="Arial"><a href="javascript:remote2('../howto/webbuild.htm')"><strong><small>Web
+building tutorials</small></strong></a></font></p>
+
+<p align="left"><a href="javascript:remote2('../cutpastejava.htm')"><font face="Arial"
+size="2"><strong>Free JavaScripts</strong></font></a></p>
+
+<p align="left"><a href="javascript:remote2('../java/javafront.htm')"><small><font
+face="Arial"><strong>Free Java applets</strong></font></small></a></p>
+
+<p align="left"><font face="Arial" size="2"><a
+href="javascript:remote2('../frontpage.htm')"><strong>FrontPage Tutorials</strong></a></font></p>
+
+<p align="left"><a href="javascript:remote2('../backgr.htm')"><font face="Arial" size="2"><strong>Web
+Graphics</strong></font></a></p>
+
+<p align="left"><a
+href="javascript:remote2('http://www.javascriptkit.com/script/cut105.htm')"><font
+face="Arial" size="2"><strong>Back to script</strong></font></a></p>
+</body>
+</html>
+
+
+<SCRIPT>
+function GetCookie (name) { 
+var arg = name + "="; 
+var alen = arg.length; 
+var clen = document.cookie.length; 
+var i = 0; 
+while (i < clen) {
+var j = i + alen; 
+if (document.cookie.substring(i, j) == arg) 
+return getCookieVal (j); 
+i = document.cookie.indexOf(" ", i) + 1; 
+if (i == 0) break; 
+} 
+return null;
+}
+function SetCookie (name, value) { 
+var argv = SetCookie.arguments; 
+var argc = SetCookie.arguments.length; 
+var expires = (argc > 2) ? argv[2] : null; 
+var path = (argc > 3) ? argv[3] : null; 
+var domain = (argc > 4) ? argv[4] : null; 
+var secure = (argc > 5) ? argv[5] : false; 
+document.cookie = name + "=" + escape (value) + 
+((expires == null) ? "" : ("; expires=" + expires.toGMTString())) + 
+((path == null) ? "" : ("; path=" + path)) + 
+((domain == null) ? "" : ("; domain=" + domain)) + 
+((secure == true) ? "; secure" : "");
+}
+function DeleteCookie (name) { 
+var exp = new Date(); 
+exp.setTime (exp.getTime() - 1); 
+var cval = GetCookie (name); 
+document.cookie = name + "=" + cval + "; expires=" + exp.toGMTString();
+}
+var expDays = 30;
+var exp = new Date(); 
+exp.setTime(exp.getTime() + (expDays*24*60*60*1000));
+function amt(){
+var count = GetCookie('count')
+if(count == null) {
+SetCookie('count','1')
+return 1
+}
+else {
+var newcount = parseInt(count) + 1;
+DeleteCookie('count')
+SetCookie('count',newcount,exp)
+return count
+}
+}
+function getCookieVal(offset) {
+var endstr = document.cookie.indexOf (";", offset);
+if (endstr == -1)
+endstr = document.cookie.length;
+return unescape(document.cookie.substring(offset, endstr));
+}
+</SCRIPT>
+<SCRIPT>
+document.write("You've been here <b>" + amt() + "</b> times.")
+</SCRIPT>

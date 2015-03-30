@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class ChainsawEventsXmlParser</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class ChainsawEventsXmlParser</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parser the xml stream</p>
+<p class="description"><p>Parser the xml stream</p></p>
+		<p class="notes">
+			Located in <a class="field" href="_chainsaw_ChainsawEventsXmlParser_php.html">Program_Root/chainsaw/ChainsawEventsXmlParser.php</a> (line <span class="field"><a href="..//__filesource/fsource_chainsaw__chainsaw_ChainsawEventsXmlParser.php.html#a25">25</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$event" title="details" class="var-name">$event</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$eventSetStarted" title="details" class="var-name">$eventSetStarted</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$eventStarted" title="details" class="var-name">$eventStarted</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$htmlEntititesTT" title="details" class="var-name">$htmlEntititesTT</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$locationInfoStarted" title="details" class="var-name">$locationInfoStarted</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$messageStarted" title="details" class="var-name">$messageStarted</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$ndcStarted" title="details" class="var-name">$ndcStarted</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$receiver" title="details" class="var-name">$receiver</a>
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+											<span class="method-result">ChainsawEventsXmlParser</span>
+										<a href="#ChainsawEventsXmlParser" title="details" class="method-name">ChainsawEventsXmlParser</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$receiver</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#cdata" title="details" class="method-name">cdata</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$xp</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$data</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#dispatch" title="details" class="method-name">dispatch</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#endTag" title="details" class="method-name">endTag</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$xp</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$tag</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#parse" title="details" class="method-name">parse</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$last</span> = <span class="var-default">false</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#startParse" title="details" class="method-name">startParse</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#startTag" title="details" class="method-name">startTag</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$xp</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$tag</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$attribs</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#stopParse" title="details" class="method-name">stopParse</a>
+										()
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$event" id="$event"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$event</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number"><a href="..//__filesource/fsource_chainsaw__chainsaw_ChainsawEventsXmlParser.php.html#a33">33</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$eventSetStarted" id="$eventSetStarted"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$eventSetStarted</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="..//__filesource/fsource_chainsaw__chainsaw_ChainsawEventsXmlParser.php.html#a27">27</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$eventStarted" id="$eventStarted"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$eventStarted</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="..//__filesource/fsource_chainsaw__chainsaw_ChainsawEventsXmlParser.php.html#a28">28</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$htmlEntititesTT" id="$htmlEntititesTT"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$htmlEntititesTT</span>
+						(line <span class="line-number"><a href="..//__filesource/fsource_chainsaw__chainsaw_ChainsawEventsXmlParser.php.html#a36">36</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$locationInfoStarted" id="$locationInfoStarted"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$locationInfoStarted</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="..//__filesource/fsource_chainsaw__chainsaw_ChainsawEventsXmlParser.php.html#a31">31</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$messageStarted" id="$messageStarted"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$messageStarted</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="..//__filesource/fsource_chainsaw__chainsaw_ChainsawEventsXmlParser.php.html#a29">29</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$ndcStarted" id="$ndcStarted"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$ndcStarted</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="..//__filesource/fsource_chainsaw__chainsaw_ChainsawEventsXmlParser.php.html#a30">30</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$receiver" id="$receiver"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$receiver</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number"><a href="..//__filesource/fsource_chainsaw__chainsaw_ChainsawEventsXmlParser.php.html#a34">34</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodChainsawEventsXmlParser" id="ChainsawEventsXmlParser"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor ChainsawEventsXmlParser</span> (line <span class="line-number"><a href="..//__filesource/fsource_chainsaw__chainsaw_ChainsawEventsXmlParser.php.html#a38">38</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">ChainsawEventsXmlParser</span>
+		<span class="method-name">
+			ChainsawEventsXmlParser
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">&$receiver</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodcdata" id="cdata"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">cdata</span> (line <span class="line-number"><a href="..//__filesource/fsource_chainsaw__chainsaw_ChainsawEventsXmlParser.php.html#a201">201</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			cdata
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$xp</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$data</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methoddispatch" id="dispatch"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">dispatch</span> (line <span class="line-number"><a href="..//__filesource/fsource_chainsaw__chainsaw_ChainsawEventsXmlParser.php.html#a52">52</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			dispatch
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodendTag" id="endTag"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">endTag</span> (line <span class="line-number"><a href="..//__filesource/fsource_chainsaw__chainsaw_ChainsawEventsXmlParser.php.html#a167">167</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			endTag
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$xp</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$tag</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodparse" id="parse"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">parse</span> (line <span class="line-number"><a href="..//__filesource/fsource_chainsaw__chainsaw_ChainsawEventsXmlParser.php.html#a74">74</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			parse
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$last</span> = <span class="var-default">false</span>])
+			</div>
+	
+		
+		
+	</div>
+<a name="methodstartParse" id="startParse"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">startParse</span> (line <span class="line-number"><a href="..//__filesource/fsource_chainsaw__chainsaw_ChainsawEventsXmlParser.php.html#a61">61</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			startParse
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodstartTag" id="startTag"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">startTag</span> (line <span class="line-number"><a href="..//__filesource/fsource_chainsaw__chainsaw_ChainsawEventsXmlParser.php.html#a101">101</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			startTag
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$xp</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$tag</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$attribs</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodstopParse" id="stopParse"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">stopParse</span> (line <span class="line-number"><a href="..//__filesource/fsource_chainsaw__chainsaw_ChainsawEventsXmlParser.php.html#a86">86</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			stopParse
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+						
+		</div>
+	</div>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Tue,  9 Dec 2003 23:49:03 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.2.2</a>
+	</p>
+	</div></body>
+</html>

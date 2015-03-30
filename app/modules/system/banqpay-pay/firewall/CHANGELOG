@@ -1,0 +1,204 @@
+Version 1.17
+
+05/11/2005 - tsm: Added rule to do ingress filtering as suggested
+                  by Brian Buchanan
+
+05/11/2005 - tsm: Changed the rule to drop broadcasts that would
+                  otherwise be dropped to a better rule als
+                  suggested by Brian Buchanan
+
+Version 1.16
+
+04/27/2005 - tsm: Added rules in bad_tcp_packets to filter packets
+                  with illegal tcp flag combinations. This will
+                  block many stealth scans.
+
+04/27/2005 - tsm: Added the option to support inbound mDNSResponder.
+
+Version 1.15
+
+03/14/2004 - tsm: Added an option to configure inbound NFS.
+                  Used this web site and included a pointer
+                  in the help: http://www.lowth.com/LinWiz/nfs_help.html
+
+03/14/2004 - tsm: Cleaned up the resources page.
+
+03/14/2004 - tsm: Added a link to the CHANGELOG on the generator form.
+
+03/14/2004 - tsm: Because of the worms blasting the 'net with pings,
+                  changed the icmp chain to drop echo requests
+                  without logging by default. (Earlier versions
+                  dropped them and logged them by default.)
+
+03/14/2004 - tsm: Added EFG version number to generated firewall script.
+
+03/14/2004 - tsm: Updated the Interfaces help to make sure people
+                  generating scripts for a single system know they
+                  can just specify '+' to match every interface.
+
+Version 1.14
+
+05/24/2003 - tsm: Added an option to port forwarding to add rules to
+                  redirect requests from internal systems to the
+                  external IP of the firewall on the forwarded
+                  port(s) to the internal system. Only works if
+                  the firewall has a static and not a dynamic
+                  IP address.  Of course, they really need
+                  a static IP if using port forwarding anyway.
+
+05/24/2003 - tsm: Added the tcp_syncookies kernel parameter setting
+                  to ensure SYN flood protection is enabled.
+                  Suggested by Salim Badakhchani (and several
+                  others.)
+
+05/24/2003 - tsm: Added the date the version was released under the
+                  version number.  This was a request.
+
+05/24/2003 - tsm: Added help for the inbound DNS server option that
+                  explains the udp rules and the optional tcp_inbound
+                  rule.
+
+05/24/2003 - tsm: Pulled the separate little changelogs out of the files
+                  and into this application CHANGELOG
+
+04/10/2003 - Jan Pavlik: Added SSL option to the inbound Web Server
+                         and Email options. 
+
+Version 1.13
+
+03/11/2003 - tsm: Added an option to allow a user-specified inbound
+                  port range.
+
+03/11/2003 - tsm: Added an option to allow MSN Messenger file
+                  transfers.  Expanded the port forwarding
+                  documentation as well. Suggested and researched
+                  by Nuno Justo.
+
+02/28/2003 - tsm: Fixed bug in log rule for forward chain introduced
+                  version 1.11.
+
+Version 1.12
+
+02/25/2003 - tsm: Added an option to reject (rather than drop) ident
+                  requests if the person uses irc.  Also included
+                  some further tips for more sophisticated
+                  configurations. Suggested by Dan Barron.
+
+02/25/2003 - tsm: Tweaked installation instruction comments in generated
+                  firewall script.
+
+01/30/2003 - tsm: Added a rule in icmp_packets to drop initial ICMP
+                  fragments.  Suggested by Alex Weeks.
+
+Version 1.11
+
+01/30/2003 - tsm: Added option to set up log for use with Fireparse
+
+01/30/2003 - tsm: Added kernel setting options suggested by Alex Weeks
+                  with additional explanation. (Thanks!)
+
+Version 1.10
+
+01/23/2003 - tsm: Ensure each script section specifies php
+
+01/21/2003 - tsm: Commented out ip_dynaddr kernel settings in all
+                  circumstances.  Caused problems in RH 8.0. Not
+                  sure why yet.
+
+Version 1.09
+
+12/06/2002 - tsm: Modified port forwarding to allow either TCP/UDP or
+                  both and an optional internal destination port.
+
+12/06/2002 - tsm: Changed the port forwarding layout in the form
+
+12/06/2002 - tsm: Altered tab index ranges by section to make easier
+                  to change the form in the future.
+
+12/05/2002 - tsm: Modified to block all subnet multicasts on the
+                  internet interface.
+
+Version 1.08
+
+11/30/2002 - tsm: Fixed a bug in FORWARD chain so bad_packets will be dropped.
+
+11/30/2002 - tsm: Allowed port forwarding to an internal system
+
+11/30/2002 - tsm: Add ICQ advanced inbound options
+
+11/30/2002 - tsm: Changed to allow ports to be specified for passive
+                  ftp on inbound connections
+
+Version 1.07
+
+10/16/2002 - tsm: Made transparent proxy comment out HTTPS option by
+                  default
+
+10/16/2002 - tsm: Changed to use $_POST
+
+Version 1.06
+
+06/27/2002 - tsm: Added rule options for the multicast
+                  packets seen from cable modems.
+                  Fixed the TTL rule.
+
+Version 1.05
+
+05/23/2002 - tsm: Added credit section for Oskar Andreasson's
+                 iptables-tutorials
+
+05/22/2002 - tsm: Modified default behavior of bad_tcp_packets chain
+                  so packets originating from the internal interface
+                  (if one exists) are not processed through the
+                  chain.  Provided expanded comments and alternative
+                  rules.
+                  Ensured all lines in the resulting file are 80
+                  columns or less.
+
+05/21/2002 - tsm: Fixed bug that added postrouting rule for single
+                  system as well as gateway.
+                  Drop INPUT broadcasts immediately before logging.
+
+Version 1.04
+
+05/20/2002 - tsm: Added logic to display Internal DHCP and External
+                  DHCP options in the form
+
+05/20/2002 - tsm: Updated to check for internal dhcp and external
+                  dhcp options.
+
+05/20/2002 - tsm: Fixed bug that failed to properly record static IP address.
+                  Added code to allow system to act a dhcp server.
+                  The autoconfig kludge is now more elegantly solved by
+                  an Internal DHCP setting that specifically allows
+                  DHCP packets from clients through the internal interface.
+                  Some of the explicit returns from chains were missing.
+                  Set internal output to internal interface to IP or IFACE.
+                  Corrected bug that printed literal value, not variable
+                  name.
+
+Version 1.03
+
+05/20/2002 - tsm: Added sysctl option to change kernel parameters.
+                  Expanded the comments explaining the udp_inbound
+                  netbios rules.
+                  Added comments to allow script to work with Redhat's
+                  chkconfig implementation
+
+05/17/2002 - tsm: Expand further on comments
+                  Fixed FTP Client inbound port rule
+                  Fixed OUTPUT chain rule for local_ip, only if there is one
+                  Explicitly drop inbound netbios (137,138)
+                  requests in udp_inbound without logging.  Cuts down
+                  on noise in the logs if in an area with lots of windows
+                  machines.  Only affects internet interface.
+                  Explicitly accept LO_IFACE on OUTPUT chain
+
+05/16/2002 - tsm: Added detail to the kernel module and proc setting sections
+                  Added actions for arguments save and restore
+                  Added generic bad_packets chain - call it first everywhere
+                  except in OUTPUT chain. May add later.
+                  Added invalid ICMP packets to OUTPUT
+                  chain to remedy potential exploit.
+
+

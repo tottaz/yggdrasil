@@ -1,0 +1,620 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1" />
+    <title>log4php - log4j ported to PHP!</title>
+    <meta name="description" content="log4php, log4j java framework ported to PHP" />
+    <meta name="keywords"  content="log4php, port, log4j, php, logging, logger" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<h1 style="font-style: italic;">Log4php</h1>
+<h2 align="right">Log4j ported to php</h2>
+<table cellpadding=3 cellspacing=0 border=0 style="border-bottom: 2px dashed Black;" summary="">
+<tr><td id="summary">
+    <a href="#news">News</a> | 
+    <a href="#intro">Introduction</a> | 
+    <a href="#features">Features</a> |
+    <a href="#comparison">Comparison Table</a> | 
+    <a href="#requirements">Requirements</a> |
+    <a href="download.html">Download</a> | 
+    <a href="#documentation">Documentation</a> |
+    <a href="#usage">Usage</a> | 
+    <a href="#contacts">Contacts</a> |
+    <a href="#contributors">Contributors</a>
+</td></tr>
+<tr><td>
+<br/>
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<a name="news"></a><h2>News</h2>
+<table id="frame" summary=""><tr><td> 
+<table id="data" cellspacing=1 cellpadding=2 summary="News">
+    <tr><th width="15%">Date</th><th>Description</th></tr>
+    <tr id="h">
+        <td align="center">10 Dec 2003</td>
+        <td><p>
+            A new release is out (0.9).<br/> 
+            Fixes and changes to make log4php PHP5b2 compatible.<br/> 
+            Corrections in LoggerDOMConfigurator and LoggerLevel.<br/>
+            Go to <a href="download.html">Download</a> page to download it.<br/>
+            See <a href="download.html#release-notes-0.9">Release Notes</a> for the list of changes.            
+            ChangeLog is avaliable <a href="api/ric_ChangeLog.html">here</a>.<br/>
+            For comments and/or bugs report send an email to 
+            <a href="mailto:vxr@vxr.it?subject=log4php 0.9 comments/bugs report">vxr@vxr.it</a>
+        </p></td>
+    </tr>
+    <tr>
+        <td align="center">28 Oct 2003</td>
+        <td><p>
+            A new release is out (0.8).<br/> 
+            Fixed a couple of bugs in LoggerDOMConfigurator and LoggerAppenderSkeleton (thanks to Sergio Strampelli).<br/> 
+            Corrections in LoggerAppenderMail and LoggerAppenderSocket.<br/>
+            Go to <a href="download.html">Download</a> page to download it.<br/>
+            See <a href="download.html#release-notes-0.8">Release Notes</a> for the list of changes.            
+            ChangeLog is avaliable <a href="api/ric_ChangeLog.html">here</a>.<br/>
+            For comments and/or bugs report send an email to 
+            <a href="mailto:vxr@vxr.it?subject=log4php 0.8 comments/bugs report">vxr@vxr.it</a>
+        </p></td>
+    </tr>
+    <tr id="h">
+        <td align="center">24 Sep 2003</td>
+        <td><p>
+            A new release is out (0.7).<br/>
+            With this release log4php has reached the &quot;<i>features-freeze</i>&quot; state.<br/> 
+            Go to <a href="download.html">Download</a> page to download it.<br/>
+            See <a href="download.html#release-notes-0.7">Release Notes</a> for the list of changes.            
+            ChangeLog is avaliable <a href="api/ric_ChangeLog.html">here</a>.<br/>
+            For comments and/or bug report send an email to 
+            <a href="mailto:vxr@vxr.it?subject=log4php 0.7 comments/bug report">vxr@vxr.it</a>
+        </p></td>
+    </tr>
+    <tr>
+        <td align="center">15 Sep 2003</td>
+        <td><p>
+            A new release is out (0.6)!<br/> 
+            Go to <a href="download.html">Download</a> page to download it.<br/>
+            See <a href="download.html#release-notes-0.6">Release Notes</a> for the list of changes.            
+            ChangeLog is avaliable <a href="api/ric_ChangeLog.html">here</a>.<br/>
+            For comments and/or bug report send an email to 
+            <a href="mailto:vxr@vxr.it?subject=log4php 0.6 comments/bug report">vxr@vxr.it</a>
+        </p></td>
+    </tr>
+    <tr id="h">
+        <td align="center">10 Sep 2003</td>
+        <td><p>
+            A new release is out (0.5)! 
+            See <a href="api/ric_ChangeLog.html">ChangeLog</a> for the list of changes.
+            Go to <a href="download.html">Download</a> page to download it.
+            For comments and/or bug reports send an email to 
+            <a href="mailto:vxr@vxr.it?subject=log4php 0.5 comments/bug report">vxr@vxr.it</a>
+        </p></td>
+    </tr>
+    <tr>
+        <td align="center">10 Sep 2003</td>
+        <td><p>
+            Alejandro Sarco has discovered a problem when LoggerDOMConfigurator tries to set level
+            to to non-root loggers. Here is a patch for log4php-0.4.<br/>
+            Replace LoggerLevel.php with this <a href="patches/0.4/LoggerLevel.phps">LoggerLevel.php</a>.
+        </p></td>
+    </tr>
+    <tr id="h">
+        <td align="center">02 Sep 2003</td>
+        <td><p>
+            A new release is out (0.4)! 
+            See <a href="api/ric_ChangeLog.html">ChangeLog</a> for the list of changes.
+            Go to <a href="download.html">Download</a> page to download it.
+            For comments and/or bug reports send an email to 
+            <a href="mailto:vxr@vxr.it?subject=log4php 0.4 comments/bug report">vxr@vxr.it</a>
+        </p></td>
+    </tr>
+    <tr>
+        <td align="center">27 Aug 2003</td>
+        <td><p>
+            A new release is out (0.3)!
+            Go to <a href="download.html">Download</a> page. 
+            For comments and/or bug reports send an email to 
+            <a href="mailto:vxr@vxr.it?subject=log4php 0.3 comments/bug report">vxr@vxr.it</a>
+        </p></td>
+    </tr>
+    <tr id="h">
+        <td align="center">20 Aug 2003</td>
+        <td><p>
+            Integrated thresholds on appenders (Thanks to Sergio Strampelli)
+        </p></td>
+    </tr>
+    <tr>
+        <td align="center">01 Aug 2003</td>
+        <td><p>Added LoggerAppenderDailyFile (Thanks to Abel Gonzalez)</p></td>
+    </tr>
+    <tr id="h">
+        <td align="center">15 May 2003</td>
+        <td><p>Added LoggerAppenderMailEvent (Thanks to Domenico Lordi)</p></td>
+    </tr>        
+    <tr>
+        <td align="center">20 Feb 2003</td>
+        <td><p>First release (0.2)! Go to <a href="download.html">Download</a> page.</p></td>
+    </tr>    
+</table>
+</td></tr></table>
+<div align="right"><p>[<a href="#" target="_top">up</a>] </p></div>
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<a name="intro"></a><h2>Introduction</h2>
+<p>
+    Log4php is a php port of Log4j, the most popular Java logging framework  
+    (see <a target="blank" href="http://jakarta.apache.org/log4j/">http://jakarta.apache.org/log4j/</a> for details).
+</p>
+<div align="right"><p>[<a href="#" target="_top">up</a>] </p></div>
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<a name="features"></a><h2>Features</h2>
+<ul>
+    <li>Supports configuration through xml and properties file (same structure as log4j).</li>
+    <li>Supports File, RollingFile, DailyFile, Echo, Console, Mail, PEAR::Db, PHP error, Syslog or NT events and Socket appenders.</li>
+    <li>Supports Simple, TTCC, Pattern, Html and Xml Layouts.</li>
+    <li>Supports Nested (NDC) and Mapped (MDC) Diagnostic Contexts.</li>
+    <li>Switchable internal debug.</li>
+</ul>
+<p>It can be used inside a class (see below) or inside a main/sub function.</p>
+<div align="right"><p>[<a href="#" target="_top">up</a>] </p></div>
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<a name="comparison"></a><h2>Log4j and log4php comparison table</h2>
+<p>This table compares log4j and log4php differences.
+<table id="frame" summary=""><tr><td> 
+<table id="data" cellspacing=1 cellpadding=2 summary="Log4j and log4php comparison table">
+    <tr>
+        <th align="right">Features/Framework</th>
+        <th align="center">log4j (1.2.8)</th>
+        <th align="center">log4php (0.7),(0.8)</th>
+        <th align="center">log4php (0.9)</th>
+
+    </tr>
+
+    <tr id="s"><td align="center" colspan=4>Configuration</td></tr>
+
+    <tr>
+        <td align="right">Xml</td>
+        <td align="center">Y (DOMConfigurator)</td>
+        <td align="center">Y (LoggerDOMConfigurator)</td>
+        <td align="center">Y (LoggerDOMConfigurator)</td>
+    </tr>
+    <tr id="h">
+        <td align="right">Properties</td>
+        <td align="center">Y (PropertyConfigurator)</td>
+        <td align="center">Y (LoggerPropertyConfigurator)</td>
+        <td align="center">Y (LoggerPropertyConfigurator)</td>
+    </tr>
+    <tr>
+        <td align="right">Basic</td>
+        <td align="center">Y (BasicConfigurator)</td>
+        <td align="center">Y (LoggerBasicConfigurator)</td>
+        <td align="center">Y (LoggerBasicConfigurator)</td>
+    </tr>
+    <tr id="h">
+        <td align="right">Variable Substitution</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr>
+        <th align="right">Features/Framework</th>
+        <th align="center">log4j (1.2.8)</th>
+        <th align="center">log4php (0.7)(0.8)</th>
+        <th align="center">log4php (0.9)</th>
+
+    </tr>
+    <tr id="s"><td align="center" colspan=4>Core</td></tr>
+
+    <tr>
+        <td align="right">Logger Hierarchy</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr id="h">
+        <td align="right">Repository Selector</td>
+        <td align="center">Y</td>
+        <td align="center" style="color: Red;">N</td>
+        <td align="center" style="color: Red;">N</td>
+    </tr>
+    <tr>
+        <td align="right">Additivity</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr id="h">
+        <td align="right">Error Handling</td>
+        <td align="center">Y</td>
+        <td align="center" style="color: Red;">N</td>
+        <td align="center" style="color: Red;">N</td>
+    </tr>
+    <tr>
+        <td align="right">Reloading Properties</td>
+        <td align="center">Y</td>
+        <td align="center" style="color: Red;">N</td>
+        <td align="center" style="color: Red;">N</td>
+    </tr>
+    <tr id="h">
+        <td align="right">Microseconds Date Formatting</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr>
+        <td align="right">Report Fully Qualified ClassName</td>
+        <td align="center">Y</td>
+        <td align="center" style="color: Red;">Partially</td>
+        <td align="center" style="color: Red;">Partially</td>
+    </tr>
+    <tr id="h">
+        <td align="right">Report Caller Object</td>
+        <td align="center">Y</td>
+        <td align="center">Y (PHP &gt;= 3.2.0)</td>
+        <td align="center">Y (PHP &gt;= 3.2.0)</td>
+    </tr>
+    <tr>
+        <td align="right">Report Caller Method</td>
+        <td align="center">Y</td>
+        <td align="center">Y (PHP &gt;= 3.2.0)</td>
+        <td align="center">Y (PHP &gt;= 3.2.0)</td>
+    </tr>
+    <tr id="h">
+        <td align="right">MDC (Mapped Diagnostic Contexts)</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr>
+        <td align="right">NDC (Nested Diagnostic Contexts)</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr id="h">
+        <td align="right">Nested Appenders</td>
+        <td align="center">Y</td>
+        <td align="center" style="color: Red;">N</td>
+        <td align="center" style="color: Red;">N</td>
+    </tr>
+    <tr>
+        <td align="right">Custom Levels (by subclassing)</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr id="h">
+        <td align="right">Custom Loggers (by subclassing)</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr>
+        <td align="right">Logger Factory</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    
+    <tr>
+        <th align="right">Features/Framework</th>
+        <th align="center">log4j (1.2.8)</th>
+        <th align="center">log4php (0.7)(0.8)</th>
+        <th align="center">log4php (0.9)</th>
+    </tr>
+    <tr id="s"><td align="center" colspan=4>Appenders</td></tr>
+    <tr>
+        <td align="right">Console</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr id="h">
+        <td align="right">Daily File</td>
+        <td align="center">Y (Daily Rolling with no roll)</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr>
+        <td align="right">Daily Rolling File</td>
+        <td align="center">Y</td>
+        <td align="center" style="color: Red;">N</td>
+        <td align="center" style="color: Red;">N</td>
+    </tr>
+    <tr id="h">
+        <td align="right">File</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr>
+        <td align="right">Rolling File</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr id="h">
+        <td align="right">Syslog</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr>
+        <td align="right">Database</td>
+        <td align="center">Y (JDBC)</td>
+        <td align="center">Y (PEAR::Db)</td>
+        <td align="center">Y (PEAR::Db)</td>
+    </tr>
+    <tr id="h">
+        <td align="right">Socket</td>
+        <td align="center">Y</td>
+        <td align="center">Y (serialize, xml)</td>
+        <td align="center">Y (serialize, xml)</td>
+    </tr>
+    <tr>
+        <td align="right">Telnet</td>
+        <td align="center">Y</td>
+        <td align="center" style="color: Red;">N</td>
+        <td align="center" style="color: Red;">N</td>
+    </tr>
+    <tr id="h">
+        <td align="right">NT Event</td>
+        <td align="center">Y</td>
+        <td align="center">Y (via syslog appender)</td>
+        <td align="center">Y (via syslog appender)</td>
+    </tr>
+    <tr>
+        <td align="right">LF5</td>
+        <td align="center">Y</td>
+        <td align="center" style="color: Red;">N</td>
+        <td align="center" style="color: Red;">N</td>
+    </tr>
+    <tr id="h">
+        <td align="right">Externally Rolled File</td>
+        <td align="center">Y</td>
+        <td align="center" style="color: Red;">N</td>
+        <td align="center" style="color: Red;">N</td>
+    </tr>
+    <tr>
+        <td align="right">Null</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr id="h">
+        <td align="right">PHP Error</td>
+        <td align="center"><font color="red">N</font></td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr>
+        <td align="right">SMTP</td>
+        <td align="center">Y</td>
+        <td align="center">Y (Mail, MailEvent)</td>
+        <td align="center">Y (Mail, MailEvent)</td>
+    </tr>
+    <tr id="h">
+        <td align="right">Echo</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+
+    <tr>
+        <th align="right">Features/Framework</th>
+        <th align="center">log4j (1.2.8)</th>
+        <th align="center">log4php (0.7)(0.8)</th>
+        <th align="center">log4php (0.9)</th>
+    </tr>
+    <tr id="s">
+        <td align="center" colspan=4>Layouts</td>
+    </tr>
+    <tr>
+        <td align="right">HTML</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr id="h">
+        <td align="right">Pattern</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr>
+        <td align="right">Simple</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr id="h">
+        <td align="right">TTCC</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr>
+        <td align="right">XML</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    
+    <tr>
+        <th align="right">Features/Framework</th>
+        <th align="center">log4j (1.2.8)</th>
+        <th align="center">log4php (0.7)(0.8)</th>
+        <th align="center">log4php (0.9)</th>
+    </tr>
+    <tr id="s">
+        <td align="center" colspan=4>Filters</td>
+    </tr>
+    <tr>
+        <td align="right">Deny All</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr id="h">
+        <td align="right">Level Match</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr>
+        <td align="right">Level Range</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+    <tr id="h">
+        <td align="right">String Match</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+    </tr>
+
+    <tr>
+        <th align="right">Features/Framework</th>
+        <th align="center">log4j (1.2.8)</th>
+        <th align="center">log4php (0.7)(0.8)</th>
+        <th align="center">log4php (0.9)</th>
+    </tr>
+    <tr id="s">
+        <td align="center" colspan=4>Renderers</td>
+    </tr>
+    <tr>
+        <td align="right">Object Renderer Support</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>
+        <td align="center">Y</td>        
+    </tr>
+    <tr id="s">
+        <td align="center" colspan=4>Others</td>
+    </tr>
+    <tr>
+        <td align="right">PHP5 Support</td>
+        <td align="center"><font color="red">N</font></td>
+        <td align="center"><font color="red">N</font></td>
+        <td align="center">Y (beta2)</td>        
+    </tr>
+</table>
+</td></tr></table>
+<div align="right"><p>[<a href="#" target="_top">up</a>] </p></div>
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<a name="requirements"></a><h2>Requirements</h2>
+<ul>
+    <li>PHP &gt;= 4.1.x (to log caller location information PHP &gt;= 3.2.0 is needed)</li>
+    <li>PEAR <b>XML_Parser</b> class (located in <i>PEAR/XML/Parser.php</i> by default) <b>only for log4php version &lt;= 0.3</b>.</li>
+</ul>
+<div align="right"><p>[<a href="#" target="_top">up</a>] </p></div>
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<a name="documentation"></a><h2>Documentation</h2>
+<p>
+    First read the original <a href="http://jakarta.apache.org/log4j/docs/documentation.html">log4j</a>  documentation.<br/>
+    Then, read the log4php <a href="qsg.html">quick setup guide</a>.<br/> 
+    Finally, for further informations, browse the online <a href="api/index.html">api documentation</a>.<br/>
+    
+</p>
+<ul>
+    <li><a href="api/index.html">log4php-0.9 Api</a></li>
+    <li><a href="api-0.8/index.html">log4php-0.8 Api</a></li>
+    <li><a href="api-0.7/index.html">log4php-0.7 Api</a></li>
+    <li><a href="api-0.6/index.html">log4php-0.6 Api</a></li>
+    <li><a href="api-0.5/index.html">log4php-0.5 Api</a></li>
+    <li><a href="api-0.4/index.html">log4php-0.4 Api</a></li>
+    <li><a href="api-0.3/index.html">log4php-0.3 Api</a></li>
+    <li><a href="api-0.2/index.html">log4php-0.2 Api</a></li>
+</ul>
+<div align="right"><p>[<a href="#" target="_top">up</a>] </p></div>
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<a name="usage"></a><h2>Usage</h2>
+<p>Here is an example on how to use in your php code (<a href="usage.php">usage.php</a>).<br>
+   For more examples see <b>tests/</b> directory in the log4php distribution.<br>
+   Take also a look at original <a href="http://jakarta.apache.org/log4j/docs/documentation.html">log4j documentation</a>.
+</p>
+<div align="right"><p>[<a href="#" target="_top">up</a>] </p></div>
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<a name="contacts"></a><h2>Contacts</h2>
+<ul>
+    <li><b>Log4php author and code maintainer</b>
+        <p>email: <a href="mailto:vxr@vxr.it">vxr@vxr.it</a></p>
+    </li>
+</ul>
+<div align="right"><p>[<a href="#" target="_top">up</a>] </p></div>
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<a name="contributors"></a><h2>Contributors</h2>
+<p>Here is a list (in alphabetical order) of the developers that (directly or indirectly) contributed (and still contribute) to enhance
+   the project.<br>Thank You all!</p>
+<ul>
+    <li><b>Abel Gonzalez</b>
+        <p>Abel is the author of the <i>LoggerAppenderDailyFile</i> appender.</p>
+    </li>
+    <li><b>Domenico Lordi</b>
+        <p>Developer of the <i>LoggerAppenderMailEvent</i> appender.</p>
+    </li>
+    <li><b>Sergio Strampelli</b>
+        <p>An endless source of ideas, contribs and bug hunting. Thank You guy!</p>
+    </li>
+    <li><b>VxR</b>
+        <p>The founder of the project and source code maintainer.</p>
+    </li>
+</ul>
+<div align="right"><p>[<a href="#" target="_top">up</a>] </p></div>
+</td>
+</tr></table>
+
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<br/>
+<br/>
+<div align="right"><p>Author: <a href="mailto:vxr@vxr.it">VxR</a>, $Revision: 1.24 $</p></div>
+
+
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+
+<br/><br/>
+<!-- NO STATS -->
+
+</body>
+</html>
+    

@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{PAGE_TITLE}</title>
+{__CSS_GLOBAL__}
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/helpScript.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/tabScript.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/functions.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/ajaxScript.js"></script>
+
+<script>
+// AJAX CORNER
+
+function ajaxParser(){
+	if(request.readyState == 1){
+		document.getElementById('title').innerHTML = oriMessage + '&nbsp;&nbsp;&nbsp;<font id="executing"><img align="top" src="{SKINROOT}/images/executing.gif">Executing...</font>';
+	}
+	if(request.readyState == 4){ 
+		var result = request.responseText.split('regexAJAX');
+		document.getElementById('title').innerHTML = oriMessage;
+
+		if(document.getElementById('action').value == 'delete_quicklinks' || document.getElementById('action').value == 'add_quicklinks') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('quicklinks_button').innerHTML = result[1];
+			document.getElementById('menuAJAX').innerHTML = result[2];
+		}
+		if(document.getElementById('action').value == 'update' || document.getElementById('action').value == 'testmail') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+		}
+		if(document.getElementById('action').value == 'gethelp') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('helptitle').innerHTML = "Context Help";
+			document.getElementById('helpdata').innerHTML = result[1];
+			if(!document.getElementById('nohelp'))
+				document.getElementById('helpdetected').value = 1;			
+		}
+		if(document.getElementById('action').value == 'getlog') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('logtitle').innerHTML = "Log Data";
+			document.getElementById('logdata').innerHTML = result[1];
+		}
+		if(document.getElementById('action').value == 'startpage') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('DefaultPage').innerHTML = result[1];
+		}
+		//CLEAR THE RELEVANT TEXTBOXES AFTER AJAX
+		document.getElementById('action').value = '';
+		enableButtons(document.forms[0]);
+	}
+	formParams = '';
+}
+
+function ajaxMain(formName,action){
+	document.getElementById('action').value = action;
+	getFormFields(formName);
+	if(formParams == '') {
+		for (i=0; i<formName.elements.length; i++) {
+			if(formName.elements[i].id) {
+				if(formName.elements[i].type == 'checkbox' || formName.elements[i].type == 'radio') {
+					 if(formName.elements[i].checked) {
+						formParams = formParams + "&" + formName.elements[i].id + "=" + encodeURIComponent(formName.elements[i].value);
+					}	
+				}
+				else {
+					formParams = formParams + "&" + formName.elements[i].id + "=" + encodeURIComponent(formName.elements[i].value);
+				}	
+			}	
+			else if(formName.elements[i].name) {
+				if(formName.elements[i].type == 'checkbox' || formName.elements[i].type == 'radio') {
+					 if(formName.elements[i].checked) {
+						formParams = formParams + "&" + formName.elements[i].name + "=" + encodeURIComponent(formName.elements[i].value);
+					}	
+				}
+				else {	
+					formParams = formParams + "&" + formName.elements[i].name + "=" + encodeURIComponent(formName.elements[i].value);
+				}	
+			}	
+		}
+	}
+
+	request.open('POST', '{AJAX_FORM_POST}', true); //THIS ONE FOR POST
+	request.onreadystatechange = ajaxParser;
+	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); //THIS ONE ADDED FOR POST ONLY
+	request.send(formParams); //THIS ONE FOR POST
+}
+
+// AJAX CORNER
+</script>
+
+</head>
+
+<body onload="showTab();">
+<table width="100%" cellpadding="0" cellspacing="2">
+	<tr>
+		<td><img src="{SKINROOT}/images/logo.gif" /></td>
+		<td height="100%" valign="bottom">
+			<table align="right" height="100%" cellspacing="5" cellpadding="0">
+			<tr>
+				<td class="td_top">Logged In: {FULL_NAME} |</td>
+				<td class="td_top">{ADMIN_USER_LINK}</td>
+				<td class="td_top">{LOGOUT_LINK}</td>
+			</tr></table>
+		</td>
+	</tr>
+	<tr><td class="spacer" colspan="2"></td></tr>
+</table>
+	
+<div class="div_top_menu">
+	{DIV_TOP_MENU}
+</div>
+	
+<div class="div_top_menu_foot"></div>
+<div id='submenu' class="div_sub_menu" align="right">Clock & Date Container</div>
+<script>startclock();</script>
+
+<table width="100%" height="100%"><tr><td nowrap valign="top">
+	<table width="100%" height="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="menu_table_parent">
+		<table class="menu_table_container">
+		<tr><td>
+			{SIDE_MENU}
+		</td></tr>
+		<tr><td>
+			<div id="menuAJAX" name="menuAJAX">
+				{QUICKLINKS_MENU}
+			</div>
+		</td></tr>
+		</table>
+		</td>
+		<td class="main_table">
+		<table width="100%" class="module_page_table">
+			<tr><td>
+				<H1 id='title' name='title'>{H1_TITLE}</H1>
+				<div id="div_breadcrumbs" name="div_breadcrumbs">{BREADCRUMBS}</div>
+				<div id="{MESSAGE_ID}" name="{MESSAGE_ID}" {MESSAGE_BOX}>{MESSAGE}</div>
+			</td></tr>
+			<tr><td height="10"></td></tr>
+			<tr><td nowrap>
+				<ul id="tablist" style="display:none">
+					<li><span class="current" onmouseover="overtab('sc1',this)" onmouseout="outtab('sc1',this)" onclick="return expandcontent('sc1', this)"><img title='tabimage' src="{SKINROOT}/images/menu_icons/{MENU_ICON}" align="absmiddle" />&nbsp;System Configuration</span></li>
+					<li><span onmouseover="overtab('sc2',this)" onmouseout="outtab('sc2',this)" onclick="return expandcontent('sc2', this)"><img title='tabimage' src="{SKINROOT}/images/menu_icons/admin_system_console.gif" align="absmiddle" />&nbsp;Current Settings</span></li>
+					<li><span onmouseover="overtab('logsection',this)" onmouseout="outtab('logsection',this)" onclick="getLog();return expandcontent('logsection', this)"><img title='tabimage' src="{SKINROOT}/images/log.gif" align="absmiddle" />&nbsp;Log</span></li>
+					<li><span onmouseover="overtab('helpsection',this)" onmouseout="outtab('helpsection',this)" onclick="getHelp();return expandcontent('helpsection', this)"><img title='tabimage' src="{SKINROOT}/images/help.gif" align="absmiddle" />&nbsp;Help</span></li>
+				</ul>
+	
+				<DIV id="tabcontentcontainer">
+					<form name='addupdate' id='addupdate' {FORM_ACTION} method="post" onsubmit="submitonce(this)">
+					<input name="addupdateID" id="addupdateID" type="hidden" value="{ID}" />
+					<input name="update_title" id="update_title" type="hidden" value="{H1_TITLE}" />
+					<input name="action" id="action" type="hidden" />
+					<input name="submit_action" id="submit_action" type="hidden" value="{SUBMIT_ACTION}" />
+					<input name="messageID" id="messageID" value="{MESSAGE_ID}" type="hidden" />
+					<input name="quickLinksName" id="quickLinksName" type="hidden" value="{QUICKLINKS_NAME}"/>
+					<input name="quickLinksURL" id="quickLinksURL" type="hidden" value="{QUICKLINKS_URL}"/>
+					<input name="quickLinksDesc" id="quickLinksDesc" type="hidden" value="{QUICKLINKS_DESC}"/>
+					<input type="hidden" value="{DEFAULT_MAIL}" id="default_mail" name="default_mail">
+					<input name="helpdetected" id="helpdetected" type="hidden"/>
+					<input name="LogType" id="LogType" type="hidden" value="{LOGTYPE}"/>
+					<input name="LogAction" id="LogAction" type="hidden" value="{LOGACTION}"/>
+					<input name="startup_page" id="startup_page" type="hidden" value="{STARTUP_PAGE}"/>
+				<div id="sc1" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/menu_icons/{MENU_ICON}" align="absmiddle" />&nbsp;<span id='subtitle'>{H1_TITLE}</span></legend>
+							<div id="listingOutputAJAX">
+								<table nowrap cellspacing="0" cellpadding="3">
+									<tr><th colspan=4>Details</th></tr>
+									<tr>
+									  <td nowrap id="field_required">Company Name:</td><td></td>
+									  <td id="Company Name"><input onkeypress="return keyPress(event,'normaltext');" title='required' class="textbox" id="name" name="name" type="text" size="55" maxlength="150" value="{COMPANY_NAME}"></td>
+									</tr>
+									<tr>		
+									  <td nowrap id="field_required">Max File Upload Size:</td><td></td>
+									  <td id="Max File Upload Size"><input title='required' value="{MAX_FILE_SIZE_DISPLAY}" onkeypress="return keyPress(event,'number');" class="textbox" id="file_size" name="file_size" type="text" size="10" maxlength="150">&nbsp;kb</td><td>&nbsp;</td>
+									</tr>
+									<tr>		
+									  <td nowrap id="field_required">Announcement Transition:</td><td></td>
+									  <td id="Announcement Transition"><input title='required' value="{ANNOUNCEMENT_TICKER}" onkeypress="return keyPress(event,'integer');" class="textbox" id="announcement_ticker" name="announcement_ticker" type="text" size="10" maxlength="10">&nbsp;seconds</td><td>&nbsp;</td>
+									</tr>
+									<tr>		
+									  <td nowrap id="field_required">Log Display:</td><td></td>
+									  <td id="Log Display"><input title='required' value="{LOG_NUMBER}" onkeypress="return keyPress(event,'integer');" class="textbox" id="log_number" name="log_number" type="text" size="10" maxlength="10">&nbsp;records</td><td>&nbsp;</td>
+									</tr>
+									<tr>		
+									  <td>Enable Logging?:</td><td></td>
+									  <td><input id="enable_log" name="enable_log" type="radio" value="1" {ENABLE_LOG}>YES <input id="enable_log" name="enable_log" type="radio" value="0" {DISABLE_LOG}>NO</td><td></td>
+									</tr>
+									<tr style="display:none">		
+									  <td>Enable Session File?:</td><td></td>
+									  <td><input id="enable_sessionfile" name="enable_sessionfile" type="radio" value="1" {ENABLE_SESSIONFILE}>YES <input id="enable_sessionfile" name="enable_sessionfile" type="radio" value="0" {DISABLE_SESSIONFILE}>NO</td><td></td>
+									</tr>
+									<tr>		
+									  <td id="field_textarea">Current Logo:</td><td></td>
+									  <td id="field_textarea"><img id='logoImage' align="top" src="{SKINROOT}/images/logo.gif"></td>
+									  <td></td>
+									</tr>
+									<tr>		
+									  <td id="field_textarea">Change Logo:</td><td></td>
+									  <td>
+										<iframe id="fileUpload" name="fileUpload" marginheight="0" marginwidth="0" src="sysconfigFILE.php" height="60" width="100%" frameborder="0" scrolling="no"></iframe></td><td id="field_textarea"></td>
+									</tr>
+								</table>
+							</div>
+							<div id="listingButtonsAJAX">{SHOW_BUTTONS}</div>
+						</fieldset>
+					</div>
+					<div id="sc2" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/menu_icons/admin_system_console.gif" align="absmiddle" />&nbsp;<span id='subtitle'>Current System Settings</span></legend>
+							<div id="listingOutputAJAX">
+								<table nowrap cellspacing="0" cellpadding="5">
+									<tr><th colspan=4>Details</th></tr>
+									<tr>		
+									  <td>Software Version:</td><td></td>
+									  <td>{SOFTWARE_VERSION}</td><td></td>
+									</tr>
+									<tr>		
+									  <td>Last Installation Date:</td><td></td>
+									  <td>{LAST_INSTALL_DATE}</td><td></td>
+									</tr>
+									<tr>		
+									  <td>Root Directory:</td><td></td>
+									  <td>{ROOT_DIRECTORY}</td><td></td>
+									</tr>
+									<tr>		
+									  <td>PHP Version:</td><td></td>
+									  <td>{PHP_VERSION}</td><td></td>
+									</tr>
+									<tr>		
+									  <td>PHP HTTP Upload:</td><td></td>
+									  <td>{PHP_UPLOAD}</td>
+									  <td></td>
+									</tr>
+									<tr>		
+									  <td>PHP Upload Max Size:</td><td></td>
+									  <td>{PHP_UPLOAD_MAX}</td>
+									  <td></td>
+									</tr>
+									<tr>		
+									  <td>MySQL Version:</td><td></td>
+									  <td>{MYSQL_VERSION}</td><td></td>
+									</tr>
+									<tr>		
+									  <td>MySQL Database Name:</td><td></td>
+									  <td>{MYSQL_DB_NAME}</td><td></td>
+									</tr>
+									<tr>		
+									  <td>MySQL Database Size:</td><td></td>
+									  <td>{MYSQL_DB_SIZE} Kb</td><td></td>
+									</tr>
+									<tr>		
+									  <td>MySQL Table Prefix:</td><td></td>
+									  <td>{MYSQL_DB_PREFIX}</td><td></td>
+									</tr>
+									<tr>		
+									  <td>SMTP Email:</td><td></td>
+									  <td>{SENDMAIL}</td><td></td>
+									</tr>
+									<tr>		
+									  <td>Current Log Records:</td><td></td>
+									  <td>{LOG_RECORDS}</td><td></td>
+									</tr>
+								</table>
+							</div>
+						</fieldset>
+					</div>
+					<div id="logsection" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/log.gif" align="absmiddle" /><span id='logtitle'>No Log Data In Session</span></legend>											
+						<div id="logdata">
+							<BR />
+							<input onclick='getLog()' id="submitButton" name="submitButton" type="button" class="buttons" onmouseover="this.className='buttons_over'" onmouseout="this.className='buttons'" value="Refresh Log Data">
+						</div>
+						</fieldset>	
+					</div>
+					<div id="helpsection" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/help.gif" align="absmiddle" /><span id='helptitle'>No Context Help Data In Session</span></legend>											
+						<div id="helpdata">
+							<BR />
+							<input onclick='getHelp()' id="submitButton" name="submitButton" type="button" class="buttons" onmouseover="this.className='buttons_over'" onmouseout="this.className='buttons'" value="Refresh Context Help">
+						</div>
+						</fieldset>	
+					</div>
+					</form>
+				</DIV>		
+			</td></tr>
+		</table>
+		{SHOW_FOOTER}
+		</td> 
+	</tr>
+	</table>
+</td></tr></table>	
+<script>var oriMessage = document.getElementById('title').innerHTML;</script>
+</body>
+</html>

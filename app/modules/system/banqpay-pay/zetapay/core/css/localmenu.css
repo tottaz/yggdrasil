@@ -1,0 +1,23 @@
+div.yui-b p {
+     margin:0 0 .5em 0;
+     color:#999;
+}
+            
+div.yui-b p strong {
+     font-weight:bold;
+     color:#000;
+}
+            
+div.yui-b p em {
+      color:#000;
+}            
+            
+h1 {
+      padding:.25em .5em;
+      background-color:#ccc;
+}
+
+#yproducts {
+       visibility: visible;
+       margin:0 0 10px 0;
+}

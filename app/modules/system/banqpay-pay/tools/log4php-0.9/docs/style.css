@@ -1,0 +1,110 @@
+LI    {
+	list-style-type: square;
+}
+
+BODY    {
+	background-color: white;
+}
+
+H1    {
+	font-family: Arial,Verdana,Helvetica;
+	font-size: 30pt;
+	font-weight: bold;
+	color: black;
+}
+
+H2    {
+	font-family: Arial,Verdana,Helvetica;
+	font-size: 12pt;
+	color: black;
+}
+
+TH    {
+	font-family: Arial,Verdana,Helvetica;
+	font-size: 9pt;
+	background-color: #9999cc;
+	color: Black;
+	font-weight: Bold;
+}
+
+TR#h    {
+	background-color: rgb(184, 216, 255);
+}
+
+TR#s    {
+	background-color: #ffcc66;
+}
+
+TR#s TD    {
+	font-weight: Bold;
+}
+
+TR    {
+	background-color: white;
+}
+
+ADDRESS, TD, TH, LI, P, BR    {
+	font-family: Arial,Verdana,Helvetica;
+	font-size: 9pt;
+}
+
+TD#summary {
+    
+    border-top: 2px dashed Black;    
+    border-bottom: 2px dashed Black;
+    text-align: center;
+}
+
+A    {
+	font-family: Arial,Verdana,Helvetica;
+	font-size: 9pt;
+	color: #cc6600;
+	text-decoration: none;
+}
+
+A:hover    {
+	text-decoration: underline;
+}
+
+A:visited    {
+	color: #cc6600;
+}
+
+CODE, PRE    {
+	font-size: 9pt;
+}
+
+*.fragment    {
+	padding: 9pt 9pt 9pt 9pt;
+	background-color: #eeeeee;
+	border-style: dotted;
+	border-width: 1px;
+	border-color: black;
+	margin: 9pt 9pt 9pt 9pt;
+}
+
+TABLE#frame    {
+/*	width: 100%; */
+	border: 0px solid #9999cc;
+	border-spacing: 0px;
+}
+
+TABLE    {
+	width: 100%;
+/*	background-color: #9999cc; */
+}
+
+TABLE#data    {
+/*	width: 100%; */
+	background-color: #9999cc;
+}
+
+
+UL#contents    {
+	margin: 5px;
+}
+
+*#tb    {
+	background-color: #9999cc;
+}
+

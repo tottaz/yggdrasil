@@ -1,0 +1,1 @@
+<?php include FCPATH.'app/core/App_URI.php';

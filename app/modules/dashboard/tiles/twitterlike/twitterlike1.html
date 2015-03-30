@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"> 
+     </script>
+    <script>
+        $(function(){
+            var url = "http://urls.api.twitter.com/1/urls/count.json?url=http://www.savethearctic.org";
+            var html = "<div />";
+            $.getJSON(url, function(json){
+                console.log(json);
+                html += "<h2>Germany</h2>";                                               
+                $.each(json, function(i,tw){
+                    html+= "<img src=app/modules/dashboard/tiles/twitterlike/facebookalt3.png>";
+                    html += "<p>Count: " + tw.count + "</p>";
+                    html += '<p><a href="' + tw.url + '">Visit Site &raquo;</a></p></div>'
+                });
+            });
+            
+            $('.tw').animate({opacity: 0}, 500, function() {
+                $('.tw').html(html);
+            });
+            $('.tw').animate({opacity:1}, 500);
+        });
+    </script>
+
+</head>
+<body>
+    <div class="tw">
+    </div>
+</body>
+</html>

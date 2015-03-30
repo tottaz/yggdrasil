@@ -1,0 +1,12 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>App Monitor</title>
+    <script type="text/javascript" src="ajax.js"></script>
+    <script type="text/javascript" src="appmonitor1.js"></script>
+  </head>
+  <body>
+    <div id="pollDiv"></div>
+  </body>
+</html>

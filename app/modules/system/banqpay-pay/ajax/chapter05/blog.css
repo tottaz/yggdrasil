@@ -1,0 +1,104 @@
+/*
+ * Copyright 2006 SitePoint Pty. Ltd, www.sitepoint.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+body { 
+  padding: 0px; 
+  margin: 0px;
+  height: 100%;
+}
+body, p, div, td, ul {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 12px;
+}
+a {
+  color: #3333aa;
+}
+form {
+  display: inline;
+}
+#entryFormDialog { 
+  position: absolute;
+  visibility: hidden;
+  width: 400px;
+  padding: 24px; 
+  background: #eeeeee; 
+  border: 1px solid #dddddd;
+}
+#colDiv {
+  width: 360px;  
+  padding: 24px; 
+  border: 1px solid #dddddd;
+  margin: auto;
+  margin-top: 24px;
+}
+#newEntryHeaderDiv {
+  padding: 8px;
+  margin-bottom: 4px;
+}
+#promptDiv {
+  color: #666666;
+  float: left;
+  margin-bottom: 12px;
+}
+#newEntryButtonDiv {
+  float: right;
+  margin-bottom: 12px;
+}
+#newEntryPromptDiv {
+  color: #666666;
+  padding-top: 40px; 
+  text-align: center;
+}
+.leftButton {
+  float: left;
+}
+.rightButton {
+  float: right;
+}
+.titleInput {
+  width: 280px;
+}
+.bodyArea {
+  width: 320px;
+  height: 120px;
+}
+.inputButton { 
+  cursor: pointer;
+}
+.fieldTitle {
+  margin-bottom: 3px;
+  font-weight: bold;
+  color: #666666;
+}
+.fieldEntry {
+  margin-bottom: 8px;
+}
+.newEntryDiv {
+  height: 100px;
+  margin-bottom: 24px;
+}
+.entryTitle {
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+.entryBody {
+  margin-bottom: 16px;
+}
+.clearBoth {
+  height: 0px;
+  font-size: 0px;
+  clear: both;
+}

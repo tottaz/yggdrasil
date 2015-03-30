@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="demo.css" />
+        <link rel="stylesheet" type="text/css" href="../../socialtimeline/css/timeline.css" />
+        <link rel="stylesheet" type="text/css" href="../../socialtimeline/css/timeline_light.css" />
+        <script type="text/javascript" src="../../socialtimeline/js/jquery.js"></script>
+        <script type="text/javascript" src="../../socialtimeline/js/timeline.min.js"></script>
+        <script type="text/javascript" src="demo.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var timeline_data = [
+                    {
+                        type:     'slider',
+                        date:     '2011-12-16',
+                        width:    400,
+                        height:   150,
+                        images:   ['img/group.jpg', 'img/old.jpg', 'img/win.jpg'],
+                        speed:    5000
+                    },
+                    {
+                        type:     'gallery',
+                        date:     '2011-04-12',
+                        title:    'Mini Gallery',
+                        width:    300,
+                        height:   100,
+                        images:   ['img/rooney.jpg', 'img/tshirt.jpg', 'img/giggs.jpg', 'img/rio.jpg', 'img/paper.jpg']
+                    },
+                    {
+                        type:     'blog_post',
+                        date:     '2011-08-03',
+                        title:    'Blog Post',
+                        width:    200,
+                        content:  '<b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
+                        image:    'img/rio.jpg',
+                        readmore: 'http://www.manutd.com'
+                    },
+                    {
+                        type:     'slider',
+                        date:     '2010-12-16',
+                        width:    400,
+                        height:   200,
+                        images:   ['img/ferguson.jpg', 'img/paper.jpg'],
+                        speed:    5000
+                    },
+                    {
+                        type:     'gallery',
+                        date:     '2010-04-12',
+                        title:    'Mini Gallery',
+                        width:    200,
+                        height:   150,
+                        images:   ['img/stadium.jpg', 'img/rafel.jpg', 'img/logo.jpg', 'img/rvp.jpg']
+                    },
+                    {
+                        type:     'blog_post',
+                        date:     '2010-08-03',
+                        title:    'Blog Post',
+                        width:    400,
+                        content:  '<b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
+                        image:    'img/evra.jpg',
+                        readmore: 'http://www.manutd.com'
+                    }
+                ];
+
+                var timeline = new Timeline($('#timeline'), timeline_data);
+                timeline.setOptions({
+                    animation:   true,
+                    lightbox:    true,
+                    showYear:    false,
+                    allowDelete: false,
+                    columnMode:  'right',
+                    order:       'desc'
+                });
+                timeline.display();
+            });
+        </script>
+    </head>
+    <body>
+        <div id="config">
+            <select id="theme">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="red">Red</option>
+            </select>
+        </div>
+        <div id="timeline"></div>
+    </body>
+</html>

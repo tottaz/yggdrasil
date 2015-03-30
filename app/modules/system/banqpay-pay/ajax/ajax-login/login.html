@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>JamesDam.com ≈ AJAX Login System Demo</title>
+<script src="md5.js" type="text/javascript">
+// javascript md5 encoder originated from <http://pajhome.org.uk/crypt/md5/>
+// used under license as outlined at <http://pajhome.org.uk/site/legal.html>
+// Copyright (c) 1998 - 2002, Paul Johnston & Contributors
+// All rights reserved.
+</script>
+<script src="xml_http_request.js" type="text/javascript">
+// xml http request script modified slightly from that found at
+// <http://www.webpasties.com/xmlHttpRequest/index.html>, which is
+// Copyright 2005 Bill Bercik.
+</script>
+<script src="login_controller.js" type="text/javascript"></script>
+<script src="login_presentation.js" type="text/javascript"></script>
+<link rel="stylesheet" href="login.css" type="text/css" />
+</head>
+
+<body>
+
+<h1>JamesDam.com - "AJAX" Login System Demo</h1>
+<strong>Creating a secure login system using XMLHttpRequest</strong>
+
+<p>This is an example of a login system that does not require page refreshes, but is still very secure.  Valid
+usernames and passwords for this demo are user1/pass1 and user2/pass2.  Try these, and also incorrect passwords
+to see the results.</p>
+
+<p>Please note that this is not a functional form, your input will not go anywhere.  It is solely for demonstrating
+an XMLHttpRequest login system in javascript.</p>
+
+<h2>Advantages</h2>
+<ul>
+<li>User does not need to refresh the page to login.</li>
+<li>User is notified <em>instantly</em> on incorrect username/password combination.</li>
+<li>Overall user experience is more seamless.</li>
+<li>Password is not sent in plain text <em>ever</em> (more secure than traditional system).</li>
+<li>Javascript convenience with server-side security (uses PHP/MySQL).</li>
+<li>Uses one-time use random seed to hash the password before sending (making interceptions useless).</li>
+</ul>
+
+<h2>Disadvantages</h2>
+<ul>
+<li>System is more prone to brute force attacks.
+<ul><li>Can be minimized by adding a delay after a certain number of attempts per username or per client.</li></ul></li>
+<li>User may expect a login button.
+<ul><li>One could still be added without reloading the page.</li></ul></li>
+<li>Older versions of Safari cannot disable a password field.</li>
+<li><b>This code uses the MD5 encryption algorithm, which has since been proven to be insecure.  If you use this code, I strongly recommend you switch to a more secure encryption algorithm, such as SHA-1.</b>  For sites were security is not crucial, MD5 should suffice.</li>
+</ul>
+
+<h2>Demonstration</h2>
+
+<div id="post_comment">
+<form action="post" onSubmit="return false">
+<div id="login" class="login">
+<label for="username">Username: </label>
+<input type="text" name="username" id="username" size=20>
+<label for="password">Password: </label>
+<input type="password" name="password" id="password" size=20>
+<p id="message">Enter your username and password to log in.</p>
+</div>
+<label for="comments">Comments:</label>
+<textarea rows="6" cols="80" id="comments"></textarea>
+</form>
+</div>
+
+<h2>Source</h2>
+<ul>
+<li><a href="login.html">login.html</a></li>
+<li><a href="login.css">login.css</a></li>
+<li><a href="login_controller.js">login_controller.js</a></li>
+<li><a href="login_presentation.js">login_presentation.js</a></li>
+<li><a href="xml_http_request.js">xml_http_request.js</a></li>
+<li><a href="md5.js">md5.js</a></li>
+<li><a href="login.phps">login.php</a></li>
+</ul>
+
+<h2>Questions</h2>
+<p><strong>Can I copy your code?</strong><br>
+Sure.  I'd appreciate it if you drop me an email first, especially if you do anything cool with it.  Just don't pass it off as your own; give
+credit where credit is due.</p>
+<p><strong>Why didn't you use [insert technology here]?</strong><br>
+Basically I haven't done web development in close to a year, so I used what I knew best
+(PHP/MySQL) and used the Javascript that I remembered, along with a little bit of
+refreshing my memory.  Perhaps I should have used object-oriented PHP or Javascript, but
+this works.  If it is slightly confusing, I apoligise, this is only meant as a proof-of-concept.</p>
+<p><strong>Who are you?</strong><br>
+I'm a Software Engineering Student at the University of Waterloo, in Ontario Canada.</p>
+<p><strong>How can I contact you?</strong>
+The email address <a href="mailto:jdam@uwaterloo.ca">jdam@uwaterloo.ca</a> will reach me.  If you
+take the time to email me, I'll take the time to email back.</p>
+<hr>
+<p>Last updated: Dec. 1, 2005.  Copyright &copy; 2005 James Dam.
+</body>
+</html>

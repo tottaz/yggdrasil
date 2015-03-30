@@ -1,0 +1,46 @@
+
+
+section.white{
+    background: black url('../img/section-pattern-dark.png') repeat;
+}
+
+.white h1 .serif, .white h2 .serif, .white h3{
+    color: #aeaeae;
+}
+
+p {
+    color: #aeaeae;
+}
+
+.white a {
+    color: #aeaeae;
+}
+
+#services .panel-default>.panel-heading {
+    background:url('../img/cream_pixels-dark.png') repeat;
+}
+
+#services .panel {
+    background-color: black;
+
+}
+
+#services .rating {
+    color: #aeaeae;
+}
+
+#services .subscriptionList {
+    color: #aeaeae;
+}
+
+.btn-default {
+    color: #aeaeae;
+}
+
+.widget p {
+    color: #aeaeae;
+}
+
+.widget ul li a {
+    color: #aeaeae;
+}

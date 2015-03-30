@@ -1,0 +1,19 @@
+/*!==========================================================================
+   General
+   ========================================================================== */
+
+
+a{transition: all 0.2s; outline: none;}
+a:focus, button:focus, input:focus{outline: none;}
+a:focus, a:active{text-decoration: none; color: $brand-primary;}
+
+h1,h2,h3,h4,h5,h6{a{color: $gray-dark; &:hover{color: $brand-primary; text-decoration: none;}}}
+
+h1,h2,h3,h4,h5,h6{text-transform: uppercase; color: $gray-dark; &:first-child{margin-top: 0;}}
+h1,h2{line-height: 36px; margin: 20px 0 10px;}
+h3,h4{line-height: 30px; margin: 20px 0 10px;}
+h5,h6{line-height: 26px; margin: 20px 0 10px;}
+p{color: $gray-light;}
+
+img{max-width: 100%;}
+

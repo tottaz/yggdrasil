@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="demo.css" />
+        <link rel="stylesheet" type="text/css" href="../files/css/timeline.css" />
+        <link rel="stylesheet" type="text/css" href="../files/css/timeline_light.css" />
+        <script type="text/javascript" src="../files/javascript/jquery.js"></script>
+        <script type="text/javascript" src="../files/javascript/timeline.min.js"></script>
+        <script type="text/javascript" src="demo.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var getTimelineData = function(years) {
+                    var data = [];
+
+                    $(years).each(function(index, year) {
+                        for (var i = 0; i <= 5; i++) {
+                            data.push({
+                                type:     'blog_post',
+                                date:     year + '-08-' + Math.floor(Math.random() * 2 + 1) + Math.floor(Math.random() * 9),
+                                title:    'Blog Post',
+                                width:    350,
+                                content:  '<b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+                            });
+                        }
+                    });
+
+                    return data;
+                };
+
+                var timeline = new Timeline($('#timeline'), getTimelineData([2013]));
+                timeline.setOptions({
+                    animation:   true,
+                    lightbox:    true,
+                    showYear:    true,
+                    allowDelete: true,
+                    columnMode:  'dual',
+                    order:       'desc'
+                });
+                timeline.display();
+
+                // menu click
+                $(document).on('click', '#menu > div', function(e) {
+                    var year      = $(this).text();
+                    var scroll_to = year == 2013 ? '#timeline' : '#timeline_date_separator_' + year;
+
+                    $.scrollTo(scroll_to, 500);
+                });
+
+                // load more click
+                var year = 2013;
+                $('#loadmore').on('click', function(e) {
+                    var button = $(this);
+
+                    if (button.hasClass('loading')) {
+                        return;
+                    }
+
+                    year--;
+                    button.addClass('loading').text('Loading...');
+                    setTimeout(function() {
+                        var scroll_to = '#timeline_date_separator_' + year;
+
+                        button.removeClass('loading').text('Load More');
+                        $('<div>').text(year).appendTo($('#menu'));
+
+                        var new_data = getTimelineData([year]);
+                        timeline.appendData(new_data);
+                        $.scrollTo(scroll_to, 500);
+                    }, 1000);
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="config">
+            <select id="theme">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="red">Red</option>
+            </select>
+        </div>
+        <div id="menu">
+            <div>2013</div>
+        </div>
+        <div id="timeline"></div>
+        <div id="loadmore">Load More</div>
+    </body>
+</html>

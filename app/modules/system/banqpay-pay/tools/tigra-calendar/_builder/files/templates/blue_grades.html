@@ -1,0 +1,144 @@
+<!--
+Title: Tigra Menu Builder v1.0 (07/21/2005)
+Copyright (c)2005 Softcomplex, Inc. (www.softcomplex.com)
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Drop Down Menu Template :: Blue Grades</title>
+	<link rel="stylesheet" href="../common.css">
+	<script language="JavaScript">
+	
+	function img_rollover(e_input) {
+		document.images['img_layout'].src = 'blue_grades_' + e_input.value + '.gif';
+		e_input.blur();
+	}
+
+	function tpl_merge () {
+		tpl_copy_styles();
+	}
+	
+	function tpl_select (n_id) {
+		// if form is loaded then read layout from the radiobuttons
+		var s_layout = 'horizontal';
+		if (document.forms['tpl_view']) {
+			var a_radio = document.forms['tpl_view'].elements['layout'];
+			for (var i = 0; i < a_radio.length; i++)
+				if (a_radio[i].checked) {
+					s_layout = a_radio[i].value;
+					break;
+				}
+		}
+		// if form is not loaded then read layout from current config
+		else
+			s_layout = (parent.frames['f_data'].A_TPL[0] && parent.frames['f_data'].A_TPL[0]['level_layout'] == 'v' ? 'vertical' : 'horizontal');
+
+		tpl_set (s_layout);
+		parent.frames['f_list'].tpl_set(n_id);
+		inp_set ();
+	}
+	 
+	function get_template (param) {
+		return [{
+			'level_layout' : (param == 'horizontal' ? 'h' : 'v'),
+			'level_width'  : 100,
+			'level_height' : 24,
+			'level_left'   : (param == 'horizontal' ? 99 : 0),
+			'level_top'    : (param == 'horizontal' ? 0 : 23),
+			'time_expand'  : 200,
+			'time_hide'    : 200,
+			'level_style'  : 0
+		},{
+			'level_layout' : 'v',
+			'level_width'  : 120,
+			'level_btop'   : (param == 'horizontal' ? 25 : 10),
+			'level_bleft'  : (param == 'horizontal' ? 0 : 85),
+			'level_left'   : 0,
+			'level_top'    : 23,
+			'level_style'  : 1
+		},{
+			'level_btop'   : 10,
+			'level_bleft'  : 105
+		}];
+	}
+
+	var A_STYLES = [{
+		'name': 'blue grades - root level',
+		'box_background_color': ['#3C76B2','#4D99E6'],
+		'box_border_color': '#2B547F',
+		'box_border_width': 1,
+		'box_padding': 4,
+		'font_color': '#FFFFFF',
+		'font_family': 'Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;',
+		'font_size': 12,
+		'font_weight': 0,
+		'font_style': 0,
+		'font_decoration': 0,
+		'text_align': 'center',
+		'text_valign': 'middle'
+	},{
+		'name': 'blue grades - sub levels',
+		'box_background_color': ['#4D99E6','#3C76B2'],
+		'box_border_color': '#2B547F',
+		'box_border_width': 1,
+		'box_padding': 4,
+		'font_color': '#FFFFFF',
+		'font_family': 'Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;',
+		'font_size': 12,
+		'font_weight': 0,
+		'font_style': 0,
+		'font_decoration': 0,
+		'text_align': 'left',
+		'text_valign': 'middle'
+	}];
+
+	var A_MENU = {
+		'menu_pos' : 'relative',
+		'menu_left' : 50,
+		'menu_top' : 20
+	};
+
+	</script>
+	<script language="JavaScript" src="tpl_common.js"></script>
+</head>
+
+<body>
+<form name="tpl_view">
+
+<table cellspacing="1" class="listTab">
+<tr><th colspan="2" class="tabHead">Blue Grades</th></tr>
+<tr><th class="colHead" colspan="2">General Information</th></tr>
+<tr>
+	<td class="propSect">Description</td>
+	<td class="propFeature">Deep blue color scheme, thin border, no font decoration, soft rollover effect with the background color.</td>
+</tr>
+<tr>
+	<td class="propSect">Compatibility</td>
+	<td class="propFeature">
+	<ul>
+		<li>Tigra Menu</li>
+		<li>Tigra Menu PRO</li>
+		<li>Tigra Menu GOLD</li>
+	</ul>
+	</td>
+</tr>
+<tr><td class="propSect">Layout</td><td class="propFeature"><input type="Radio" name="layout" value="horizontal" checked onclick="img_rollover(this)"> Horizontal <input type="Radio" name="layout" value="vertical" onclick="img_rollover(this)"> Vertical</td></tr>
+<tr><th class="colHead" colspan="2">Preview</th></tr>
+<tr><td class="propFeature" align="center" colspan="2"><img src="blue_grades_horizontal.gif" alt="template preview" width="300" height="200" border="0" name="img_layout" id="img_layout"></td></tr>
+<tr><th colspan="2" class="tabHead" align="right">
+	<input type="Button" name="merge" value="Load Styles" onclick="inp_merge()">
+	<input type="Button" name="select" value="Select" onclick="inp_select()">
+</th></tr>
+</table>
+
+</form>
+
+<script language="JavaScript">
+	inp_set();
+</script>
+
+</body>
+</html>

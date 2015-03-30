@@ -1,0 +1,182 @@
+<!--
+Title: Tigra Menu Builder v1.0 (07/21/2005)
+Copyright (c)2005 Softcomplex, Inc. (www.softcomplex.com)
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Application Data Storage</title>
+	<link rel="stylesheet" href="common.css">
+
+	<script language="JavaScript">
+		window.onbeforeunload = function () {
+			if (B_DIRTY)
+				return "Unsaved data will be lost.";
+		}
+	</script>
+	<script language="JavaScript" src="common.js"></script>
+	
+<script>
+
+// --------------------------------------------------------------------------------
+// list of supported modes
+var A_MODES = [
+	{'name': 'Tigra Menu', 'list': true, 'allow': true},
+	{'name': 'Tigra Menu PRO', 'list': true, 'allow': false, 'cartid' : 61},
+	{'name': 'Tigra Menu GOLD', 'list': true, 'allow': false, 'cartid' : 171},
+	{'name': 'Tigra Tree Menu', 'list': false, 'allow': false},
+	{'name': 'Tigra Tree Menu PRO', 'list': false, 'allow': false, 'cartid' : 231}
+];
+var N_MODE = null;
+
+// --------------------------------------------------------------------------------
+var A_TEMPLATES = [
+	{	's_name'  : 'Grayscale',
+		'n_modes' : 7,
+		's_file'  : 'grayscale.html'},
+	{	's_name'  : 'Blue Grades',
+		'n_modes' : 7,
+		's_file'  : 'blue_grades.html'}
+];
+var N_TPL = null;
+
+// --------------------------------------------------------------------------------
+// style template properties
+var A_STYLE_PROPERTIES = [
+		'name',
+		'box_background_color',
+		'box_border_color',
+		'box_border_width',
+		'box_padding',
+		'font_color',
+		'font_family',
+		'font_size',
+		'font_weight',
+		'font_style',
+		'font_decoration',
+		'text_align',
+		'text_valign'
+];
+
+// --------------------------------------------------------------------------------
+// predefined style templates
+
+var A_STYLES = [];
+var A_STYLES_INDEX = [];
+
+// --------------------------------------------------------------------------------
+// new style properties
+var A_STYLE_DEFAULT = {
+		'name':'New Style Template',
+		'box_background_color':'transparent',
+		'box_border_color':'transparent',
+		'box_border_width':0,
+		'box_padding': 4,
+		'font_color': '#000000',
+		'font_family': 'Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif',
+		'font_size': 12,
+		'font_weight': 0,
+		'font_style': 0,
+		'font_decoration': 0,
+		'text_align': 'left',
+		'text_valign': 'middle'
+};
+
+// --------------------------------------------------------------------------------
+// hierarchy variable
+
+var A_ITEMS = [
+	{'text_caption':'Home',
+	'children': [
+		{'text_caption':'Company Info'},
+		{'text_caption':'Mission'},
+		{'text_caption':'Press Releases'}
+	]},
+	{'text_caption':'Products'},
+	{'text_caption':'Services'},
+	{'text_caption':'Support'}
+];
+var A_INDEX = [];
+
+// --------------------------------------------------------------------------------
+// menu template variable
+var A_TPL = [];
+
+// --------------------------------------------------------------------------------
+// menu settings variable
+var A_MENU = {};
+
+// --------------------------------------------------------------------------------
+var A_TRANSITIONS = [
+	{'v':'', 't':'no transition'},
+	{'v':'dTrans(DURATION=t)', 't':'Fade'},
+	{'v':'revealTrans(TRANSITION=0,DURATION=t)', 't':'Box in'},
+	{'v':'revealTrans(TRANSITION=1,DURATION=t)', 't':'Box out'},
+	{'v':'revealTrans(TRANSITION=2,DURATION=t)', 't':'Circle in'},
+	{'v':'revealTrans(TRANSITION=3,DURATION=t)', 't':'Circle out'},
+	{'v':'revealTrans(TRANSITION=4,DURATION=t)', 't':'Wipe up'},
+	{'v':'revealTrans(TRANSITION=5,DURATION=t)', 't':'Wipe down'},
+	{'v':'revealTrans(TRANSITION=6,DURATION=t)', 't':'Wipe right'},
+	{'v':'revealTrans(TRANSITION=7,DURATION=t)', 't':'Wipe left'},
+	{'v':'revealTrans(TRANSITION=8,DURATION=t)', 't':'Vertical blinds'},
+	{'v':'revealTrans(TRANSITION=9,DURATION=t)', 't':'Horizontal blinds'},
+	{'v':'revealTrans(TRANSITION=10,DURATION=t)', 't':'Checkerboard across'},
+	{'v':'revealTrans(TRANSITION=11,DURATION=t)', 't':'Checkerboard down'},
+	{'v':'revealTrans(TRANSITION=12,DURATION=t)', 't':'Random dissolve'},
+	{'v':'revealTrans(TRANSITION=13,DURATION=t)', 't':'Split vertical in'},
+	{'v':'revealTrans(TRANSITION=14,DURATION=t)', 't':'Split vertical out'},
+	{'v':'revealTrans(TRANSITION=15,DURATION=t)', 't':'Split horizontal in'},
+	{'v':'revealTrans(TRANSITION=16,DURATION=t)', 't':'Split horizontal out'},
+	{'v':'revealTrans(TRANSITION=17,DURATION=t)', 't':'Strips left down'},
+	{'v':'revealTrans(TRANSITION=18,DURATION=t)', 't':'Strips left up'},
+	{'v':'revealTrans(TRANSITION=19,DURATION=t)', 't':'Strips right down'},
+	{'v':'revealTrans(TRANSITION=20,DURATION=t)', 't':'Strips right up'},
+	{'v':'revealTrans(TRANSITION=21,DURATION=t)', 't':'Random bars horizontal'},
+	{'v':'revealTrans(TRANSITION=22,DURATION=t)', 't':'Random bars vertical'},
+	{'v':'progid:DXImageTransform.Microsoft.Wheel(DURATION=t,spokes=5)', 't':'Wheel'},
+	{'v':'progid:DXImageTransform.Microsoft.Barn(DURATION=t,orientation=horizontal)', 't':'Horizontal Barn'},
+	{'v':'progid:DXImageTransform.Microsoft.Barn(DURATION=t,orientation=vertical)', 't':'Vertical Barn'},
+	{'v':'progid:DXImageTransform.Microsoft.GradientWipe(DURATION=t,wipeStyle=0)', 't':'Hor. Gradient Wipe'},
+	{'v':'progid:DXImageTransform.Microsoft.GradientWipe(DURATION=t,wipeStyle=1)', 't':'Ver. Gradient Wipe'},
+	{'v':'progid:DXImageTransform.Microsoft.Iris(DURATION=t,irisStyle=STAR)', 't':'Iris with Star'},
+	{'v':'progid:DXImageTransform.Microsoft.Iris(DURATION=t,irisStyle=CIRCLE)', 't':'Iris with Circle'},
+	{'v':'progid:DXImageTransform.Microsoft.Pixelate(DURATION=t,maxSquare=40)', 't':'Pixelate'},
+	{'v':'progid:DXImageTransform.Microsoft.Stretch(DURATION=.5,stretchStyle=push)', 't':'Stretch'},
+	{'v':'revealTrans(TRANSITION=23,DURATION=t)', 't':'Random'}
+];
+
+
+// --------------------------------------------------------------------------------
+// unsaved changes flag
+var B_DIRTY = false;
+// last viewed item id
+var N_LAST_ITEM_ID  = null;
+// last viewed style id
+var N_LAST_STYLE_ID = null;
+
+</script>
+	
+</head>
+<body>
+
+<script language="JavaScript">
+	F_LIST.location  = 'intro.html';
+	var B_LOADED = true;
+</script>
+
+<table cellspacing="0" cellpadding="5" class="listTab">
+<tr>
+	<td class="tabBott" background="images/tab_bgtop.gif"><font color="white">Copyright &copy;2002-2005 SoftComplex Inc. All rights reserved.</font></td>
+	<td class="tabBott" background="images/tab_bgtop.gif" align="right"><font color="white">SoftComplex Links:</font>
+	| <a href="http://www.softcomplex.com/" target="_blank"><font color="white">company info</font></a>
+	| <a href="http://www.softcomplex.com/download.html" target="_blank"><font color="white">downloads</font></a>
+	| <a href="http://www.softcomplex.com/support.html" target="_blank"><font color="white">support</font></a>
+	|
+	</td>
+</tr>
+</table>
+
+</body>
+</html>

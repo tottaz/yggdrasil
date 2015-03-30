@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    @author VxR <vxr@vxr.it>
+    @version $Revision: 1.1 $
+    @since 0.8
+-->
+<log4php:configuration xmlns:log4php="http://www.vxr.it/log4php/" threshold="all" debug="true">
+
+    <appender name="default" class="LoggerAppenderEcho">
+        <param name="threshold" value="warn" />
+        <layout class="LoggerLayoutHtml" />
+    </appender>
+
+    <appender name="test" class="LoggerAppenderNull">
+        <param name="threshold" value="warn" />
+    </appender>
+    
+    <root>
+        <level value="debug" />
+        <appender_ref ref="default" />
+        <appender_ref ref="test" />
+    </root>
+</log4php:configuration>

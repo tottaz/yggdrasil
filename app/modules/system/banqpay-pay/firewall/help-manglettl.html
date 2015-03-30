@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC 
+  "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Help - Mangle Packet TTL</title>
+<meta name="Author" content="Scott Morizot" /></head>
+<body>
+
+<h2 align="center">Help - Mangle Packet TTL</h2>
+
+<p>This advanced option will set the <i>Time to Live</i> or TTL
+embedded in every IP packet.  The TTL is used to tell when a packet has
+traveled too far without reaching its destination.  This prevents it
+from traveling in infinite loops.  Normally this value is set by the
+operating system and should not be changed.  However, some providers,
+particularly broadband providers, do not want networks connected to the
+Internet through a single gateway/firewall system.  Packets with varying
+TTLs apparently coming from a single system are evidence of a private
+network.  This option will allow you to set one TTL on all outbound
+packets.</p>
+
+<p>If this option is selected, the TTL field will appear the next time
+the Generate Firewall! button is clicked.  If the Mangle TTL option is
+checked, a value must be entered in the TTL field for the firewall to
+successfully generate.  The default value is 128 hops.  I suggest that
+you not change the default unless you <i>really</i> know what you're
+doing.  A bad choice could have serious consequences.</p>
+
+<p>Note: Broadband providers are beginning to look at traffic as the
+sole measure and charge heavy users more whether they use a single
+system or service a network.  This is a more reasonable approach than
+attempting to prohibit networks attached through a gateway.  If your
+provider does not restrict subscribers from using private networks, you
+probably have no need to use this option.</p>
+
+<p><strong>Note:</strong> The TTL target may not be included in the
+distribution on your system.  If it is not and you require it, you will
+have to add it.  That may require that you build from source.
+
+<p align="center"><a href="javascript:window.close();">
+Close Window
+</a></p>
+
+</body>
+</html>
+

@@ -1,0 +1,3 @@
+<?
+$this->methodTable = array();
+?>

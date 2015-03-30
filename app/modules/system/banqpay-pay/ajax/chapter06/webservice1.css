@@ -1,0 +1,62 @@
+/*
+ * Copyright 2006 SitePoint Pty. Ltd, www.sitepoint.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+* {
+  padding:0px; 
+  margin:0px; }
+body, p, div, td, ul {
+  font-family:verdana, arial, helvetica, sans-serif;
+  font-size:12px; }
+#mainDiv {
+  background:#ffffff;
+  padding:24px;
+  overflow:hidden;
+}
+#containerDiv {
+  position:relative;
+  width:380px; 
+  height:480px; 
+  border:1px solid #aaaaaa;
+  overflow:hidden; }
+.resultsDiv {
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:380px; 
+  height:480px; 
+  overflow:auto; }
+.itemDiv {
+  padding-top:8px;
+  padding-bottom:8px; }
+.imageDiv {
+  width:64px;
+  height:80px;
+  float:left;
+  padding-left:12px;
+  padding-right:12px;
+}
+.titleDiv {
+  font-weight:bold;
+  color:#333333;
+  margin-bottom:4px;
+}
+.authorDiv {
+}
+.clearBoth {
+  height:0px;
+  font-size:0px;
+  clear:both; }
+  

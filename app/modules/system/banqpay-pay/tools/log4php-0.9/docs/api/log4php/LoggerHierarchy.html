@@ -1,0 +1,964 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class LoggerHierarchy</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class LoggerHierarchy</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This class is specialized in retrieving loggers by name and also maintaining the logger hierarchy.</p>
+<p class="description"><p>This class is specialized in retrieving loggers by name and also maintaining the logger hierarchy.
+ The casual user does not have to deal with this class directly.</p><p>The structure of the logger hierarchy is maintained by the  getLogger method. The hierarchy is such that children link  to their parent but parents do not have any pointers to their  children. Moreover, loggers can be instantiated in any order, in  particular descendant before ancestor.</p><p>In case a descendant is created before a particular ancestor,  then it creates a provision node for the ancestor and adds itself  to the provision node. Other descendants of the same ancestor add  themselves to the previously created provision node.</p><p></p></p>
+	<ul class="tags">
+				<li><span class="field">version:</span> $Revision: 1.20 $</li>
+				<li><span class="field">author:</span> VxR &lt;<a href="mailto:vxr@vxr.it">mailto:vxr@vxr.it</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_log4php_LoggerHierarchy_php.html">Program_Root/log4php/LoggerHierarchy.php</a> (line <span class="field"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a53">53</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+								<div class="var-title">
+					<span class="var-type">boolean</span>
+					<a href="#$debug" title="details" class="var-name">$debug</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">object currently</span>
+					<a href="#$defaultFactory" title="details" class="var-name">$defaultFactory</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">boolean</span>
+					<a href="#$emittedNoAppenderWarning" title="details" class="var-name">$emittedNoAppenderWarning</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">boolean</span>
+					<a href="#$emittedNoResourceBundleWarning" title="details" class="var-name">$emittedNoResourceBundleWarning</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$ht" title="details" class="var-name">$ht</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type"><a href="../log4php/or/LoggerRendererMap.html">LoggerRendererMap</a></span>
+					<a href="#$rendererMap" title="details" class="var-name">$rendererMap</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type"><a href="../log4php/LoggerRoot.html">LoggerRoot</a></span>
+					<a href="#$root" title="details" class="var-name">$root</a>
+				</div>
+								<div class="var-title">
+					<span class="var-type"><a href="../log4php/LoggerLevel.html">LoggerLevel</a></span>
+					<a href="#$threshold" title="details" class="var-name">$threshold</a>
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+											<span class="method-result">LoggerHierarchy</span>
+										<a href="#LoggerHierarchy" title="details" class="method-name">LoggerHierarchy</a>
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">$root</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addHierarchyEventListener" title="details" class="method-name">addHierarchyEventListener</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$listener</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addRenderer" title="details" class="method-name">addRenderer</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$classToRender</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$or</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#clear" title="details" class="method-name">clear</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#emitNoAppenderWarning" title="details" class="method-name">emitNoAppenderWarning</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$cat</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#exists" title="details" class="method-name">exists</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#fireAddAppenderEvent" title="details" class="method-name">fireAddAppenderEvent</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$logger</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$appender</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getCurrentCategories" title="details" class="method-name">&amp;getCurrentCategories</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#getCurrentLoggers" title="details" class="method-name">&amp;getCurrentLoggers</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result"><a href="../log4php/Logger.html">Logger</a></span>
+										<a href="#getLogger" title="details" class="method-name">&amp;getLogger</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type"><a href="../log4php/spi/LoggerFactory.html">LoggerFactory</a></span>&nbsp;<span class="var-name">$factory</span> = <span class="var-default">null</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result"><a href="../log4php/Logger.html">Logger</a></span>
+										<a href="#getLoggerByFactory" title="details" class="method-name">&amp;getLoggerByFactory</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$factory</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result"><a href="../log4php/or/LoggerRendererMap.html">LoggerRendererMap</a></span>
+										<a href="#getRendererMap" title="details" class="method-name">&amp;getRendererMap</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result"><a href="../log4php/LoggerRoot.html">LoggerRoot</a></span>
+										<a href="#getRootLogger" title="details" class="method-name">&amp;getRootLogger</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result"><a href="../log4php/LoggerLevel.html">LoggerLevel</a></span>
+										<a href="#getThreshold" title="details" class="method-name">getThreshold</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#isDisabled" title="details" class="method-name">isDisabled</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$level</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#overrideAsNeeded" title="details" class="method-name">overrideAsNeeded</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$override</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#resetConfiguration" title="details" class="method-name">resetConfiguration</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setDisableOverride" title="details" class="method-name">setDisableOverride</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$override</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setRenderer" title="details" class="method-name">setRenderer</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$renderedClass</span>, <span class="var-type">LoggerRenderer</span>&nbsp;<span class="var-name">$renderer</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setThreshold" title="details" class="method-name">setThreshold</a>
+											(<span class="var-type"><a href="../log4php/LoggerLevel.html">LoggerLevel</a></span>&nbsp;<span class="var-name">$l</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#shutdown" title="details" class="method-name">shutdown</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#singleton" title="details" class="method-name">&amp;singleton</a>
+										()
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$debug" id="$debug"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">boolean</span>
+			<span class="var-name">$debug</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a64">64</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> activate internal logging</li>
+				<li><span class="field">see:</span> <a href="../log4php/LoggerLog.html">LoggerLog</a></li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$defaultFactory" id="$defaultFactory"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">object currently</span>
+			<span class="var-name">$defaultFactory</span>
+						(line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a58">58</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> unused</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$emittedNoAppenderWarning" id="$emittedNoAppenderWarning"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">boolean</span>
+			<span class="var-name">$emittedNoAppenderWarning</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a89">89</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> currently unused</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$emittedNoResourceBundleWarning" id="$emittedNoResourceBundleWarning"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">boolean</span>
+			<span class="var-name">$emittedNoResourceBundleWarning</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a94">94</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> currently unused</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$ht" id="$ht"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$ht</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a69">69</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> hierarchy tree. saves here all loggers</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$rendererMap" id="$rendererMap"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type"><a href="../log4php/or/LoggerRendererMap.html">LoggerRendererMap</a></span>
+			<span class="var-name">$rendererMap</span>
+						(line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a79">79</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$root" id="$root"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type"><a href="../log4php/LoggerRoot.html">LoggerRoot</a></span>
+			<span class="var-name">$root</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a74">74</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$threshold" id="$threshold"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type"><a href="../log4php/LoggerLevel.html">LoggerLevel</a></span>
+			<span class="var-name">$threshold</span>
+						(line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a84">84</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> main level threshold</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodLoggerHierarchy" id="LoggerHierarchy"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor LoggerHierarchy</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a114">114</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Create a new logger hierarchy.</p>
+<p class="description"><p>Create a new logger hierarchy.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">LoggerHierarchy</span>
+		<span class="method-name">
+			LoggerHierarchy
+		</span>
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">$root</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$root</span><span class="var-description">: the root logger</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodaddHierarchyEventListener" id="addHierarchyEventListener"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">addHierarchyEventListener</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a128">128</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add a HierarchyEventListener event to the repository.</p>
+<p class="description"><p>Add a HierarchyEventListener event to the repository. Not Yet Impl.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addHierarchyEventListener
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$listener</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodaddRenderer" id="addRenderer"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">addRenderer</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a137">137</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add an object renderer for a specific class.</p>
+<p class="description"><p>Add an object renderer for a specific class. Not Yet Impl.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addRenderer
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$classToRender</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$or</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodclear" id="clear"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">clear</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a145">145</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This call will clear all logger definitions from the internal hashtable.</p>
+<p class="description"><p>This call will clear all logger definitions from the internal hashtable.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			clear
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodemitNoAppenderWarning" id="emitNoAppenderWarning"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">emitNoAppenderWarning</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a150">150</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			emitNoAppenderWarning
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$cat</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodexists" id="exists"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">exists</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a160">160</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Check if the named logger exists in the hierarchy.</p>
+<p class="description"><p>Check if the named logger exists in the hierarchy.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			exists
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodfireAddAppenderEvent" id="fireAddAppenderEvent"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">fireAddAppenderEvent</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a165">165</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			fireAddAppenderEvent
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$logger</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$appender</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetCurrentCategories" id="getCurrentCategories"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getCurrentCategories</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a173">173</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">deprecated:</span> Please use <a href="../log4php/LoggerHierarchy.html#methodgetCurrentLoggers">getCurrentLoggers()</a> instead.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			&amp;getCurrentCategories
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetCurrentLoggers" id="getCurrentLoggers"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getCurrentLoggers</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a182">182</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns all the currently defined categories in this hierarchy as an array.</p>
+<p class="description"><p>Returns all the currently defined categories in this hierarchy as an array.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			&amp;getCurrentLoggers
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetLogger" id="getLogger"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getLogger</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a201">201</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a new logger instance named as the first parameter using the default factory.</p>
+<p class="description"><p>Return a new logger instance named as the first parameter using the default factory.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../log4php/Logger.html">Logger</a></span>
+		<span class="method-name">
+			&amp;getLogger
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type"><a href="../log4php/spi/LoggerFactory.html">LoggerFactory</a></span>&nbsp;<span class="var-name">$factory</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: logger name</span>			</li>
+					<li>
+				<span class="var-type"><a href="../log4php/spi/LoggerFactory.html">LoggerFactory</a></span>
+				<span class="var-name">$factory</span><span class="var-description">: a <a href="../log4php/spi/LoggerFactory.html">LoggerFactory</a> instance or null</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetLoggerByFactory" id="getLoggerByFactory"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getLoggerByFactory</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a217">217</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a new logger instance named as the first parameter using the default factory.</p>
+<p class="description"><p>Return a new logger instance named as the first parameter using the default factory.</p></p>
+	<ul class="tags">
+				<li><span class="field">todo:</span> merge with <a href="../log4php/LoggerHierarchy.html#methodgetLogger">getLogger()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../log4php/Logger.html">Logger</a></span>
+		<span class="method-name">
+			&amp;getLoggerByFactory
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$factory</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: logger name</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetRendererMap" id="getRendererMap"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getRendererMap</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a259">259</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> Get the renderer map for this hierarchy.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../log4php/or/LoggerRendererMap.html">LoggerRendererMap</a></span>
+		<span class="method-name">
+			&amp;getRendererMap
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetRootLogger" id="getRootLogger"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getRootLogger</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a267">267</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> Get the root of this hierarchy.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../log4php/LoggerRoot.html">LoggerRoot</a></span>
+		<span class="method-name">
+			&amp;getRootLogger
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetThreshold" id="getThreshold"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getThreshold</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a277">277</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> Returns the threshold Level.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../log4php/LoggerLevel.html">LoggerLevel</a></span>
+		<span class="method-name">
+			getThreshold
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodisDisabled" id="isDisabled"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">isDisabled</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a287">287</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This method will return true if this repository is disabled for level object passed as parameter and false otherwise.</p>
+<p class="description"><p>This method will return true if this repository is disabled for level object passed as parameter and false otherwise.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isDisabled
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$level</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodoverrideAsNeeded" id="overrideAsNeeded"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">overrideAsNeeded</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a295">295</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">deprecated:</span> Deprecated with no replacement.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			overrideAsNeeded
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$override</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodresetConfiguration" id="resetConfiguration"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">resetConfiguration</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a315">315</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Reset all values contained in this hierarchy instance to their default.</p>
+<p class="description"><p>Reset all values contained in this hierarchy instance to their default.
+ This removes all appenders from all categories, sets the level of all non-root categories to <em>null</em>, sets their additivity flag to <em>true</em> and sets the level of the root logger to LOGGER_LEVEL_DEBUG.  Moreover, message disabling is set its default &quot;off&quot; value.
+ Existing categories are not removed. They are just reset.</p><p>This method should be used sparingly and with care as it will  block all logging until it is completed.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			resetConfiguration
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodsetDisableOverride" id="setDisableOverride"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setDisableOverride</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a335">335</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">deprecated:</span> Deprecated with no replacement.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setDisableOverride
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$override</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodsetRenderer" id="setRenderer"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setRenderer</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a346">346</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Used by subclasses to add a renderer to the hierarchy passed as parameter.</p>
+<p class="description"><p>Used by subclasses to add a renderer to the hierarchy passed as parameter.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setRenderer
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$renderedClass</span>, <span class="var-type">LoggerRenderer</span>&nbsp;<span class="var-name">$renderer</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$renderedClass</span><span class="var-description">: a LoggerRenderer class name</span>			</li>
+					<li>
+				<span class="var-type">LoggerRenderer</span>
+				<span class="var-name">$renderer</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetThreshold" id="setThreshold"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setThreshold</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a356">356</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">set a new threshold level</p>
+<p class="description"><p>set a new threshold level</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setThreshold
+		</span>
+					(<span class="var-type"><a href="../log4php/LoggerLevel.html">LoggerLevel</a></span>&nbsp;<span class="var-name">$l</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../log4php/LoggerLevel.html">LoggerLevel</a></span>
+				<span class="var-name">$l</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodshutdown" id="shutdown"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">shutdown</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a376">376</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Shutting down a hierarchy will <em>safely</em> close and remove all appenders in all categories including the root logger.</p>
+<p class="description"><p>Shutting down a hierarchy will <em>safely</em> close and remove all appenders in all categories including the root logger.
+ Some appenders such as LoggerSocketAppender  need to be closed before the  application exists. Otherwise, pending logging events might be  lost.</p><p>The shutdown method is careful to close nested  appenders before closing regular appenders. This is allows  configurations where a regular appender is attached to a logger  and again to a nested appender.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			shutdown
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodsingleton" id="singleton"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">singleton</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerHierarchy.php.html#a101">101</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			&amp;singleton
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+						
+		</div>
+	</div>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Tue,  9 Dec 2003 23:49:23 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.2.2</a>
+	</p>
+	</div></body>
+</html>

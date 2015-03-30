@@ -1,0 +1,2585 @@
+<!--
+-->
+<HTML>
+<HEAD>
+	<STYLE type="text/css">
+		BODY, TD		{font-family:verdana; font-size:12px}
+        PRE 			{ margin-left: 2em; margin-right: 2em; }
+		TABLE			{width:98%; border-collapse:collapse;margin:5px;}
+		THEAD TD		{color:#666666; font-weight:bold;}
+		TD				{padding:5px; vertical-align:top;}
+		A				{color:#000099;}
+		A:link			{color:#000099; Xfont-weight:bold;}
+		A:visited		{color:#000066; Xfont-weight:bold;}
+		P.sep			{height:20px;border-bottom:1px solid black;}
+		LI				{margin-top:5px}
+		LI A			{Xfont-weight:bold;}
+		CODE			{background-color:F0F0F0;}
+		CODE.call		{background-color:DDDDDD; display:block; 
+							margin:10px; padding-left:20px;}
+		.notimplemented	{color:darkred; font-size:10px; font-style:italic;}
+		.datatype		{color:#666666; font-size:10px; font-style:italic;}
+		.openQuestion	{color:darkred; font-weight:bold; font-style:italic;
+							margin-top:10px;}
+	</STYLE>
+	<title>XForms Package</title>
+</HEAD>
+<BODY>
+
+<h1>XForms Package</h1>
+
+<h2><a name="Introduction">Introduction</a></h2>
+
+The purpose of the XForms package is to provide an optimized mechanism for producing complex display and data-entry forms on the client, while shielding the developer from writing the HTML required to create these displays.  This implementation is both a subset of the <a href="http://www.w3.org/TR/xforms/" target=_blank>W3C XForms Specification</a>, in that not every piece of the spec is implemented, and an extension of the spec in that it provides a large number of additional attributes that allows the developer great flexibility over the appearance and behavior of the forms as they appear on screen.  Note that XForms are just as useful for providing a standardized way to present complex data as they are for creating complex input forms.
+
+<p>
+At the heart of every XForm are three pieces:
+<LI>an <a href="#XForm_Object">XForm object</a>
+<LI>an <a href="#XModel_Object">XModel object</a>
+<LI>a <a href="#data_instance">data instance</a>
+ 
+<p>
+The <a name="XForm_Object">XForm object</a> specifies functionality and appearance of the form.  The meat of the XForm consists of a list of "items", each of which has some representation on the screen (see <a href="#XForm_Items">XForm Items</a>).  Many of the item types are visual (e.g. labels, text fields, checkboxes and buttons), while some are provided for grouping or aggregating sets of form items for display purposes.  A facility is provided for switching the set of fields displayed (much like a tabbed preference dialog or a wizard, where different sets of options are presented sequentially), and also for handling lists of items, where the XForm will automatically create as many rows in the display form as there are rows in the instance data.  XForm items are dynamically shown or hidden (see <a href="#relevant">relevant</a> property) as instance data changes, to hide controls that are not relevant due to the current state of the data instance.
+
+<p>
+The <a name="XModel_Object">XModel object</a> specifies the shape of the data -- how the data is organized hierarchically, data types and any constraints (validators) on the data.  The XModel is essentially a static set of items (referred to herein as "modelItems", to distinguish them from form "items"), and is used mainly to access and set property values in the current data instance, as well as to guarantee that data written to the instance is consistent with all constraints.  (see <a href="#XModel_Items">XModel Items</a>). An XForm can be instantiated without an XModel, in which case the XForm will create an "empty" XModel automatically.  It is common to have a number of XForms that point to a single XModel ("Singleton" pattern) -- for example, one might specify "simple display", "full display", "simple edit" and "full edit" forms that all point to the same piece of data, and thus share a single XModel.  
+
+<p>
+The <a name="data_instance">data instance</a> is either a simple Javascript object, or an instance of a Javascript class.  The ultimate purpose of the XForms mechanism is to display and modify this data.  By default, the XModel will access the properties of the instance directly according to XPath expressions embedded into the modelItem descriptions.  Within the XModel, a facility is provided to use functions to <a href=#xmodel_getter>get</a> or <a href=#xmodel_setter>set</a> various properties of the instance data to provide for calculated values, use multi-part widgets to control a single instance attribute, etc.  Also note that the XForm will save values into with the widget as the user interacts with the form -- when the user types a new value into a text field, that value will be saved in the instance when the user leaves the field.  If you want to provide the user with the facility to cancel editing actions on a form, you may want to clone the instance, and pass the clone into the form, then write any changed values back into the original instance when they hit "save."
+
+
+<p class="sep"/>
+<h2><a name="The_XForm_Object">The XForm Object</a></h2>
+
+You will create a single XForm for every display, input form, etc that you want to create in your application.  You can either create a generic XForm and customize it by setting its items, etc. or you can subclass the XForm class itself and create instances of that.  Note that the XForm is an instance of the DwtComposite class -- in the standalone prototype mode (where DWT is not provided), a very basic DwtComposite is created -- (see <a href="#Standalone_Mode">Standalone Mode</a>).
+
+<p>
+The basic procedure to create and display an XForm goes like so:
+<OL>
+	<LI> Create the <a href="#XForm_Items">list of items</a> to be shown in the XForm.
+	<LI> (optional) <a href="#new_XModel">Create an XModel</a> that describes the data instance.
+	<LI> <a href="#new_XForm">Create the XForm</a>, passing in the list of items (in the attributes argument) and the XModel.
+	<LI> Create the instance that the XForm will display and <a href="#setInstance">make the form aware of it</a>.  Note: you may want to clone the instance before handing it to the form; (see <a href="#Handling_Changes_to_the_Form">Handling Changes to the Form</a>).
+	<LI> <a href="#draw">Draw the form</a> to display it.
+	<LI> The user interacts with the form, <a href="#Getting_and_Setting_Instance_Values">values are automatically saved</a> in the instance.  The form is hidden when it is no longer used.
+	<LI> At some point later, when the user wants to edit/display a new instance, simply <a href="#setInstance">point the form at the new instance</a> and show the form again.
+</OL>
+
+Note that the XForm is very smart about drawing -- it only creates the various widgets in the form once, then simply updates the values in these widgets dynamically as the instance data changes.
+
+<p>
+In the Model-View-Controller paradigm, an XForm can be thought of as a both a View -- in that it visually presents the instance data to the user -- and as a Controller -- in that it actually modifies the data.  It accomplishes this through managing (controlling) the set of XForm Items, which themselves present a view (of a small piece of the instance data) and a controller (the INPUT, SELECT, TEXTAREA, etc) that allows the user to change this datum.  This concept of nested views and controllers is very common in the MVC paradigm.  
+
+<p>Because your form is probably a part of a larger system, say an entire DHTML application, the XForm understands that it in turn might be managerd by another controller.  When creating your form, you can <a href=#setController>set its controller</a>, then make references within the form and form items to this controller.  For instance, you might have a button in your xform that needs to show a dialog that is not part of the form.  The "onActivate" script of XFormItem that represents your button can be:
+
+	<code class=call> onActivate:"this.getForm().getController().showSomeOtherDialog()"
+	</code>
+
+By setting up the reference from your form to the controller, you can avoid having to use static references to the controller within your form.  E.g., you want to avoid code like the following for the aforementioned <code>onActivate</code> trigger:
+	<code class=call>onActivate:someGlobalController.getRef() + ".showSomeOtherDialog()"</code>
+because it makes your code conceptually more confusing, and makes it harder to re-use this piece of code in other circumstances (where there might be a different controller).
+
+<p class="sep"/>
+<h2><a name="XForm_Attributes_of_Interest">XForm Attributes of Interest</a></h2>
+
+<p>The following are properties of an XForm that you can add on instantiation to control how the form is rendered.  Pass these as the <code>attributes</code> of the form on instantiation, e.g.:
+	<pre class=call>
+	var myXForm = new XForm({
+			id:"myForm",
+			cssClass:"myFormClass",
+			cssStyle:"border:1px solid blue;",
+			items:[
+				{type:_OUTPUT_, value:"Instructions for using this form..."},
+				{ref:"name"},
+				{ref:"phone"}
+			],
+			defaultItemType:_TEXTFIELD_,
+			itemDefaults:{
+				_OUTPUT_:     { cssClass:"myFormOutput" },
+				_TEXTFIELD_:  { width:200  }
+			
+			}
+		}, myXModel);</pre>
+
+
+<table border=1>
+<thead><tr>
+	<td width=20%>Attribute (type)</td>
+	<td width=80%>Description</td>
+</tr></thead>
+
+<tr><td><a name="xform.id"><code>id</code></a>
+		<span class=datatype>(string)</span></td>
+	<td>
+Sets the DOM <code>id</code> of the HTML container that the XForm is drawn in, as well as the internal id of the xform in the Javascript context.  Because this is the DOM <code>id</code> of the form container, you can have an id'd CSS attribute in a CSS file that styles the container for the form, e.g., in a CSS file,
+	<code class=call>#myForm	{	border:1px solid blue;	}</code>
+will style the container for the above form.
+
+<p>
+Note that if you instantiate more than one form with the same <code>id</code>, the second and subsequent forms will have a number appended to their name to make them unique, eg:  <code>myForm</code>, <code>myForm2</code>, <code>myForm3</code>, etc.   
+<p>
+To get a pointer to an XForm with a particular <code>id</code>, use:
+	<code class=call>XFG.cacheGet(<i>id</i>)</code>
+<p>If you do not provide an <code>id</code>, forms wll default to <code>id</code>s of <code>_XForm</code>, <code>_XForm2</code>, etc.
+
+</td>
+</tr>
+
+
+<tr><td><a name="xform.items"><code>items</code></a>
+		<span class=datatype>(array)</span></td>
+	<td>
+The list of (possibly nested) <a href=#XForm_Items>xform items</a> that this form will display.
+<p>Default is a form with no items (which is not very interesting).
+	</td>
+</tr>
+
+
+<tr><td><a name="xform.cssClass"><code>cssClass</code></a>
+		<span class=datatype>(string)</span></td>
+	<td>
+CSS CLASS attribute for the outer container of the form.  E.g., the form above would match an entry in a CSS file like so:
+	<code class=call>.myFormClass	{border: 1px solid blue;}</code>
+<p>Default is <code>null</code> (no class applied).
+	</td>
+</tr>
+
+
+
+<tr><td><a name="xform.cssStyle"><code>cssStyle</code></a>
+		<span class=datatype>(string)</span></td>
+	<td>
+CSS STYLE attribute for the outer container of the form.  Enter styles here in quotes, as you would place them in a CSS file.  Note that it is generally a better practice to use logical css classes for your form, rather than relying on setting css styles for everything.
+<p>Default is <code>null</code> (no style applied).
+	</td>
+</tr>
+
+
+<tr><td><a name="xform.numCols"><code>numCols</code></a>
+		<span class=datatype>(number)</span></td>
+	<td>
+Specifies the number of columns (including columns for labels) for the outer display of the form.  See <a href=#Layout_Considerations>Layout Considerations</a> for more details.
+<p>Default is <code>2</code>, one column for labels and one for form item widgets.
+	</td>
+</tr>
+
+
+
+<tr><td><a name="xform.colSizes"><code>colSizes</code></a>
+		<span class=datatype>(array)</span></td>
+	<td>
+Specifies an array of column sizes to output for the outer display of the form.  See <a href=#Layout_Considerations>Layout Considerations</a> for more details.
+<p>Default is <code>null</code>.
+	</td>
+</tr>
+
+
+<tr><td><a name="xform.defaultItemType"><code>defaultItemType</code></a>
+		<span class=datatype>(string)</span></td>
+	<td>
+XFormItem type which will be used to instantiate the form's <code>items</code>, when an item does not specify an explicit <code>type</code>.  In the above example, both <code>name</code> and <code>phone</code> would be created as <code>_TEXTFIELD_</code> items.
+<p>Default is <code>_OUTPUT_</code>.
+</td>
+</tr>
+
+
+<tr><td><a name="xform.itemDefaults"><code>itemDefaults</code></a>
+		<span class=datatype>(object)</span></td>
+	<td>
+<p>Use this to customize different XFormItem types for this form.  The syntax is an object with <code>typename:propertylist</code> pairs.  For this form only, the defaults that you provide for each type name will override the normal default properties for that type.  E.g., in our example above, all <code>_OUTPUT_</code> formItems will have a cssClass of "myFormOutput" and all <code>_TEXTFIELD_</code> items will be 200 pixels wide.  You can override any properties of the formItems you want, including methods.
+<p>
+Note that a current limitation of this implementation is that the defaults will only apply to the particular formItem type you specify in the itemDefaults, not to subclsses of that formItem type.  E.g. setting a default for the <code>_TEXTFIELD_</code> formitem type will not apply to the <code>_PASSWORD_</code> formitem type, even though the <code>_PASSWORD_</code> implementation derives from <code>_TEXTFIELD_</code>.
+<p>Default is <code>null</code> (no customization).
+	</td>
+</tr>
+</table>
+
+
+
+
+
+<p class="sep"/>
+<h2><a name="XForm_Methods_of_Interest">XForm Methods of Interest</a></h2>
+
+
+<table border=1>
+
+<tr><td><a name="new_XForm"><B>To create an XForm</b></a></td></tr>
+<tr>
+	<td>
+<code class=call>new XForm(attributes [,xmodel] [,instance] [,dwtContainer])</code>
+	<ul>
+		<li><code>attributes</code>: object literal, all properties of which will be copied into the instance of the form.  Specifically, this should at the least contain an "items" property which specifies the list of form items to display (see <a href="#XForm_Items">XForm Items</a>).
+		<li><code>xmodel</code>:  <i>(optional)</i> instance of an <a href="#The_XModel_Object">XModel</a> or subclass.  If not provided, the form will make an empty XModel automatically.
+		<li><code>instance</code>: <i>(optional)</i> instance of data to be displayed by the form.  Can also be <a href="#setInstance">provided later</a> (or switched out at any time).
+		<li><code>dwtContainer</code>: <i>(optional)</i> DWT container object to set as the parent of the form.
+	</ul>
+<br></td>
+</tr>
+
+<tr><td><a name="draw"><B>To draw an XForm</b></a></td></tr>
+<tr><td>
+	<code class=call>xform.draw([parentElement])</code>
+	<ul>
+		<li><code>parentElement</code>: <i>(optional)</i> parent element to draw in.  If not specified, will use the <code>getHTMLElement()</code> call from DWTContainer.
+	</ul>
+<p>
+Note: only needs to be done once.  After the initial draw, use the <a href=#refresh>refresh()</a> method to update the form display.
+<br><br></td>
+</tr>
+
+<tr><td><a name="setInstance"><b>To set the XForm to a particular data instance</b></a></td></tr>
+<tr><td>
+	<code class=call>xform.setInstance(instance)</code>
+	<ul>
+		<li><code>instance</code>: data instance (simple JS object or instance of a JS class) that the form should display.  The form will automatically update to show the new instance data.
+	</ul>
+<br></td>
+</tr>
+
+<tr><td><a name="refresh"><b>To refresh the form</b></a> to display any changes to the data instance</td></tr>
+<tr><td>
+	<code class=call>xform.refresh()</code>
+<p>Note that you don't need to do this when the user changes data using the form, this will be done automatically.	 You would instead do this when, for example, the data changed because of a server notification.
+<br><br></td>
+</tr>
+
+
+<tr><td><a name="setController"><b>To set the controller of the form</b></a></td></tr>
+<tr><td>
+	<code class=call>xform.setController(yourController)</code>
+		<ul><li><code>yourController</code>: Any controller object.
+		</ul>
+<br></td>
+</tr>
+
+
+<tr><td><a name="getController"><b>To get a reference to the controller</b></a> of the form</td></tr>
+<tr><td>
+	<code class=call>xform.getController()</code>
+		<ul><li><code>returns</code>: Pointer to the controller object.
+		</ul>
+		
+	<p>Note that within the context of a formItem, you can use the convenience method <code>getFormController()</code>, e.g.
+		<code class=call>formItem.getFormController() == formItem.getForm().getController()</code>
+
+<br></td>
+</tr>
+</table>
+
+
+<p class="sep"/>
+<h2><a name="XForm_Events">XForm Events of Interest</a></h2>
+<p>The following are events that you can observe on an XForm, to be notified when interesting things happen with the form.  The form uses the standard <code>LsListener</code> syntax to set up and remove listeners, eg:
+
+	<code class=call>
+	var listener = new LsListener(<i>yourObject</i>, <i>yourCallbackMethod</i>);<BR>
+	<i>yourXForm</i>.addListener(DwtEvent.XFORMS_READY, listener);
+	</code>
+	
+	Then, when the appropriate thing happens in the form, your method will be called:
+		<code class=call><i>yourObject</i>.<i>yourCallbackMethod</i>(event)</code>
+	where event has one or more of the following properties:
+	<ul>
+		<li><code>form</code>:  pointer to the form signalling the event
+		<li><code>formItem</code>:  pointer to the formItem signalling the event
+		<li><code>detail</code>:  details specific to the particular event, enumerated below
+	</ul>
+<table border=1>
+<thead><tr>
+	<td width=10%>Event Name</td>
+	<td width=50%>Description</td>
+	<td width=40%>Event Attributes</td>
+</tr></thead>
+
+<tr><td><a name="XFORMS_READY"><code>DwtEvent.<BR>XFORMS_READY</code></a></td>
+	<td>
+	Called when the form finished its inital <a href=#draw>draw()</a>.
+
+	</td>
+	<td><li><code>event.form</code> == pointer to the form
+	</td>
+</tr>
+
+<tr><td><a name="XFORMS_DISPLAY_UPDATED"><code>DwtEvent.<BR> XFORMS_DISPLAY_UPDATED</code></a>
+
+<div class=openQuestion>Rename to XFORMS_REFRESHED?</div>
+</td>
+	<td>
+	Called whenever a form <code>refresh()</code> has been completed, and all visible form items show the correct values from the data instance.  
+	
+	<p>This is called after <code>XFORMS_READY</code> on the initial draw.
+	<p>This is called after <code>XFORMS_VALUE_CHANGED</code> and after <code>XFORMS_FORM_DIRTY_CHANGE</code> when an item has been changed.
+
+	</td>
+	<td><li><code>event.form</code> == pointer to the form
+	</td>
+</tr>
+
+
+<tr><td><a name="XFORMS_VALUE_CHANGED"><code>DwtEvent.<BR> XFORMS_VALUE_CHANGED</code></a></td>
+	<td>
+	Called when a formItem in the form has been changed, eg: the user changed a value and it passed validation.  This will be called after the value has actually been saved in the data instance, but before <code>XFORMS_FORM_DIRTY_CHANGE</code>.
+
+	</td>
+	<td><li><code>event.form</code> == pointer to the form
+		<li><code>event.formItem</code> == pointer to the formItem that was changed
+		<li><code>event.details</code> == new value saved for that item.
+	</td>
+</tr>
+
+
+<tr><td><a name="XFORMS_FORM_DIRTY_CHANGE"><code>DwtEvent.<BR> XFORMS_FORM_DIRTY_CHANGE</code></a></td>
+	<td>
+	Set whenever the "dirty" state of the form changes.  This is called:
+	<li>When the form is set to a new data instance. (<code>event.details == false</code>)
+	<li>When a form item is actually changed (eg: the user changed a value and it passed validation).  (<code>event.details == true</code>)
+
+	</td>
+	<td><li><code>event.form</code> == pointer to the form
+		<li><code>event.details</code> == boolean: <code>true</code> means the form is now "dirty", <code>false</code> means it is "clean" (eg: form was set to a new data instance, was saved, etc).
+	</td>
+</tr>
+</table>
+
+
+
+
+<p class="sep"/>
+<h2><a name="XForm_Items">XForm Items</a></h2>
+XForm items are the things that are actually displayed in the the form.  Each widget is automatically converted to be an instance of a XFormItem subclass when the form is initialized.  
+
+<p>XForm items fall into five basic categories:
+	<ul>
+		<li><a href="#widget_item_types">Widgets</a> (input, output, select, etc)
+		<li><a href="#composite_item_types">Composite Items</a> (date, etc)
+		<li><a href="#grouping_item_types">Grouping Items</a> (group, switch, case)
+		<li><a href="#repeating_item_types">Repeating structures</a> (repeat)
+		<li><a href="#appearance_item_types">Form appearance</a> items (spacer, separator)
+	</ul>
+<p>
+At a minimum, each form item has a <code>type</code> attribute which controls how it is displayed (as a text field, selection box, text label, etc).  In addition to the <a href=#W3C_Compliance>standard XForm types</a>, this implementation includes a large number of additional item types, allowing you to create very complex forms.  If the type of a form item is not specified, it is assumed to be of the <code>output</code> type.
+<p>
+<a name=group_item_ref> </a>Many form items also specify a <code>ref</code> attribute, which links this form item to a modelItem, specified in the XModel for the form.  Form items with <code>ref</code>s will automatically display the value contained in the current instance when the form is updated.  Note that grouping items can also specify a <code>ref</code> attribute; any sub-items of the group with a <code>ref</code> will be nested under the ref of the group.  e.g.:
+	<pre>
+		{type:_GROUP_, ref:"address", items:[
+				{type:_INPUT_, ref:"street"},
+				{type:_INPUT_, ref:"city"},
+				{type:_INPUT_, ref:"state"},
+				{type:_INPUT_, ref:"zip"},
+			]
+		}
+	</pre>
+Each of the input elements within the group will inherit the <code>address</code> reference from the group, so their references are effectively <code>"address/street"</code>, <code>"address/city"</code>, etc.  The XForm handles setting this up with the appropriate XModel modelItems automatically.
+
+
+
+<p class="sep"/>
+<h2><a name="item_types">XFormItem Types</a></h2>
+
+Note that when specifying widgets in JavaScript you should use constants defined by the XFormItem classes to reference the different types of widgets.  E.g.
+
+	<code class=call>{type:_OUTPUT_, ref:"foo"}</code>
+
+will create an "output" type widget.  When specifying widgets in XML, use the lowercase widget names specified below, eg:
+	<code class=call>&lt;output ref="foo" /&gt;</code>
+
+
+<p>The item types detailed below are divided into the following categories:
+
+<ul>
+	<li><a href="#widget_item_types">Widget Item Types</a></li>
+	<li><a href="#composite_item_types">Composite Item Types</a></li>
+	<li><a href="#grouping_item_types">Grouping Item Types</a></li>
+	<li><a href="#repeating_item_types">Repeating Item Types</a></li>
+	<li><a href="#form_appearance_item_types">Form Appearance Item Types</a></li>
+	<li><a href="#external_widget_adaptor_types">External Widget Adaptor Types</a></li>
+</ul>
+
+
+<p>
+Items with an asterisk (*) after them are not specified in the W3C XForms spec or have different semantics than those specified in the spec.
+<p>
+
+<table border=1>
+<thead><tr>
+	<td width=15%>Type Constant ("XML name")</td>
+	<td width=60%>Description</td>
+	<td width=25%>Interesting attributes: default value</td>
+</tr></thead>
+
+
+
+<tr><td colspan=3><h3><a name="widget_item_types">Widget Item Types</a></h3></td></tr>
+
+
+<tr><td><a name="_OUTPUT_"><code>_OUTPUT_</code></a>
+		<span class=datatype>("output")</span></td>
+	<td>
+Draws a static piece of text within the form.  If the item specifes a <code>ref</code>, the value displayed will change as the instance changes.
+<p>
+If an <code>_OUTPUT_</code> widget specifies a <code>choices</code> attribute, the XForm will look up the current instance value in the <code>choices</code> list and display the label that matches the value.  e.g., if you have a formItem defined as:
+	<code class=call>{type:_OUTPUT_, ref:"someRef", <BR>
+		&nbsp;&nbsp;&nbsp;choices:{a,"AAAA", b:"BBB"}</code>
+and the value of <code>instance.someRef</code> is <code>"a"</code>, the <code>_OUTPUT_</code> will show the string <code>"AAAA"</code>.
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#choices>choices</a>: <code>null</code>
+		<li><a href=#cssClass>cssClass</a>: <code>"xform_output"</code>
+		<li><a href=#cssStyle>cssStyle</a>: <code>null</code>
+		<li><a href=#nowrap>nowrap</a>: <code>false</code>
+		<li><a href=#align>align</a>: <code>null</code>
+		<li><a href=#valign>valign</a>: <code>null</code>
+	</td>
+</tr>
+
+
+
+<tr><td><a name="_INPUT_"><code>_INPUT_</code></a>
+		<span class=datatype>("input")</span></td>
+	<td>
+	Specifies a form control that is text-entry widget.
+	
+<p>The <a href=http://www.w3.org/TR/2003/REC-xforms-20031014/slice8.html#ui-input target=_blank>W3C spec</a> uses the <code>_INPUT_</code> type for many different types of inputable widgets.  If an <code>_INPUT_</code> is hooked up to a modelItem through its <code>ref</code> property, the spec indicates that the type of the widget actually displayed to edit the value of the field will change based on properties of the modelItem or the formItem.  For example, if an <code>_INPUT_</code> is hooked up to a <code>_DATE_</code> modelItem, it should render as a date selection widget.  This XForms package implements this behavior.  
+
+<p>The authors of this package recommend using the more explicit types detailed below (e.g. <code>_TEXTFIELD_</code>, <code>_CHECKBOX_</code>, etc) when possible as it is will be clearer to maintainers of your form exactly what is being specified.
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#cssClass>cssClass</a>: <code>"xform_field"</code>
+		<li><a href=#cssStyle>cssStyle</a>: <code>null</code>
+	</td>
+</tr>
+
+
+<tr><td><a name="_TEXTFIELD_"><code>_TEXTFIELD_</code></a>*
+		<span class=datatype>("textfield")</span></td>
+	<td>
+Specifies a text entry widget, rendered as an HTML <code>&lt;input&gt;</code> element.
+<P>Specify a <code>value</code> property to put default text into a field.
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#cssClass>cssClass</a>: <code>"xform_field"</code>
+		<li><a href=#cssStyle>cssStyle</a>: <code>null</code>
+		<li><a href=#width>width</a>: <code>100</code>
+		<li><a href=#value>value</a>: <code>null</code>
+	</td>
+</tr>
+
+
+<tr><td><a name="_SECRET_"><code>_SECRET_</code></a> or 
+		<a name="_PASSWORD_"><code>_PASSWORD_</code></a>*
+		<span class=datatype>("secret" or "password")</span></td>
+	<td>
+Specifies a text entry widget where the value is masked visually, generally by asterisks or dots.
+<p>
+You can specify this type either as <code>_SECRET_</code> or <code>_PASSWORD_</code> -- the implementation is the same.
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#cssClass>cssClass</a>: <code>"xform_field"</code>
+		<li><a href=#cssStyle>cssStyle</a>: <code>null</code>
+		<li><a href=#width>width</a>: <code>100</code>
+	</td>
+</tr>
+
+
+
+<tr><td><a name="_FILE_"><code>_FILE_</code></a>
+		<span class=datatype>("file")</span></td>
+	<td>
+Implements a native "file upload" widget (eg: usually a field with a browse button.  Note that a bug implementation sometimes causes forms with <code>_FILE_</code> widgets to crash when the form is redrawing.
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+	</td>
+</tr>
+
+
+
+<tr><td><a name="_TEXTAREA_"><code>_TEXTAREA_</code></a>
+		<span class=datatype>("textarea")</span></td>
+	<td>
+Implements a multi-line HTML <code>&lt;textarea&gt;</code> widget.
+<p>Set the width of the <code>_TEXTAREA_</code> to "100%" to make it fill the entire horizontal space of the form.
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#cssClass>cssClass</a>: <code>"xform_field"</code>
+		<li><a href=#cssStyle>cssStyle</a>: <code>null</code>
+		<li><a href=#width>width</a>: <code>"100%"</code>
+		<li><a href=#height>height</a>: <code>100</code>
+	</td>
+</tr>
+
+
+
+<tr><td><a name="_CHECKBOX_"><code>_CHECKBOX_</code></a>*
+		<span class=datatype>("checkbox")</span></td>
+	<td>
+Implements a checkbox, e.g. a box with a check in it when true and empty when false.  Note that according to desktop user interface specifications, the label of a <code>_CHECKBOX_</code> is rendered to the right of the box, rather than to the left as it is with most fields.
+<p>
+Specify the <code>trueValue</code> and <code>falseValue</code> properties to save particular values in the form when the checkbox is checked or unchecked, respectively, e.g.
+
+ <code class=call>{ref:"present", type:_CHECKBOX_, <BR>
+     &nbsp;&nbsp;&nbsp;trueValue:"Y", falseValue:"N"}</code>
+
+will save the value <code>"Y"</code> in <code>instance.present</code> if the checkbox is checked, and <code>"N"</code> if it is unchecked.
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#cssClass>cssClass</a>: <code>"xform_checkbox"</code>
+		<li><a href=#labelCssClass>labelCssClass</a>: <code>"xform_checkbox"</code>
+		<li><a href=#labelLocation>labelLocation</a>: <code>_RIGHT_</code>
+		<li><a href=#nowrap>trueValue</a>: <code>true</code>
+		<li><a href=#align>falseValue</a>: <code>false</code>
+	</td>
+</tr>
+
+
+
+<tr><td><a name="_RADIO_"><code>_RADIO_</code></a>*
+		<span class=datatype>("radio")</span></td>
+	<td>
+Implements a radio button, which allows the user to select one of a number of choices.
+
+<div class=notimplemented>Not yet implemented</div>
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+	</td>
+</tr>
+
+
+
+<tr><td><a name="_TRIGGER_"><code>_TRIGGER_</code></a> or 
+		<a name="_BUTTON_"><code>_BUTTON_</code></a>*
+		<span class=datatype>("trigger" or "button")</span></td>
+	<td>
+Implements a button that the user can click.  Specify the label on the button with the <code>label</code> property.
+
+<p>Provide an <code>onActivate</code> method to do something when the button is clicked.  E.g., to call a method on the form controller when the button is clicked, use:
+
+	<code class=call>{type:_BUTTON_, label:"Click Me!",<br>
+		&nbsp;&nbsp;&nbsp;onActivate:function(){<BR>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.getFormController().doSomething()<BR>
+		&nbsp;&nbsp;&nbsp;}<BR>
+			}
+		</code>
+
+You can specify this type either as <code>_BUTTON_</code> or <code>_TRIGGER_</code> (the W3C name for this control) -- the implementation is the same.
+
+	</td>
+	<td>
+		<li><a href=#label>label</a>: <code>null</code>
+		<li><a href=#cssClass>cssClass</a>: <code>"xform_button"</code>
+		<li><a href=#cssStyle>cssStyle</a>: <code>null</code>
+		<li><a href=#onActivate>onActivate</a>: <code>null</code>
+	</td>
+</tr>
+
+
+
+<tr><td><a name="_SUBMIT_"><code>_SUBMIT_</code></a>
+		<span class=datatype>("submit")</span></td>
+	<td>
+Implements a button specially tailored to submit the form.
+
+<p><div class=notimplemented>Note: you can specify this, but 'submitting the form' hasn't been worked out yet</div>
+
+	</td>
+	<td>
+		<li><a href=#label>label</a>: <code>null</code>
+		<li><a href=#cssClass>cssClass</a>: <code>"xform_button"</code>
+		<li><a href=#cssStyle>cssStyle</a>: <code>null</code>
+		<li><a href=#onActivate>onActivate</a>: <code>null</code>
+	</td>
+</tr>
+
+
+
+<tr><td><a name="_ANCHOR_"><code>_ANCHOR_</code></a>*
+		<span class=datatype>("anchor")</span></td>
+	<td>
+Provides an anchor (eg: HTML <code>&lt;a href=...&gt;</code>) tag.  By default, <code>label</code> property will be the visible label of the anchor, and the <code>href</code> of the anchor will be whichever comes first of the following:
+	<li>If a <code>ref</code> was specified, the value of the <code>ref</code>'d field in the data instance.
+	<li>If a <code>href</code> is specified, the <code>href</code> as a static value.
+	<li>Alternatively, you can specify an <code>onActivate</code> method on the item to have that invoked instead when the anchor is clicked.  If you're doing this, make sure you do <b>not</b> specify either a <code>ref</code> or <code>href</code> property for the anchor.
+<p>
+Use the <code>showInNewWindow</code> property to show the resulting URL in a new window (does not apply if you're specifying an <code>onActivate</code> handler).
+
+	</td>
+	<td>
+		<li><a href=#label>label</a>: <code>label</code>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#href>href</a>: <code>null</code>
+		<li><a href=#onActivate>onActivate</a>: <code>null</code>
+		<li><a href=#cssClass>cssClass</a>: <code>"xform_anchor"</code>
+		<li><a href=#cssStyle>cssStyle</a>: <code>null</code>
+		<li><a href=#showInNewWindow>showInNewWindow</a>: <code>true</code>
+	</td>
+</tr>
+
+
+<tr><td><a name="_DATA_ANCHOR_"><code>_DATA_ANCHOR_</code></a>*
+		<span class=datatype>("data_anchor")</span>
+		<div class=openQuestion>RENAME TO ???</div>
+		</td>
+	<td>
+Same as an <code>_ANCHOR_</code> item, except that the <b><code>label</code></b> of the anchor will be set by the value of the <code>ref</code> of the anchor.  
+<p>It is recommended that you only use this with the <code>onActivate</code> trigger.
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#href>href</a>: <code>null</code>
+		<li><a href=#onActivate>onActivate</a>: <code>null</code>
+		<li><a href=#cssClass>cssClass</a>: <code>"xform_anchor"</code>
+		<li><a href=#cssStyle>cssStyle</a>: <code>null</code>
+		<li><a href=#showInNewWindow>showInNewWindow</a>: <code>true</code>
+	</td>
+</tr>
+
+
+<tr><td><a name="_URL_"><code>_URL_</code></a>*
+		<span class=datatype>("url")</span></td>
+	<td>
+A variant of the <code>_ANCHOR_</code> type where the <code>href</code> and label of the anchor are both set by the value of the <code>ref</code> of the formitem.  Use this for a data value that is itself a URL that you want the user to be able to click on.
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#cssClass>cssClass</a>: <code>"xform_anchor"</code>
+		<li><a href=#cssStyle>cssStyle</a>: <code>null</code>
+		<li><a href=#showInNewWindow>showInNewWindow</a>: <code>true</code>
+	</td>
+</tr>
+
+
+<tr><td><a name="_MAILTO_"><code>_MAILTO_</code></a>*
+		<span class=datatype>("mailto")</span></td>
+	<td>
+A variant on the <code>_ANCHOR_</code> type used to make clickable email addresses.  The label of the anchor will be the value of the <code>ref</code> of the formItem, and the href will be <code>"mailto:" + <i>refValue</i></code>.
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#cssClass>cssClass</a>: <code>"xform_anchor"</code>
+		<li><a href=#cssStyle>cssStyle</a>: <code>null</code>
+	</td>
+</tr>
+
+<tr><td><a name="_IMAGE_"><code>_IMAGE_</code></a>*
+		<span class=datatype>("image")</span></td>
+	<td>
+Creates an HTML <code>&lt;img&gt;</code> tag.  The <code>src</code> for the image will come from:
+	<li>If a <code>ref</code> was specified, the value of the <code>ref</code>'d field in the data instance.
+	<li>If a <code>src</code> is specified, the <code>src</code> as a static value.
+<p>
+You can also specify a <code>choices</code> attribute for the formItem; if present, the <code>src</code> obtained above will be matched to the <code>value</code> of one of the choice items, and the <code>label</code> of the matched choice will be used as the image <code>src.</code>  E.g.
+
+<code class=call>
+	{type:_IMAGE_, src:"someField",<BR>
+		&nbsp;&nbsp;&nbsp;choices:{"a":"capital_a.gif", "b":"other.gif"}<BR>
+		&nbsp;&nbsp;&nbsp;srcPath:"http://someserver.com/images/"<BR>
+	}
+</code>
+
+If <code>instance.someField</code> has the value of <code>"a"</code>, the image src will be <code>"capital_a.gif"</code>.
+<p>
+Note also you can specify a <code>srcPath</code> property for your <code>_IMAGE_</code> items which will be prepended to the src.  So for the example above, the final <code>src</code> applied to the image will be:
+<code class=call>http://someserver.com/images/capital_a.gif</code>
+Note that you might want to use the <a href=#xform.itemDefaults>xform.itemDefaults</a> to specify a <code>srcPath</code> for all of the images in your form.
+<p>
+If there is no src specified (because the <code>ref</code>'d data value is null, for example) no image will be shown.
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#src>src</a>: <code>null</code>
+		<li><a href=#srcPath>srcPath</a>: <code>null</code>
+		<li><a href=#choices>choices</a>: <code>null</code>
+		<li><a href=#width>width</a>: <code>null</code>
+		<li><a href=#height>height</a>: <code>null</code>
+	</td>
+</tr>
+
+
+<tr><td><a name="_SELECT1_"><code>_SELECT1_</code></a>
+		<span class=datatype>("select1")</span></td>
+	<td>
+Implements a single-line pop-up menu (e.g. an HTML <code>&lt;select multiple=false&gt;</code> widget).  
+<p>Specify the <code>options</code> of the widget with the <code>choices</code> property.  See <a href=#Working_with_Choices>Working with Choices</a> for more details about specifying options for this widget.
+
+<p>Note that bugs in Internet Explorer on Windows cause this widget to hover over all DHTML structures on the page.  Use the _OSELECT_ widget instead to get around this limitation.
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#choices>choices</a>: <code>null</code>
+		<li><a href=#selection>selection</a>: <code>_CLOSED_</code>
+		<li><a href=#cssClass>cssClass</a>: <code>"xform_field"</code>
+		<li><a href=#cssStyle>cssStyle</a>: <code>null</code>
+		<li><a href=#width>width</a>: <code>null</code>
+	</td>
+</tr>
+
+<tr><td><a name="_SELECT_"><code>_SELECT_</code></a>
+		<span class=datatype>("select")</span></td>
+	<td>
+Implements a multi-line HTML <code>&lt;select multiple=true&gt;</code> widget. 
+<p>Specify the <code>options</code> of the widget with the <code>choices</code> property.  See <a href=#Working_with_Choices>Working with Choices</a> for more details about specifying options for this widget.
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#choices>choices</a>: <code>null</code>
+		<li><a href=#selection>selection</a>: <code>_OPEN_</code>
+		<li><a href=#cssClass>cssClass</a>: <code>"xform_field"</code>
+		<li><a href=#cssStyle>cssStyle</a>: <code>null</code>
+		<li><a href=#width>width</a>: <code>null</code>
+		<li><a href=#height>height</a>: <code>null</code>
+	</td>
+</tr>
+
+<tr><td><a name="_BUTTON_GRID_"><code>_BUTTON_GRID_</code></a>*
+		<span class=datatype>("button_grid")</span></td>
+	<td>
+Implements a simple set of buttons with "on" and "off" states to indicate multiple selection within a list of items.  Use the <code>choices</code> of the _BUTTON_GRID_ as the list of <code>value:label</code> pairs for the grid.  The <code>multiple</code> and <code>selection</code> properties of the _BUTTON_GRID_ work like the _SELECT_ item type.
+<p>
+Set the appearance of the buttons using the <code>cssClass</code> property.  Note that the formItem will use variants of the specified cssClass to show the up and down states of the button.  If your <code>cssClass</code> is <code>xform_button_grid_medium</code>, the following styles will actually be used:
+<ul>
+	<li>xform_button_grid_medium_table
+	<li>xform_button_grid_medium td
+	<li>xform_button_grid_medium_button
+	<li>xform_button_grid_medium_button_selected
+</ul>
+
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#choices>choices</a>: <code>null</code>
+		<li><a href=#multiple>multiple</a>: <code>true</code>
+		<li><a href=#selection>selection</a>: <code>_OPEN_</code>
+		<li><a href=#cssClass>cssClass</a>: <code>"xform_button_grid_medium"</code>
+		<li><a href=#numCols>numCols</a>: <code>5</code>
+	</td>
+</tr>
+
+
+
+<tr><td><a name="_TAB_BAR_"><code>_TAB_BAR_</code></a>*
+		<span class=datatype>("tab_bar")</span></td>
+	<td>
+Implements a set of tabs, tuned for hooking up to a _SWITCH_.  Set the <code>choices</code> of the _TAB_BAR_ to the names and values of the tabs you want to show.
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#choices>choices</a>: <code>null</code>
+		<li><a href=#cssClass>cssClass</a>: <code>"xform_button_grid_tab"</code>
+	</td>
+</tr>
+
+
+
+<tr><td colspan=3><h3><a name="dwt_item_types">DWT Item Types</a></h3></td></tr>
+
+
+
+<tr><td><a name="_DWT_BUTTON_"><code>_DWT_BUTTON_</code></a>*
+		<span class=datatype>("dwt_button")</span></td>
+	<td>
+An adaptor for using DwtButtons within an XForm.
+<p>
+Set the <code>label</code> of the formItem to be the label of the button, and the <code>onActivate</code> method of the formItem to set what happens when the button is clicked.  The <code>onActivate</code> method is called in the context of the formItem, so you have access to the form, form controller, etc. within this script.
+
+	</td>
+	<td>
+		<li><a href=#label>label</a>: <code>null</code>
+		<li><a href=#width>width</a>: <code>null</code>
+		<li><a href=#height>height</a>: <code>null</code>
+		<li><a href=#cssClass>cssClass</a>: <code>null</code>
+		<li><a href=#onActivate>onActivate</a>: <code>null</code>
+	</td>
+</tr>
+
+
+
+<tr><td><a name="_DWT_SELECT_"><code>_DWT_SELECT_</code></a>*
+		<span class=datatype>("dwt_select")</span></td>
+	<td>
+An adaptor for using DwtSelect items within an XForm.
+<p>
+Note that the implementation of the DwtSelect is fairly slow -- consider using the _OSELECT_ class instead.
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#choices>choices</a>: <code>null</code>
+	</td>
+</tr>
+
+
+<tr><td><a name="_DWT_DATE_"><code>_DWT_DATE_</code></a>*
+		<span class=datatype>("dwt_date")</span></td>
+	<td>
+Implements a date selector as a DwtDate widget -- a label that shows the date, and a button that shows a mini-calendar to allow them to select a date.
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+	</td>
+</tr>
+
+
+<tr><td><a name="_DWT_DATETIME_"><code>_DWT_DATETIME_</code></a>*
+		<span class=datatype>("_DWT_DATETIME_")</span></td>
+	<td>
+This item is a composite of a _DWT_DATE_ and a _TIME_ object.
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+	</td>
+</tr>
+
+
+
+<tr><td colspan=3><h3><a name="composite_item_types">Composite Item Types</a></h3></td></tr>
+
+<tr><td><a name="_COMPOSITE_"><code>_COMPOSITE_</code></a>*
+		<span class=datatype>("composite")</span></td>
+	<td>
+This is the base class for all composite formItems -- items composed of a set of other items.  Extend this class to create your own composite items.
+<p>
+Set the <code>items</code> property of your composite to the set of items that you want to show for each instance of the composite.  The xforms mechanism will automatically duplicate the items for each instance of the composte that is created.
+<p>
+See <a href="#Creating_New_Widget_Types">Creating New Widget Types</a> for an explanation of subclassing _COMPOSITE_ to create a new item type.
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#items>items</a>: <code>null</code>
+		<li><a href=#numCols>numCols</a>: <code>2</code>
+	</td>
+</tr>
+
+
+<tr><td><a name="_DATE_"><code>_DATE_</code></a>*
+		<span class=datatype>("date")</span></td>
+	<td>
+Use this composite item type to show a date input widget.  The default implementation shows:
+	<li>A _SELECT1_ widget to set the month
+	<li>A _SELECT1_ widget to set the date
+	<li>A _TEXTFIELD_ widget to set the year
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+	</td>
+</tr>
+
+
+<tr><td><a name="_TIME_"><code>_TIME_</code></a>*
+		<span class=datatype>("time")</span></td>
+	<td>
+Use this composite item type to show a time input widget.  The default implementation shows:
+	<li>A _SELECT1_ widget to set the hour
+	<li>A _SELECT1_ widget to set the minutes
+	<li>A _SELECT1_ widget to set AM/PM
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+	</td>
+</tr>
+
+
+<tr><td><a name="_DATETIME_"><code>_DATETIME_</code></a>*
+		<span class=datatype>("datetime")</span></td>
+	<td>
+Use this composite item type to allow the user to input a date and time as a single item.  It is a composite of a _DATE_ and a _TIME_ widget.
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+	</td>
+</tr>
+
+
+
+
+<tr><td colspan=3><h3><a name="grouping_item_types">Grouping Item Types</a></h3></td></tr>
+
+<tr><td><a name="_GROUP_"><code>_GROUP_</code></a>
+		<span class=datatype>("group")</span></td>
+	<td>
+Use this to group a set of formItems either logically or visually.  For example, if you have a number of formItems that you want to show or hide all together, place them in a <code>_GROUP_</code> and set the <code>relevant</code> property of the group rather than setting it on each item.
+<p>
+Alternatively, if you want to have more than one item appear in one logical cell in the <a href=#layout_considerations>form layout</a>, place those items in a <code>_GROUP_</code>.
+<p>Within the <code>_GROUP_</code>, the <code>items</code> property is the set of items that the group will display.  The system will take care of initializing these objects for you.
+<p>Note that if you're using a <code>_GROUP_</code> to put more than one item in a single "cell" in the outer form, you might want to specify a label on the <code>_GROUP_</code> itself rather than on the first item within the group.  This will make the label line up with the other labels in the form properly.
+<p>See also this note about <a href=#group_item_ref>group items specifying a ref property for their sub-items</a>.
+<p>Note that it is currently not possible to set the style of a <code>_GROUP_</code> element.  See <a href=#layout_considerations>Layout Considerations</a> for more details.
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#items>items</a>: <code>null</code>
+		<li><a href=#numCols>numCols</a>: <code>2</code>
+		<li><a href=#colSizes>colSizes</a>: <code>null</code>
+		<li><a href=#useParentTable>useParentTable</a>: <code>false</code>
+		<li><a href=#label>label</a>: <code>null</code>
+	</td>
+</tr>
+
+
+
+<tr><td><a name="_SWITCH_"><code>_SWITCH_</code></a>
+		<span class=datatype>("switch")</span></td>
+	<td>
+Use a <code>_SWITCH_</code> formItem to display one of a number of sets of formItems.  
+<p>For example, think of a tabbed preferences dialog:  the <code>_SWITCH_</code> item is the one that controls which of the preference "panes" is visible.  Each of the panes themselves is implemented as a <code>_CASE_</code> formItem.  You can use a <code>_TAB_GROUP_</code> formItem to show each <code>_CASE_</code> as appropriate.
+<p>Another example of where you might use a <code>_SWITCH_</code> is with a setup wizard interface -- you would again have a single <code>_SWITCH_</code> and multiple <code>_CASE_</code> formItems, but buttons at the bottom of each <code>_CASE_</code> would show the proper <code>_CASE_</code> elements in turn.
+<p>
+Currently the best way to use a <code>_SWITCH_</code> is to hook it up to some value in your data instance using the <code>ref</code> property, then have the items in the <code>_TAB_GROUP_</code> property set the appropriate value in that <code>ref</code> when they are clicked.  The <code>_CASE_</code> formItems are set as the <code>items</code> property of the <code>_SWITCH_</code>, and their <code>relevant</code> property is set to the value of the <code>ref</code>'d attribute.  e.g:
+
+<pre class=call>
+  {type:_TAB_GROUP_, ref:"myVar",
+     choices:{
+        a:"Home Address",
+        b:"Work Address",
+        c:"Other Address"
+       }
+  }
+  {type:_SWITCH_, ref:"myVar", 
+     items:[
+       {type:_CASE_, 
+        relevant:"get('myVar')=='a' || get('myVar')==null",
+          items:[...]
+       },
+       {type:_CASE_, relevant:"get('myVar')=='b'",  
+          items:[...]
+       },
+       {type:_CASE_, relevant:"get('myVar')=='c'",  
+          items:[...]
+       }
+     ]
+  }
+
+</code>
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#items>items</a>: <code>null</code>
+		<li><a href=#numCols>numCols</a>: <code>1</code>
+		<li><a href=#colSpan>colSpan</a>: <code>"*"</code>
+		<li><a href=#useParentTable>useParentTable</a>: <code>false</code>
+	</td>
+</tr>
+
+
+<tr><td><a name="_CASE_"><code>_CASE_</code></a>
+		<span class=datatype>("case")</span></td>
+	<td>
+A <code>_CASE_</code> formItem is functionally identical to a <code>_GROUP_</code>, but is specifically called for by the W3C Spec when using a <code>_SWITCH_</code>.  The implementation is exactly the same.
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#items>items</a>: <code>null</code>
+		<li><a href=#numCols>numCols</a>: <code>2</code>
+		<li><a href=#useParentTable>useParentTable</a>: <code>false</code>
+	</td>
+</tr>
+
+
+
+<tr><td colspan=3><h3><a name="repeating_item_types">Repeating Item Types</a></h3></td></tr>
+
+<tr><td><a name="_REPEAT_"><code>_REPEAT_</code></a>
+		<span class=datatype>("repeat")</span></td>
+	<td>
+This formItem type is used to show a repeating data structure.  Hook the <code>ref</code> of the repeat up to a modelItem of type <code>_LIST_</code> and the <code>_REPEAT_</code> will duplicate all of its <code>items</code> for each item in the the list of the data instance.
+<p>
+Set the <code>items</code> of the _REPEAT_ to a list of formItems to be duplicated for each row in the data instance.  You can place any formItems in there as you want.  The <code>numCols</code> of the repeat will set the number of columns displayed per line within the repeated items.  Set the <code>number</code> property of the repeat to the minimum number of repeat rows of you want visible at all times -- usually this is fine set to 1.
+<p>
+The <code>showAddButton</code> and <code>showRemoveButton</code> properties, when true, will show the formItems <code>addButton</code> and <code>removeButton</code> for each repeated row.  Note that the default behavior is that the <code>addButton</code> is only shown on the last row of the repeat.  You can have different <code>addButton</code>s and <code>removeButtons</code>s by simply specifying these properties in your repeat instance -- look at the implementation for how to code these buttons.
+
+	</td>
+	<td>
+		<li><a href=#ref>ref</a>: <code>null</code>
+		<li><a href=#items>items</a>: <code>null</code>
+		<li><a href=#numCols>numCols</a>: <code>2</code>
+		<li><a href=#number>number</a>: <code>1</code>
+		<li><a href=#showAddButton>showAddButton</a>: <code>true</code>
+		<li><a href=#showRemoveButton>showRemoveButton</a>: <code>true</code>
+		<li><a href=#addButton>addButton</a>: <i>(form item)</i>
+		<li><a href=#removeButton>removeButton</a>: <i>(form item)</i>
+	</td>
+</tr>
+
+
+
+<tr><td colspan=3><h3><a name="form_appearance_item_types">Form Appearance Item Types</a></h3></td></tr>
+
+<tr><td><a name="_SPACER_"><code>_SPACER_</code></a>*
+		<span class=datatype>("spacer")</span></td>
+	<td>
+Use this to output a spacer in the form that takes up an entire row in the form display.  Specify the <code>width</code> and <code>height</code> of the spacer to change the amount of space it takes up.
+<p>
+If you place the <code>_SPACER_</code> in a row that still has some columns in it, it will eat all of the columns to the end of the row and stop (and not take any additional vertical space).  If you place the spacer at the start of a new row, it will provide the amount of vertical space specified in its <code>height</code> property.
+
+	</td>
+	<td>
+		<li><a href=#width>width</a>: <code>1</code>
+		<li><a href=#height>height</a>: <code>10</code>
+		<li><a href=#colSpan>colSpan</a>: <code>"*"</code>
+	</td>
+</tr>
+
+
+<tr><td><a name="_CELL_SPACER_"><code>_CELL_SPACER_</code></a>*
+		<span class=datatype>("cell_spacer")</span></td>
+	<td>
+Use this to output a spacer that takes up only a single column in the form.
+
+	</td>
+	<td>
+		<li><a href=#width>width</a>: <code>10</code>
+		<li><a href=#height>height</a>: <code>10</code>
+		<li><a href=#colSpan>colSpan</a>: <code>1</code>
+	</td>
+</tr>
+
+<tr><td><a name="_SEPARATOR_"><code>_SEPARATOR_</code></a>*
+		<span class=datatype>("separator")</span></td>
+	<td>
+Use this to make a horizontal line separating parts of a form.  The appearance of the line is set by the <code>cssClass</code> of the formItem: by default, the system will output a single pixel black line that will be centered within the <code>height</code> of the formItem.  
+
+<p>This line will behave in the same way as the <code><a href=#_SPACER_>_SPACER_</a></code> formItem in terms of eating columns and/or lines.
+
+	</td>
+	<td>
+		<li><a href=#cssClass>cssClass</a>: <code>"xform_separator"</code>
+		<li><a href=#height>height</a>: <code>10</code>
+		<li><a href=#colSpan>colSpan</a>: <code>"*"</code>
+	</td>
+</tr>
+
+
+<tr><td colspan=3><h3><a name="external_widget_adaptor_types">External Widget Adaptor Types</a></h3></td></tr>
+
+<tr><td><a name="_WIDGET_ADAPTOR_"><code>_WIDGET_ADAPTOR_</code></a>*
+		<span class=datatype>("widget_adaptor")</span></td>
+	<td>
+Use this item type to adapt an external widget for use within an XForm.  
+<p>
+See the file <i>ButtonGrid.js</i> for an example of creating a simple widget class and integrating it with the XForms system.
+
+	</td>
+	<td>
+	</td>
+</tr>
+
+
+<tr><td><a name="_DWT_ADAPTOR_"><code>_DWT_ADAPTOR_</code></a>*
+		<span class=datatype>("dwt_adaptor")</span></td>
+	<td>
+An abstract class for use in adapting DWT widgets for use in XForms.  See the implementation for how to do this with different form types.
+
+	</td>
+	<td>
+	</td>
+</tr>
+
+
+
+</table>
+
+
+<p class="sep"/>
+<h2><a name="XForm_Item_Attributes">XForm Item Attributes</a></h2>
+The following is a list of the attributes that can be applied to an XForm item.  Just as HTML provides some default properties that apply to certain tags (e.g. anchors have underlines, headings show a larger font size, etc.), the XForm class provides defaults for each of the <a href="#XForm_Items">form item types</a> that you can define.  In this way, you get a reasonable default behavior without having to write properties on each widget.
+<p>
+It is often convenient to provide defaults for the behavior and appearance of form items in the modelItems that the form item links to.  For example, for a given instance attribute, the list of <code>choices</code> is likely to be the same whether the attribute is displayed as a select, output as a label, etc.  To some extent, the list of internal values and external labels for these values can be thought of as properties of the model -- by default, each form or field that displays these values should have the same set of <code>choices</code>, with a particular field, of course, being able to override these defaults.  So for most form item attributes, we'll look up values like so:
+
+	<ol>
+		<li>Look in the form item attributes provided by the author when the form was created.
+		<li>Look in the prototype chain for the formItem type.
+		<li>Look in the modelItem that corresponds to the field (if provided).
+	</ol>
+Thus the system can provide reasonable defaults, the model can provide defaults, but the form item itself can always override these defaults.  Note that there are a small number of properties that do not use this inheritance mechanism -- those wil be called out in the table below.
+<p>
+Note that you can use the <a href="#xform.itemDefaults">itemDefaults</a> property of your form to customize the defaults for one or more item types.
+<p>
+The following is the current list of form item attributes.  Items with an asterisk (*) after them are not specified in the W3C XForms spec or have different semantics than those specified in the spec.
+
+<table border=1>
+<thead><tr>
+	<td width=10%>Attribute (type)</td>
+	<td width=65%>Description</td>
+	<td width=25%>Applies to types</td>
+</tr></thead>
+
+
+
+<tr><td colspan=3><b>Basic attributes</b></td></tr>
+<tr><td><a name="ref"><code>ref</code></a>
+		<span class=datatype>(string)</span></td>
+	<td>Reference to a modelItem with a particular <code>id</code> in the xmodel for this form.  This is how the form items and modelItems are associated.  To use the same value as a parent item, use <code>ref:"."</code>.
+	<p>
+Note that this value is not inherited -- only the value in provided in the item itself will be used.  	
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+<tr><td><a name="id"><code>id</code></a>
+		<span class=datatype>(string)</span></td>
+	<td>Identifier for this item.  If ommitted, an <code>id</code> will be created automatically, based on the id of the XForm (and any parent items).  Note that if an <code>id</code> is provided, it will be made unique by appending a number to it -- this allows for the developer to specify <code>id</code>s for items to be repeated in the form.
+<p>
+Note that this value is not inherited -- only the value in provided in the item itself will be used.  
+	</td>
+	<td>(all types)</td>
+</tr>
+
+<tr><td><a name="value"><code>value</code></a>
+		<span class=datatype>(string)</span></td>
+	<td>Specifies a static value to be displayed in the item.  Used mainly in <code>output</code> item types to specify a static string to be displayed.  
+	<p>Note that the XForms spec explicitly states that <code>input</code> item types that specify a <code>value</code> attribute should be treated as <code>checkbox</code> items.  This behavior is replicated in this implementation.  If for some reason you want to specify a text field that has a <code>value</code>, use the <code>textfield</code> item type instead.
+	<p>Note that this attribute is not inherited -- we will only look in the form item specified, and not in the modelItem or the defaults for each item type.
+	</td>
+	<td><li><code>output</code> (to specify a static value to be displayed)
+		<li><code>input</code> (to specify that a checkbox item should be used.  The checkbox will be checked if the value of the item's <code>ref</code> is the same as the <code>value</code> specified.
+	</td>
+</tr>
+
+
+
+<tr><td><a name="items"><code>items</code></a>
+		<span class=datatype>(array)</span></td>
+	<td>An array of sub-items for this item.  Note that the <code>ref</code> of this master item will be automaticaly appended to that of any sub-items that also specify a <code>ref</code></td>
+	<td><li><code>group</code>
+		<li><code>switch</code>
+		<li><code>case</code>
+		<li><code>repeat</code>
+		<li>any <a href=#creating_composite_items>composite item</a> types.
+	</td>
+</tr>
+
+
+<tr><td><a name="relevant"><code>relevant</code></a>*
+		<span class=datatype>(string)</span></td>
+	<td>A javascript expression which is evaluated at form update time to determine whether a given item should be editable or shown.  For example, if an item specified:
+	<p>&nbsp;<code>relevant:"get('repeat_type') != 'N'"</code>
+	<p>this indicates that the item is only relevant if the value of the "repeat_type" property in the current instance being displayed is not "N".  If the value is "N", the item would be hidden or disabled (see <a href="#relevantBehavior"><code>relevantBehavior</code></a>).
+	<p>Note that item relevance is nested -- if a group item is not relevant, we automatically assume that all children of that group are not relevant.
+	
+	<p>In the <code>relevant</code> expression, you can use the following variables and method calls:
+		<table border=1>
+			<tr><td><code>get('xpath')</code></td>
+				<td>return the value of the xpath expression in the current instnace.</td></tr>
+			<tr><td><code>form</code> or <code>this</code></td>
+				<td>pointer to the xform. All references to <code>this</code> also will point to the xform.</td></tr>
+			<tr><td><code>model</code></td>
+				<td>pointer to the xmodel</td></tr>
+			<tr><td><code>instance</code></td>
+				<td>pointer to the instance object being displayed</td></tr>
+			<tr><td><code>item</code></td>
+				<td>pointer to the item in question</td></tr>
+		</table>
+	<p>You can look in any property of the instance, call any method on the form, model, instance, etc that you want to determine if an item is relevant.
+	<p>Note that the implementation differs from the W3C XForms Spec in how you specify the <code>relevant</code> property, but the idea is the same.
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+<tr><td><a name="relevantBehavior"><code>relevantBehavior</code></a>*
+		<span class=datatype>(enum)</span></td>
+	<td>Specifies what to do if a form item is not relevant.  Use one of the following values:
+		<ul>
+			<li><code>_HIDE_</code>: indicates that the item should be hidden if not relevant.
+			<li><code>_DISABLE_</code>: indicates that the item element should be shown as disabled.  
+			<li><code>_PARENT_</code>: indicates that the item element should do whatever its parent decides to do.   Use this for sub-<code>items</code> within a _COMPOSITE_ item.
+			<p>For items with an HTML <code>input</code>, <code>textara</code>, <code>select</code>, etc. element, the <code>disabled</code> property of the item will be set.  
+			<p>Other items such as <code>output</code> will have their css class changed to add the suffix <code>_disabled</code> -- e.g. the cssClass <code>xform_output</code> will change to be <code>xform_output_disabled</code>.
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+<tr><td><a name="relevantIfEmpty"><code>relevantIfEmpty</code></a>*
+		<span class=datatype>(boolean)</span></td>
+	<td>
+If <code>false</code>, items that specify a <code>ref</code> that leads to a <code>null</code> value in the data instance are automatically considered not <code>relevant</code>.
+<p>
+Default is <code>true</code>.
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+
+<tr><td><a name="choices"><code>choices</code></a>
+		<span class=datatype>(array or object)</span></td>
+	<td>Provides a list of value:label pairs for an item (similar to the list of <code>OPTION</code>s for an HTML <code>SELECT</code>).  Can be specified as:
+	<ul>
+		<li>an array of <code>{value:"string", label:"string"}</code> objects.
+		<li>an array of strings or numbers (which will be used for both the value and label).
+	</ul>
+	It is often convenient to place the <code>choices</code> attribute on the modelItem that a form refers to -- that way it can be used by all fields in all xforms that refer to that modelItem.  An individual xform/field instance can always override with a different <code>choices</code> list.
+	</td>
+	<td>
+		<li><code>select</code>
+		<li><code>select1</code>
+		<li><code>output</code> (used to map an internal value to a displayed label)
+		<li><code>image</code> (used to map an internal value to a specific set of image references)
+	<p>
+	See <a href="#Working with Choices">Working with Choices</a> for more details.
+	</td>
+</tr>
+
+<!-- DEPRECATED 
+<tr><td><a name="alwaysUpdateChoices"><code>alwaysUpdateChoices</code></a>
+		<span class=datatype>(boolean)</span></td>
+	<td>
+If <code>true</code>, a _SELECT_ (or variant) widget will attempt to update the list of <code>choices</code> displayed every time the form is refreshed.  Note that this can be highly inefficient &em; it is recommended that you use a <code>XFormChoices</code> object instead.  See <a href="#Working with Choices">Working with Choices</a>.
+<p>Default is <code>false</code>.
+	</td>
+	<td>
+		<li><code>select</code>
+		<li><code>select1</code>
+	<p>
+	See <a href="#Working with Choices">Working with Choices</a> for more details.
+	</td>
+</tr>
+-->
+
+<tr><td><a name="forceUpdate"><code>forceUpdate</code></a>
+		<span class=datatype>(boolean)</span></td>
+	<td>By default, the systems only updates form items that have specified a <code>ref</code> in their attributes, linking them to a modelItem and thus to a value in the data instance being displayed.  Sometimes you want to override this behavior, to always force an item to update in the update cycle, whether it has a <code>ref</code> or not.  Set <code>forceUpdate:true</code> to accomplish this.
+	<p>Note also that the system attempts to be smart during the update cycle, remembering the last display value actually placed in a formItems DOM element.  If the value on this update cycle is the same as the value updated last time, the actual DOM element will not be changed.  This can sometimes lead to problems with values such as Dates or Arrays where the contents of the value may change, but the object itself is the same.  If you're seeing a case where a field element in the form is not changing when you think it should, try setting <code>forceUpdate:true</code> on the formItem.
+	<p>Note: it is always safe to use this property -- at worst, it might result in a very small speed penalty on update.  If you're finding a definable pattern where you're always having to set <code>forceUpdate:true</code>, bring it to the authors' attention and we can probably make the system smart enough to do this automatically.
+	</td>
+</tr>
+
+
+<tr><td><a name="getDisplayValue"><code>getDisplayValue</code></a>
+		<span class=datatype>(function)</span></td>
+	<td>(Optional) Function called to get the value actually displayed in a form item.  The <code>getDisplayValue()</code> function will be passed the value from the modelItem, and can transform that value to make it appropriate for display in the particular widget for the formItem.  For example, a <code>_DATE_</code> field might be a composite item, made of three <code>_SELECT1_</code> widgets.  For the "month" selector, you want to transform the value (a Date object) into the number of the month.  You would use <code>getDisplayValue()</code> for this.
+	
+		<p>The exact call to be made is:
+		<code class=call>item.getDisplayValue(value)</code>
+	<p>where <code>value</code> is the value from the data instance of the form that corresponds to this form item.  The function should massage the <code>value</code> however it needs to and return the value to be displayed.
+	
+	<p>You can specify the <code>getDisplayValue()</code> handler in one of three ways:
+		<ul>
+			<li>a Function instance
+			<li>the string name of a function currently defined on the xform instance, or
+			<li>a script to be converted to a function (with the arguments shown above).
+		</ul>
+
+	</td>
+</tr>
+
+<tr><td colspan=3><b>Attributes for controlling item appearance</b></td></tr>
+
+<tr><td><a name="cssClass"><code>cssClass</code></a>*
+		<span class=datatype>(string)</span></td>
+	<td>Specifies a css <code>CLASS</code> tag to be written out for the item element.  If an item draws as a native HTML widget (e.g. an <code>INPUT</code> field), the <code>cssClass</code> will be applied to that widget.  If the item is an <code>output</code> type, a <code>group</code>, a composite or inserted widget, the <code>cssClass</code> will be applied to the <code>DIV</code> that the widget will be drawn in.
+	<p>Default varies according to item type.
+	<p>Note that this corresponds to the <code>class</code> attribute in the W3C XForms spec.
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+<tr><td><a name="cssStyle"><code>cssStyle</code></a>*
+		<span class=datatype>(string)</span></td>
+	<td>Specifies any css style properties you wish to write into the element tag for the item, allowing you to completely customize the display of an item without having to create a myriad of css classes.  
+	<p>e.g. <code>cssStyle:"margin:10px;padding:2px;"</code>	
+	<p>Default is that no extra style properties will be applied.
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+<tr><td><a name="label"><code>label</code></a>
+		<span class=datatype>(string)</span></td>
+	<td>Specifies a label for this item.  May be shown depending on the items <code>labelLocation</code> property.
+	<p>Note that <code>button</code> and <code>anchor</code> item types use the <code>label</code> for the text that appears to the user in the element, rather than a separate label for the field itself.
+	<p>Note that unlike the W3C XForms spec, labels are not required in this implementation.
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+<tr><td><a name="labelLocation"><code>labelLocation</code></a>*
+		<span class=datatype>(enum)</span></td>
+	<td>Specifies where the label should appear for this item.  Set to one of the following values:
+	<ul>
+		<li><code>_NONE_</code>: Don't show the label, even if one is specified  (default for <code>case</code>, <code>switch</code>, <code>button</code>, <code>anchor</code>, <code>separator</code>, <code>spacer</code> types).
+		<li><code>_LEFT_</code>: Show the label to the left of the item (default for most item types).
+		<li><code>_RIGHT_</code>: Show the label to the right of the item (default for <code>checkbox</code> and <code>radio</code> item types).
+		<li><code>_TOP_</code>: Show the label on a separate line, above of the item.  You might use this for a text area that wants to use the whole width of the form.
+		<li><code>_BOTTOM_</code>: Show the label on a separate line, below of the item.
+	</ul>
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+<tr><td><a name="labelCssClass"><code>labelCssClass</code></a>*
+		<span class=datatype>(string)</span></td>
+	<td>Allows you to specify a css <code>CLASS</code> attribute for the label of an item.  Only used for items whose <code>labelLocation</code> attribute is not <code>_NONE_</code>.
+	<p>Default is <code>xform_label</code> for most item types, <code>xform_label_checkbox</code> for <code>checkbox</code> and <code>radio</code> item types.
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+<tr><td><a name="labelCssStyle"><code>labelCssStyle</code></a>*
+		<span class=datatype>(string)</span></td>
+	<td>Allows you to specify arbitrary css style properties for the label of an item.
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+<tr><td><a name="labelWrap"><code>labelWrap</code></a>*
+		<span class=datatype>(boolean)</span></td>
+	<td>Allows you to specify whether the label of an item should wrap when it goes over the assigned space for the label. <p>Default is <code>false</code>.</td>
+	<td>(all types)</td>
+</tr>
+
+
+<tr><td><a name="containerCssClass"><code>containerCssClass</code></a>*
+		<span class=datatype>(string)</span></td>
+	<td>Specifies a css <code>CLASS</code> attribute for the containing element for a formItem.  The container is currently a <code>&lt;td&gt;</code>, although this may change in the future.
+<p>The default is <code>xform_container</code>.
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+<tr><td><a name="errorCssClass"><code>errorCssClass</code></a>*
+		<span class=datatype>(string)</span></td>
+	<td>Specifies a css <code>CLASS</code> attribute for the error message that will show up above a formItem when it fails validation.  
+<p>Default is <code>xform_error</code>.
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+<tr><td><a name="tableCssClass"><code>tableCssClass</code></a>*
+		<span class=datatype>(string)</span></td>
+	<td>CSS class for the <code>&lt;table&gt;</code> tag used to write a grouping, repeating or composite item.  Not all such objects require that a table tag be written.
+	<p>Note: only applies to items that have <code>useParentTable</code> set to <code>false</code>, otherwise the item will not write out a table.
+<p>Default is <code>xform_table</code>.
+</td>
+	<td>
+		<li><code>group</code>
+		<li><code>case</code>
+		<li><code>repeat</code>
+		<li><code>_COMPOSITE_</code> types
+		<p>
+		which specify <code>useParentTable:false</code>
+	</td>
+</tr>
+
+
+<tr><td><a name="useParentTable"><code>useParentTable</code></a>*
+		<span class=datatype>(boolean)</span></td>
+	<td>
+Boolean that indicates whether a nesting item (_GROUP_, etc) should create its own table context, or should fold its items into the table context of its parent item.  If you are using a _GROUP_, etc. and your layout is not doing what you're expecting, there's a good chance you need to change the <code>useParentTable</code> attribute.
+<p>
+<p>See <a href=#Layout_Considerations>Layout Considerations</a> for more details.
+
+<p>Default is <code>false</code>.
+</td>
+	<td>
+		<li><code>group</code>
+		<li><code>case</code>
+		<li><code>repeat</code>
+		<li><code>_COMPOSITE_</code> types
+	</td>
+</tr>
+
+
+
+
+<tr><td><a name="width"><code>width</code></a>*
+		<span class=datatype>(number)</span></td>
+	<td>Specifies the width of an element.  Automatically added to the <codE>cssStyle</code> of the element or its container, as appropriate.  
+	<p>Note: it is recommended that you specify the width in this way (rather than in the <code>cssStyle</code> property) as it will in future allow for resizing semantics.	
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+<tr><td><a name="height"><code>height</code></a>*
+		<span class=datatype>(number)</span></td>
+	<td>Specifies the height of an element.  Automatically added to the <codr>cssStyle</code> of the element or its container, as appropriate.  
+	<p>Note: it is recommended that you specify the height in this way (rather than in the <code>cssStyle</code> property) as it will in future allow for resizing semantics.	
+	
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+<tr><td><a name="overflow"><code>overflow</code></a>*
+		<span class=datatype>(enum)</span></td>
+	<td>
+Specifies the HTML <code>overflow</code> property for the container of the form element.  Use this to make the container clip or scroll the contents.   Note that the <code>overflow</code> property is not well defined if you do not specify <code>width</code> and/or <code>height</code> for your formItem.
+
+<p>Set to one of:
+	<li><code>_VISIBLE_</code> to allow the container to expand with the size of the contents.
+	<li><code>_HIDE_</code> to clip the contents to the specified width and height.
+	<li><code>_AUTO_</code> to clip the contents, adding scrollbar(s) if necessary.
+	<li><code>_SCROLL_</code> to clip the contents and always show both scrollbars.
+
+
+<p>Default is <code>_VISIBLE_</code>.
+
+	<td>(all types)
+<div class=notimplemented>Note: not tested very much!</div>	
+	</td>
+</tr>
+
+
+<tr><td><a name="numCols"><code>numCols</code></a>*
+		<span class=datatype>(number)</span></td>
+	<td>Specify the number of columns to show in a grouping, repeating or composite item.
+<p>See <a href=#Layout_Considerations>Layout Considerations</a> for more details.
+<p>	
+	Default is 1.</td>
+	<td>
+		<li><code>group</code>
+		<li><code>case</code>
+		<li><code>repeat</code>
+		<li>any <a href=#creating_composite_items>composite item</a> types.
+	</td>
+</tr>
+
+
+<tr><td><a name="colSizes"><code>colSizes</code></a>*
+		<span class=datatype>(array)</span></td>
+	<td>
+Specifies an array of column sizes for a grouping, repeating or composite item. See <a href=#Layout_Considerations>Layout Considerations</a> for more details.
+<p>Default is <code>null</code>.
+	</td>
+		<li><code>group</code>
+		<li><code>case</code>
+		<li><code>repeat</code>
+		<li>any <a href=#creating_composite_items>composite item</a> types.
+</tr>
+
+
+
+
+
+<tr><td><a name="colSpan"><code>colSpan</code></a>*
+		<span class=datatype>(number or "*")</span></td>
+	<td>
+Similar to the usage in an HTML <code>&lt;table&gt;</code>, <code>colSpan</code> pecifies the number of columns an item should take up in the output table.  Set to a number for a specific number of columns, or <code>"*"</code> to indicate an item should take all the remaining columns in the row it is placed in.
+<p>See <a href=#Layout_Considerations>Layout Considerations</a> for more details.
+<p>Default is <code>1</code>.
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+
+<tr><td><a name="rowSpan"><code>rowSpan</code></a>*
+		<span class=datatype>(array)</span></td>
+	<td>
+Similar to the usage in an HTML <code>&lt;table&gt;</code>, <code>colSpan</code> pecifies the number of rows an item should take up in the output table.  Set to a number for a specific number of rows.
+<p>See <a href=#Layout_Considerations>Layout Considerations</a> for more details.
+<p>Default is <code>1</code>.
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+
+
+
+<tr><td><a name="align"><code>align</code></a>*
+		<span class=datatype>(enum)</span></td>
+	<td>Horizontal alignment for this element (or children if a grouping/repeating element). Set to one of the following constants:
+		<ul>
+		<li><code>_LEFT_</code>: align to the left (default).
+		<li><code>_RIGHT_</code>: align to the right.
+		<li><code>_CENTER_</code>: center the item(s) in the parent container.
+		<li><code>_MIDDLE_</code>: synonym for _CENTER_.
+		</ul>
+	</td>
+	<td>(all types)  <p><span class=notimplemented>Note: may not work for all item types.</span>
+</tr>
+
+
+<tr><td><a name="valign"><code>valign</code></a>*
+		<span class=datatype>(enum)</span></td>
+	<td>Vertical alignment for this element (or children if a grouping/repeating element). Set to one of the following constants:
+		<ul>
+		<li><code>_TOP_</code>: align to the top
+		<li><code>_MIDDLE_</code>: align to the middle of the cell (default).
+		<li><code>_CENTER_</code>: synonym for _MIDDLE_
+		<li><code>_BOTTOM_</code>: align to the bottom of the cell.
+		</ul>
+	
+	</td>
+	<td>(all types)  <p><span class=notimplemented>Note: may not work for all item types.</span>
+	</td>
+</tr>
+
+
+
+
+<tr><td colspan=3><b>Attributes for handling changes in the form</b></td></tr>
+
+<tr><td><a name="onChange"><code>onChange</code></a>* <span class=datatype>(function)</span></td>
+	<td>Function to call when the form item is changed.  The exact call to be made is:
+		<code class=call>item.onChange(value, event, form)</code>
+	<p>You can specify the onChange handler in one of three ways:
+		<ul>
+			<li>a Function instance
+			<li>the string name of a function currently defined on the xform instance, or
+			<li>a script to be converted to a function (with the arguments shown above).
+		</ul>
+	<p>
+	The default assumption is that items which specify an <code>onChange</code> function will explicity set any values in the model that need to be set, rather than relying on the default saving behavior.  This allows the <code>onChange</code> method to change more than one value in the instance, etc.  	<p>Note that when _BUTTON_ or _ANCHOR_ objects are clicked, they will fire <code>onActivate</code> instead of <code>onChange</code>.
+	<p>
+	See <a href="#Handling_Changes_to_the_Form">Handling Changes to the Form</a> for more details on change handling.
+	</td>
+	<td>
+		<li>_INPUT_
+		<li>_TEXTFIELD_
+		<li>_FILE_
+		<li>_TEXTAREA_
+		<li>_PASSWORD_
+		<li>_SECRET_
+		<li>_CHECKBOX_
+		<li>_SELECT1_
+		<li>_SELECT_
+		<li>_DWT_SELECT_
+		<li>_OSELECT1_
+		<li>_OSELECT_
+		<li>_DATE_
+		<li>_TIME_
+		<li>_DATETIME_
+		<li>_BUTTON_GRID_
+	</td>
+</tr>
+
+<tr><td><a name="onActivate"><code>onActivate</code></a>* <span class=datatype>(function)</span></td>
+	<td>Function to call when the an anchor or button is clicked.  The exact call to be made is:
+		<code class=call>item.onActivate(event)</code>
+	<p>You can specify the onActivate handler in one of three ways:
+		<ul>
+			<li>a Function instance
+			<li>the string name of a function currently defined on the xform instance, or
+			<li>a script to be converted to a function (with the arguments shown above).
+		</ul>
+<p>
+Note that the <code>onChange</code> event is <b>not</b> called for these item types.
+	</td>
+	<td>
+		<li>_BUTTON_
+		<li>_TRIGGER_
+		<li>_SUBMIT_
+		<li>_ANCHOR_
+		<li>_DATA_ANCHOR_
+		<li>_MAILTO_
+	</td>
+</tr>
+
+
+<tr><td><a name="elementChanged"><code>elementChanged</code></a>* <span class=datatype>(function)</span></td>
+	<td>Function that is called when the HTML widget that the user actually interacts with is manipulated, i.e., they type a new value into a _TEXTFIELD_ or select a different value from a _SELECT1_.  
+<p>The exact call is:
+	<code class=call>item.elementChanged(elementValue, instanceValue, event)</code>, where
+	<li><code>elementValue</code> is the newly changed value
+	<li><code>instanceValue</code> is the value previously stored in the data instance for this item, and
+	<li><code>event</code> is the browser event.
+<p>	
+	The default implementation is to call
+		<code class=call>this.getForm().itemChanged(this, elementValue, event)</code>
+		which will validate the value and insert it back into the model, as appropriate.
+<p>
+You might want to override this, for example, in a composite item that is setting a single part of a complex value.  For example, lets say you have a _DATE_ field that is composed of three simple widgets.  Each of those widgets is setting a part of the date (the month, day, etc).  You want a change to any sub-item of the _DATE_ widget to represent a change the actual date, rather than exposing that they changed only a piece of the date.  To do this, you'll implement an <code>elementChanged</code> handler that will compose the changed bit with the current date, then call <code>itemChanged()</code> on the form with the new value.  e.g. for the "month" pulldown:
+	<pre>
+  elementChanged:function(elementValue, instanceValue, event) {
+    // elementValue is the number of the new month that they selected
+    // instanceValue is the original date stored for this value
+    instanceValue.setMonth(elementValue);
+    this.getForm().itemChanged(this.getParentItem(), instanceValue, event);
+  }</pre>
+Note we call <code>itemChanged()</code> on the parent item (the _DATE_ widget): this ensures that if there is a validation error, the error will be displayed above the entire _DATE_ widget, rather than just above the "month" pull-down.
+	</td>
+	<td>
+		<li>_INPUT_
+		<li>_TEXTFIELD_
+		<li>_FILE_
+		<li>_TEXTAREA_
+		<li>_PASSWORD_
+		<li>_SECRET_
+		<li>_CHECKBOX_
+		<li>_SELECT1_
+		<li>_SELECT_
+		<li>_DWT_SELECT_
+		<li>_OSELECT1_
+		<li>_OSELECT_
+		<li>_DATE_
+		<li>_TIME_
+		<li>_DATETIME_
+		<li>_BUTTON_GRID_
+	</td>
+</tr>
+
+
+
+
+<!--
+<tr><td><a name="elementChangeHandler"><code>elementChangeHandler</code></a>*
+		<span class=datatype>(string)</span></td>
+	<td>Name of the change handler on which to fire the <code>onChange</code> function for an item.  
+	<p>Default is <code>"onchange"</code> but you can specify a different handler (eg: you might specify <code>"onkeydown"</code> to have the item <code>onChange</code> handler fire every time a key is pressed).</td>
+	<td>
+		<li><code>textfield</code>
+		<li><code>textarea</code>
+		<li><code>password</code>/ <code>secret</code>
+		<li><code>select</code>
+		<li><code>select1</code>
+		<li><code>checkbox</code>
+		<li><code>radio</code>
+	</td>
+</tr>
+-->
+
+
+
+<tr><td colspan=3><b>Attributes specific to <code>select</code>, <code>select1</code>, etc type items</b></td></tr>
+<tr><td><a name="selection"><code>selection</code></a>
+		<span class=datatype>(enum)</span></td>
+	<td>Controls whether a selection is "open" or "closed," the difference being that in a "closed" selection, the user <b>must</b> choose one of the pre-defined values, and in an "open" selection, the user may enter in a new value (or leave the value blank).  Set to one of the following values:
+	<ul>
+		<li><code>_OPEN_</code>
+		<li><code>_CLOSED_</code>
+	</ul>
+	<p>
+	<span class=notimplemented>Note: only partially implemented.</span>
+	</td>
+	<td>
+		<li><code>select</code>
+		<li><code>select1</code>
+	</td>
+</tr>
+
+<tr><td><a name="openSelectionLabel"><code>openSelectionLabel</code></a>*
+		<span class=datatype>(string)</span></td>
+	<td>For <code>select</code> items with <code>selection:_OPEN_</code>, the <code>openSelectionLabel</code> provides the label to show when no value has been selected.  
+	<p>The default is <code>""</code> (the empty string), but you could specify another label, such as <code>"Choose one"</code>, etc. to have that displayed instead.
+	</td>
+	<td>
+		<li><code>select</code>
+		<li><code>select1</code>
+	</td>
+</tr>
+
+<tr><td colspan=3><b>Attributes specific to <a href=#Repeating_Form_Structures><code>repeat</code> type items</a></b></td></tr>
+<tr><td><a name="number"><code>number</code></a>
+		<span class=datatype>(number)</span></td>
+	<td>Specifies the minimum number of rows to show in the repeated structure.  At least this number of rows will always be shown, regardless of the actual number of rows specified in the data instance.
+	<p>Default is <code>1</code>.  Set to <code>0</code> to not show any elements when the data instance has no elements.
+	</td>
+	<td><li><code>repeat</code></td>
+</tr>
+
+
+<tr><td><a name="showAddRemoveButtons"><code>showAddRemoveButtons</code></a>*
+		<span class=datatype>(boolean)</span></td>
+	<td>If <code>true</code>, we will automatically show <a href=#addButton>add</a> and <a href=#removeButton>remove</a> buttons at the end of each repeated row.
+	<p>Default is <code>false</code>.
+	</td>
+	<td><li><code>repeat</code></td>
+</tr>
+
+<tr><td><a name="removeButton"><code>removeButton</code></a>* &nbsp;<nobr>(item specification)</nobr></td>
+	<td>This is the item specification for the remove button to show if <code>showAddRemoveButtons:true</code>.  You can override to specify a different style of button, etc.</td>
+	<td><li><code>repeat</code></td>
+</tr>
+
+
+<tr><td><a name="addButton"><code>addButton</code></a>* &nbsp;<nobr>(item specification)</nobr></td>
+	<td>This is the item specification for the add button to show if <code>showAddRemoveButtons:true</code>.  You can override to specify a different style of button, etc.
+	<p>The default behavior is to only show the add button on the last row of the repeat structure.  Override this by setting <code>alwaysShowAddButton:true</code>.
+	</td>
+	<td><li><code>repeat</code></td>
+</tr>
+
+
+<tr><td><a name="alwaysShowAddButton"><code>alwaysShowAddButton</code></a>*
+		<span class=datatype>(boolean)</span></td>
+	<td>Set to <code>true</code> to always show the <a href=#addButton>add</a> button on each row of the repeated items.
+	<p>Default is <code>false</code>.
+	</td>
+	<td><li><code>repeat</code></td>
+</tr>
+
+
+
+<tr><td colspan=3><b>Attributes specific to <code>checkbox</code> type items</b></td></tr>
+<tr><td><a name="trueValue"><code>trueValue</code></a>*
+		<br><span class=datatype>(string, number or boolean)</span></td>
+	<td>Will show the <code>checkbox</code> as checked if the value stored in the data instance is equal to the <code>trueValue</code>.  Also specifies what is stored in the data instance when the checkbox is changed from unchecked to checked.
+	<p>You may want to change this if the internal representation of your boolean value is: 
+	<ul>
+		<li><code>"Y" == true</code> and <code>"N" == false</code>, or 
+		<li><code>1 == true</code> and <code>0 == false</code>, etc.
+	</ul>
+	<p>The default is <code>true</code>.
+	</td>
+	<td><li>checkbox</td>
+</tr>
+
+
+<tr><td><a name="falseValue"><code>falseValue</code></a>*
+		<br><span class=datatype>(string, number or boolean)</span></td>
+	<td> Specifies what is stored in the data instance when the <code>checkbox</code> is changed from checked to unchecked. 
+	
+	<p>The default is <code>false</code>.
+	</td>
+	<td><li>checkbox</td>
+</tr>
+
+
+<tr><td colspan=3><b>Properties specific to <code>image</code> type items</b></td></tr>
+
+<tr><td><a name="src"><code>src</code></a>* <span class=datatype>(string)</span></td>
+	<td>For images that don't specify a <a href=#ref><code>ref</code> property</a>, specifies the url for the image, relative to the <code>srcPath</code> of the item.  The actual path will be:
+	<code class=call>item.srcPath + src</code>
+	<p>Where <code>src</code> is:
+		<ol>
+		<li> the dynamic value of the data instance for this formItem (if the item specified a <code>ref</code> property, or
+		<li> the static <code>item.src</code> specified when the formItem was created.
+		</ol>
+		Note also, that if the <code>image</code> supplies a <a href=#choices><code>choices</code> property</a>, the choices will be used to map an internal value to a url.  Thus for an item specified like so:
+<p><pre>
+	{type:_IMAGE_, ref:"someProperty", href:"spacer.gif",
+		choices:[
+			{value:"a",       label:"image_a.gif"},
+			{value:"b",       label:"image_b.gif"}
+		]
+	}
+		</pre>
+Conceptually, the system will get the href for the image tag like so:
+	<ol>
+		<li>set <code>currentHref</code> the <code>someProperty</code> property in the data instance.
+		<li>if the <code>currentHref</code> is null, use the value <code>item.href</code>
+		<li>Regardless of how the value was obtained in step 1 or 2, attempt to match the <code>currentHref</code> to the <code>value</code> of one of the items in the <code>choices</code> property and use the <code>label</code> for that choice as the <code>href</code>.  (eg: if the <code>href</code> at this point was <code>a</code>, it would get mapped to <code>image_a.gif</code>).
+		<li>If no choice was found whose <code>value</code> matched, just use <code>currentHref</code> specified.
+	</ol>
+	or, in pseudocode:
+	<pre>
+	currentHref = instance.someProperty;
+	if (currentHref == null) currentHref = item.href;
+	if (getChoiceWithValue(currentHref) != null) {
+		currentHref = getChoiceWithValue(currentHref).label;
+	}
+	</pre>
+	
+A couple of examples with the formItem defined above:
+	<ul>
+		<li>If the <code>someProperty</code> value is <code>b</code>, the href at the end will be:  <code>image_b.gif</code>.
+		<li>If the <code>someProperty</code> value is <code>null</code>, the href at the end will be <code>spacer.gif</code> (coming from the <code>href</code> property, and falling through the <code>choices</code> array unchanged).
+		<li>If the <code>someProperty</code> value is <code>image_c.gif</code>, the href will end up as <code>image_c.gif</code> (falling through the <code>choices</code> array unchanged).
+
+	</td>
+	<td><li><code>image</code></td>
+</tr>
+
+<tr><td><a name="srcPath"><code>srcPath</code></a>* <span class=datatype>(string)</span></td>
+	<td>Sets the path prefix for the image to be displayed.  Thus the actual URL used for the image will be:
+	<code class=call>item.srcPath + src</code>
+	<p>Where <a href=#src><code>src</code></a> is as specified above.
+	</td>
+	<td><li><code>image</code></td>
+</tr>
+
+
+
+<tr><td colspan=3><b>Properties specific to <code>anchor</code> type items</b></td></tr>
+
+<tr><td><a name="href"><code>href</code></a>* <span class=datatype>(string)</span></td>
+	<td>For <code>anchor</code>s that don't specify a <a href=#ref><code>ref</code> property</a>, sets the href for the actual <code>&lt;a&gt;</code> tag written into the form.  Thus the href of the anchor will be:
+		<ol>
+		<li> the dynamic value of the data instance for this formItem (if the item specified a <code>ref</code> property, or
+		<li> the static <code>item.href</code> specified when the formItem was created.
+		</ol>
+	</td>
+	<td>
+	<li><code>_ANCHOR_</code>
+	</td>
+</tr>
+
+
+<tr><td><a name="showInNewWindow"><code>showInNewWindow</code></a>* <span class=datatype>(boolean)</span></td>
+	<td>
+If <code>true</code>, an anchor or subtype will open a new <code>_blank</code> window when the anchor is clicked upon.  Set to <code>false</code> to take over the current window.
+<p>Default is <code>true</code>.
+	</td>
+	<td>
+	<li><code>_ANCHOR_</code>
+	<li><code>_DATA_ANCHOR_</code>
+	<li><code>_MAILTO_</code>
+	<li><code>_URL_</code>
+	</td>
+</tr>
+
+</table>
+
+
+<p class="sep"/>
+<h2><a name="XFormItem Methods of Interest">XFormItem Methods of Interest</a></h2>
+
+The following are useful methods you can call on a XFormItem, for example, in a <code>relevant</code> script, an <code>onActivate</code> handler, etc.
+
+<table border=1>
+
+<tr><td><a name="xformItem.getForm()"><B>To get a pointer to the form</b></a></td></tr>
+<tr>
+	<td>
+<code class=call>xformItem.getForm()</code>
+	<ul>
+		<li><code><i>returns</i></code>: Form that contains the form item.
+	</ul>
+<br></td>
+</tr>
+
+<tr><td><a name="xformItem.getFormController()"><B>To get a pointer to the form's Controller</b></a></td></tr>
+<tr>
+	<td>
+<code class=call>xformItem.getFormController()</code>
+	<ul>
+		<li><code><i>returns</i></code>: Controller that controls the form.
+	</ul>
+<br></td>
+</tr>
+
+<tr><td><a name="xformItem.getModel()"><B>To get a pointer to the model</b></a></td></tr>
+<tr>
+	<td>
+<code class=call>xformItem.getModel()</code>
+	<ul>
+		<li><code><i>returns</i></code>: XModel that this item's form is hooked up to.
+	</ul>
+<br></td>
+</tr>
+
+<tr><td><a name="xformItem.getInstance()"><B>To get a pointer to the current data instance </b></a></td></tr>
+<tr>
+	<td>
+<code class=call>xformItem.getInstance()</code>
+	<ul>
+		<li><code><i>returns</i></code>: Data instance that the form is currently displaying.
+	</ul>
+<br></td>
+</tr>
+
+
+<tr><td><a name="xformItem.getModelItem()"><B>To get a pointer ot the modelItem for this form</b></a></td></tr>
+<tr>
+	<td>
+<code class=call>xformItem.getModelItem()</code>
+	<ul>
+		<li><code><i>returns</i></code>: a XModelItem, or null if no <code>ref</code> defined for this item.
+	</ul>
+<br></td>
+</tr>
+
+
+
+<tr><td><a name="xformItem.getParentItem()"><B>To get a pointer to the parent item</b></a> of an item in a _COMPOSITE_, _GROUP_, etc</td></tr>
+<tr>
+	<td>
+<code class=call>xformItem.getParentItem()</code>
+	<ul>
+		<li><code><i>returns</i></code>: Pointer the the parent item, or <code>null</code> if no parent defined.
+	</ul>
+<br></td>
+</tr>
+
+
+
+<tr><td><a name="xformItem.getInstanceValue()"><B>To get the value of the current data instance for this formItem</b></a></td></tr>
+<tr>
+	<td>
+<code class=call>xformItem.getInstanceValue()</code>
+	<ul>
+		<li><code><i>returns</i></code>: Value contained in the data instance for this item.  May be <code>null</code>.
+	</ul>
+<br></td>
+</tr>
+
+
+<tr><td><a name="xformItem.getInstanceCount()"><B>To get the number of items in a _LIST_ modelItem</b></a></td></tr>
+<tr>
+	<td>
+<code class=call>xformItem.getInstanceCount()</code>
+	<ul>
+		<li><code><i>returns</i></code>: The number of items in the _LIST_ for this form item.  Returns -1 if no list found.
+	</ul>
+<br></td>
+</tr>
+
+
+
+<tr><td><a name="xformItem.getGlobalRef()"><B>To return a global refence to a formItem</b></a> (i.e., for use in a callback string)</td></tr>
+<tr>
+	<td>
+<code class=call>xformItem.getGlobalRef()</code>
+	<ul>
+		<li><code><i>returns</i></code>: String value that, when executed in the global context, will return a pointer to this formItem.
+	</ul>
+<br></td>
+</tr>
+
+
+<tr><td><a name="xformItem.()"><B></b></a></td></tr>
+<tr>
+	<td>
+<code class=call>xformItem.()</code>
+	<ul>
+		<li><code><i>returns</i></code>: 
+	</ul>
+<br></td>
+</tr>
+
+
+<tr><td><a name="xformItem.()"><B></b></a></td></tr>
+<tr>
+	<td>
+<code class=call>xformItem.()</code>
+	<ul>
+		<li><code><i>returns</i></code>: 
+	</ul>
+<br></td>
+</tr>
+
+
+<tr><td><a name="xformItem.()"><B></b></a></td></tr>
+<tr>
+	<td>
+<code class=call>xformItem.()</code>
+	<ul>
+		<li><code><i>returns</i></code>: 
+	</ul>
+<br></td>
+</tr>
+
+
+<tr><td><a name="xformItem.()"><B></b></a></td></tr>
+<tr>
+	<td>
+<code class=call>xformItem.()</code>
+	<ul>
+		<li><code><i>returns</i></code>: 
+	</ul>
+<br></td>
+</tr>
+
+
+
+</table>
+
+
+
+<p class="sep"/>
+<h2><a name="Drawing_and_Update_Semantics">Drawing and Update Semantics</a></h2>
+<p>
+When the system draws an XForm, it runs through the entire (nested) list of items, and does the following things:
+	<ol>
+		<li>initialize each item (hooking it up to its modelItem, figuring out nested references, etc),
+		<li>write each item's HTML into the HTMLOutput stream,
+		<li>marks any items that need to be inserted into the form after the form is drawn, and
+		<li>adds code to the <a href=#updateScript>updateScript</a> for each item that needs it.
+	</ol>
+
+(Note that drawing can proceed without a data instance being attached to the form).
+<p>
+When it comes time to display an actual data instance (either because one was passed in initially before the form was drawn, or because some other code called <code>xform.setInstance(instance)</code> on a xform that has been drawn already, the system runs through the <a href=#update_script>updateScript</a> that was created when the form was initially drawn.
+<p>
+This <a name=updateScript>updateScript</a> is responsible for the following:
+	<ol>
+		<li>Determining if each item is <a href=#relevant>relevant</a> and <a href=#relevantBehavior>showing/hiding or disabling/enabling</a> the element as necessary.
+		<li>If an item is relevant and it needs to be inserted into the form (e.g. is an externally populated widget), it will call the item's <a href=#insertMethod>insert method</a> to insert the item into the form.  This is done exactly once per item.
+		<li>If the item is relevant and it has a reference or otherwise specifies that it should always be updated, the updateScript will call the item's <a href=#updateMethod>updateMethod</a> to show the current value in the data instance for that item.
+	</ol>
+
+<p>Note that the full update script is run every time any value in the form is changed.  This ensures that calculated values, multiple values that might be changed by manipulation of a single control, or any values that are duplicated within the form (perhaps once as a label and once as an input field), etc. always stay in synch with the current state of the data instance.  The updateScript has been tuned to run very quickly, even for complex forms.  One way this is accomplished is that form items that are not relevant (and are thus hidden) will not be updated.  
+
+<p>By default, the form widgets themselves are encouraged to remember the last values displayed, and not actually manipulate the DOM unless the values have changed.  This is considerably faster, especially in Internet Explorer.  However, there may be times when all value needs to be forced to update when some value changes.  To accomplish this, set <a href=#forceUpdate><code>forceUpdate:true</code></a> on the particular item which needs to force the update.  Note this will not force the update of items which are not <a href=#relevant><code>relevant</code></a> and are hidden, and that forcing all items to update can be considerably slower, especially for complex forms.
+
+
+<p>You can also manually run the updateScript at any time, for example, if the server or another process updates the value of the current data instance, by calling <a href=#refresh><code>xform.refresh()</code></a>.
+
+
+<p class="sep"/>
+<h2><a name="Handling_Changes_to_the_Form">Handling Changes to the Form</a></h2>
+<p>When the user manipulates a form widget to make a change to the data, the xform calls the method <code>xform.itemChanged(itemId, value, event)</code>.  This routine:
+	<ol>
+		<li>Checks to see if the item has defined a <a href=#onChange><code>onChange</code></a> function, and if it has, it calls this routine.  Treats the value returned by the onChange handler as if the original form widget had returned that value.
+		<li>If there was no <code>onChange</code> function, the routine will save the value in the instance by calling <code>model.set(fullItemXPath, newValue)</code>.  See <a href=#Getting_and_Setting_Instance_Values>Getting and Setting Instance Values</a> for how the model saves the value into the form.
+		<li>Generates the <code>FORM_ITEM_UPDATED</code> event for any listeners.
+		<li>Runs the update script to show any changed values in the form.
+	</ol>
+<p><span class=notimplemented>Note that we will (very soon) provide for constraints that can be placed on the modelItems, to ensure that the user cannot type invalid values into text fields, etc.</span>
+
+
+<p class="sep"/>
+<h2><a name="Repeating_Form_Structures">Repeating Form Structures</a></h2>
+	<p><span class=notimplemented>Note: will be documented soon.</span>
+
+
+
+<p class="sep"/>
+<h2><a name="Creating_New_Widget_Types">Creating New Widget Types</a></h2>
+
+<p>
+The default set of controls provided with this XForms package is
+sufficient for most tasks. However, the implementation allows new
+types of controls to be added dynamically for those situations
+where the provided controls are not appropriate or do not fulfil
+the requirements. This section describes how to implement custom
+controls for the following two cases:
+</p>
+<ul>
+<li>a value in the data instance is complex and needs to be
+handled using multiple controls; and</li>
+<li>a custom user interface is needed to display a value.</li>
+</ul>
+<p>
+A <code>_COMPOSITE_</code> control allows you to create a
+new control that is an aggregate of other controls. This
+allows you to take a single, complex value in the data instance
+and have separate controls manage each part. You can also use 
+a composite to handle parts of the data instance as a single 
+re-usable form unit.
+</p>
+<p>
+There are three steps to creating and using a composite
+component:
+</p>
+<ol>
+<li>register new type with the <code>XFormItemFactory</code>;</li>
+<li>set the list of child components as the <code>items</code>
+property of the new type's <code>prototype</code> object; and</li>
+<li>use the new type in your form.
+</ol>
+<p>
+The following example creates a composite control that displays
+the red, green, and blue components of a color in the data
+instance using separate input fields.
+First, we register new type with the <code>XFormItemFactory</code>.
+Adding some convenience methods on the object prototype helps us in
+the next step when we define the form items.
+</p>
+<pre>
+function ColorInput() { }
+XFormItemFactory.createItemType("_COLOR_", "color", ColorInput, _COMPOSITE_);
+
+// NOTE: setXXX(value) methods replace hex color component value in 
+//       color strings that match "#RRGGBB"
+ColorInput.prototype.setRed = function(value) {
+    var ivalue = this.getInstanceValue();
+    return '#' + value + ivalue.substr(3,4);
+}
+ColorInput.prototype.setGreen = function(value) {
+    var ivalue = this.getInstanceValue();
+    return '#' + ivalue.substr(1,2) + value + ivalue.substr(5,2);
+}
+ColorInput.prototype.setBlue = function(value) {
+    var ivalue = this.getInstanceValue();
+    return '#' + ivalue.substr(1,4) + value;
+}
+</pre>
+<p>
+Next, we set the list of child components as the items property. We
+implement the <code>getDisplayValue</code> method on each child 
+component to map the data value to the component value; and we
+implement the <code>onChange</code> method in order to map changes
+back to the data value.
+</p>
+<pre>
+ColorInput.prototype.items = [
+    // NOTE: This child component references the same data as the
+    //       parent level using ref: "."
+    { ref: ".", type: _INPUT_, label: "R", width: "3em",
+        getDisplayValue: function(value) { return value.substr(1,2); },
+        onChange: function(value, event, form) {
+            // NOTE: the parent item is of type ColorInput
+            return this.getParentItem().setRed(value);
+        }
+    },
+    { ref: ".", type: _INPUT_, label: "G", width: "3em",
+        getDisplayValue: function(value) { return value.substr(3,2); },
+        onChange: function(value, event, form) {
+            return this.getParentItem().setGreen(value);
+        }
+    },
+    { ref: ".", type: _INPUT_, label: "B", width: "3em",
+        getDisplayValue: function(value) { return value.substr(5,2); },
+        onChange: function(value, event, form) {
+            return this.getParentItem().setBlue(value);
+        }
+    }
+];
+</pre>
+<p>
+Finally, we can now use the new <code>_COLOR_</code> type in our form.
+</p>
+<pre>
+var myform = {
+    { ref: 'color', type: _COLOR_ }
+};
+</pre>
+<p>
+In addition to creating composite controls, you can also create
+custom controls that are bound to data instance values. Continuing
+our color example, we will create a color swatch that shows the
+currently entered color as the background of the new control.
+</p>
+<p>
+There are four steps to create a custom control:
+</p>
+<ol>
+<li>define object;</li>
+<li>add object methods for form rendering;</li>
+<li>register new type and add factory method; and</li>
+<li>use the new type in your form.</li>
+</ol>
+<p>
+Because the new control is not based on an existing type, we first
+need to create a new object type.
+The constructor should take an attributes object (which can be used
+to map DWT attributes to the new control).
+</p>
+<pre>
+function ColorSwatch(attributes) {
+    // copy any properties passed to the object
+    for (var prop in attributes) {
+        this[prop] = attributes[prop];
+    }
+}
+
+ColorSwatch.prototype.value = 'white'; // default bgcolor
+</pre>
+<p>
+Next, we define some object methods for use when the control 
+is being used. The <code>resetStyle</code> method sets the
+CSS of the displayed component &mdash; we call this method 
+when the data value changes and the HTML needs to be updated.
+</p>
+<pre>
+ColorSwatch.prototype.setValue = function(value) {
+    this.value = value;
+}
+
+ColorSwatch.prototype.resetStyle = function(element) {
+    element.style.backgroundColor = this.value;
+    // NOTE: extra style info should be part of CSS class
+    element.style.width = '30px';
+    element.style.border = 'black solid 1px';
+}
+</pre>
+<p>
+Now that our object is defined, it must have two methods
+defined for the XForms framework to render it:
+<code>insertIntoXForm</code> and <code>updateInXForm</code>.
+The former method is called when the control is first 
+rendered and the latter is called when the bound data
+value changes and the display needs to be updated.
+</p>
+<pre>
+ColorSwatch.prototype.insertIntoXForm = function(form, item, element) {
+    // NOTE: this method returns the control's HTML but
+    //       we don't display anything but the bgcolor
+    element.innerHTML = "&amp;nbsp;";
+}
+
+ColorSwatch.prototype.updateInXForm = function(form, item, value, element) {
+    this.setValue(value);
+    this.resetStyle(element);
+}
+</pre>
+<p>
+After that is done, the new type is registered with the
+<code>XFormItemFactory</code> using <code>_WIDGET_ADAPTER_</code>
+as the base type. To allow the widget adapter to construct
+your new component object, though, the <code>constructWidget</code>
+method must be implemented.
+</p>
+<pre>
+function ColorSwatchWidget() { }
+XFormItemFactory.createItemType("_COLOR_SWATCH_", "color_swatch", ColorSwatchWidget, _WIDGET_ADAPTOR_);
+
+ColorSwatchWidget.prototype.constructWidget = function() {
+    var attributes = {
+        // place widget attributes here
+    };
+    return new ColorSwatch(attributes);
+}
+</pre>
+<p>
+Finally, the new control can be used in your form.
+</p>
+<pre>
+var myform = {
+    items: [
+        { ref: "color", type: _COLOR_SWATCH_ }
+    ]
+};</pre>
+
+
+<p class="sep"/>
+<h2><a name="The_XModel_Object">The XModel Object</a></h2>
+The XModel object itself is simple very simple, and tends to be static.  You will generally create one XModel for each data type you have (e.g. an "appointment" or "contact" object) and then use that in one or more forms.  Rather than creating instances of the model to apply to each form, you assign a single instance of the model to all forms that use it.  When the form wants the model to display a value, it will explicitly pass it the data instance that the model is to use.
+
+	<p><span class=notimplemented>Note: more docs to come here.</span>
+
+
+<p class="sep"/>
+<h2><a name="XModel_Methods_of Interest">XModel Methods of Interest</a></h2>
+
+<ul>
+
+<p><li><a name="new_XModel">To create an XModel</a>, call:
+
+	<code class=call>new XModel(attributes)</code>
+	<ul>
+		<li><code>attributes</code>: object literal, all properties of which will be copied into the instance of the form.  Specifically, this should at the least contain an "items" property which specifies the list of modelItems that the model will interact with. (see <a href="#XModel_Items">XModel Items</a>).
+	</ul>
+
+
+</ul>
+
+<p class="sep"/>
+<h2><a name="XModel_Items">XModel Items</a></h2>
+The meat of the model specification is the list of <code>items</code>.
+
+	<p><span class=notimplemented>Note: more docs to come here.</span>
+
+
+<p class="sep"/>
+<h2><a name="XModel_Item_Attributes">XModel Item Attributes</a></h2>
+
+<table border=1>
+<thead><tr>
+	<td width=10%>Attribute (type)</td>
+	<td width=65%>Description</td>
+	<td width=25%>Applies to types</td>
+</tr></thead>
+
+
+
+<tr><td colspan=3><b>Basic attributes</b></td></tr>
+<tr><td><a name="id"><code>type</code></a>
+		<span class=datatype>(enum)</span></td>
+	<td>Data type of this modelItem.  Currently the following types are supported:
+	<ul>
+		<li><code>_STRING_</code>:  String value.
+		<li><code>_NUMBER_</code>:  Numeric value.
+		<li><code>_DATETIME_</code>: Javascript <code>Date</code> object.
+		<li><code>_LIST_</code>: Array of any other type or of sub-objects.
+		<li><code>_OBJECT_</code>: Object with various properties.
+	</ul>
+	<p>Default if not specified is the <code>_STRING_</code> type.
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+<tr><td><a name="xmodel_id"><code>id</code></a>
+		<span class=datatype>(string)</span></td>
+	<td>Identifier for this item.  This is what the xform uses to match up an xform item with an xmodel modelItem.  (i.e. <code>xform.item.ref == xmodel.item.id</code>).
+	<p>Note that <code>id</code>s must be unique within each level of the xmodel (but you can use the same <code>id</code> within two distinct sets of sub-items.
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+<tr><td><a name="xmodel_ref"><code>ref</code></a>
+		<span class=datatype>(string)</span></td>
+	<td>Reference to a particular attribute of the data instance.  Note that the references are nested -- if a modelItem specifies both a <code>ref</code> and an <code>items</code> array, all sub-items will be found under the <code>ref</code> of their parent.  e.g.
+
+	<pre><code style='display:block;'>
+    {id:"address",  ref:"address", type:_LIST_, items:[
+            {id:"street",  ref:"street",  type:_STRING_},
+            {id:"city",    ref:"city",    type:_STRING_},
+            {id:"state",   ref:"state",   type:_STRING_},
+            {id:"zip",     ref:"zip",     type:_STRING_},
+        ]
+    }</code></pre>
+	
+	<p>Each of the input elements within the <code>_LIST_</code> will inherit the <code>address</code> reference from the list, so their references are effectively <code>"address/street"</code>, <code>"address/city"</code>, etc.  
+	<p>Note that the system will automatically use the <code>id</code> of the modelItem if you do not specify a <code>ref</code>.  So the above example could more easily have been written:
+	
+	<pre><code style='display:block;'>
+    {id:"address", type:_LIST_, items:[
+            {id:"street"}, {id:"city"},
+            {id:"state"},  id:"zip"},
+        ]
+    }</code></pre>
+	
+	</td>
+	<td>(all types)</td>
+</tr>
+
+<tr><td><a name="xmodel_items"><code>items</code></a>
+		<span class=datatype>(array)</span></td>
+	<td>An array of sub-items for this item.  Note that the <code>ref</code> of this master item will be automaticaly appended to that of any sub-items that also specify a <code>ref</code>.
+	<p>If this item is a <code>_LIST_</code> type, the system assumes that this item is an array of objects.  If this item is a <code>_OBJECT_</code> object, the system assumes that the sub-items are attribtues of the object.
+	
+	</td>
+	<td>
+		<li><code>_LIST_</code>
+		<li><code>_OBJECT_</code>
+	</td>
+</tr>
+
+<tr><td><a name="xmodel_getter"><code>getter</code></a>*
+		<span class=datatype>(function)</span></td>
+	<td>A function that the model will call to <b>get</b> the value of a form instance.  Specify a <code>getter</code> if you are providing a calculated value for a field.  You can specify a <code>getter</code> in one of the following ways:
+	<ol>
+		<li>the name of a method on the instance, which will be called as:
+			<code class=call>getter.call(instance, xpath)</code>
+
+		<li>the name of a method on the xmodel itself, which will be called as:
+			<code class=call>getter.call(xmodel, instance, xpath)</code>
+
+		<li>a function defined on the modelItem itself, called as:
+			<code class=call>getter.call(xmodel, instance, xpath)</code>
+
+		<li>a bit of script, which will be converted to a function and called as #3 above.
+	</ul>	
+	
+	<p>In all cases, the <code>getter</code> should return the value to be displayed for the xpath provided.
+	
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+<tr><td><a name="xmodel_setter"><code>setter</code></a>*
+		<span class=datatype>(function)</span></td>
+	<td>A function that the model will call to <b>set</b> the value of a form instance.  Specify a <code>setter</code> if you are providing a calculated value for a field.  You can specify a <code>setter</code> in one of the following ways:
+	<ol>
+		<li>the name of a method on the instance, which will be called as:
+			<code class=call>setter.call(instance, value, xpath)</code>
+
+		<li>the name of a method on the xmodel itself, which will be called as:
+			<code class=call>setter.call(this, instance, value, xpath)</code>
+
+		<li>a function defined on the modelItem itself, called as:
+			<code class=call>setter.call(this, instance, value, xpath)</code>
+
+		<li>a bit of script, which will be converted to a function and called as #3 above.
+	</ul>	
+	
+	<p>In all cases, the <code>setter</code> should return the value to be displayed for the xpath provided.
+	
+	<p><span class=notimplemented>Note: constraints are not currently implemented.</span>
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+
+<tr><td><a name="xmodel_constraints"><code>constraints</code></a>*
+		<span class=datatype>(array of objects)</span></td>
+	<td>An array of constraints that a new value must pass before being inserted back into the data instance.
+
+	<p>See <a href=#Constraints>Constraints</a> for specifics, as well as the list of constraints that you can add to model items.	
+	<p><span class=notimplemented>Note: constraints are not currently implemented.</span>
+	</td>
+	<td>(all types)</td>
+</tr>
+
+
+<tr><td><a name="xmodel_required"><code>required</code></a>*
+		<span class=datatype>(boolean)</span></td>
+	<td>If <code>true</code>, this item is required.  This will be indicated visually within the xform display somehow.
+
+	<p>See <a href=#Constraints>Constraints</a> for specifics.
+	<p><span class=notimplemented>Note: not currently implemented.</span>
+	</td>
+	<td>(all types)</td>
+</tr>
+
+<tr><td><a name="xmodel_readonly"><code>readonly</code></a>*
+		<span class=datatype>(boolean)</span></td>
+	<td>If <code>true</code>, this item cannot be edited by the user.  This will be indicated visually within the xform display somehow.
+
+	<p><span class=notimplemented>Note: not currently implemented.</span>
+	</td>
+	<td>(all types)</td>
+</tr>
+
+<tr><td colspan=3><b>Datatype facet attributes</b></td></tr>
+
+<tr><td><a name='facet_length'><code>length</code></a>
+		<span class='datatype'>(number)</span></td>
+	<td>
+	<p>Required length of input value.</p>
+	</td>
+	<td><code>_STRING_</code></td>
+</tr>
+<tr><td><a name='facet_minLength'><code>minLength</code></a>
+		<span class='datatype'>(number)</span></td>
+	<td>
+	<p>Minimum length of input value.</p>
+	</td>
+	<td><code>_STRING_</code></td>
+</tr>
+<tr><td><a name='facet_maxLength'><code>maxLength</code></a>
+		<span class='datatype'>(number)</span></td>
+	<td>
+	<p>Maximum length of input value.</p>
+	</td>
+	<td><code>_STRING_</code></td>
+</tr>
+<tr><td><a name='facet_pattern'><code>pattern</code></a>
+		<span class='datatype'>(string, regex, array)</span></td>
+	<td>
+	<p>Regular expression pattern that input value must match. This
+	value may be specified as a <code>RegExp</code> object; or a string
+	representing the regular expression; or an array of either 
+	<code>RegExp</code> objects or strings.</p>
+	<p>When an array of regular expressions is specified, they are
+	are combined as branches of the same regular expression, as
+	defined in the <a href='http://www.w3.org/TR/xmlschema-2/'>XML 
+	Schema Datatypes</a> specification. For
+	example: <code>[ /a/, /b/ ]</code> is equivalent to <code>/a|b/</code>.
+	<p><span class=notimplemented>Note: 
+	changed from <code>regex</code> to <code>pattern</code>
+	to match XML Schema datatype facet name.
+	</span>
+	<p><span class=notimplemented>Note: not currently implemented for <code>_DATETIME_</code>.</span>
+	</td>
+	<td><code>_STRING_</code>, <code>_NUMBER_</code>, <code>_DATETIME_</code></td>
+</tr>
+<tr><td><a name='facet_enumeration'><code>enumeration</code></a>
+		<span class='datatype'>(array)</span></td>
+	<td>
+	<p>Array of literal values. Input value must match one of the
+	literals to be valid.</p>
+	<p><span class=notimplemented>Note: document how this relates
+	to the <code>choices</code> attribute</span>
+	<p><span class=notimplemented>Note: not currently implemented for <code>_DATETIME_</code>.</span>
+	</td>
+	<td><code>_STRING_</code>, <code>_NUMBER_</code>, <code>_DATETIME_</code></td>
+</tr>
+<tr><td><a name='facet_whiteSpace'><code>whiteSpace</code></a>
+		<span class='datatype'>(enum)</span></td>
+	<td>
+	<p>Specifies how whitespace within the input value is to be
+	handled. Supports the following values:
+	</p>
+	<ul>
+	<li><code>"preserve"</code>: leaves whitespace as-is (default)</li>
+	<li><code>"replace"</code>: replaces tabs, newlines, and
+	carriage-returns with a space</li>
+	<li><code>"collapse"</code>: same as <code>"replace"</code>
+	but also trims leading and trailing whitespace
+	and replaces sequences of spaces with a single space</li>
+	</ul>
+	<p><span class=notimplemented>Note: not currently implemented for <code>_DATETIME_</code>.</span>
+	</td>
+	<td><code>_STRING_</code>, <code>_NUMBER_</code>, <code>_DATETIME_</code></td>
+</tr>
+
+<tr><td><a name='facet_maxInclusive'><code>maxInclusive</code></a>
+		<span class='datatype'>(number)</span></td>
+	<td>
+	<p>Restricts input value to less than or equal to specified value.</p>
+	<p><span class=notimplemented>Note: not currently implemented for <code>_DATETIME_</code>.</span>
+	</td>
+	<td><code>_NUMBER_</code>, <code>_DATETIME_</code></td>
+</tr>
+<tr><td><a name='facet_maxExclusive'><code>maxExclusive</code></a>
+		<span class='datatype'>(number)</span></td>
+	<td>
+	<p>Restricts input value to less than specified value.</p>
+	<p><span class=notimplemented>Note: not currently implemented for <code>_DATETIME_</code>.</span>
+	</td>
+	<td><code>_NUMBER_</code>, <code>_DATETIME_</code></td>
+</tr>
+<tr><td><a name='facet_minInclusive'><code>minInclusive</code></a>
+		<span class='datatype'>(number)</span></td>
+	<td>
+	<p>Restricts input value to greater than or equal to specified value.</p>
+	<p><span class=notimplemented>Note: not currently implemented for <code>_DATETIME_</code>.</span>
+	</td>
+	<td><code>_NUMBER_</code>, <code>_DATETIME_</code></td>
+</tr>
+<tr><td><a name='facet_minExclusive'><code>minExclusive</code></a>
+		<span class='datatype'>(number)</span></td>
+	<td>
+	<p>Restricts input value to greater than specified value.</p>
+	<p><span class=notimplemented>Note: not currently implemented for <code>_DATETIME_</code>.</span>
+	</td>
+	<td><code>_NUMBER_</code>, <code>_DATETIME_</code></td>
+</tr>
+<tr><td><a name='facet_totalDigits'><code>totalDigits</code></a>
+		<span class='datatype'>(number)</span></td>
+	<td>
+	<p>Restricts total number of digits in numeric input value.</p>
+	</td>
+	<td><code>_NUMBER_</code></td>
+</tr>
+<tr><td><a name='facet_fractionDigits'><code>fractionDigits</code></a>
+		<span class='datatype'>(number)</span></td>
+	<td>
+	<p>Restricts number of digits in fractional part of numeric input value.</p>
+	</td>
+	<td><code>_NUMBER_</code></td>
+</tr>
+
+</table>
+
+
+
+<p class="sep"/>
+<h2><a name="Getting_and_Setting_Instance_Values">Getting and Setting Instance Values</a></h2>
+
+	<p><span class=notimplemented>Note: more docs to come here.</span>
+
+<p class="sep"/>
+<h2><a name="Constraints">Constraints</a></h2>
+	<p><span class=notimplemented>Note: constraints are not currently implemented.</span>
+
+
+<p class="sep"/>
+<h2><a name="W3C_Compliance">W3C Compliance</a></h2>
+
+	<p><span class=notimplemented>Note: more docs to come here.</span>
+
+
+<p class="sep"/>
+<h2><a name="Standalone_Mode">Standalone Mode</a></h2>
+
+
+	<p><span class=notimplemented>Note: more docs to come here.</span>
+</BODY>
+</HTML>

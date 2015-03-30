@@ -1,0 +1,216 @@
+// ================================================================
+// Mental SCSS Settings File
+// ================================================================
+
+
+
+
+//== Colors
+
+$gray-darker:            #1a1a1a;
+$gray-dark:              #444649;
+$gray:                   lighten(#000, 33.5%);
+$gray-light:             #8e9095; 
+$gray-lighter:           #edeef0;
+
+$brand-primary:         #76d898;
+$brand-success:         #5cb85c;
+$brand-info:            #5bc0de;
+$brand-warning:         #f0ad4e;
+$brand-danger:          #d9534f;
+
+
+
+
+//== Scaffolding
+
+$link-color:            $brand-primary;
+$link-hover-color:      darken($link-color, 15%);
+
+
+
+//== Menu Bar
+
+$menubar_width: 300px;
+$menubar_switcher_width: 30px;
+$menubar_body_width: $menubar_width - $menubar_switcher_width;
+$menubar_font_color1: #8e9095;
+$menubar_font_color2: #545659;
+$menubar_background: $gray-darker;
+
+
+
+//== Iconography
+
+$icon-font-path: "assets/fonts/";
+
+
+
+//== Typography
+
+$line-height-base: 1.7;
+
+$font-family-sans-serif: "Oxygen", sans-serif;
+$font-family-base: $font-family-sans-serif;
+
+$font-size-h1: 30px;
+$font-size-h2: 28px;
+$font-size-h3: 24px;
+$font-size-h4: 21px;
+$font-size-h5: 18px;
+$font-size-h6: 15px;
+
+
+
+//== Components
+
+$border-radius-base: 0;
+$border-radius-large: 0;
+$border-radius-small: 0;
+
+
+
+//== Media queries breakpoints
+//
+//## Define the breakpoints at which your layout will change, adapting to different screen sizes.
+
+// Extra small screen / phone
+// Note: Deprecated $screen-xs and $screen-phone as of v3.0.1
+// Note: Deprecated $screen-xs-min as of v3.2.0
+$screen-xs:                  480px;
+$screen-xs-min:              $screen-xs;
+$screen-phone:               $screen-xs-min;
+
+// Small screen / tablet
+// Note: Deprecated $screen-sm and $screen-tablet as of v3.0.1
+$screen-sm:                  768px;
+$screen-sm-min:              $screen-sm;
+$screen-tablet:              $screen-sm-min;
+
+// Medium screen / desktop
+// Note: Deprecated $screen-md and $screen-desktop as of v3.0.1
+$screen-md:                  992px;
+$screen-md-min:              $screen-md;
+$screen-desktop:             $screen-md-min;
+
+// Large screen / wide desktop
+// Note: Deprecated $screen-lg and $screen-lg-desktop as of v3.0.1
+$screen-lg:                  1200px;
+$screen-lg-min:              $screen-lg;
+$screen-lg-desktop:          $screen-lg-min;
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max:              ($screen-sm-min - 1);
+$screen-sm-max:              ($screen-md-min - 1);
+$screen-md-max:              ($screen-lg-min - 1);
+
+
+
+//== Grid system
+//
+//## Define your custom responsive grid.
+
+//** Number of columns in the grid.
+$grid-columns:              12;
+//** Padding between columns. Gets divided in half for the left and right.
+$grid-gutter-width:         30px;
+// Navbar collapse
+//** Point at which the navbar becomes uncollapsed.
+$grid-float-breakpoint:     $screen-sm-min;
+//** Point at which the navbar begins collapsing.
+$grid-float-breakpoint-max: ($grid-float-breakpoint - 1);
+
+
+
+//== Container sizes
+//
+//## Define the maximum width of `.container` for different screen sizes.
+
+// Small screen / tablet
+$container-tablet:             ((708px + $grid-gutter-width));
+//** For `$screen-sm-min` and up.
+$container-sm:                 $container-tablet;
+
+// Medium screen / desktop
+$container-desktop:            ((960px + $grid-gutter-width));
+//** For `$screen-md-min` and up.
+$container-md:                 $container-desktop;
+
+// Large screen / wide desktop
+$container-large-desktop:      ((1170px + $grid-gutter-width));
+//** For `$screen-lg-min` and up.
+$container-lg:                 $container-large-desktop;
+
+
+
+
+//== Panels
+
+$panel-border-radius: $border-radius-base;
+
+
+
+//== Wells
+
+$well-bg:                     $gray-lighter;
+$well-border:                 $gray-lighter;
+
+
+
+//== Buttons
+
+$btn-default-color:              $brand-primary;
+$btn-default-bg:                 #fff;
+$btn-default-border:             #d5d8dd;
+
+$btn-primary-color:              $brand-primary;
+$btn-primary-bg:                 #444649;
+$btn-primary-border:             darken($btn-primary-bg, 5%);
+
+
+
+//== Progress bars
+
+$progress-bg:                 $gray-lighter;
+$progress-bar-color:          $brand-primary;
+
+$progress-bar-bg:             $brand-primary;
+$progress-bar-success-bg:     $brand-success;
+$progress-bar-warning-bg:     $brand-warning;
+$progress-bar-danger-bg:      $brand-danger;
+$progress-bar-info-bg:        $brand-info;
+
+
+
+
+//== Forms
+
+$input-bg:                       $gray-lighter;
+$input-bg-disabled:              $gray-lighter;
+
+//** Text color for `<input>`s
+$input-color:                    $gray-dark;
+//** `<input>` border color
+$input-border:                   $gray-lighter;
+//** `<input>` border radius
+$input-border-radius:            0;
+//** Border color for inputs on focus
+$input-border-focus:             $gray;
+
+//** Placeholder text color
+$input-color-placeholder:        $gray-light;
+
+//** Default `.form-control` height
+$input-height-base:              ($line-height-computed + ($padding-base-vertical * 2) + 10);
+//** Large `.form-control` height
+$input-height-large:             (ceil($font-size-large * $line-height-large) + ($padding-large-vertical * 2) + 2);
+//** Small `.form-control` height
+$input-height-small:             (floor($font-size-small * $line-height-small) + ($padding-small-vertical * 2) + 2);
+
+$legend-color:                   $gray-dark;
+$legend-border-color:            #e5e5e5;
+
+//** Background color for textual input addons
+$input-group-addon-bg:           $gray-lighter;
+//** Border color for textual input addons
+$input-group-addon-border-color: $input-border;

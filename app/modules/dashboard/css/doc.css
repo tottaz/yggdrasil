@@ -1,0 +1,51 @@
+
+
+.year{
+    font-size:108px;
+    margin-top:30px;
+}
+
+.month{
+    font-size:42px;
+    color:red;
+}
+
+.time{
+    float:right;
+    font-size:36px;
+    text-align:right;
+}
+
+.calendar{
+}
+
+.calendar TH{
+    font-size:14px;
+    font-weight:bold;
+    border-top:1px solid #ccc;
+}
+
+.calendar TD{
+    height:50px;
+    font-size:24px;
+    color:#999;
+}
+
+.calendar TD.weekend{
+    color:#CDCDCD;
+}
+
+.calendar TD.today{
+    background-color:#EFEFEF;
+    color:#666666;
+}
+
+.calendar TD.holiday{
+    color:red;
+}
+
+.content{
+    color:black;
+    font-size:11px;
+    line-height:0px;
+}

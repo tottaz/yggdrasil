@@ -1,0 +1,35 @@
+<!-- BEGIN: main -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Language" content="en" />
+<meta name="GENERATOR" content="Co-Comp Ltd" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>example 3</title></head>
+<!-- $Id: ex3.xtpl,v 1.3 2005/04/07 12:02:52 cocomp Exp $ -->
+<body>
+<p>testing set_autoreset() and clear_autoreset()</p>
+
+<!-- BEGIN: table -->
+<table border="1">
+	<tr>
+		<th>row nr.</th>
+		<th>id</th>
+		<th>name</th>
+		<th>age</th>
+	</tr>
+	<!-- BEGIN: row -->
+	<tr>  
+		<td>{ROW_NR}</td>
+		<td>{DATA.ID}</td>
+		<td>{DATA.NAME}</td>
+		<td>{DATA.AGE}</td>
+	</tr>
+	<!-- END: row -->
+
+</table>
+<!-- END: table -->
+
+</body>
+</html>
+<!-- END: main -->

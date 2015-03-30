@@ -1,0 +1,15 @@
+/** RSS FEED **/
+.labelfield{ color:brown; font-size: 90%; }
+.datefield{ color:gray; font-size: 90%;}
+#rssfeeds a{ color: purple;text-decoration: none;font-weight: bold;}
+#rssfeeds p{ margin-bottom: 2px;}
+code{ color: red;}
+#blogoolafeed, #blogoolafeed a { color:white; }
+#blogoolafeed a:hover{ color:#8E7BD3; }
+#blogoolafeed ul { margin-left:-15px }
+#rssfeed-wrap { text-align:left; margin-left:15px; }
+
+#footercopyright { clear: both; text-align:center;	
+				   width:100%; height: 20px; min-width:600px;
+				   padding:30px 0px 50px 0px;
+				   background-color:#EFEFEF; }

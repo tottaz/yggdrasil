@@ -1,0 +1,50 @@
+<ul class="actions">
+  <li><?php echo $html->link('Edit Task',   $link->getLink('/tasks/form/' . $task['Task']['id'])); ?></li>
+  <li><?php echo $html->link('Delete Task', $link->getLink('/tasks/delete/' . $task['Task']['id']), null, 'Are you sure you want to delete Task ID ' . $task['Task']['id'] . '?'); ?></li>
+  <li><?php echo $html->link('List Tasks',   $link->getLink('/tasks/index')); ?></li>
+  <li><?php echo $html->link('New Task',	$link->getLink('/tasks/form/0')); ?></li>
+  <li><?php echo $html->link('New Project', $link->getLink('/projects/form/0/task_id-' . $task['Task']['id'])); ?></li>
+  <li><?php echo $html->link('New Type', $link->getLink('/types/form/0/task_id-' . $task['Task']['id'])); ?></li>
+</ul>
+
+<fieldset>
+  <legend>Task View</legend>
+
+  <dl>
+
+    <dt>ID</dt>
+    <dd><?php echo $task['Task']['id']?>&nbsp;</dd>
+
+    <dt>Client</dt>
+    <dd><?php echo $html->link($task['Client']['name'], '/clients/view/' .$task['Client']['id'])?>&nbsp;</dd>
+
+    <dt>Project</dt>
+    <dd><?php echo $html->link($task['Project']['name'], '/projects/view/' .$task['Project']['id'])?>&nbsp;</dd>
+
+    <dt>Type</dt>
+    <dd><?php echo $html->link($task['Type']['name'], '/types/view/' .$task['Type']['id'])?>&nbsp;</dd>
+
+    <dt>Rate</dt>
+    <dd><?php echo $html->link($task['Rate']['name'], '/rates/view/' .$task['Rate']['id'])?>&nbsp;</dd>
+
+    <dt>Name</dt>
+    <dd><?php echo $task['Task']['name']?>&nbsp;</dd>
+
+    <dt>Time Start</dt>
+    <dd><?php echo $task['Task']['time_start']?>&nbsp;</dd>
+
+    <dt>Time End</dt>
+    <dd><?php echo $task['Task']['time_end']?>&nbsp;</dd>
+
+    <dt>Amount</dt>
+    <dd><?php echo $task['Task']['amount']?>&nbsp;</dd>
+
+    <dt>Billed</dt>
+    <dd><?php echo $task['Task']['billed']?>&nbsp;</dd>
+
+    <dt>Notes</dt>
+    <dd><?php echo $task['Task']['notes']?>&nbsp;</dd>
+
+  </dl>
+
+</fieldset>

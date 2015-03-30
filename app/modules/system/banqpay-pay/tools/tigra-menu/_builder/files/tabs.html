@@ -1,0 +1,93 @@
+<!--
+Title: Tigra Menu Builder v1.0 (07/21/2005)
+Copyright (c)2005 Softcomplex, Inc. (www.softcomplex.com)
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Navigation Tabs</title>
+
+<link rel="stylesheet" href="common.css">
+<script language="JavaScript" src="common.js"></script>
+<script language="JavaScript">
+
+	var A_TABSTATES = {'intro': 1}
+
+	function tab_enable (s_id) {
+		A_TABSTATES[s_id] = 1;
+		var e_tab = get_element('tab_' + s_id);
+		e_tab.className = 'tabLev2';
+	}
+	function tab_allow (s_id) {
+		return A_TABSTATES[s_id];
+	}
+
+	function tab_export (b_preview) {
+		F_LIST.location = 'export/' + F_DATA.A_MODES[F_DATA.N_MODE]['name'].replace(/\s/g, '_').toLowerCase() + (b_preview ? '/preview.html' : '/export.html');
+	}
+
+	var s_tabover;
+	var s_tabactive;
+	function tab_over(s_id) {
+		if (!A_TABSTATES[s_id]) return;
+		var e_tab = get_element('tab_' + s_id);
+		e_tab.className = 'tabHL';
+		s_tabover = s_id;
+	}
+	function tab_out() {
+		if (!s_tabover || s_tabover == s_tabactive) return;
+		var e_tab = get_element('tab_' + s_tabover);
+		e_tab.className = 'tabLev2' + (A_TABSTATES[s_tabover] ? '' : 'dis');
+		s_tabover = null;
+	}
+</script>
+
+</head>
+
+<body>
+
+<table cellspacing="0" cellpadding="0" id="nav">
+<tr>
+	<td rowspan="2" bgcolor="#F2F2F2"><img src="images/pixel.gif" width="1" height="48" border="0"></td>
+	<td colspan="7" class="tabLev1">START</td>
+	<td class="tabSep"><img src="images/tab_delimiter.gif"></td>
+	<td colspan="5" class="tabLev1">EDIT</td>
+	<td class="tabSep"><img src="images/tab_delimiter.gif"></td>
+	<td colspan="3" class="tabLev1">FINISH</td>
+	<td rowspan="2"><img src="images/tab_lleft.gif" width="51" height="48" border="0"></td>
+	<td rowspan="2" background="images/tab_line.gif" width="100%" align="right" valign="top"><a href="http://www.softcomplex.com/" target="_blank" title="Developed and Distributed by Softcomplex Inc."><img src="images/logo.gif" width="180" height="32" border="0"></a></td></td>
+</tr>
+<tr>
+	<td class="tabLev2" id="tab_intro" onmouseover="tab_over('intro')" onmouseout="tab_out()" onclick="F_LIST.location='intro.html'">intro<br>
+		<img src="images/pixel.gif" width="50" height="1"></td>
+	<td class="tabSep"><img src="images/tab_delimiter.gif"></td>
+	<td class="tabLev2dis" id="tab_mode" onmouseover="tab_over('mode')" onmouseout="tab_out()" onclick="if (tab_allow('mode')) F_LIST.location='mode.html'">mode<br>
+		<img src="images/pixel.gif" width="60" height="1"></td>
+	<td class="tabSep"><img src="images/tab_delimiter.gif"></td>
+	<td class="tabLev2dis" id="tab_template" onmouseover="tab_over('template')" onmouseout="tab_out()" onclick="if (tab_allow('template')) F_LIST.location='template.html'">template<br>
+		<img src="images/pixel.gif" width="75" height="1"></td>
+	<td class="tabSep"><img src="images/tab_delimiter.gif"></td>
+	<td class="tabLev2dis" id="tab_load" onmouseover="tab_over('load')" onmouseout="tab_out()" onclick="if (tab_allow('load')) F_LIST.location='load.html'">load<br>
+		<img src="images/pixel.gif" width="50" height="1"></td>
+	<td class="tabSep"><img src="images/tab_delimiter.gif"></td>
+	<td class="tabLev2dis" id="tab_items" onmouseover="tab_over('items')" onmouseout="tab_out()" onclick="if (tab_allow('items')) F_LIST.location='tree.html'">items<br>
+		<img src="images/pixel.gif" width="55" height="1"></td>
+	<td class="tabSep"><img src="images/tab_delimiter.gif"></td>
+	<td class="tabLev2dis" id="tab_styles" onmouseover="tab_over('styles')" onmouseout="tab_out()" onclick="if (tab_allow('styles')) F_LIST.location='styles.html'">styles<br>
+		<img src="images/pixel.gif" width="55" height="1"></td>
+	<td class="tabSep"><img src="images/tab_delimiter.gif"></td>
+	<td class="tabLev2dis" id="tab_preview" onmouseover="tab_over('preview')" onmouseout="tab_out()" onclick="if (tab_allow('preview')) tab_export(true)">preview<br>
+		<img src="images/pixel.gif" width="70" height="1"></td>
+	<td class="tabSep"><img src="images/tab_delimiter.gif"></td>
+	<td class="tabLev2dis" id="tab_save" onmouseover="tab_over('save')" onmouseout="tab_out()" onclick="if (tab_allow('save')) F_LIST.location='save.html'">save<br>
+		<img src="images/pixel.gif" width="45" height="1"></td>
+	<td class="tabSep"><img src="images/tab_delimiter.gif"></td>
+	<td class="tabLev2dis" id="tab_export" onmouseover="tab_over('export')" onmouseout="tab_out()" onclick="if (tab_allow('export')) tab_export()">export<br>
+		<img src="images/pixel.gif" width="55" height="1"></td>
+</tr>
+</table>
+
+</body>
+</html>

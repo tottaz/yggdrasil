@@ -1,0 +1,313 @@
+<HTML>
+<HEAD>
+<link href="/ZimbraWebClient/js/zimbraMail/config/style/zm.css" 	rel="stylesheet" type="text/css">
+<link href="/zimbra/img/hiRes/imgs.css" 	rel="stylesheet" type="text/css">
+<link href="/ZimbraWebClient/skins/steel/skin.css" 	rel="stylesheet" type="text/css">
+<link href="test_styles.css" 	rel="stylesheet" type="text/css">
+</HEAD>
+<BODY ONLOAD='onLoad();'>
+<table width=100% height=100% cellspacing=0 cellpadding=0>
+<tr><td height=1>
+	<div class=testHeader>
+		<table class=tabtable><tr>		
+			<td class=borderbottom>&nbsp;&nbsp;</td>
+			<td id=show_display class=tab onclick='showCard("display")'>Display</td>
+			<td id=show_HTMLOutput class=tab onclick='showCard("HTMLOutput")'>HTML</td>
+
+			<td id=show_debug class=tab onclick='showCard("debug")'>Debug</td>
+			<td id=show_formItems class=tab onclick='showCard("formItems")'>Items</td>
+			<td id=show_instanceValue class=tab onclick='showCard("instanceValue")'>Instance</td>
+			<td id=show_updateScript class=tab onclick='showCard("updateScript")'>UpdateScr</td>
+
+			<td width=100% class=borderbottom>&nbsp;&nbsp;&nbsp;</td>
+
+			<td class=borderbottom><div class=label>Form:</div></td>
+			<td class=borderbottom><select id=formList class=xform_select1 onchange='setCurrentForm(this.options[this.selectedIndex].value)'></select></td>
+			<td class=borderbottom><div class=label>Instance:</div></td>
+			<td class=borderbottom><select id=instanceList class=xform_select1 onchange='setCurrentInstance(this.selectedIndex)'></select></td>
+			<td class=borderbottom>&nbsp;&nbsp;</td>
+
+		</tr>
+		</table>
+	</div>
+</td></tr>
+<tr><td height=100%>
+<div style='width:100%;height:100%;position:relative;overflow:auto;'>	
+		<div ID=display class=displayCard width=100% height=100%>
+		</div ID=output>
+	
+		<div ID=debug class=debugCard>
+			<button onclick='DBG.clear()'>Clear</button><pre>
+		</div ID=debug>
+	
+		<div ID=output class=displayCard>
+		</div ID=output>
+	</div>
+</td>
+</tr></table>
+</BODY>
+
+<SCRIPT>var ot0 = new Date().getTime()</SCRIPT>
+<SCRIPT language=JavaScript src="DWT_shim.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/debug/AjxDebug.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/core/AjxEnv.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/config/msgs/AjxMsg_en.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/dwt/config/msgs/DwtMsg_en.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/util/AjxUtil.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/core/AjxCore.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/util/AjxBuffer.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/util/AjxCallback.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/util/AjxVector.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/events/AjxListener.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/events/AjxEventMgr.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/dwt/events/DwtEvent.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/dwt/events/DwtUiEvent.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/dwt/events/DwtXFormsEvent.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/core/AjxImg.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/dwt/core/DwtImg.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/dwt/graphics/DwtBorder.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/dwt/xforms/XFormGlobal.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/dwt/xforms/XModel.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/dwt/xforms/XModelItem.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/dwt/xforms/XForm.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/dwt/xforms/XFormItem.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/dwt/xforms/XFormChoices.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/dwt/xforms/ButtonGrid.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/dwt/xforms/OSelect_XFormItem.js"></SCRIPT>
+<SCRIPT>var ot1 = new Date().getTime();DBG.println("loading all xforms libs took " + (ot1-ot0) + " msec");</SCRIPT>
+
+<SCRIPT language=JavaScript>
+
+var lastTabSeen = XFG.getCookie("lastTabSeen");
+if (lastTabSeen == null || lastTabSeen == "") lastTabSeen = "display";
+function onLoad() {
+	setCurrentForm();
+}
+
+var cardList = [
+	"display", "HTMLOutput", "instanceValue", "debug", "updateScript", "formItems"
+]
+function showCard(cardName) {
+	if (cardName == null) cardName = lastTabSeen;
+	window.lastTabSeen = cardName;
+	XFG.setCookie("lastTabSeen", cardName);
+	
+	XFG.hideEl("display");
+	XFG.hideEl("debug");
+	XFG.hideEl("output");
+	
+	// unhilite all the tabs
+	for (var i = 0; i < cardList.length; i++) {
+		XFG.hideSelected("show_" + cardList[i])
+	}
+	// hilite the selected tab
+	XFG.showSelected("show_" + cardName);
+	
+	// now show the right thing based on the card they want to see
+	switch (cardName) {
+		case "display":				showDisplay();			break;
+		case "debug":				showDebug();			break;
+		case "HTMLOutput":			showHTMLOutput();		break;
+		case "formItems":			showFormItems();		break;
+		case "updateScript": 		showUpdateScript();		break;
+		case "removeScript": 		showRemoveScript();		break;
+		case "insertScript": 		showInsertScript();		break;
+		case "instanceValue": 		showInstanceValue();	break;
+	}
+}
+
+
+function showDisplay() {
+	XFG.showEl("display");
+}
+
+function showOutput(str) {
+	str = str.split("<\/textarea>").join("<\/Xtextarea>");
+	str = str.split("<\/TEXTAREA>").join("<\/Xtextarea>");
+	
+	XFG.getEl("output").innerHTML = "<TEXTAREA style='width:99%;height:99%' wrap=off>" + str + "<\/TEXTAREA>";
+	XFG.showEl("output");
+}
+
+function showFormItems() {
+	var output = XFG.valueToString(currentForm.getItems(), "", true, true, true);
+	showOutput(output);
+}
+
+function showInstanceValue() {
+	var output = XFG.valueToString(currentForm.getInstance(), "", true, true, true);
+	showOutput(output);
+}
+
+function showHTMLOutput() {
+	showOutput(XFG.getEl("display").innerHTML);
+}
+
+function showUpdateScript() {
+	var output = currentForm.updateScript;
+	showOutput(output);
+}
+
+
+function showDebug() {
+	XFG.getEl("debug").innerHTML = "<button onclick='DBG.clear()'>Clear<\/button><pre>" + DBG.getMessages();
+	XFG.showEl("debug");
+}
+
+
+
+var formIdList = [];
+var formList = {};
+var instanceNames = [];
+
+var currentForm = null;
+var currentFormId = null;
+var currentInstance = null;
+
+function registerForm(id, form, instances) {
+	formIdList[formIdList.length] = id;
+	formList[id] = form;
+	form.instanceList = instances;
+	
+	// add an item to the formList popup list
+	var el = XFG.getEl("formList");
+	if (el) el.options[el.options.length] = new Option(id, id);
+}
+
+function setInstancesForForm() {
+	var instances = currentForm.instanceList;
+
+	// put the instances in the instanceList as an array
+	instanceNames = [];
+	for (var prop in instances) {
+		instanceNames[instanceNames.length] = prop;
+	}
+	
+	
+	// clear the old options in the instanceList
+	var el = XFG.getEl("instanceList");
+	if (el) {
+		for (var i = el.options.length - 1; i >=0; i--) {
+			el.options[i] = null;
+		}
+	
+		// show the new options in the instanceList
+		var i = 0;
+		for (var prop in instances) {
+			el.options[el.options.length] = new Option(prop, ""+i);	
+		}
+	}
+	
+	// make sure the current form is selected in the formList
+	var el = XFG.getEl("formList");
+	for (var i = 0; i < el.options.length; i++) {
+		if (el.options[i].value == currentFormId) {
+			el.selectedIndex = i;
+			break;	
+		}
+	}
+}
+
+function setCurrentForm(id) {
+	if (id == null) {
+		// try to get the last form they were looking at
+		id = XFG.getCookie("lastFormSeen");
+		var instanceNum = parseInt(XFG.getCookie("lastInstanceSeen"));
+		// if we can't find it, just use the first one
+		if (formList[id] == null) {
+			id = formIdList[0];
+		}
+	} else {
+		var instanceNum = 0;
+	}
+	
+	currentForm = formList[id];
+	if (currentForm == null) return;
+
+	currentFormId = id;
+	DBG.println("<BR>Showing form " + id);
+
+	// remember the last form seen in a cookie
+	XFG.setCookie("lastFormSeen", id);
+
+	// reset the options on the instance popup
+	setInstancesForForm();
+
+	// always show the first instance, and don't auto-draw on the instance
+	setCurrentInstance(instanceNum, false);
+	
+	// draw the form (draws in-memory, so we can get the properties if there's an error)
+	// TRY...CATCH BLOCK???
+	currentForm.draw();
+
+	// actually put the HTML in the display
+	XFG.getEl("display").innerHTML = currentForm.__HTMLOutput;
+
+	// manually run the insert and update scripts (since we drew manually)
+	currentForm.refresh();
+
+	// and show the proper card
+	showCard(lastTabSeen);
+}
+
+function setCurrentInstance(instanceNum, autoDraw) {
+	if (isNaN(instanceNum)) instanceNum = 0;
+	XFG.setCookie("lastInstanceSeen", ""+instanceNum);
+	
+	var instanceName = instanceNames[instanceNum];
+	var currentInstance = currentForm.instanceList[instanceName];
+	if (currentInstance == null) {
+		instanceNum = 0;
+		instanceName = instanceNames[0];
+		currentInstance = currentForm.instanceList[instanceName];
+	}
+	DBG.println("Showing instance " + instanceName);
+
+	currentForm.setInstance(currentInstance);
+	
+	var el = XFG.getEl("instanceList");
+	el.selectedIndex = instanceNum;
+	
+	if (autoDraw != false) 	showCard();
+}
+
+</SCRIPT>
+
+<SCRIPT language=JavaScript>
+//
+//	HACK THE DWT COMPONENT TYPES TO USE THE NORMAL TYPES
+//
+
+var _DWT_DATE_ = _DATE_;
+var _DWT_DATETIME_ = _DATETIME_;
+var _DWT_TIME_ = _TIME_;
+var _DWT_SELECT_ = _OSELECT1_;
+
+</SCRIPT>
+
+<!-- * ADD SCRIPT INCLUDES HERE FOR ALL THE FORMS YOU WANT TO REGISTER 	
+	 * CREATE A HELPER FILE LIKE  LmAppoinmentView_helper.js  IF NEEDED 
+		TO REGISTER YOUR FORM AND PROVIDE INSTANCES 					
+-->
+<SCRIPT language=JavaScript src="xform_model_test.js"></SCRIPT>
+<SCRIPT language=JavaScript src="xform_item_test.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/ajax/js/dwt/xforms/Cos_XForms.js"></SCRIPT>
+<SCRIPT language=JavaScript src="Cos_XForms_helper.js"></SCRIPT>
+<SCRIPT language=JavaScript src="xform_oselect_test.js"></SCRIPT>
+<SCRIPT language=JavaScript src="xform_disable_test.js"></SCRIPT>
+<SCRIPT language=JavaScript src="xform_choices_test.js"></SCRIPT>
+<SCRIPT language=JavaScript src="xform_repeat_test.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/zimbrabuild/js/zimbraMail/config/msgs/LmMsg_en.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/zimbrabuild/js/zimbraMail/prefs/model/LmTimezones.js"></SCRIPT>
+<SCRIPT language=JavaScript src="/zimbrabuild/js/zimbraMail/calendar/view/LmAppointmentView.js"></SCRIPT>
+<SCRIPT language=JavaScript src="LmAppointmentView_helper.js"></SCRIPT>
+<XSCRIPT language=JavaScript src="/zimbrabuild/js/zimbraMail/abook/view/LmContactSplitView.js"><!-- Provides Contact forms? --></SCRIPT>
+<XSCRIPT language=JavaScript src="LmContactSplitView_helper.js"><!-- Depends on Contact form --></SCRIPT>
+<XSCRIPT language=JavaScript src="xform_repeat_grid_test.js"><!-- Depends on Contact form --></SCRIPT>
+<SCRIPT language=JavaScript src="xform_border_test.js"></SCRIPT>
+<SCRIPT language=JavaScript src="xform_scroll_test.js"></SCRIPT>
+<XSCRIPT language=JavaScript src="xform_compose.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="accept_appt_test.js"></SCRIPT>
+<SCRIPT language=JavaScript src="edit_appt_test.js"></SCRIPT>
+<SCRIPT language=JavaScript src="cal_share_test.js"></SCRIPT>

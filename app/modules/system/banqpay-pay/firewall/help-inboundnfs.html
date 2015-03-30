@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC 
+  "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Help - NFS Server</title>
+<meta name="Author" content="Scott Morizot" /></head>
+<body>
+
+<h2 align="center">Help - Allow NFS Server</h2>
+
+<p>Allowing connections to an NFS server through a firewall requires
+a number of services that typically use random ports be configured
+to use specific ports. The generator will prompt for those port numbers.
+This help provides a quick look at each service. For more information,
+read this site by Chris Lowth:
+<a href="http://www.lowth.com/LinWiz/nfs_help.html" target="_blank">
+http://www.lowth.com/LinWiz/nfs_help.html</a>. EFG uses a different suggested
+port range purely because I thought I had already used 4000 as a suggestion
+for something else.</p>
+
+<h3>statd</h3>
+
+<p>The rpc.statd program must be configured to start with the correct
+port. Find the startup script that starts that daemon and add the -p
+option. On a redhat system, that would be the /etc/init.d/nfslock
+program. Change the startup line to: 'daemon rpc.statd -p 9400' (or
+whatever port you select).</p>
+
+<h3>lockd</h3>
+
+<p>The NFS lock manager is a kernel module. If your system loads it
+as a loadable module, add this line to /etc/modules.conf:
+'options lockd nlm_udpport=9401 nlm_tcpport=9401'. Otherwise, the change
+has to be made as a kernel option to the system boot loader. See the
+above web site for more information.</p>
+
+<h3>mountd</h3>
+
+<p>The rpc.mountd program must be configured to use the specified port
+with the '-p' option. On a redhat system, that can be done in the
+/etc/sysconfig/nfs file with the line: MOUNTD_PORT=9402</p>
+
+<h3>rquotad</h3>
+
+<p>Specifying a port for rquotad requires at least version 3.08 of the
+quota package. In order to implement the configuration, make sure the
+following line is in the /etc/rpc file (exactly as given):</p>
+
+<p>rquotad 100011 rquotaprog quota rquota</p>
+
+<p>Then add two lines to /etc/services:
+
+<ul>
+<li>rquotad 9403/tcp</li>
+<li>rquotad 9403/udp</li>
+</ul></p>
+
+<p align="center"><a href="javascript:window.close();">
+Close Window
+</a></p>
+
+</body>
+</html>
+

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="demo.css" />
+        <link rel="stylesheet" type="text/css" href="../socialtimeline/css/timeline.css" />
+        <link rel="stylesheet" type="text/css" href="../socialtimeline/css/timeline_light.css" />
+        <script type="text/javascript" src="../socialtimeline/js/jquery.js"></script>
+        <script type="text/javascript" src="../socialtimeline/js/timeline.min.js"></script>
+        <script type="text/javascript" src="demo.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                String.prototype.parseURL = function() {
+                    return this.replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&~\?\/.=]+/g, function(url) {
+                        return url.link(url);
+                    });
+                };
+
+                String.prototype.parseHashtag = function() {
+                    return this.replace(/[#]+[A-Za-z0-9-_]+/g, function(t) {
+                        var tag = t.replace("#","%23")
+                        return t.link("http://twitter.com/search?q=" + tag);
+                    });
+                };
+
+                var hashtag = 'Envato';
+
+                $.getJSON('http://api.melonhtml5.com/?action=twittersearch&q=' + hashtag + '&callback=?', function(data) {
+                    var timeline_data = [];
+
+                    if (!data.statuses.length) {
+                        alert('no results found, please try another hashtag');
+                        return;
+                    }
+
+                    $(data.statuses).each(function(index, tweet_data) {
+                        var months = [];
+                        months['Jan'] = '01'; months['Feb'] = '02'; months['Mar'] = '03';
+                        months['Apr'] = '04'; months['May'] = '05'; months['Jun'] = '06';
+                        months['Jul'] = '07'; months['Aug'] = '08'; months['Sep'] = '09';
+                        months['Oct'] = '10'; months['Nov'] = '11'; months['Dec'] = '12';
+
+                        var date = tweet_data.created_at.split(' ');
+                        var year  = date[5];
+                        var month = months[date[1]];
+                        var day   = date[2];
+
+                        timeline_data.push({
+                            type:     'blog_post',
+                            date:     year + '-' + month + '-' + day,
+                            title:    '<a href="http://www.twitter.com/' + tweet_data.user.screen_name + '" target="_blank" style="text-decoration:none;color:#AAAAAA;">' + tweet_data.user.screen_name + '</a>',
+                            width:    300,
+                            content:  '<div><img style="margin:0px 5px 5px 0px;" align="left" src="' + tweet_data.user.profile_image_url + '" /></div>' + tweet_data.text.parseURL().parseHashtag()
+                        });
+                    });
+
+
+                    var options       = {
+                        animation:   true,
+                        lightbox:    true,
+                        showYear:    true,
+                        allowDelete: false,
+                        columnMode:  'dual'
+                    };
+
+                    var timeline = new Timeline($('#timeline'), timeline_data);
+                    timeline.setOptions(options);
+                    timeline.display();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="config">
+            <select id="theme">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="red">Red</option>
+            </select>
+        </div>
+        <div id="timeline"></div>
+    </body>
+</html>

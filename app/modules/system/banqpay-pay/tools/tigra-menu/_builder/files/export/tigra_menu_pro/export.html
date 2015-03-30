@@ -1,0 +1,139 @@
+<!--
+Title: Tigra Menu Builder v1.0 (07/21/2005)
+Copyright (c)2005 Softcomplex, Inc. (www.softcomplex.com)
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Export Filter - Tigra Menu PRO</title>
+	<link rel="stylesheet" href="../../common.css">
+
+	<script language="JavaScript">
+	if (window == top) {
+		alert ('This file is the component of the builder, it can not be opened as stand alone HTML document');
+		window.location = '../../../index.html';
+	}
+	</script>
+	
+	<script language="JavaScript" src="../../common.js"></script>
+	<script language="JavaScript" src="functions.js"></script>
+
+	<script language="JavaScript">
+		var s_items  = export_items(F_DATA.A_ITEMS, 0),
+			s_styles = export_styles(F_DATA.A_STYLES_INDEX, F_DATA.A_TPL),
+			s_tpl    = export_template(F_DATA.A_MENU, F_DATA.A_TPL);
+	</script>
+
+</head>
+<body>
+
+<form>
+<table cellspacing="1" class="listTab">
+<tr><th class="tabHead">Exporting Menu Configuration</th></tr>
+<tr><th class="colHead">1. Prepare Directory</th></tr>
+<tr>
+	<td class="propDescr">
+	Cleanup the directory <b>results</b> under the folder where you located this builder.
+	All the file operations described below should be done in this directory.
+	You'll be able to relocate the menu files in the filesystem of your web site later.
+	</td>
+</tr>
+<tr><th class="colHead">2. Copy Tigra Menu Core File</th></tr>
+<tr>
+	<td class="propDescr">
+	The core script file for Tigra Menu is <b>menu.js</b>. Local copy of this file
+	can be found at <b>files/export/tigra_menu/menu.js</b> under the folder where
+	you unzipped this builder.<br>
+	You can also get most current version of this file from the official download page at:
+	<a href="http://www.javascript-menu.com/download.html">www.softcomplex.com</a>
+	</td>
+</tr>
+<tr><th class="colHead">3. Save Items Structure</th></tr>
+<tr>
+	<td class="propDescr">
+	<p>Create new file <b>menu_items.js</b>, copy the contents of the textarea below into that file and save it.</p>
+	<script language="JavaScript">
+		document.write(
+			'<textarea name="export" rows="10" style="width: 100%" wrap="off">',
+			"/* Tigra Menu PRO items structure */\n",
+			'var MENU_ITEMS = [',
+			s_items,
+			"\n];\n</textarea>"
+		);
+	</script>
+	</td>
+</tr>
+<tr><th class="colHead">3. Save Template Structure</th></tr>
+<tr>
+	<td class="propDescr">
+	<p>Create new file <b>menu_tpl.js</b>, copy the contents of the textarea below into that file and save it.</p>
+	<script language="JavaScript">
+		document.write(
+			'<textarea name="export" rows="10" style="width: 100%" wrap="off">', "\n",
+			"/* Tigra Menu PRO template structure */\n",
+			'var MENU_TPL = ',
+			s_tpl,
+			";\n</textarea>"
+		);
+	</script>
+	</td>
+</tr>
+<tr><th class="colHead">4. Save CSS Settings</th></tr>
+<tr>
+	<td class="propDescr">
+	<p>Create new file <b>menu.css</b>, copy the contents of the textarea below into that file and save it.</p>
+	<script language="JavaScript">
+		document.write(
+			'<textarea name="export" rows="10" style="width: 100%" wrap="off">', "\n",
+			 s_styles,
+			 "</textarea>"
+		);
+	</script>
+	</td>
+</tr>
+<tr><th class="colHead">5. Save Sample HTML page</th></tr>
+<tr>
+	<td class="propDescr">
+	<p>Create new file <b>index.html</b>, copy the contents of the textarea below into that file and save it.</p>
+	<script language="JavaScript">
+		document.write(
+			'<textarea name="export" rows="10" style="width: 100%" wrap="off">', "\n",
+			"&lt;html&gt;\n",
+			"&lt;head&gt;\n",
+			"	&lt;title&gt;Tigra Menu PRO Test&lt;/title&gt;\n",
+			'	&lt;script language="JavaScript" src="menu.js"&gt;&lt;/script&gt;', "\n",
+			'	&lt;script language="JavaScript" src="menu_items.js"&gt;&lt;/script&gt;', "\n",
+			'	&lt;script language="JavaScript" src="menu_tpl.js"&gt;&lt;/script&gt;', "\n",
+			'	&lt;link rel="stylesheet" href="menu.css"&gt;', "\n",
+			"&lt;/head&gt;\n",
+			"&lt;body&gt;\n\n",
+			'&lt;script language="JavaScript"&gt;', "\n",
+			'	new menu (MENU_ITEMS, MENU_TPL);', "\n",
+			"&lt;/script&gt;\n\n",
+			"&lt;/body&gt;\n",
+			"&lt;/html&gt;\n",
+			"</textarea>"
+		);
+	</script>
+	</td>
+</tr>
+<tr><th class="colHead">6. Test the Menu</th></tr>
+<tr>
+	<td class="propDescr">
+		Open another instance of your browser and load <b>index.html</b> in it.
+		Make sure menu appears on the page the way you want.
+	</td>
+</tr>
+<tr><th class="colHead" colspan="2">&nbsp;</th></tr>
+</table>
+</form>
+
+<script language="JavaScript">
+	F_PROPS.location = '../../export.html';
+	tab_active('export');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,930 @@
+.header {
+  padding: 4px;
+  background: #ffffff;
+}
+
+.title, .title td {
+  font-size: 100%;
+}
+
+.title, .caption, tr.caption th {
+  color: #000;
+  font-weight: bold;
+}
+
+th.caption {
+  white-space: nowrap;
+  text-align: left;
+}
+
+.pagetitle {
+  color: #000;
+  font-weight: bold;
+  font-size: 125%;
+}
+
+.logo {
+  padding-top: 5px;
+}
+
+.separator {
+  background-color: #cfcfcf;
+}
+
+.error, .errorbox-bad {
+  color: red;
+  border: outset 1px red;
+  padding: 2px;
+  background-color: #ffdcdc;
+}
+
+th {
+  text-align: left;
+  font-weight: normal;
+}
+
+body {
+  background-color: #ffffff;
+}
+
+body, td, th {
+  font-family: arial, sans-serif;
+  font-size: 83%;
+}
+
+.submit {
+}
+
+.bigSubmit {
+  padding: 5px;
+  background-color: #003399;
+  border-top: solid 2px white;
+  border-left: solid 2px white;
+  border-right: solid 2px black;
+  border-bottom: solid 2px black;
+}
+
+.hint {
+  font-size: 75%;
+}
+
+.title, .body {
+  margin-right: 24px;
+}
+
+.title, .body, .form, .form-padding-top, .form-noborder {
+  margin-left: 24px;
+}
+
+.form-padding-top {
+  padding-top: 10px;
+}
+
+.form, .form-noindent, .form-padding-top, .form-noborder {
+  background-color: #ffffff;
+}
+
+.form, .form-noindent, .form-padding-top {
+  border: solid 1px #003399;
+}
+
+.form-sub-header {
+  background-color: #efefef;
+  border: solid 1px #003399;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  white-space: nowrap;
+  margin-top: 3ex;
+}
+
+.form-sub-header a, a.internalNavigation {
+  color: #0000ff
+}
+
+table.form, table.form-padding-top {
+  border-collapse: collapse;
+}
+
+.form .form {
+  border-style: none;
+}
+
+.progress {
+}
+
+.progress-active {
+  font-size: 100%;
+  font-weight: bold;
+}
+
+.progress-inactive {
+  font-size: 83%;
+  color: #6F6F6F;
+}
+
+.progress-arrow {
+  font-weight: bold;
+  color: #6F6F6F;
+}
+
+.copyright {
+  color: #6F6F6F;
+}
+
+.new {
+  color: red;
+  text-transform: uppercase;
+}
+
+.errorText {
+  color: red;
+}
+
+.ad {
+  border: solid 1px #cfcfcf;
+  background-color: #efefef;
+  text-align: center;
+}
+
+.ad td {
+  font-size: 100%;
+  background-color: #efefef;
+  vertical-align: top;
+}
+
+.faq_toc_section {
+  font-size: 100%;
+  font-weight: bold;
+  margin-top: 10pt;
+  margin-bottom: 5pt;
+}
+
+.faq_toc_section li {
+  margin-bottom: 6pt;
+}
+
+.faq_section_title {
+  font-size: large;
+  margin-top: 14px;
+  margin-bottom: 14px;
+  font-weight: bold;
+}
+
+.faq_subsection_title, .policy_section_title {
+  margin-bottom: 12px;
+  margin-top: 12px;
+  font-size: 100%;
+  font-weight: bold;
+}
+
+.faq_body, .policy_body li {
+  margin-bottom: 5pt;
+}
+
+.site_filter_title {
+  font-weight: bold;
+}
+
+.site_filter_example {
+  color: #6F6F6F;
+}
+
+.bignum {
+  font-weight: bold;
+  vertical-align: top;
+  font-size: 260%;
+}
+
+.welcome-startbox {
+  width: 100%;
+  border-color: #003399;
+  text-align: center;
+  border-style: solid none solid none;
+  border-width: 3px 0px 3px 0px;
+  padding: 10px;
+  margin: 0px;
+}
+
+.buttonborder {
+  background-color: #003399;
+  margin: 0px;
+  padding: 2px;
+  border-width: 2px;
+  border-style: outset;
+  border-color: #003399;
+  border-spacing: 0;
+}
+
+.buttonborder td, buttonborder tr {
+  background-color: #003399;
+}
+
+.cancelborder {
+  background-color: transparent;
+  margin: 0px;
+  padding: 2px;
+  border-width: 2px;
+  border-style: none;
+  border-color: transparent;
+  border-spacing: 0;
+}
+
+small {
+  font-size: 75%;
+}
+
+/* fine-print (used for examples) */
+.fine {
+  color: #6f6f6f;
+}
+
+.inline {
+  display: inline;
+  vertical-align: middle;
+}
+
+tr.top {
+  background-color: #efefef;
+  font-weight: bold;
+}
+
+.indent5 {
+  margin-left:5;
+}
+
+tr.active   {
+  background-color: #ffffff;
+}
+
+tr.inactive {
+  background-color: #efefef;
+}
+
+tr.selected {
+  background-color: #ffffd9 !important;
+  display: table-row;
+}
+
+tr.visible {
+  display: table-row;
+}
+
+tr.invisible {
+  display: none;
+}
+
+table.settingsTable td {
+  vertical-align: baseline;
+}
+
+table.settingsTable td.key {
+  padding-left: 5px;
+  white-space: nowrap;
+}
+
+table.settingsTable td.tableKey {
+  vertical-align: top;
+  padding-left: 5px;
+  white-space: nowrap;
+}
+
+.settingsControl {
+  padding-left: 5px;
+}
+
+a.quickHelpLink {
+  text-decoration: none;
+  font-weight: bold;
+  color: #0000ff;
+}
+
+a.quickHelpLink:hover {
+  text-decoration: underline;
+}
+
+.promo-title {
+  font-weight: bold;
+  color: #003399;
+}
+
+span.meta {
+  font-size: 80%;
+  font-style: italic;
+}
+
+/* HR in Copyright.gxp */
+hr.copyright {
+  border: 0;
+  color: #003399; /* IE */
+  background-color: #003399; /* Mozilla, Firefox */
+  height: 1px;
+  width: 100%;
+}
+
+#content {
+  padding: 0 0;
+  margin: 0 10px;
+}
+
+#content h1 {
+  font-size: 1.5em;
+}
+
+td.noWebsearchResults {
+  text-align: center;
+  width: 50%;
+  padding: 20px;
+  font-size: 1em;
+}
+
+td.activeTab, td.inactiveTab {
+  text-align:middle;
+  text-align:top;
+  color:#efefef;
+}
+
+td.activeTab {
+  font-weight:bold;
+  background-color:#003399;
+}
+
+td.inactiveTab {
+  background-color:#efefef;
+  cursor: pointer;
+}
+
+div.inactive1 {
+  height: 4px;
+  background: url(images/borderleft.gif) no-repeat top left;
+}
+
+div.inactive2 {
+  height: 4px;
+  background: url(images/borderright.gif) no-repeat top right;
+  padding: 0 4px;
+}
+
+div.inactive3 {
+  border-top: 1px solid #c6ced7;
+}
+
+div.inactiveTabText {
+  border-left: 1px solid #c6ced7;
+  border-right: 1px solid #c6ced7;
+  padding: 0px 1em 2px;
+  color: blue;
+  white-space: nowrap;
+}
+
+div.inactiveTabText a {
+  text-decoration: none;
+  color: blue;
+}
+
+div.active1 {
+  height: 4px;
+  background: url(images/left.gif) no-repeat top left;
+}
+
+div.active2 {
+  height: 4px;
+  background: url(/images/right.gif) no-repeat top right;
+  padding: 1px 6px;
+}
+
+div.active3 {}
+
+div.activeTabText {
+  padding: 0px 1em 2px;
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* second level bar */
+#subTabs div.subtab2 {
+  height: 4px;
+  background: url(images/right.gif) no-repeat top right;
+  padding: 1 4px;
+}
+
+#subTabs td {
+  color: #fff;
+  padding: 4px;
+  background: #003399;
+  white-space: nowrap;
+}
+
+#subTabs div.activeText {
+  font-weight: bold;
+  color: #cbe5ff;
+  padding: 0 7px;
+  display: inline;
+}
+
+#subTabs div.inactiveText {
+  color: #fff;
+  margin: 0 1px;
+  padding: 0 7px;
+  display: inline;
+}
+
+#subTabs div.inactiveText a {
+  color: #fff;
+}
+
+
+/* common for all reports tables */
+
+table.report {
+  border-right: 1px solid #003399;
+  border-left: 1px solid #003399;
+  border-top: 1px solid #003399;
+  border-bottom: 1px solid #003399;
+}
+
+/* alternate rows get these colors */
+table.report tr.odd {
+  background-color: #ffffff;
+}
+table.report tr.even {
+  background-color: #efefef;
+}
+
+/* column title is bold, bg color efefef */
+table.report tr.columntitle td {
+  background-color: #efefef;
+  font-weight: bold;
+}
+
+/* report table title */
+table.report tr.tabletitle td {
+  text-align:left;
+  background-color: #003399;
+  font-weight: bold;
+  color: #ffffff;
+  padding: 4px;
+}
+
+/* links */
+table.reportV2 tr.columntitle a {
+  color: #0000ff
+}
+
+/* totals row is white, bold, 12pt */
+table.report tr.totals td {
+  background-color: #003399;
+  font-weight: bold;
+  font-size: small;
+  color: #ffffff;
+}
+
+/* averages is white, 10pt */
+table.report tr.averages td {
+  padding-top: 0;
+  background-color: #003399;
+  color: #ffffff;
+}
+
+/* cells aligned to the right unless otherwise specified */
+table.report td {
+  text-align: right;
+}
+
+/* use this for no data row */
+table.report td.nodata {
+  text-align: center;
+  background-color: #ffffff;
+}
+
+/* new report style */
+
+table.reportV2 {
+  width: 97%;
+  margin: auto;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+}
+
+table.reportV2 td {
+  padding: 5px 7px;
+  text-align: right;
+  vertical-align: top;
+  font-size: 0.83em;
+  border-bottom: 1px solid #eee;
+}
+
+/* don't alternate colors... */
+table.reportV2 tr.odd { }
+table.reportV2 tr.even { }
+
+/* hover color */
+table.reportV2 tr.hover {
+  background: #ffffee  !important;
+}
+
+/* column title */
+table.reportV2 tr.columntitle td {
+  color: #666;
+  font-weight: bold;
+}
+
+/* report table title -- used for totals row at the top */
+table.reportV2 tr.tabletitle td {
+  color: #333;
+  font-size: 1em;
+  border-top: 1px solid #ccc;
+  background:#efefef;
+}
+
+/* links */
+table.report tr.columntitle a {
+  color: #0000ff
+}
+
+/* totals row */
+table.reportV2 tr.totals td {
+  color: #333;
+  font-size: 1em;
+  border-top: 1px solid #ccc;
+  background:#efefef;
+}
+
+/* averages */
+table.reportV2 tr.averages td {
+  color: #333;
+  font-size: 1em;
+  border-top: 0px solid #ccc;
+  background: #f9f9f9;
+}
+
+
+/* use this for no data row */
+table.reportV2 td.nodata {
+  text-align: center;
+	font-size: 1em;
+  color: #999;
+  border: 1px solid #ccc;
+}
+
+/* payment summary report table */
+
+table.paymentreport {
+  border-right: 1px solid #003399;
+  border-left: 1px solid #003399;
+  border-top: 1px solid #003399;
+  border-bottom: 1px solid #003399;
+}
+
+table.paymentreport td {
+  border-right: 1px solid #e0e0e0;
+  border-left: 0px;
+  border-top: 0px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* column title is bold, bg color efefef */
+table.paymentreport tr.columntitle td {
+  background-color: #efefef;
+  font-weight: bold;
+}
+
+/* report table title */
+table.paymentreport tr.tabletitle td {
+  text-align:left;
+  background-color: #003399;
+  font-weight: bold;
+  color: #ffffff;
+  padding: 4px;
+}
+
+table.daterange-selector {
+  background-color: #efefef;
+  border: 1px solid #003399;
+  border-bottom: 0px;
+}
+
+table.payment-details {
+  border: 1px solid #003399;
+}
+
+td.payment-description {
+  border-top: 1px solid #dfdfdf;
+  border-right: 1px solid #dfdfdf;
+  border-left: 1px solid #cfcfcf;
+}
+
+td.payment-value {
+  border-top: 1px solid #cfcfcf;
+  border-right: 1px solid #dfdfdf;
+}
+
+td.payment-description-top {
+  border-bottom: 1px solid #dfdfdf;
+  border-right: 1px solid #dfdfdf;
+  border-left: 1px solid #cfcfcf;
+}
+
+td.payment-value-top {
+  border-bottom: 1px solid #cfcfcf;
+  border-right: 1px solid #dfdfdf;
+}
+
+div.advanced-report-settings {
+  background: #eee;
+  padding: 0.5em 1%;
+  margin: 0 0 1em 0;
+}
+
+td.advanced-report-settings-column {
+  text-align: left;
+  vertical-align: top;
+  width: 50%;
+}
+
+td.advanced-report-separator {
+  border-top: 1px solid #cccccc;
+  padding-top: 10px;
+}
+
+td.advanced-report-show-data {
+  white-space: nowrap;
+  align: left;
+  text-align: left;
+  vertical-align: top;
+}
+
+input.advanced-report-submit {
+  font-weight: bold;
+  font-size: 1.15em;
+}
+
+.advanced-report-channel {
+  background: #ffffff;
+}
+
+input.advanced-report-channel {
+  cellspacing: 5px;
+  align: left;
+}
+
+table.advanced-report-settings {
+  width: 95%;
+}
+
+table.online-query-report {
+  width: 100%;
+  cellspacing: 0px;
+  cellpadding: 3px;
+  border-top: 1px solid #003399;
+  border-bottom: 1px solid #003399;
+  border-right: 1px solid #003399;
+  border-left: 1px solid #003399;
+}
+
+table.online-query-report-body {
+  cellspacing: 0px;
+  cellpadding: 5px;
+  border: 1px solid #003399;
+  width: 75%;
+}
+
+table.online-query-report-body tr.titles {
+  background-color: #efefef;
+}
+
+table.online-query-report-body td.titles {
+  border-bottom: 1px solid #dfdfdf;
+  font: arial, sans-serif;
+  font-size: 83%;
+}
+
+table.online-query-report-body td.body {
+  font: arial, sans-serif;
+  font-size: 83%;
+}
+
+table.online-query-report-body tr.total {
+  background-color: #003399;
+}
+
+table.online-query-report-body td.left-total {
+  color: #ffffff;
+  font: arial, sans-serif;
+  font-size: 83%;
+  font-weight: bold;
+}
+
+table.online-query-report-body td.right-total {
+  color: #ffffff;
+  text-align: right;
+  font: arial, sans-serif;
+  font-size: 83%;
+  font-weight: bold;
+}
+
+td.websearch-graph-title {
+  text-align: center;
+  font-size: 110%;
+  font-weight: bold;
+}
+
+.pager_arrow {
+  font-weight: bold;
+}
+
+.pager_current {
+  font-weight: bold;
+}
+
+.pager_not_current {
+}
+
+.pager_next_prev {
+}
+
+.tax-title-block {
+  font-weight: bold;
+  font-size: large;
+  text-align: center;
+}
+
+.tax-title-block small {
+  font-weight: normal;
+  font-size: 83%;
+}
+
+.tax-sectionhead {
+  font-weight: bold;
+  text-align: left;
+  background-color: #efefef;
+  width: 100%;
+}
+
+#summarytable {
+  background:#fff;
+  border:1px solid #ccc;
+  width:42em;
+  border-collapse:collapse;
+}
+
+#summarytable td {
+  padding:5px 7px;
+  text-align:right;
+  vertical-align:top;
+  font-size: 0.8em;
+}
+
+#summarytable tr.gray {
+  background-color: #f5f5f5;
+}
+
+#summarytable tr.white  {
+  background-color: #ffffff;
+}
+
+#summarytable tr.entity td.channelColumn {
+  padding-left: 2em;
+}
+
+#summarytable .entitylink {
+  margin-left:0.5em;
+  white-space:nowrap;
+}
+
+#summarytable .entitylink images {
+  border:0;
+  vertical-align:middle;
+  margin-right:2px;
+}
+
+#summarytable thead td {
+  color:#666;
+  font-size:11px;
+  font-weight:bold;
+}
+
+#summarytable .thead td {
+  color:#666;
+  font-size:11px;
+  font-weight:bold;
+  border-top:1px solid #ccc;
+}
+
+#summarytable tfoot td {
+  color:#333;
+  font-size:1.15em;
+  border-top:1px solid #ccc;
+  background:#f0f0f0;
+}
+
+#summarytable .nodatarow td {
+  border-top: 1px solid #ccc;
+}
+
+#summarytable .spacerrow td {
+  font-size: 1px;
+}
+
+#summarytable .productcell {
+  text-align: left;
+  white-space: nowrap;
+}
+
+#summarytable .productname {
+  font-weight: bold;
+}
+
+.tablecontrols {
+  margin:1.5em 0 5px 0;
+  width:48em;
+  clear:all;
+}
+
+.tablecontrols * {
+  vertical-align:bottom;
+}
+
+.tablecontrols a {
+  margin-left:1em;
+}
+
+#quickreportsdiv {
+  width: 49em;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  padding:  0.75em 1em;
+}
+
+.quickreportslist h4 {
+  margin: 0 0 0.25em 0;
+	font-size: 1em;
+}
+
+.quickreportslist ul {
+  margin: 0 0 0 1em;
+  padding: 0;
+  list-style-type: none;
+}
+
+.quickreportslist li {
+  line-height: 1.25em;
+  margin:0.5em 0;
+  padding:0;
+}
+
+h1.balance {
+  font-size: 1.5em;
+  color: #333;
+  margin: 0;
+  white-space:nowrap;
+}
+
+table.design{
+	background-color: #EEEEEE;
+	border-color: #FFFFFF #CCCCCC #CCCCCC #FFFFFF;
+	border-style: solid;
+	border-width: 1px;
+	border: 1px solid #C8C8C8;
+	padding: 0px;
+	margin: 0px;
+}
+
+table.design td{
+	font-size: 11px;
+	color: #4A4A4A;
+	padding: 0px 6px 6px;
+}
+
+table.design th{
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #003399;
+	color: #FFFFFF;
+	border: 1px #C8C8C8 solid;
+	border-right-width: 0px;
+	border-left-width: 0px;
+}
+
+td.row1{
+	background-color: #EFEFEF;
+}
+
+td.row2{
+	background-color: #F8F8F8;
+}
+
+td.copy{
+	background-color: #000000;
+}
+
+table.empty{
+	background-color: #FFFFFF;
+}
+
+table.empty td{
+	border: none;
+	padding: 0px;
+	background-color: #FFFFFF;
+}

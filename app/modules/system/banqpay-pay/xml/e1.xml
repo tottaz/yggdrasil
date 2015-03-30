@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hawhaw SYSTEM "http://www.banqpay.com/xml/hawhaw.dtd">
+<hawhaw>
+  <deck title="Example 1">
+    <text boxed="yes" color="yellow" boxcolor="#889988">Some text formats:</text>
+      <!-- coloring works with (X)HTML only -->
+    <text bold="yes">This is bold</text>
+    <text italic="yes">This is italic</text>
+    <text underline="yes">Underlined</text>
+    <text big="yes">BIG</text>
+    <text small="yes">and very small</text>
+    <hr/>
+    <text bold="yes" italic="yes" underline="yes">And now a little bit of all</text>
+  </deck>
+</hawhaw>

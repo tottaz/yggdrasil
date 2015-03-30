@@ -1,0 +1,119 @@
+<!--
+Title: Tigra Menu Builder v1.0 (07/21/2005)
+Copyright (c)2005 Softcomplex, Inc. (www.softcomplex.com)
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Template Selector</title>
+	<link rel="stylesheet" href="common.css">
+	<script language="JavaScript" src="common.js"></script>
+</head>
+
+<body>
+<form name="form_tpl" id="form_tpl">
+
+<script language="JavaScript">
+check_loaded();
+
+var a_tpls = F_DATA.A_TEMPLATES;
+
+// --------------------------------------------------------------------------------
+function tpl_details (n_id, s_cmd) {
+	if (String(F_PROPS.location).indexOf(a_tpls[n_id]['s_file']) == -1) {
+		F_PROPS.location = 'templates/' + a_tpls[n_id]['s_file'] + '?id=' + n_id + (s_cmd ? '&cmd=' + s_cmd : '');
+		if (s_cmd) return true;
+	}
+	else
+		if (s_cmd) return false;
+}
+
+// --------------------------------------------------------------------------------
+function tpl_merge (n_id) {
+	mark_dirty();
+	if (!tpl_details (n_id, 'merge'))
+		F_PROPS.tpl_merge(n_id);
+}
+
+// --------------------------------------------------------------------------------
+function tpl_select (n_id) {
+	if (F_DATA.N_TPL != null && !confirm("Do you want to discard current menu styles and\n layout settings and use '" + a_tpls[n_id]['s_name'] + "' as a new template?"))
+		return;
+	if (!tpl_details (n_id, 'select'))
+		F_PROPS.tpl_select(n_id);
+}
+
+// --------------------------------------------------------------------------------
+function tpl_set (n_id) {
+	mark_dirty();
+	F_TABS.tab_enable('items');
+	F_TABS.tab_enable('styles');
+	F_TABS.tab_enable('preview');
+	F_TABS.tab_enable('export');
+	F_DATA.N_TPL = Number(n_id);
+	window.location = window.location;
+}
+
+// --------------------------------------------------------------------------------
+function tpl_display () {
+	if (!a_tpls) return;
+
+	// show templates intro message
+	if (F_DATA.N_TPL == null)
+		document.write (
+			'<table cellpadding="0" cellspacing="10" border="1" width="100%" style="margin: 10px 0 10px 0" bordercolor="#CCCC33" bgcolor="#FFFFCC"><tr><td bordercolor="#FFFFCC" style="border: 0">',
+			"Select one of the menu templates available for " + F_DATA.A_MODES[F_DATA.N_MODE]['name'] + ". You'll be able to change all the template's presets (fonts, colors sizes etc.) later in the process. You can learn about each template from the details page in the right pane.",
+			'</td></tr></table>'
+	);
+	
+	document.write(
+		'<table cellspacing="1" class="listTab">',
+		'<tr><th colspan="2" class="tabHead">' + F_DATA.A_MODES[F_DATA.N_MODE]['name'] + ' Templates</th></tr>',
+		'<tr><th class="colHead">Template</th><th class="colHead">Actions</th></tr>'
+	);
+	// skip incompatible templates
+	for (var i = 0; i < a_tpls.length; i++) {
+		if (!tpl_iscompatible(i)) continue;
+
+		document.write(
+			'<tr>',
+				'<td class="propLitem" style="font-weight:',(i == F_DATA.N_TPL ? 'bold' : 'normal')
+				,'">', a_tpls[i]['s_name'] , '</td>',
+				'<td class="propActions" nowrap align="right">[', (i == F_DATA.N_TPL ? '<a href="javascript:tpl_select('+i+')" title="discard any changes and reset to original \'' + a_tpls[i]['s_name'] + '\' template">reset</a>' : 
+				'<a href="javascript:tpl_select('+i+')" title="discard current settings and use \'' + a_tpls[i]['s_name'] + '\' as new template">select</a>'),
+				'] ', (F_DATA.N_TPL == null ? '[<span style="color:gray;">load styles</span>]' : '[<a href="javascript:tpl_merge('+i+')" title="keep current settings and load style settings of \'' + a_tpls[i]['s_name'] + '\' template">load styles</a>]') + ' [<a href="javascript:tpl_details(',i,
+				')" title="view details about \'' + a_tpls[i]['s_name'] + '\' template">view details</a>]</td>',
+			'</tr>'
+		);
+	}	
+	document.write(
+		'<tr><th colspan="2" class="tabBott">&nbsp;</th></tr>',
+		'</table>'
+	);
+	// if template is not selected then show details for first compatible template
+	if (F_DATA.N_TPL == null) {
+		var n_template;
+		for (var i = 0; i < a_tpls.length; i++)
+			if (tpl_iscompatible(i)) {
+				n_template = i;
+				break;
+			}
+		tpl_details(n_template);
+	}
+	// otherwise show details for selected template
+	else
+		tpl_details(F_DATA.N_TPL);
+}
+
+// --------------------------------------------------------------------------------
+tpl_display();
+tab_active('template');
+
+</script>
+
+</form>
+
+</body>
+</html>

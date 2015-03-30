@@ -1,0 +1,332 @@
+<!--
+Title: Tigra Menu Builder v1.0 (07/21/2005)
+Copyright (c)2005 Softcomplex, Inc. (www.softcomplex.com)
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Edit Menu Item</title>
+	<link rel="stylesheet" href="common.css">
+	<script language="JavaScript" src="common.js"></script>
+	<script language="JavaScript" src="picker.js"></script>
+	<script language="JavaScript" src="class_property.js"></script>
+
+<script language="JavaScript">
+
+// --------------------------------------------------------------------------------
+// define local variables for global structures
+var A_INDEX = F_DATA.A_INDEX;
+
+// create item properties map for quick lookups
+var A_PMAP = {};
+for (var i = 0; i < A_PROPS.length; i++)
+	if (A_PROPS[i].n_modes & Math.pow(2,F_DATA.N_MODE))
+		A_PMAP[A_PROPS[i]['s_sname']] = A_PROPS[i];
+
+// --------------------------------------------------------------------------------
+function item_property(n_index) {
+	return 	A_PROPS[n_index].s_form == 'item_edit' &&
+			A_PROPS[n_index].n_modes & Math.pow(2,F_DATA.N_MODE);
+}
+
+// --------------------------------------------------------------------------------
+function level_property(n_index) {
+	return 	A_PROPS[n_index].s_form == 'level_edit' &&
+			A_PROPS[n_index].n_modes & Math.pow(2,F_DATA.N_MODE);
+}
+
+// --------------------------------------------------------------------------------
+function menu_property(n_index) {
+	return 	A_PROPS[n_index].s_form == 'menu_edit' &&
+			A_PROPS[n_index].n_modes & Math.pow(2,F_DATA.N_MODE);
+}
+		
+// --------------------------------------------------------------------------------
+function item_edit (n_index, b_force) {
+
+	// exit if some required variables are not defined
+	if (!A_INDEX || !A_INDEX.length || (!b_force && N_ID == n_index)) return;
+	N_ID = n_index;
+
+	var o_item = A_INDEX[n_index];
+
+	// adjust the form buttons depending on action (create or edit)
+	document.forms['item_edit'].elements['Save'].value = 
+		o_item.temp ? 'Create': 'Save';
+	document.forms['level_edit'].elements['Save'].value = 
+		F_DATA.A_TPL[o_item.n_depth] ? 'Save' : 'Create';
+	
+	for (var i= 0; i < A_PROPS.length; i++)
+		if (A_PROPS[i].n_modes & Math.pow(2,F_DATA.N_MODE))
+				A_PROPS[i].f_init(A_INDEX[N_ID]);
+				
+	F_DATA.N_LAST_ITEM_ID = N_ID;
+}
+
+// --------------------------------------------------------------------------------
+function item_copy (n_id) {
+	var o_item = A_INDEX[n_id];
+	var o_copy = item_copy_rcsv (o_item, true);
+
+	var a_children = o_item.o_parent.children;
+	for (var i = a_children.length - 2; i > o_item.n_order; i--)
+		a_children[i + 1] = a_children[i];
+	a_children[o_item.n_order + 1] = o_copy;
+	mark_dirty();
+	F_LIST.location = 'tree.html?id=' + o_copy.n_id;
+}
+
+// --------------------------------------------------------------------------------
+function item_copy_rcsv (o_item, b_first) {
+	var o_copy = {};
+	for (var i = 0; i < A_PROPS.length; i++)
+		o_copy[A_PROPS[i]['s_sname']] =  o_item[A_PROPS[i]['s_sname']];
+	if (b_first)
+		o_copy['text_caption'] = item_copy_name(o_item);
+	
+	o_copy.n_id = A_INDEX.length;
+	A_INDEX[o_copy.n_id] = o_copy;
+	
+	o_copy.children = [];
+	for (var i = 0; i < o_item.children.length; i++)
+		if(!o_item.children[i].temp) 
+			o_copy.children[i] = item_copy_rcsv(o_item.children[i]);
+	return o_copy;
+}
+
+// --------------------------------------------------------------------------------
+function item_copy_name (o_item) {
+	var n_number = 1;
+	for (var i = 0; i < o_item.o_parent.children.length; i++) {
+		if (
+			RE_COPY.exec(o_item.o_parent.children[i]['text_caption'])
+			&& RegExp.$2 == o_item['text_caption']
+			&& Number(RegExp.$1) >= n_number) {
+				n_number = Number(RegExp.$1) + 1;
+		}
+	}
+	return 'copy ' + n_number + ' of ' + o_item['text_caption'];
+}
+
+// --------------------------------------------------------------------------------
+function item_up (n_id) {
+	var o_item = A_INDEX[n_id];
+	var a_children = o_item.o_parent.children;
+	a_children[o_item.n_order] = a_children[o_item.n_order - 1];
+	a_children[o_item.n_order - 1] = o_item;
+
+	mark_dirty();
+	F_LIST.location = 'tree.html?id=' + n_id;
+}
+
+// --------------------------------------------------------------------------------
+function item_down (n_id) {
+	var o_item = A_INDEX[n_id];
+	var a_children = o_item.o_parent.children;
+	a_children[o_item.n_order] = a_children[o_item.n_order + 1];
+	a_children[o_item.n_order + 1] = o_item;
+
+	mark_dirty();
+	F_LIST.location = 'tree.html?id=' + n_id;
+}
+
+// --------------------------------------------------------------------------------
+function item_delete (n_id) {
+	var o_item = A_INDEX[n_id];
+	if (!confirm("Are you sure you want to delete item '" + o_item.text_caption + "'" + 
+		(o_item.children.length ? ' with all its sub-items' : '') + '?'))
+		return;
+
+	var s_url = 'tree.html' + (o_item.n_depth ? '?id=' + o_item.o_parent.n_id : '');
+	var a_children = o_item.o_parent.children;
+
+	item_delete_rcsv(o_item);
+	for (var i = o_item.n_order; i < a_children.length - 1; i++)
+		a_children[i] = a_children[i + 1];
+	a_children.length = a_children.length - 1;
+	A_INDEX[n_id] = null;
+	mark_dirty();
+	F_LIST.location = s_url;
+}
+
+// --------------------------------------------------------------------------------
+function item_delete_rcsv (o_item) {
+	for (var i = 0; i < o_item.children.length; i++) {
+		item_delete_rcsv(o_item.children[i])
+		A_INDEX[o_item.children[i].n_id] = null;
+	}
+}
+
+// --------------------------------------------------------------------------------
+function item_move (n_id, n_parent_id) {
+	if (n_parent_id == null) {
+		item_edit(n_id);
+		F_LIST.o_tree.b_selectmode = true;
+		alert('Select new parent item from the tree');
+		return;
+	}
+	var o_item   = A_INDEX[N_ID],
+		o_parent = A_INDEX[n_parent_id];
+
+	if (o_parent.temp)
+		return alert ('This is temporary item, it can not be selected as parent');
+	if (o_item == o_parent)
+		return alert ('Can not move item to itself.');
+	var o_temp = o_parent.o_parent;
+	for (var i = o_temp.n_depth; i >= 0; i--) {
+		if (o_temp == o_item)
+			return alert('Can not move the item in its direct or indirect sub-item');
+		o_temp = o_temp.o_parent;
+	}
+
+	var a_children = o_parent.children;
+	a_children[a_children.length] = a_children[a_children.length - 1];
+	a_children[a_children.length - 2] = o_item;
+	a_children = o_item.o_parent.children;
+
+	for (var i = o_item.n_order; i < a_children.length - 1; i++)
+		a_children[i] = a_children[i + 1];
+	a_children.length = a_children.length - 1;
+
+	mark_dirty();
+	F_LIST.location = 'tree.html?id=' + o_item.n_id;
+}
+
+// --------------------------------------------------------------------------------
+function item_save () {
+	var e_input, s_value, e_preset, s_preset, o_item = A_INDEX[N_ID];
+
+	mark_dirty();
+
+	for (var i = 0; i < A_PROPS.length; i++)
+		if (item_property(i))
+			A_PROPS[i].f_save(o_item);
+
+	if (o_item.temp)
+		o_item.temp = false;
+
+	F_LIST.location = 'tree.html?id=' + o_item.n_id;
+}
+
+// --------------------------------------------------------------------------------
+function item_cancel () {
+	if (confirm('Do you want to restore last saved item settings?'))
+	for (var i = 0; i < A_PROPS.length; i++)
+		if (item_property(i))
+			A_PROPS[i].f_init(A_INDEX[N_ID]);
+}
+
+// --------------------------------------------------------------------------------
+function level_save () {
+	var e_input, s_value, e_preset, s_preset, o_prop, o_item = A_INDEX[N_ID];
+
+	mark_dirty();
+	for (var i = 0; i < A_PROPS.length; i++)
+		if (level_property(i))
+			A_PROPS[i].f_save(o_item);
+
+	F_PROPS.location = 'item.html?id=' + o_item.n_id;
+}
+
+// --------------------------------------------------------------------------------
+function level_cancel () {
+	if (confirm('Do you want to restore last saved level settings?'))
+	for (var i = 0; i < A_PROPS.length; i++)
+		if (level_property(i))
+			A_PROPS[i].f_init(A_INDEX[N_ID]);
+}
+
+// --------------------------------------------------------------------------------
+function menu_save () {
+	var e_input, e_preset, o_prop;
+
+	mark_dirty();
+	for (var i = 0; i < A_PROPS.length; i++)
+		if (menu_property(i))
+			A_PROPS[i].f_save();
+
+	F_PROPS.location = 'item.html?id=' + N_ID;
+}
+
+// --------------------------------------------------------------------------------
+function menu_cancel () {
+	if (confirm('Do you want to restore last saved menu settings?'))
+	for (var i = 0; i < A_PROPS.length; i++)
+		if (menu_property(i))
+			A_PROPS[i].f_init(A_INDEX[N_ID]);
+}
+// --------------------------------------------------------------------------------
+
+
+style_reindex();
+style_generate_css();
+
+</script>
+
+</head>
+
+<body>
+<form name="item_edit" id="item_edit">
+<table cellspacing="1" class="listTab">
+<tr><th colspan="3" class="tabHead">Edit Menu Item</th></tr>
+<tr><th class="colHead">Property</th><th class="colHead">Value</th><th class="colHead">Presets</th></tr>
+
+<script language="JavaScript">
+for (var i= 0; i < A_PROPS.length; i++)
+	if (item_property(i))
+		A_PROPS[i].f_draw(A_INDEX[N_ID]);
+</script>
+</tr>
+<tr>
+	<th align="right" colspan="3" class="tabBott">
+		<input type="Button" name="Cancel" value="Cancel" onclick="item_cancel()">
+		<input type="Button" name="Save"   value="Save"   onclick="item_save()">
+	</th>
+</tr>
+</table>
+</form>
+
+<form name="level_edit" id="level_edit">
+<table cellspacing="1" class="listTab">
+<tr><th colspan="3" class="tabHead">Edit Menu Level</th></tr>
+<tr><th class="colHead">Property</th><th class="colHead">Value</th><th class="colHead">Presets</th></tr>
+
+<script language="JavaScript">
+for (var i= 0; i < A_PROPS.length; i++)
+	if (level_property(i))
+		A_PROPS[i].f_draw(A_INDEX[N_ID]);
+</script>
+
+<tr>
+	<th align="right" colspan="3" class="tabBott">
+		<input type="Button" name="Cancel" value="Cancel" onclick="level_cancel()">
+		<input type="Button" name="Save"   value="Save"   onclick="level_save()">
+	</th>
+</tr>
+</table>
+</form>
+
+<form name="menu_edit" id="menu_edit">
+<table cellspacing="1" class="listTab">
+<tr><th colspan="3" class="tabHead">Edit Menu Settings</th></tr>
+<tr><th class="colHead">Property</th><th class="colHead">Value</th><th class="colHead">Presets</th></tr>
+
+<script language="JavaScript">
+for (var i= 0; i < A_PROPS.length; i++)
+	if (menu_property(i))
+		A_PROPS[i].f_draw(A_INDEX[N_ID]);
+</script>
+
+<tr>
+	<th align="right" colspan="3" class="tabBott">
+		<input type="Button" name="Cancel" value="Cancel" onclick="menu_cancel()">
+		<input type="Button" name="Save"   value="Save"   onclick="menu_save()">
+	</th>
+</tr>
+</table>
+</form>
+
+</body>
+</html>

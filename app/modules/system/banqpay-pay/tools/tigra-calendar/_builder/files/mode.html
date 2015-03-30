@@ -1,0 +1,85 @@
+<!--
+Title: Tigra Menu Builder v1.0 (07/21/2005)
+Copyright (c)2005 Softcomplex, Inc. (www.softcomplex.com)
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Mode Selector</title>
+
+<link rel="stylesheet" href="common.css">
+
+<script language="JavaScript" src="common.js"></script>
+<script language="JavaScript">
+
+if (N_ID != null)
+	F_DATA.N_MODE = N_ID;
+
+function mode_select (n_id) {
+	mark_dirty();
+	F_TABS.tab_enable('template');
+	F_TABS.tab_enable('save');
+	window.location = 'mode.html?id=' + n_id;
+}
+
+function mode_details (n_id) {
+	if (!F_DATA.A_MODES) return;
+	F_PROPS.location = 'descriptions/' + F_DATA.A_MODES[n_id]['name'].replace(/\s/g, '_').toLowerCase() + '.html';
+}
+
+</script>
+</head>
+
+<body>
+
+<form name="mode_edit" id="mode_edit">
+
+<script language="JavaScript">
+function mode_display () {
+	if (!F_DATA.A_MODES) return;
+
+	if (F_DATA.N_MODE == null)
+		document.write (
+			'<table cellpadding="0" cellspacing="10" border="1" width="100%" style="margin: 10px 0 10px 0" bordercolor="#CCCC33" bgcolor="#FFFFCC"><tr><td bordercolor="#FFFFCC" style="border: 0">',
+			"Select the menu component you plan to create the configuration for. You'll be able to change this selection later without losing any compatible settings.<br>Note that not all the components are free. You will not be able to create a working navigation system based on the commercial product unless you own a valid license for it. For details on each available menu component please see the product descriptions in the right pane.",
+			'</td></tr></table>'
+	);
+
+	document.write(
+		'<table cellspacing="1" class="listTab">',
+		'<tr><th colspan="2" class="tabHead">JavaScript Menus</th></tr>',
+		'<tr><th class="colHead">Mode</th><th class="colHead">Actions</th></tr>'
+	);
+	
+	for (var i = 0; i < F_DATA.A_MODES.length; i++)
+		if (F_DATA.A_MODES[i]['list'])
+			document.write(
+				'<tr>',
+					'<td class="propLitem" style="font-weight:',(i == F_DATA.N_MODE ? 'bold' : 'normal')
+					,'">', F_DATA.A_MODES[i]['name'] , '</td>',
+					'<td class="propActions" nowrap>[', (F_DATA.A_MODES[i]['allow'] ? (i == F_DATA.N_MODE ? '<span style="color:gray; margin: 0 2px 0 2x;">selected</span>' : 
+					'<a href="javascript:mode_select('+i+')" title="click to switch the editor to ' + F_DATA.A_MODES[i]['name'] + ' mode" style="margin: 0 8px 0 8x;">select</a>') : '<a href="http://www.softcomplex.com/cgi-bin/mgr.pl?class=cart&action=add&license[' + F_DATA.A_MODES[i]['cartid'] + ']=1" target="_blank" style="margin: 0 9px 0 9x;">order</a>'),
+					'][<a href="javascript:mode_details(',i,
+					')" title="click to learn more about features of ', F_DATA.A_MODES[i]['name'],
+					 '">view details</a>]</td>',
+				'</tr>'
+			);
+
+	document.write(
+		'<tr><th colspan="2" class="tabBott">&nbsp;</th></tr>',
+		'</table>'
+	);
+}
+
+mode_display();
+mode_details(F_DATA.N_MODE == null ? 0 : F_DATA.N_MODE);
+tab_active('mode');
+
+</script>
+
+</form>
+
+</body>
+</html>

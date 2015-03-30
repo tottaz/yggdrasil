@@ -1,0 +1,226 @@
+* nowrap (?change to be similar to labelWrap?)
+* have button_grid use:
+	- width/height for each button
+	- cssStyle for each button
+	- selection: open/closed
+	- numCols: "*"
+	- improve docs: explain css
+* 
+
+
+SPEC NOTES:
+---------------------------
+* per spec, "item.calculate" is an xpath expression that allows them to have a calculated value
+	-- convert "getDisplayValue"
+* per spec, readonly and required can be expressions, calculated dynamically at update time
+* per spec, readonly is inherited (like relevant)!
+* per spec, use "count()" to get number of items of a list
+* "incremental:boolean" on items, seems to mean generate events more frequently
+* help and hint on formItems
+* "alert" on formItems, seems to be an error message
+* there seems to be some concept of "reset" for instance data, although poorly specified
+* actions -- interesting, eg: "setValue" to set a modelItem value
+* there is a possibility that we'll have to run **all** validation code when anything changes,
+	as well as "required" and "readonly" checks.  Make a script?
+
+
+NOT PRIORITIZED
+---------------------------
+* be able to specify a ref that is data within the form itself, eg:
+		$form/prop
+	to store temporary values in the form.  Set on update, get on change?
+	- use for composite widgets like Greg wants
+	- use for add/remove fields for selection in the various boxes?
+	- use for switches for the visible case?
+	- nice if the form didn't know about this, and the model just handled it
+* widget: add/remove boxes for selection
+	-- check and see if there's a better paradigm
+			-- select with checks?
+	-- note that the "value" of the add/remove select is showing up as the "choices"
+	-- note that we need to remove from one list to place in another...
+* have a global, top-level "ref" for model so we don't have to do ref:"attr/X" for each modelItem
+* choices:  use an object for value:label pairs
+* dynamic choices
+* item.getNotifyForm()  -- check is !, shouldn't be
+* disabled property they can set?
+* relevantIfEmpty ?
+* forceUpdate for buttons to update name?
+* forceUpdate forfor selects/etc to update list of options?
+* image choices and selection:open/closed?
+* forceUpdate: in onChange, used to mean ALL form items should be updated...
+* notifyForm on composite items?
+
+
+P1
+---------------------------
+
+
+* check in all code, examples and tests.  All work done from repository.
+* safari?
+* make item_test have at least one of each item type or variant for quick visual check
+
+* model-level getter() w/same semantics as item level, but called on the model
+	- property to set where callbacks are called -- on model, item, etc?
+
+* internal property to ignore parentItem ref on init() (if set in parent)
+
+* validators and constraints
+	* repeat not showing [+]
+	* all model routines should take either a path (string) or a modelItem?
+	* model.getLeafValue(), etc should be on modelItem so we can return with proper type?
+		-- really, each step of path should use the appropriate modelItem so it can
+			call its getter ???   speed???
+	* specify when errors show up (on leave field, on 'save'?)
+	* error messages show up in-line in form or as alert?
+	* 'registerTypeValidator'?  for other classes to provide type validation (and subsequent method?) to the modelItem
+	* change form to handle:
+		* string maxLength
+		* visual indicator in forms for required fields
+		* readonly fields in form -- convert to output?  mode in formItem?  disable in formItem?
+		* where to show errors
+			? insert at beginning of container HTML
+			? insert/remove onChange of field ?
+	? think about:
+		? should getter/setter be called on model or modelItem?
+		? "multi-type" value (list of value types tried in order)
+		? "date" type (w/o time)?	-- how do we communicate this with the server?
+		? "time" type?	-- how do we communicate this with the server
+		? "enum" type (w/choices & selection:open|closed)
+		? constraints where only one needs to be true (eg: value can be X or Y or Z)
+		? do we need accessors?  xform doesn't use them.  Just remove?
+	* doc
+		* "untyped" item type
+	* test:
+		* type checking (in item_test.html)
+		* enum model type  w/auto constraint (selection:open/closed)
+		* keep model types consistent (eg: SELECTs sometimes turn string lists into arrays...
+		* reasonable error messages!
+		* i18n of error mesages
+	
+
+* field widths for appointment form - colspan:"*" ?
+* testenv: make FormItem output more reasonable, esp for Dates, etc
+* testenv: output ModelItems
+* make selects and button grid work with any data type, not just strings
+	-- talk to Dan about n squared time?
+
+* borders
+	* apply style to group/case/etc
+	* css borders (can do now)
+	* image borders
+	* border/label combo
+	
+* sizing:
+	* colSizes
+	* outputAsTable(?) property to output set of items in a single table
+		- TR as container?
+	* dynamic vertical sizing (new msg form)
+	* property to make containers scroll
+
+* cache all properties that are used in update
+	- ref, items, value, updateElement, etc
+* alignment of formItems in container
+* update docs
+
+
+P2
+---------------------------
+* form.get(path) doesn't use modelItems initialized in formItems already
+	-- give form a (ref)path index of items and get the item, then do item.getInstanceValue()?
+* two-dimensional REPEAT type (for contacts card grid)
+* test dynamic update rather than writing a script
+* make a really big form to test for speed
+* speed of repeats types? make repeat rows faster?
+* don't init sub-items if they're not being drawn due to relevance?
+* key handling
+	- tabbing (incl. tabbing to button grid/dwt/etc)
+	- only allow certain characters in fields
+	- typing with pattern matching for number, date, etc?
+* inheritance of attributes? a problem?
+	- eg: value not being inherited?
+* make good, well-named, consistent css classes
+* ability to change options of a select on the fly (property of SELECT, run routine on update)
+* repeat w/max number of rows (and scrolling?)
+* test deep nesting of subclasses
+	(wierdness with _BUTTON_GRID_ -> _TAB_BAR_ -> _SWITCH_TAB_BAR_)
+* remove dependence on XFG class
+* 
+* model.addRowAfter:
+	* only work if modelItem is a list?
+	* have modelItem.getInstance() -- returns default instance
+	* handle non-list type
+
+P3
+---------------------------
+* disable for widget types (button grid, etc) -- just hide for now
+* have logic to only enable/disable when state changes
+* item.getElementValue() ???	(rename updateElement to setElementValue ?)
+* numCols of "*" to mean however many items there are
+* mechanism to set form-level defaults for various item types
+* check speed of model routines, esp. parsing paths too often
+* disable checkbox label
+	(change checkbox to composite of CHECK and ANCHOR ?)
+* form-level forceUpdate ?
+* make _SWITCH_ automatically show nested _CASE_s if no relevant provided (property?)
+* radio group class
+* make labels clickable for checkbox/radio
+* firefox draws old form images for just a second before applying update
+	-- create items display:none by default?
+* _OBJECT_ type for modelItems?
+* checkbox doesn't use value property...
+* consolidate XModelItemFactory and XFormItemFactory into a pattern/superclass?
+
+
+
+
+POSSIBLE NEW FORMITEM TYPES
+---------------------------
+* more efficient _SELECT_ and _SELECT1_
+	- ability to stick any type of item (or composite) in there
+* _COMBO_BOX_ (_TEXTFIELD_ with choices)
+* _SELECT_ that uses checkboxes to select
+* _SELECT_ that allows you to re-order contents
+* _SELECT_ w/ open selection w/ field that allow you to enter new value
+* _SELECT_ w/ open selection where you can remove values from the list
+* _TAG_
+* _IMAGE_BUTTON_
+* _TOOLBAR_
+* _SPRING_SPACER_ (ala Mac toolbars, for spacing in toolbars)
+* _CUSTOM_ which renders arbitrary HTML (or just create subclass?)
+* _RANGE_ for slider
+* autoComplete mechanism
+
+
+
+THINGS TO THINK ABOUT OR TEST
+-----------------------------
+* consolidate XFormItemFactory into XForm?
+* images with no SRC -- hide?
+* are we using closures safely?
+* event semantics: auto-add/remove listeners?
+* have a _FORM_ type that we put at the outside of all the items?  do we need sub-forms?
+* ability to show a sub-form in a dialog like apple does?
+* make all output functions take an itemID so they can be string substituted in repeat?
+	(doesn't help w/update...)
+
+
+
+
+CODING STYLE POINTS
+-----------------------------
+* recommend specifying getter/setter/etc as function rather than string
+* any time you're putting more than 2 lines of code in insert/update/etc
+	-- make a function on XForm/XModel and call that instead
+* all inserted handlers (esp onchange) should assume they're surrounded by "",
+	ie: if referencing a string in a handler, us '', 
+	eg: onchange="var value=X; someObject.set('foo',value)"
+	
+
+
+
+XFORM SPEC NOTES
+-----------------------------
+* 'calculate' property -- getter?
+* match notions of "constraint"
+* match notions of "relevant"
+* bind concept for extending base item defaults in your form or model?

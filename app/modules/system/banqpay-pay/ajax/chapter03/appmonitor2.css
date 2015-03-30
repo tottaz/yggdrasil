@@ -1,0 +1,91 @@
+/*
+ * Copyright 2006 SitePoint Pty. Ltd, www.sitepoint.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS;
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+*/
+
+body, p, div, td, ul {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:12px;
+}
+#mainDiv {
+  padding-top: 24px;
+}
+#uiDiv {
+  width: 360px;
+  height: 280px;
+  padding: 24px;
+  text-align: left;
+  background: #eee;
+  border: 1px solid #ddd;
+  margin:auto;
+}
+#statusDiv {
+  width: 358px;
+  height: 24px;
+  padding: 2px;
+  background: #fff;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+}
+#appStatusDiv {
+  font-size: 11px;
+  float: left;
+  height: 16px;
+  padding: 4px;
+  text-align: left;
+  color: #999;
+}
+#requestStatusDiv {
+  font-size: 11px;
+  float: right;
+  width: 80px;
+  height: 14px;
+  padding: 4px;
+  text-align: center;
+  background: #fff;
+}
+#pollDiv {
+  width: 360px;
+  height: 210px;
+}
+#buttonDiv {
+  text-align: center;
+}
+.entryDiv { 
+  padding-bottom: 4px;
+}
+.messageDiv {
+  font-size: 11px;
+  width: 74px;
+  float: left;
+}
+.processing {
+  color: #339;
+  border: 1px solid #333399;
+}
+.done {
+  color: #393;
+  border: 1px solid #393;
+}
+.barDiv {
+  background: #ddf;
+  float: left;
+}
+.inputButton {
+  width: 8em;
+  height: 2em;
+}
+.clearBoth {
+  clear: both;
+}

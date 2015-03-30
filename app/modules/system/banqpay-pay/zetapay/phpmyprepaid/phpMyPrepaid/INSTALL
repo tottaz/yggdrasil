@@ -1,0 +1,47 @@
+This file contains installation instructions for phpMyPrepaid
+
+1) Untar the tar file into your webservers base directoy.
+# cd /var/www/html or wherever it is on your server
+# tar -xvf ../phpMyPrepaid-0.1.x.tar
+
+2) create the radius db.  If you have it, you will need to drop
+it or add the extra tables etc.
+
+# mysql -u root -p < ./db_mysql.sql
+
+3) Put dbconnect into your document root and rename it dbconnect.php
+Edit it and add your username and password.
+
+
+4) If you are using the 0.1.1 or 0.1.2 tarball, edit index.php and
+comment out the first section (Between GET DESIGN DETAILS and HEADER
+INFOTMATION).  This was a reminant of dhalbe-Admin.  You could also
+create the table in the database using design.sql. 
+(Starting with 0.1.3RC1, This has been removed.  the show settings 
+option is still in config.inc.php but it is set to 0 by default.)
+
+Edit config.inc.php and change the show settings var from 1 to 0.
+we just got rid of that section anyway so the link would do nothing.
+
+5) Fire up a web browser and point it at the phpMyPrepaid directory.
+Now try to make a card.  If you get an fopen permissions warning, it
+means that the webserver can't write to the directory and it needs to
+do this to make the pdf.
+
+(Dirty unsafe way to do this #chmod 666 test.pdf)
+
+Better way, chown test.pdf to the webservers user and group and then
+give the file owner write permissions.   
+
+If you want to use the new quick print option, set your web server to
+push .ppc files to the client.  This is done in /etc/mime.types
+add
+application/xml-external-parsed-entity  ppc
+I am using a shell script on the client to parse this and send it to
+a reciept printer.  The shell script is not yet included with this
+distro as it has not yet been GPLed.  prehaps in RC2.  I am looking 
+at writing a python client for printing.  I could use Active X for 
+windows clients but I think that Active X is evil.
+
+Now you should be up and running.
+

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="demo.css" />
+        <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; user-scalable=0" />
+        <link rel="stylesheet" type="text/css" href="../files/css/timeline.css" />
+        <link rel="stylesheet" type="text/css" href="../files/css/timeline_light.css" />
+        <script type="text/javascript" src="../files/javascript/jquery.js"></script>
+        <script type="text/javascript" src="../files/javascript/timeline.min.js"></script>
+        <script type="text/javascript" src="demo.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var timeline_data = [
+                    {
+                        type:     'blog_post',
+                        date:     '2012-09-03',
+                        title:    'FA Cup',
+                        width:    '90%',
+                        content:  'The Reds go marching on in the FA Cup...',
+                        image:    'images/facup.jpg'
+                    },
+                    {
+                        type:     'blog_post',
+                        date:     '2011-08-03',
+                        title:    'Swansea',
+                        width:    '90%',
+                        content:  'Check out our exclusive video preview ahead of today\'s clash with Swansea <a href="http://bit.ly/Yz0bmZ" target="_blank">http://bit.ly/Yz0bmZ</a>',
+                        image:    'images/rio.jpg'
+                    },
+                    {
+                        type:     'blog_post',
+                        date:     '2011-07-15',
+                        title:    'Manchester United VS Liverpool',
+                        width:    '90%',
+                        content:  'The Reds complete the double over Liverpool this season...',
+                        image:    'images/evra.jpg'
+                    },
+                    {
+                        type:     'blog_post',
+                        date:     '2011-06-29',
+                        title:    'Michael Carrick',
+                        width:    '90%',
+                        content:  'Last chance to win Michael Carrick\'s signed shirt from the Liverpool game!! Click this link to enter <a href="http://bit.ly/W03U8k" target="_blank">http://bit.ly/W03U8k</a>',
+                        image:    'images/carric.jpg'
+                    },
+                    {
+                        type:     'blog_post',
+                        date:     '2011-04-02',
+                        title:    'Match',
+                        width:    '90%',
+                        content:  '9 Premier League wins out of 10 this season at Old Trafford. What is your match of the season so far at the Theatre of Dreams?',
+                        image:    'images/wigan.jpg'
+                    },
+                    {
+                        type:     'blog_post',
+                        date:     '2010-02-13',
+                        title:    'Old Traffordt',
+                        width:    '90%',
+                        content:  'Check out our exclusive video preview ahead of today\'s clash with Swansea <a href="http://bit.ly/Yz0bmZ" target="_blank">http://bit.ly/Yz0bmZ</a>',
+                        image:    'images/home.jpg'
+                    }
+                ];
+
+                var timeline = new Timeline($('#timeline'), timeline_data);
+                timeline.setOptions({
+                    animation:   true,
+                    lightbox:    true,
+                    showYear:    true,
+                    allowDelete: true,
+                    columnMode:  'center'
+                });
+                timeline.display();
+            });
+        </script>
+    </head>
+    <body>
+        <div id="config">
+            <select id="theme">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="red">Red</option>
+            </select>
+        </div>
+        <div id="timeline"></div>
+    </body>
+</html>

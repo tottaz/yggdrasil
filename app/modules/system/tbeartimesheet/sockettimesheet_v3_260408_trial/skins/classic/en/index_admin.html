@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{PAGE_TITLE}</title>
+{__CSS_GLOBAL__}
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/functions.js"></script>
+</head>
+
+<body>
+<table width="100%" cellpadding="0" cellspacing="2">
+	<tr>
+		<td><img src="{SKINROOT}/images/logo.gif"></td>
+		<td height="100%" valign="bottom">
+			<table align="right" height="100%" cellspacing="5" cellpadding="0">
+			<tr>
+				<td class="td_top">Logged In: {FULL_NAME} |</td>
+				<td class="td_top">{ADMIN_USER_LINK}</td>
+				<td class="td_top">{LOGOUT_LINK}</td>
+			</tr></table>
+		</td>
+	</tr>
+	<tr><td class="spacer" colspan="2"></td></tr>
+</table>
+	
+<div class="div_top_menu">
+{DIV_TOP_MENU}
+</div>
+	
+<div class="div_top_menu_foot"></div>
+<div id='submenu' class="div_sub_menu" align="right">Clock & Date Container</div>
+<script>startclock();</script>
+
+<table width="100%" height="100%"><tr><td nowrap valign="top">
+	<table width="100%" height="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="menu_table_parent">
+		<table class="menu_table_container">
+		<tr><td>
+				{QUICKLINKS_MENU}
+		</td></tr>
+		</table>
+		</td>
+		<td class="main_table">
+		<table width="100%" class="index_page_table">
+			<tr valign="top">
+				<td valign="top">
+				<H1>Admin Features Description</H1>
+				<span class=subtitle><img align="absmiddle" src="{SKINROOT}/images/admin_module_main.gif">&nbsp;Admin Module<BR></span>
+				<p>
+				Configure various settings for all modules in the system. Features include: 
+					<UL>
+						<LI>Multiple User Config</LI>
+						<LI>Timesheet System Configuration</LI>
+						<LI>Email Server Configuration</LI>
+						<LI>Project Module Configuration</LI>
+					</UL>
+				</p>	
+				<span class=subtitle><img align="absmiddle" src="{SKINROOT}/images/admin_system_main.gif">&nbsp;Admin System<BR></span>
+				<p>
+				Configure system based settings. Features include: 
+					<UL>
+						<LI>Announcement System</LI>
+						<LI>Data Archiving</LI>
+						<LI>Backup and Restore</LI>
+						<LI>Holiday Management</LI>
+						<LI>IP Address Ban List</LI>
+						<LI>Email Configuration</LI>
+						<LI>Logging Configuration</LI>
+						<LI>LDAP Configuration (Premium)</LI>
+						<LI>Company Logo</LI>
+					</UL>
+				</p>
+				<span class=subtitle><img align="absmiddle" src="{SKINROOT}/images/help_main.gif">&nbsp;Help Tab<BR></span>
+				<p>
+				Click the Help Tab for detailed information on specific items mentioned above
+				</p>
+				</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	</table>
+</td></tr></table>
+</body>
+</html>

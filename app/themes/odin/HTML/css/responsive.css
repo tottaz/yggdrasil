@@ -1,0 +1,317 @@
+@media (min-width: 1200px){
+
+}
+
+
+/*Notebooks and Small Laptops*/
+@media (min-width: 1025px){
+
+}
+
+/*iPad Landscape Mode and Large Tablets */
+@media (max-width: 1024px){
+
+
+}
+
+/*Small Desktop and Very Small Notebook */
+@media (max-width: 980px){
+
+    .gallery .gallery-inner,
+    .gallery .grid-sizer {
+        width: 50%;/* change here the column width */
+    }
+
+}
+
+/*Medium Tablets */
+@media (max-width: 800px){
+
+    .bt-menu ul:first-of-type li {
+        -webkit-transform: none;
+        transform: none;
+    }
+
+}
+
+
+/*iPad Portrait Mode, iPad Mini and Small Tablets */
+@media (max-width: 768px){
+
+    .navbar {
+        padding: 5px;
+        padding-top:20px;
+    }
+
+    a.menu-link{
+        background: black;
+        padding-top:20px;
+    }
+
+    img.bigIntroLogo{
+        width: 30%;
+        margin:0 auto;
+    }
+
+
+    .bt-menu ul:first-of-type {
+        top: 100px;
+    }
+
+    .bt-menu ul:first-of-type li {
+        width: 200px;
+        height: 40px;
+        line-height: 40px;
+        top: 40px;
+    }
+
+
+    #charts h3 {
+        margin-bottom: 50px;
+    }
+
+    .introText h1 {
+
+        font-size: 20px;
+
+    }
+
+}
+
+/*Medium Smart Phones v2*/
+@media screen and (max-width: 640px){
+
+    .btn{
+        padding: 8px 20px;
+        outline-offset: 2px;
+    }
+
+    .btn:hover, .btn:active, .btn:focus, .btn-default.active{
+        padding: 8px 20px;
+        outline-offset: 2px;
+
+        outline: 2px solid #c99f6c;
+        border:1px solid white;
+        color:white;
+
+    }
+
+    .bt-menu.bt-menu-open {
+        border-width: 0px 200px 60px 0px;
+    }
+
+    .bt-menu ul:nth-of-type(2) li {
+        width: 60px;
+        height: 40px;
+        line-height: 50px;
+    }
+}
+
+@media screen and (max-width: 600px)and (orientation : landscape){
+    img.bigIntroLogo{
+        width: 30%;
+    }
+
+
+    .bt-menu ul:first-of-type li {
+        width: 200px;
+        height: 30px;
+        line-height: 30px;
+        top: 30px;
+    }
+
+    .bt-menu ul:first-of-type li a {
+        font-size: 10px;
+    }
+
+    .bt-menu ul:nth-of-type(2) li a {
+        font-size: 6px;
+    }
+
+    .bt-menu-trigger span {
+        height: 3px;
+    }
+
+    .gallery .gallery-inner,
+    .gallery .grid-sizer {
+        width: 50%;/* change here the column width */
+    }
+
+
+}
+
+/*Google Nexus and Other Large Smart Phones v1*/
+@media screen and (max-width: 600px){
+
+    .bt-menu ul:first-of-type {
+        top: 80px;
+    }
+
+    .bt-menu ul:first-of-type li {
+        width: 200px;
+        height: 30px;
+        line-height: 30px;
+        top: 70px;
+    }
+
+
+    h2{
+        font-size: 14px;
+        letter-spacing: 3px;
+    }
+
+    h1{
+        font-size: 28px;
+        letter-spacing: 1px;
+        line-height: 26px;
+    }
+
+    p {
+        padding: 5px;
+    }
+
+    .triangleBorderSmall {
+        height: 40px;
+        width: 40px;
+        margin: 0 20px;
+    }
+
+    .triangleBorderSmall i {
+        padding: 8px;
+    }
+
+    .triangleBorderSmall .fa-2x {
+        font-size: 1.5em;
+    }
+
+    .triangleWrapperSmall {
+        margin: 0 auto;
+        width: 240px;
+    }
+
+
+    .fa-2x {
+        font-size: 1.2em;
+    }
+
+
+    .bigIntroLogo {
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    .smallLogo {
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    #charts h3 {
+        margin-bottom: 50px;
+    }
+
+    .gallery .gallery-inner,
+    .gallery .grid-sizer {
+        width: 50%;/* change here the column width */
+    }
+
+    .triangleBorderSmall .fa-2x {
+        font-size: 1.2em;
+    }
+
+
+    .bt-menu-trigger {
+        right: 20px;
+        top:30px;
+        width: 50px;
+        height: 8px;
+    }
+
+}
+
+
+/*iPhone Landscape Mode and Mediium Smart Phones*/
+@media screen and (max-width: 480px){
+
+    h2{
+        font-size: 12px;
+        letter-spacing: 3px;
+    }
+
+
+    .btn{
+        padding: 8px 20px;
+        outline-offset: 2px;
+    }
+
+    .btn:hover, .btn:active, .btn:focus, .btn-default.active{
+        padding: 8px 20px;
+        outline-offset: 2px;
+
+        outline: 2px solid #c99f6c;
+        border:1px solid white;
+        color:white;
+
+    }
+
+
+
+    h1{
+        font-size: 28px;
+        letter-spacing: 1px;
+        line-height: 26px;
+    }
+
+    p {
+        padding: 5px;
+    }
+
+    .triangleBorderSmall {
+        height: 40px;
+        width: 40px;
+        margin: 0 20px;
+    }
+
+    .triangleBorderSmall i {
+        padding: 8px;
+    }
+
+    .triangleBorderSmall .fa-2x {
+        font-size: 1.2em;
+    }
+
+    .triangleWrapperSmall {
+        margin: 0 auto;
+        width: 240px;
+    }
+
+
+
+    .bigIntroLogo {
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    .smallLogo {
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    #charts h3 {
+        margin-bottom: 50px;
+    }
+
+
+}
+
+/*Other Major Small Smart Phones*/
+@media screen and (max-width: 360px){
+
+
+
+}
+
+/*iPhone Portrait Mode and Very Small Mobile Phones*/
+@media screen and (max-width: 320px) {
+
+
+}

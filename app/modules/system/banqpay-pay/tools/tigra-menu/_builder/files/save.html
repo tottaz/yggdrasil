@@ -1,0 +1,85 @@
+<!--
+Title: Tigra Menu Builder v1.0 (07/21/2005)
+Copyright (c)2005 Softcomplex, Inc. (www.softcomplex.com)
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Save Project Data</title>
+
+	<link rel="stylesheet" href="common.css">
+	<script language="JavaScript" src="common.js"></script>
+
+</head>
+
+<body>
+
+<form name="save_data">
+<table cellspacing="1" class="listTab">
+<tr><th class="tabHead">Save the Project Data</th></tr>
+<tr>
+	<td class="propDescr">
+	To save the project data:
+	<ol>
+		<li>open any text editor</li>
+		<li>select and copy all the content of the text area below into the clipboard</li>
+		<li>paste the clipboard in the text editor</li>
+		<li>save the file on your computer</li>
+		<li>click "Mark Saved" button. Note that clicking that button just resets the flag indicating that you've
+		made the changes since last time data was saved.</li>
+	</ol>
+	<script language="JavaScript">
+		var dt_now = new Date();
+		var s_now = (dt_now.getMonth() < 9 ? '0' : '') + (dt_now.getMonth() + 1) + "/"
+			+ (dt_now.getDate() < 10 ? '0' : '') + dt_now.getDate() + "/"
+			+ dt_now.getFullYear();
+
+		if (F_DATA.A_MENU)
+			document.write(
+				'<textarea name="app_data" rows="30"  wrap="off">',
+				"// Tigra Menu Builder project file\n",
+				"// Project Name: " + F_DATA.A_MENU['menu_name'] + "\n",
+				"// Saved: " + s_now + "\n\n",
+	
+				'var N_MODE = ' + dump_var(F_DATA.N_MODE) + ";\n\n",
+				'var N_TPL = ' + dump_var(F_DATA.N_TPL) + ";\n\n",
+				'var A_MENU = ' + dump_var(F_DATA.A_MENU) + ";\n\n",
+				'var A_TPL = ' + dump_var(F_DATA.A_TPL) + ";\n\n",
+				'var A_ITEMS = ' + dump_var(prepare_items(F_DATA.A_ITEMS)) + ";\n\n",
+				'var A_STYLES = ' + dump_var(F_DATA.A_STYLES) + ";\n\n",
+				"</textarea>"
+		);
+	</script>
+	</td>
+</tr>
+<tr><th class="colHead" colspan="2" align="right"><input type="button" name="mark_saved" value="Mark as Saved" onclick="on_mark_saved()"></th></tr>
+</table>
+</form>
+
+<script language="JavaScript">
+
+	var e_button = document.forms['save_data'].elements['mark_saved'];
+	if (F_DATA.B_DIRTY)
+		on_mark_dirty ()
+	else
+		on_mark_saved ()
+
+	function on_mark_saved () {
+		e_button.disabled = true;
+		e_button.value = '   Saved   ';
+		mark_saved();
+	}
+	function on_mark_dirty () {
+		e_button.disabled = false;
+		e_button.value = '   Mark Saved   ';
+	}
+
+	F_PROPS.location = 'saveinfo.html'
+	tab_active('save');
+
+</script>
+
+</body>
+</html>

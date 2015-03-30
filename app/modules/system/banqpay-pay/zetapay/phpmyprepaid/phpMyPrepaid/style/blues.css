@@ -1,0 +1,29 @@
+body {
+	background:	white;
+	margin:		10px  0 0 0;
+	font-family:	sans-serif;
+	font-size:	small;
+}
+
+table.pageLayout {
+	background:	#FAFAFF;
+	width:		800px;
+	height:		600px;
+	border:		solid 1px #DDEEFF;
+}
+
+p {
+	color:		#000066;
+}
+h2 {
+	color:		#89A;
+}
+	
+hr {
+	height:		1px;
+	background:	#CCDDEE;
+	border:		0;
+}
+td.leftMenu {
+	border:	solid 1px #D7E5F2;
+}

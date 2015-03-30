@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Web Services, Part 2</title>
+    <script type="text/javascript" src="ajax.js"></script>
+    <script type="text/javascript" src="xmlparse.js"></script>
+    <script type="text/javascript" src="webservices2.js"></script>
+    <link rel="stylesheet" href="webservices2.css" type="text/css"/>
+  </head>
+  <body>
+    <div id="mainDiv">
+      <div id="uiDiv">
+        <div id="pageTopDiv" class="screenReader">
+          <a id="pageTop" name="pageTop">Page top</a>
+        </div>
+        <form id="searchForm" method="post" action="/webservices2.html">
+          <div id="searchTypeTitleDiv" class="fieldTitle" style="padding-top:24px;">Search Type:</div>
+          <div id="searchTypeSelectDiv" class="fieldEntry">
+            <select name="SearchService" title="Search Type">
+              <option value="amazon">Amazon</option>
+              <option value="ebay">eBay</option>
+              <option value="google">Google</option>
+            </select>
+          </div>
+          <div id="searchTextTitleDiv" class="fieldTitle">Search Text:</div>
+          <div id="searchTextInputDiv" class="fieldEntry">
+            <input type="text" name="SearchText" id="SearchText" size="24" maxlength="100" value=""/>
+          </div>
+          <div id="buttonDiv">
+            <input type="submit" class="inputButtonDisabled" id="searchButton" name="searchButton" value="Search" />
+          </div>
+        </form>
+      </div>
+      <div id="resultsDiv"></div>
+      <div class="screenReader">
+        <a href="#pageTop">Back to form top</a>
+        End of page
+      </div>
+    </div>
+  </body>
+</html>

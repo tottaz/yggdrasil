@@ -1,0 +1,167 @@
+<?php
+require('cpos/core/include/common.php');
+require_once('cpos/core/include/cpos_base.php');
+require('cpos/core/include/session.php');
+
+require('fpdf/fpdf.php');
+include('fpdf/fpdf.inc.php');
+
+//error_reporting(E_ALL);
+$NO_OF_FIELDS=4;
+$pdf=new PDF();
+$pdf->Open();
+$pdf->SetFont('Arial','',14);
+
+//include_once("inc/exelon.inc.php");
+
+include_once('../../modules/merchant/account_statement.php');
+
+
+$f=0;
+/*---------------------------------------------------------------------------------------*/
+$title='Merchant Summary';
+$pdf->AddPage(); 
+
+$dataArr[]='Nitin';
+$dataArr[]='singh';
+
+//$pdf->FPDF('P','mm',$format='A3');
+//$pdf->SetLineWidth("250");
+// ####### This code is used to Gent Vendor Name and Campaign Name to be displayed at top ############//
+
+	$inserted=0;
+	$num_variable=1;
+
+	$headerArr=array();
+	$dataArr=array();
+	$headerArr[]='Date range:';
+  	//$headerArr[]=$_REQUEST['dateFrom']." To ".$_REQUEST['dateTo'];
+
+	$headerArr[]='Select Call Type';
+//	$headerArr[]=$callname;
+	$headerArr[]='Site';
+//	$headerArr[]=$site_name;
+	
+	$headerArr[]='Agents';
+	//$headerArr[]=$total_agent;
+	$headerArr[]='Completed Evaluations';
+	//$headerArr[]=$ceval;
+
+	$pdf->AgentInfo($headerArr,$dataArr);
+
+	$header=NULL;	
+	
+	$header[]="Improvement Opportunities";
+	//$pdf->ParamHeading_periodic($header);
+	$align=array('C','C','C','C','C','C','C','C','C');
+	$wid=array(35,24,23,23,23,23,126);
+	$pdf->SetFillColor(192,160,98);			
+	$pdf->Row($header,$wid,$align);
+		
+	if(count($data)>0)
+	{
+		
+		$k=0;
+		for($i=0;$i<count($data);$i++)
+		{
+			$header=NULL;
+			if($data[$i][4]!="")
+			{
+				$header[]=$data[$i][4];
+				$pdf->SingleRow_report($header);
+			}
+			$header=NULL;	
+			if($data[$i][3]=="Total")
+			{
+			$header[]=$data[$i][3];
+			$header[]=$data[$i][6];
+			$header[]=$data[$i][7]."%";
+			$header[]=$data[$i][8]."%";
+			$header[]=$data[$i][9]."%";
+			$header[]=$data[$i][10]."%";
+			$header[]="";
+			$header[]="";
+			$header[]="";
+			
+			}
+			else
+			{
+				if($i==count($data)-1)
+				{
+					$header[]=$data[$i][3];
+					$header[]=$data[$i][6];
+					$header[]=$data[$i][7];
+					$header[]=$data[$i][8];
+					$header[]=$data[$i][9];
+					$header[]=$data[$i][10];
+					$header[]="";
+					$header[]="";
+					$header[]="";
+					
+								
+				}
+				else
+				{
+					$header[]=$data[$i][5];
+					$header[]=$data[$i][6];
+					$header[]=$data[$i][7];
+					$header[]=$data[$i][8];
+					$header[]=$data[$i][9];
+					$header[]=$data[$i][10];
+					if($data[$i][0]=="")
+					$header[]="";
+					else
+					$header[]=$data[$i][0];
+
+					if($data[$i][1]=="")
+					$header[]="";
+					else
+					$header[]=$data[$i][1];
+
+					if($data[$i][2]=="")
+					$header[]="";
+					else
+					$header[]=$data[$i][2];
+					
+				}
+			
+			}
+			//	print_r($header);
+			//ParamHeading_local($header);
+			$pdf->SetFillColor(220,233,231);
+			$align=array('L','C','C','C','C','C','L','L','L');
+			$wid=array(35,24,23,23,23,23,42,42,42);
+			$pdf->Row($header,$wid,$align);
+			
+
+		}
+	}
+	else
+	{
+		$header=NULL;	
+		$header[]="No Record Found";
+		$pdf->SingleRow_report($header);
+	}
+	
+	
+	/*
+	$header=NULL;
+	$pdf->Score($header);	
+	$header=NULL;
+	$pdf->Summary($header);
+	$header=NULL;//
+
+	
+
+	$pdf->ParamHeading($header);	*/
+	$pdf->Ln();$pdf->Ln();$pdf->Ln();$pdf->Ln();$pdf->Ln();
+	/*$headerArr=NULL;
+	$headerArr[]='Agent Signature:_________________________________________________  Date:____________________';
+	$pdf->HeaderTable($headerArr);*/
+
+
+$file=basename(tempnam(getcwd(),'tmp'));
+
+$pdf->Output($file);
+ //echo "<html><SCRIPT>document.location='../../modules/merchant/account_statement.php?f=$file'; </SCRIPT></html>";
+?>

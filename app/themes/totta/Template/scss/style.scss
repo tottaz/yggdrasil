@@ -1,0 +1,106 @@
+/*!
+
+Template Name: Mental
+Template Demo: http://d.azelab.com/mental/Demo/intro.html
+Author: Azelab
+Author website: http://azelab.com
+Version: 1.0.1
+
+
+Table of Contents:
+
+I. Theme Framework
+      1. Twitter Bootstrap
+      2. Bootstrap Custom Styles
+         a. Acordions
+         b. Tabs
+         c. Buttons
+         d. Tables
+         e. Panels, Wells
+         f. Forms
+         g. Bootstrap Carousel
+
+II. Vendor components
+      1. Font Awesome
+      2. ElegantIcons Font
+      3. Animate.css Library
+      4. Perfect Scrollbar Plugin
+      5. Mental Menu Plugin
+      6. ValidationEngine Plugin
+
+III. Mental components
+      1. General
+      2. Layout
+         a. Body & Wrapper
+         b. Header
+         c. Footer
+         d. Sections
+         e. Containers
+      3. Menu Bar
+         a. Menu Bar
+         b. Menu Bar Menu
+      4. Components
+         a. Creative minds block
+         b. Social blocks
+         c. Some fun facts block
+         d. Services block
+         e. Progress Bar Block
+         f. Pricing tables
+         g. Testimonials
+         h. Brands
+         i. Responsive Google Map
+         j. Address, Phone, Email blocks
+         k. Single Post Content Section
+         l. Related posts
+         m. Comments
+         n. Single Post Footer
+         o. Sidebar & Widgets
+         p. Blog list
+         q. Footer Load More
+         r. Mental LayerSlider Layers & Styles
+         s. Top main menu
+         t. Onepage
+         u. Gallery
+         v. Single Work with Description
+         x. Video Js Skin
+         y. Loading spinners
+      5. Helpers
+         a. Text helpers
+         b. Effects & Animations
+         c. Other
+
+*/
+
+@charset "UTF-8";
+
+
+/*!==========================================================================
+   Theme Framework
+   ========================================================================== */
+
+@import "bootstrap";
+
+/*!==========================================================================
+   Vendor components
+   ========================================================================== */
+
+@import "vendor/font-awesome";
+@import "vendor/eleganticons";
+@import "vendor/animate";
+@import "vendor/perfect-scrollbar";
+@import "vendor/mtmenu";
+@import "vendor/validationEngine";
+
+
+/*!==========================================================================
+   Mental components
+   ========================================================================== */
+
+@import "general";
+@import "layout";
+@import "menu-bar";
+@import "components";
+@import "helpers";
+
+
+

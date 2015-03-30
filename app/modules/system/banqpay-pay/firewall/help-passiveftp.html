@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC 
+  "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Help - Passive FTP</title>
+<meta name="Author" content="Scott Morizot" /></head>
+<body>
+
+<h2 align="center">Help - Passive FTP</h2>
+
+<p>With passive FTP, the server provides a port to the client
+and allows the client to initiate the connection rather
+than initiating the connection with the client from the data port.
+Web browsers and clients operating behind a firewall generally
+use passive ftp transfers.  A general purpose FTP server
+will need to support passive FTP requests.</p>
+
+<p>However, by default an FTP server will select a port from the entire
+range of high ports.  It is not particularly safe to open all
+high ports.  Fortunately, that range can be restricted.  This
+firewall presumes that the range has been restricted to a specific
+selected range.  That range must also be configured in the ftp
+server.</p>
+
+<p>Instructions for specifying the port range for the wu-ftpd server
+can be found here:</p>
+
+<p><a href="http://www.wu-ftpd.org/man/ftpaccess.html" target="_blank">
+http://www.wu-ftpd.org/man/ftpaccess.html</a>
+(See the passive ports option.)</p>
+
+<p>Instructions for the ProFTPD server can be found here:</p>
+
+<p><a
+href="http://proftpd.linux.co.uk/localsite/Userguide/linked/x861.html"
+target="_blank">
+http://proftpd.linux.co.uk/localsite/Userguide/linked/x861.html</a></p>
+
+<p align="center"><a href="javascript:window.close();">
+Close Window
+</a></p>
+
+</body>
+</html>
+

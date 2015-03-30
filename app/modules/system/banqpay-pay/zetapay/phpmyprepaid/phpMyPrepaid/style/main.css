@@ -1,0 +1,15 @@
+/* This is not being used now, but it should be in the future */
+
+body {
+	font-family:	sans-serif;
+}
+
+h2 {
+	color:		#ABC;
+}
+
+table {
+	background-color: #F9FBFD;
+	border-collapse: collapse; 
+}
+

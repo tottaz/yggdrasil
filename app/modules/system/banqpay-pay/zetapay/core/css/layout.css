@@ -1,0 +1,176 @@
+/* CSS Document */
+body{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	background-attachment: fixed;
+	background-image: url(images/back.gif);
+	color: #555555;
+	text-align: justify;
+	margin-top: 8px;
+	margin-right: 8px;
+	margin-bottom: 8px;
+	margin-left: 8px;
+}
+.popupbody{
+	background-image: none;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+a:link{
+	color: #003399;
+}
+a:visited{
+	color: #003399;
+}
+a:hover{
+	color: #FF3300;
+	text-decoration: none;
+}
+.menu{
+	font-size: 11px;
+	color: #555555;
+	text-align: Center;
+}
+.copyright{
+	font-size: 9px;
+	color: #555555;
+	text-align: center;
+}
+tr,td{
+	font-size: 11px;
+	color: #555555;
+	text-align: justify;
+}
+.text2{
+	font-size: 13px;
+	font-weight: bold;
+}
+.text3{
+	font-size: 14px;
+	font-weight: bold;
+}
+.text4{
+	font-size: 17px;
+	font-weight: bold;
+}
+.text5{
+	font-size: 20px;
+	font-weight: bold;
+}
+.tbin{
+	background-color: #EEEEEE;
+	border: 1px solid #C8C8C8;
+	padding: 0px;
+	margin: 0px;
+}
+.tdin{
+	font-size: 11px;
+	color: #4A4A4A;
+	padding: 0px 6px 6px;
+}
+.tdtitle{
+	font-size: 12px;
+	font-weight: bold;
+	padding: 4px 6px;
+	background-color: #D0D0D0;
+}
+input, select{
+	background-color: #FDFDFD;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #4A4A4A;
+	border: 1px solid #C8C8C8;
+	height: 20px;
+	padding: 2px;
+}
+.buttons{
+	border:none;
+	background:auto;
+	height:14px;
+	padding:auto;
+}
+textarea{
+	background-color: #FDFDFD;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #4A4A4A;
+	border: 1px solid #C8C8C8;
+	padding: 2px;
+}
+.tdmenu{
+	font-size: 11px;
+	padding: 3px;
+	margin: 0px;
+	text-align: left;
+}
+.tdmenu a{
+	border: 1px solid #EEEEEE;
+	width: 100%;
+	padding: 3px;
+	margin: 0px;
+}
+.tdmenu a:visited{
+	border: 1px solid #EEEEEE;
+}
+.tdmenu a:hover{
+	background-color: #F8F8F8;
+	border: 1px solid #C8C8C8;
+}
+.tdsubmenu{
+	background-color: #F8F8F8;
+	padding: 4px 3px;
+	font-weight:bold;
+	border-top: 1px solid #C8C8C8;
+	border-right: 1px none #C8C8C8;
+	border-bottom: 1px solid #C8C8C8;
+	border-left: 1px none #C8C8C8;
+}
+.Stats{
+	font-family: Verdana;
+	font-size: 10px;
+	color: #333333;
+	border: 1px solid #999999;
+}
+.Stats tr {
+	background-color: #F0F0F0;
+}
+.Stats td {
+	padding: 2px 4px;
+	text-align: right;
+}
+.StatsB td {
+	background-color: #E4E4E4;
+	text-align: right;
+	padding: 2px 4px;
+	font-weight:bold;
+}
+.Stats1 td {
+	font-size: 9px;
+	background-color: #F0F0F0;
+}
+.Stats2 td {
+	font-size: 9px;
+	background-color: #E8E8E8;
+}
+.StatsTitle td{
+	background-color: #D0D0D0;
+	color: #444444;
+	font-weight: bold;
+	font-size: 13px;
+	text-align: left;
+}
+.StatsSTitle td{
+	background-color: #DDDDDD;
+	color: #666666;
+	font-weight: bold;
+	text-align: center;
+}
+.StatsSTitle2 td{
+	font-size: 9px;
+	color: #666666;
+	background-color: #DDDDDD;
+	font-weight: bold;
+	text-align: center;
+}

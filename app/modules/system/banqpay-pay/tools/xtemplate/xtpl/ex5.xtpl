@@ -1,0 +1,23 @@
+<!-- BEGIN: main -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Language" content="en" />
+<meta name="GENERATOR" content="Co-Comp Ltd" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>example 5</title></head>
+<!-- $Id: ex5.xtpl,v 1.3 2005/04/07 12:02:52 cocomp Exp $ -->
+<body>
+<p>With SetNullString you can set the default value to be put when no assign is made for a variable.<br />
+the default is to wipe it out, but you can set it up to put a custom string.</p>
+<!-- BEGIN: form -->
+<p>{INTRO_TEXT}</p>
+<form action="#">
+	<p>full name:&nbsp;&nbsp;<input type="text" size="20" name="fullname" value="{FULLNAME}" /><br />
+	e-mail:&nbsp;&nbsp;<input type="text" size="20" name="email" value="{EMAIL}" /><br />
+	income:&nbsp;&nbsp;<input type="text" size="20" name="income" value="{INCOME}" /></p>
+</form>
+<!-- END: form -->
+</body>
+</html>
+<!-- END: main -->

@@ -1,0 +1,117 @@
+<!doctype html>  
+<!--[if IE 6 ]><html lang="en-us" class="ie6"> <![endif]-->
+<!--[if IE 7 ]><html lang="en-us" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="en-us" class="ie8"> <![endif]-->
+<!--[if (gt IE 7)|!(IE)]><!-->
+<html lang="en-us"><!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	
+	<title>Scrap Sitemap Generator</title>
+	
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="copyright" content="">
+	<meta name="generator" content="Documenter v1.6 http://rxa.li/documenter">
+	<meta name="date" content="2013-01-08T13:32:30+01:00">
+	
+	<link rel="stylesheet" href="css/documenter_style.css" media="all">
+	
+	
+	<script src="js/jquery.1.6.4.js"></script>
+	
+	<script src="js/jquery.scrollTo-1.4.2-min.js"></script>
+	<script src="js/jquery.easing.js"></script>
+	
+	
+	<script>document.createElement('section');var duration=500,easing='swing';</script>
+	<script src="js/script.js"></script>
+	
+	<style>
+		html{background-color:#FFFFFF;color:#383838;}
+		::-moz-selection{background:#444444;color:#DDDDDD;}
+		::selection{background:#444444;color:#DDDDDD;}
+		#documenter_sidebar #documenter_logo{background-image:url();}
+		a{color:#0000FF;}
+		hr{border-top:1px solid #EBEBEB;border-bottom:1px solid #FFFFFF;}
+		#documenter_sidebar, #documenter_sidebar ol a{background-color:#DDDDDD;color:#222222;}
+		#documenter_sidebar ol a{-webkit-text-shadow:1px 1px 0px #EEEEEE;-moz-text-shadow:1px 1px 0px #EEEEEE;text-shadow:1px 1px 0px #EEEEEE;}
+		#documenter_sidebar ol{border-top:1px solid #AAAAAA;}
+		#documenter_sidebar ol a{border-top:1px solid #EEEEEE;border-bottom:1px solid #AAAAAA;color:#444444;}
+		#documenter_sidebar ol a:hover{background:#444444;color:#DDDDDD;border-top:1px solid #444444;}
+		#documenter_sidebar ol a.current{background:#444444;color:#DDDDDD;border-top:1px solid #444444;}
+		#documenter_copyright{display:block !important;visibility:visible !important;}
+	</style>
+	
+</head>
+<body>
+	<div id="documenter_sidebar">
+		<a href="#documenter_cover" id="documenter_logo"></a>
+		<ol id="documenter_nav">
+			<li><a class="current" href="#documenter_cover">Start</a></li>
+			<li><a href="#information">Information</a></li>
+			<li><a href="#configure">Configure</a></li>
+			<li><a href="#usage">Usage</a></li>
+			<li><a href="#limit">Limit</a></li>
+
+		</ol>
+		<div id="documenter_copyright">Copyright  2013<br>
+		made with the <a href="http://rxa.li/documenter">Documenter v1.6</a> 
+		</div>
+	</div>
+	<div id="documenter_content">
+	<section id="documenter_cover">
+	  <h1>Scrap WebSite Analyzer</h1>
+	  <hr><ul></ul></section><section id="information">
+	<h3>Information</h3><hr class="notop"> 
+	<p>This script scrape a website and return for each page:<ul><li>the title</li>
+    <li>the description</li>
+	  <li>h1, h2 and h3 tag</li>
+	  <li>header status</li>
+      </ul>
+	<p>And the list of image with alt tag, script and style wth their size.</p>
+	<p>You can also export as CSV each table<br>
+	  </p>
+	  </section>
+<section id="configure">
+	<h3>Configure</h3><hr class="notop">
+<p>
+	Create a new database, for example with phpmyadmin.</p>
+<p>
+	Open config.php and insert the host name (eg: localhost).</p>
+<p>
+	The username, the password and the databse name ($db_name).</p>
+</section>
+<section id="usage">
+	<h3>Usage</h3><hr class="notop">
+<p>
+	Go to the url of the script and insert:</p>
+<p>
+	The url (eg: http://www.example.com). Remember to insert http://www. and not use the last <strong>/</strong>.</p>
+<p>
+	Choose the recursion level. If it is set to 0 only scrap the home page link. If it is set to 1 scrap the home page link and all the link of the linked page.</p>
+    <p>With the Separator you can extract a portion of the text, such an article. You only need to insert the class you wants to get.<br>
+For example: i wants to get the article from http://net.tutsplus.com. So i check the code for find the article separator, i see that all the article is inside "single_post" class. So in Separator i insert ".single_post".</p>
+<p>Prefix is for the www or not www content. In the case the site doesn't use www. i leave it blank (for example for net.tutsplus.com) else i insert "www.".
+</p>
+<p>
+Example:
+extract all the information and the post from net.tutsplus.com:<br>
+Url: http://net.tutsplus.com<br>
+separator: .single_post<br>
+Prefix: leave it blank<br>
+
+
+</p>
+<p>Now run, wait and enjoy!</p>
+<p>&nbsp;</p>
+</section>
+<section id="limit">
+	<h3>Limit</h3><hr class="notop">
+<p>
+	No work if the url use <strong># </strong>character.</p>
+</section>
+
+	</div>
+</body>
+</html>

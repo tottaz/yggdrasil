@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{PAGE_TITLE}</title>
+{__CSS_GLOBAL__}
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/helpScript.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/tabScript.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/functions.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/ajaxScript.js"></script>
+<script>
+// AJAX CORNER
+function ajaxParser(){
+	if(request.readyState == 1){
+		document.getElementById('title').innerHTML = oriMessage + '&nbsp;&nbsp;&nbsp;<font id="executing"><img align="top" src="{SKINROOT}/images/executing.gif">Executing...</font>';
+	}
+	if(request.readyState == 4){ 
+		var result = request.responseText.split('regexAJAX');
+		document.getElementById('title').innerHTML = oriMessage;
+
+		if(document.getElementById('action').value == 'delete_quicklinks' || document.getElementById('action').value == 'add_quicklinks') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('quicklinks_button').innerHTML = result[1];
+			document.getElementById('menuAJAX').innerHTML = result[2];
+		}
+		if(document.getElementById('action').value == 'update') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+		}
+		if(document.getElementById('action').value == 'gethelp') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('helptitle').innerHTML = "Context Help";
+			document.getElementById('helpdata').innerHTML = result[1];
+			if(!document.getElementById('nohelp'))
+				document.getElementById('helpdetected').value = 1;			
+		}
+		if(document.getElementById('action').value == 'getlog') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('logtitle').innerHTML = "Log Data";
+			document.getElementById('logdata').innerHTML = result[1];
+		}
+		if(document.getElementById('action').value == 'startpage') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('DefaultPage').innerHTML = result[1];
+		}
+		//CLEAR THE RELEVANT TEXTBOXES AFTER AJAX
+		document.getElementById('action').value = '';
+		enableButtons(document.forms[0]);
+	}
+	formParams = '';
+}
+
+function ajaxMain(formName,action){
+	document.getElementById('action').value = action;
+	getFormFields(formName);
+	if(formParams == '') {
+		for (i=0; i<formName.elements.length; i++) {
+			if(formName.elements[i].id) {
+				if(formName.elements[i].type == 'checkbox' || formName.elements[i].type == 'radio') {
+					 if(formName.elements[i].checked) {
+						formParams = formParams + "&" + formName.elements[i].id + "=" + encodeURIComponent(formName.elements[i].value);
+					}	
+				}
+				else {
+					formParams = formParams + "&" + formName.elements[i].id + "=" + encodeURIComponent(formName.elements[i].value);
+				}	
+			}	
+			else if(formName.elements[i].name) {
+				if(formName.elements[i].type == 'checkbox' || formName.elements[i].type == 'radio') {
+					 if(formName.elements[i].checked) {
+						formParams = formParams + "&" + formName.elements[i].name + "=" + encodeURIComponent(formName.elements[i].value);
+					}	
+				}
+				else {	
+					formParams = formParams + "&" + formName.elements[i].name + "=" + encodeURIComponent(formName.elements[i].value);
+				}	
+			}	
+		}
+	}
+
+	request.open('POST', '{AJAX_FORM_POST}', true); //THIS ONE FOR POST
+	request.onreadystatechange = ajaxParser;
+	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); //THIS ONE ADDED FOR POST ONLY
+	request.send(formParams); //THIS ONE FOR POST
+}
+// AJAX CORNER
+</script>
+
+</head>
+
+<body onload="showTab();">
+<table width="100%" cellpadding="0" cellspacing="2">
+	<tr>
+		<td><img src="{SKINROOT}/images/logo.gif" /></td>
+		<td height="100%" valign="bottom">
+			<table align="right" height="100%" cellspacing="5" cellpadding="0">
+			<tr>
+				<td class="td_top">Logged In: {FULL_NAME} |</td>
+				<td class="td_top">{ADMIN_USER_LINK}</td>
+				<td class="td_top">{LOGOUT_LINK}</td>
+			</tr></table>
+		</td>
+	</tr>
+	<tr><td class="spacer" colspan="2"></td></tr>
+</table>
+	
+<div class="div_top_menu">
+	{DIV_TOP_MENU}
+</div>
+	
+<div class="div_top_menu_foot"></div>
+<div id='submenu' class="div_sub_menu" align="right">Clock & Date Container</div>
+<script>startclock();</script>
+
+<table width="100%" height="100%"><tr><td nowrap valign="top">
+	<table width="100%" height="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="menu_table_parent">
+		<table class="menu_table_container">
+		<tr><td>
+			{SIDE_MENU}
+		</td></tr>
+		<tr><td>
+			<div id="menuAJAX" name="menuAJAX">
+				{QUICKLINKS_MENU}
+			</div>
+		</td></tr>
+		</table>
+		</td>
+		<td class="main_table">
+		<table width="100%" class="module_page_table">
+			<tr><td>
+				<H1 id='title' name='title'>{H1_TITLE}</H1>
+				<div id="div_breadcrumbs" name="div_breadcrumbs">{BREADCRUMBS}</div>
+				<div id="{MESSAGE_ID}" name="{MESSAGE_ID}" {MESSAGE_BOX}>{MESSAGE}</div>
+			</td></tr>
+			<tr><td height="10"></td></tr>
+			<tr><td nowrap>
+				<ul id="tablist" style="display:none">
+					<li><span class="current" onmouseover="overtab('sc1',this)" onmouseout="outtab('sc1',this)" onclick="return expandcontent('sc1', this)"><img title='tabimage' src="{SKINROOT}/images/backup.gif" align="absmiddle" />&nbsp;Backup Data Configuration</span></li>
+					<li><span onmouseover="overtab('sc2',this)" onmouseout="outtab('sc2',this)" onclick="return expandcontent('sc2', this)"><img title='tabimage' src="{SKINROOT}/images/restore.gif" align="absmiddle" />&nbsp;Restore Data Configuration</span></li>
+					<li><span onmouseover="overtab('logsection',this)" onmouseout="outtab('logsection',this)" onclick="getLog();return expandcontent('logsection', this)"><img title='tabimage' src="{SKINROOT}/images/log.gif" align="absmiddle" />&nbsp;Log</span></li>
+					<li><span onmouseover="overtab('helpsection',this)" onmouseout="outtab('helpsection',this)" onclick="getHelp();return expandcontent('helpsection', this)"><img title='tabimage' src="{SKINROOT}/images/help.gif" align="absmiddle" />&nbsp;Help</span></li>
+				</ul>
+	
+				<DIV id="tabcontentcontainer">
+					<form name='addupdate' id='addupdate' {FORM_ACTION} method="post" onsubmit="submitonce(this)">
+					<input name="addupdateID" id="addupdateID" type="hidden" value="{ID}" />
+					<input name="update_title" id="update_title" type="hidden" value="{H1_TITLE}" />
+					<input name="action" id="action" type="hidden" />
+					<input name="submit_action" id="submit_action" type="hidden" value="{SUBMIT_ACTION}" />
+					<input name="messageID" id="messageID" value="{MESSAGE_ID}" type="hidden" />
+					<input name="quickLinksName" id="quickLinksName" type="hidden" value="{QUICKLINKS_NAME}"/>
+					<input name="quickLinksURL" id="quickLinksURL" type="hidden" value="{QUICKLINKS_URL}"/>
+					<input name="quickLinksDesc" id="quickLinksDesc" type="hidden" value="{QUICKLINKS_DESC}"/>
+					<input name="helpdetected" id="helpdetected" type="hidden"/>
+					<input name="LogType" id="LogType" type="hidden" value="{LOGTYPE}"/>
+					<input name="LogAction" id="LogAction" type="hidden" value="{LOGACTION}"/>
+					<input name="startup_page" id="startup_page" type="hidden" value="{STARTUP_PAGE}"/>
+					<div id="sc1" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/backup.gif" align="absmiddle" />&nbsp;<span id='subtitle'>Backup Data</span></legend>
+							<div id="listingOutputAJAX">
+								<table nowrap cellspacing="0" cellpadding="3">
+									<th colspan="4">Manual Backup Process</th>
+									<tr><td>
+										<div>1. SocketTimeSheet <b id='field_required'>cannot guarantee</b> under any circumstances the integrity of database backups that are done using this script.</div><BR>
+										<div>2. If possible, you are <b id='field_required'>strongly recommended</b> to use MySQL's internal shell script, mysqldump, in the following manner:</div>
+										<ul>
+											<li>Log into <tt>telnet</tt> / <tt>SSH</tt> for your website. (usually you will use the same login information you use for your site's FTP)</li>
+											<li>Type the following from the command line:<br /><br />
+												<tt>mysqldump --opt -u{username} -p {database} > /path/to/dump.sql</tt><br /><br />
+												Replacing:
+												<ul>
+													<li><tt>{username}</tt> with your MySQL username.</li>
+													<li><tt>{database}</tt> with your MySQL database name.</li>
+													<li><tt>/path/to/dump.sql</tt> with the complete path to your backup file. (for example, <tt>{BACKUP_NAME_ROOT}</tt>)</li>
+												</ul>
+											</li><BR>
+											<li>You will then be asked to enter your MySQL password.</li>
+											<li>The server will now create a backup of your database. The larger your database is, the longer it will take to back it up.</li>
+											<li>When the backup is complete you will be brought back to the command prompt.</li>
+											<li>Verify through FTP that the backup file is in place, and type <tt>exit</tt> to close the connection.</li>
+										</ul>
+										(All of the MySQL information above can be found in SocketTimeSheet's <tt>/include/lib/db_connect.php</tt> file.)
+									</td></tr>
+									<th colspan="4">Automatic Backup Process</th>
+									<tr><td>
+									Click on the button below to start backing up your database and download it to your local machine as <b><i>{BACKUP_NAME}</i></b>, a SQL script file.<br>								
+									</td></tr>
+								</table>	
+							</div>
+							<div id="listingButtonsAJAX">{SHOW_BUTTONS}</div>
+						</fieldset>
+					</div>
+					<div id="sc2" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/restore.gif" align="absmiddle" />&nbsp;<span id='subtitle'>Restore Data</span></legend>
+							<div id="listingOutputAJAX">
+								<table nowrap cellspacing="0" cellpadding="3">
+									<th colspan="4">Automatic Restoration Process</th>
+									<tr><td>
+										To automatically restore from previously backed up file:
+										<OL>
+										<li>Upload the backed-up SQL script file (example <i>{RESTORE_NAME}</i>)</li>
+										<li>Click on the <b>Restore From File</b> button</li>
+										<li id='field_required'>This process may take a few minutes (please wait patiently)</li>
+										</OL>
+									<p>
+										<iframe id="restoreDB" name="restoreDB" marginheight="0" marginwidth="0" src="restoreFILE.php" height="50" width="100%" frameborder="0" scrolling="no"></iframe>	
+									</p>
+									<b>Note:</b>
+									<OL>				
+										<li>SocketTimeSheet <b id='field_required'>cannot guarantee</b> under any circumstances the integrity of database that are restored done using this automatic restoration process</li>
+										<li>Changes will take effect after your next login</li>
+									</OL>
+									</td></tr>
+									<th colspan="4">Manual Restoration Process</th>
+									<tr><td>
+										To restore a database backup you once made, follow these simple steps:
+										<ul>
+											<li>First, make sure the backup file is on your site. If it's on your computer, you will need to upload it first using FTP.</li>
+											<li>Log into <tt>telnet</tt> / <tt>SSH</tt> for your website. (usually you will use the same login information you use for your site's FTP)</li>
+											<li>Type the following from the command line:<br />
+												<tt>mysql -u{username} -p {database} < /path/to/backup.sql</tt><br /><br />
+												Replacing:
+												<ul>
+													<li><tt>{username}</tt> with your MySQL username.</li>
+													<li><tt>{database}</tt> with your MySQL database name.</li>
+													<li><tt>/path/to/dump.sql</tt> with the complete path to your backup file. (for example, <tt>{RESTORE_NAME_ROOT}</tt>)</li>
+												</ul>
+											</li>
+											<li>You will then be asked to enter your MySQL password.</li>
+											<li>The server will now restore the backup of your database. The larger your backup is, the longer it will take to restore it.</li>
+											<li>When the process is complete you will be brought back to the command prompt.</li>
+											<li>Verify the database has been restored, and type <tt>exit</tt> to close the connection.</li>
+										</ul>
+										(All of the MySQL information above can be found in SocketTimeSheet's <tt>/include/lib/db_connect.php</tt> file.)<br /><br />
+										<b id='field_required'>IMPORTANT NOTE:</b><br />
+										Restoring a database backup in this manner will <b id='field_required'>IRREVERSIBLY DELETE</b> all current data in your database, and replace it with data from the backup you have made. 
+										In other words, if you have made the database backup on April 8th, and you are restoring it on April 12th, any and all new data that was created between these dates will be <b id='field_required'>DELETED</b>.								
+									</td></tr>
+								</table>	
+							</div>
+						</fieldset>
+					</div>
+					<div id="logsection" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/log.gif" align="absmiddle" /><span id='logtitle'>No Log Data In Session</span></legend>											
+						<div id="logdata">
+							<BR />
+							<input onclick='getLog()' id="submitButton" name="submitButton" type="button" class="buttons" onmouseover="this.className='buttons_over'" onmouseout="this.className='buttons'" value="Refresh Log Data">
+						</div>
+						</fieldset>	
+					</div>
+					<div id="helpsection" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/help.gif" align="absmiddle" /><span id='helptitle'>No Context Help Data In Session</span></legend>											
+						<div id="helpdata">
+							<BR />
+							<input onclick='getHelp()' id="submitButton" name="submitButton" type="button" class="buttons" onmouseover="this.className='buttons_over'" onmouseout="this.className='buttons'" value="Refresh Context Help">
+						</div>
+						</fieldset>	
+					</div>
+					</form>
+				</DIV>		
+			</td></tr>
+		</table>
+		{SHOW_FOOTER}
+		</td> 
+	</tr>
+	</table>
+</td></tr></table>	
+<script>var oriMessage = document.getElementById('title').innerHTML;</script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{PAGE_TITLE}</title>
+{__CSS_GLOBAL__}
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/helpScript.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/tabScript.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/functions.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/ajaxScript.js"></script>
+<script>
+// AJAX CORNER
+
+function ajaxParser(){
+	if(request.readyState == 1){
+		document.getElementById('title').innerHTML = oriMessage + '&nbsp;&nbsp;&nbsp;<font id="executing"><img align="top" src="{SKINROOT}/images/executing.gif">Executing...</font>';
+	}
+	if(request.readyState == 4){ 
+		var result = request.responseText.split('regexAJAX');
+		document.getElementById('title').innerHTML = oriMessage;
+
+		if(document.getElementById('action').value == 'delete_quicklinks' || document.getElementById('action').value == 'add_quicklinks') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('quicklinks_button').innerHTML = result[1];
+			document.getElementById('menuAJAX').innerHTML = result[2];
+		}
+		if(document.getElementById('action').value == 'update' || document.getElementById('action').value == 'testmail') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+		}
+		if(document.getElementById('action').value == 'gethelp') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('helptitle').innerHTML = "Context Help";
+			document.getElementById('helpdata').innerHTML = result[1];
+			if(!document.getElementById('nohelp'))
+				document.getElementById('helpdetected').value = 1;			
+		}
+		if(document.getElementById('action').value == 'getlog') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('logtitle').innerHTML = "Log Data";
+			document.getElementById('logdata').innerHTML = result[1];
+		}
+		if(document.getElementById('action').value == 'startpage') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('DefaultPage').innerHTML = result[1];
+		}
+		//CLEAR THE RELEVANT TEXTBOXES AFTER AJAX
+		document.getElementById('action').value = '';
+		enableButtons(document.forms[0]);
+	}
+	formParams = '';
+}
+
+function ajaxMain(formName,action){
+	if(action == 'update') {
+		if(document.getElementById('default_mail').value == 'smtp' && !document.getElementById('mailserver').value) {
+			alert('Enter The SMTP Server Name');
+			return false;
+		}
+		if(document.getElementById('default_mail').value == 'smtp' && !document.getElementById('mailport').value) {
+			alert('Enter The SMTP Server Port');
+			return false;
+		}
+		if(document.getElementById('default_mail').value == 'smtp' && document.getElementById('authentication').checked && (!document.getElementById('maillogin').value || !document.getElementById('mailpassword').value)) {
+			alert('Enter The Authentication Values');
+			return false;
+		}
+	}	
+	if(action == 'testmail') {
+		if(!document.getElementById('sender_name').value ||
+		!document.getElementById('sender_email').value ||
+		!document.getElementById('recepients').value ||
+		!document.getElementById('subject').value ||
+		!document.getElementById('content').value) {
+			alert('Enter All Required Fields (In Red)');
+			return false;
+		}
+	}	
+	document.getElementById('action').value = action;
+	getFormFields(formName);
+	if(formParams == '') {
+		for (i=0; i<formName.elements.length; i++) {
+			if(formName.elements[i].id) {
+				if(formName.elements[i].type == 'checkbox' || formName.elements[i].type == 'radio') {
+					 if(formName.elements[i].checked) {
+						formParams = formParams + "&" + formName.elements[i].id + "=" + encodeURIComponent(formName.elements[i].value);
+					}	
+				}
+				else {
+					formParams = formParams + "&" + formName.elements[i].id + "=" + encodeURIComponent(formName.elements[i].value);
+				}	
+			}	
+			else if(formName.elements[i].name) {
+				if(formName.elements[i].type == 'checkbox' || formName.elements[i].type == 'radio') {
+					 if(formName.elements[i].checked) {
+						formParams = formParams + "&" + formName.elements[i].name + "=" + encodeURIComponent(formName.elements[i].value);
+					}	
+				}
+				else {	
+					formParams = formParams + "&" + formName.elements[i].name + "=" + encodeURIComponent(formName.elements[i].value);
+				}	
+			}	
+		}
+	}
+
+	request.open('POST', '{AJAX_FORM_POST}', true); //THIS ONE FOR POST
+	request.onreadystatechange = ajaxParser;
+	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); //THIS ONE ADDED FOR POST ONLY
+	request.send(formParams); //THIS ONE FOR POST
+}
+
+// AJAX CORNER
+</script>
+
+</head>
+
+<body onload="showTab();">
+<table width="100%" cellpadding="0" cellspacing="2">
+	<tr>
+		<td><img src="{SKINROOT}/images/logo.gif" /></td>
+		<td height="100%" valign="bottom">
+			<table align="right" height="100%" cellspacing="5" cellpadding="0">
+			<tr>
+				<td class="td_top">Logged In: {FULL_NAME} |</td>
+				<td class="td_top">{ADMIN_USER_LINK}</td>
+				<td class="td_top">{LOGOUT_LINK}</td>
+			</tr></table>
+		</td>
+	</tr>
+	<tr><td class="spacer" colspan="2"></td></tr>
+</table>
+	
+<div class="div_top_menu">
+	{DIV_TOP_MENU}
+</div>
+	
+<div class="div_top_menu_foot"></div>
+<div id='submenu' class="div_sub_menu" align="right">Clock & Date Container</div>
+<script>startclock();</script>
+
+<table width="100%" height="100%"><tr><td nowrap valign="top">
+	<table width="100%" height="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="menu_table_parent">
+		<table class="menu_table_container">
+		<tr><td>
+			{SIDE_MENU}
+		</td></tr>
+		<tr><td>
+			<div id="menuAJAX" name="menuAJAX">
+				{QUICKLINKS_MENU}
+			</div>
+		</td></tr>
+		</table>
+		</td>
+		<td class="main_table">
+		<table width="100%" class="module_page_table">
+			<tr><td>
+				<H1 id='title' name='title'>{H1_TITLE}</H1>
+				<div id="div_breadcrumbs" name="div_breadcrumbs">{BREADCRUMBS}</div>
+				<div id="{MESSAGE_ID}" name="{MESSAGE_ID}" {MESSAGE_BOX}>{MESSAGE}</div>
+			</td></tr>
+			<tr><td height="10"></td></tr>
+			<tr><td nowrap>
+				<ul id="tablist" style="display:none">
+					<li><span class="current" onmouseover="overtab('sc1',this)" onmouseout="outtab('sc1',this)" onclick="return expandcontent('sc1', this)"><img title='tabimage' src="{SKINROOT}/images/menu_icons/{MENU_ICON}" align="absmiddle" />&nbsp;Email Settings Configuration</span></li>
+					<li><span onmouseover="overtab('sc2',this)" onmouseout="outtab('sc2',this)" onclick="return expandcontent('sc2', this)"><img title='tabimage' src="{SKINROOT}/images/menu_icons/admin_system_mailsend.gif" align="absmiddle" />&nbsp;Email Testing</span></li>
+					<li><span onmouseover="overtab('logsection',this)" onmouseout="outtab('logsection',this)" onclick="getLog();return expandcontent('logsection', this)"><img title='tabimage' src="{SKINROOT}/images/log.gif" align="absmiddle" />&nbsp;Log</span></li>
+					<li><span onmouseover="overtab('helpsection',this)" onmouseout="outtab('helpsection',this)" onclick="getHelp();return expandcontent('helpsection', this)"><img title='tabimage' src="{SKINROOT}/images/help.gif" align="absmiddle" />&nbsp;Help</span></li>
+				</ul>
+	
+				<DIV id="tabcontentcontainer">
+					<form name='addupdate' id='addupdate' {FORM_ACTION} method="post" onsubmit="submitonce(this)">
+					<input name="addupdateID" id="addupdateID" type="hidden" value="{ID}" />
+					<input name="update_title" id="update_title" type="hidden" value="{H1_TITLE}" />
+					<input name="action" id="action" type="hidden" />
+					<input name="submit_action" id="submit_action" type="hidden" value="{SUBMIT_ACTION}" />
+					<input name="messageID" id="messageID" value="{MESSAGE_ID}" type="hidden" />
+					<input name="quickLinksName" id="quickLinksName" type="hidden" value="{QUICKLINKS_NAME}"/>
+					<input name="quickLinksURL" id="quickLinksURL" type="hidden" value="{QUICKLINKS_URL}"/>
+					<input name="quickLinksDesc" id="quickLinksDesc" type="hidden" value="{QUICKLINKS_DESC}"/>
+					<input type="hidden" value="{DEFAULT_MAIL}" id="default_mail" name="default_mail">
+					<input name="helpdetected" id="helpdetected" type="hidden"/>
+					<input name="LogType" id="LogType" type="hidden" value="{LOGTYPE}"/>
+					<input name="LogAction" id="LogAction" type="hidden" value="{LOGACTION}"/>
+					<input name="startup_page" id="startup_page" type="hidden" value="{STARTUP_PAGE}"/>
+				<div id="sc1" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/menu_icons/{MENU_ICON}" align="absmiddle" />&nbsp;<span id='subtitle'>{H1_TITLE}</span></legend>
+							<div id="listingOutputAJAX">
+								<table nowrap cellspacing="0" cellpadding="3">
+									<th colspan="2">Email Format</th>
+									<tr>
+										<td nowrap><input id="mailformat" name="mailformat" type="radio" value="HTML" {HTML_FORMAT}>&nbsp;HTML based email</td>
+										<td nowrap><input id="mailformat" name="mailformat" type="radio" value="TEXT" {TEXT_FORMAT}>&nbsp;TEXT based email</td>
+									</tr>
+									<th colspan="2">Server Settings</th>
+									<tr>
+										<td nowrap colspan="2"><input onFocus="document.getElementById('default_mail').value=this.value" id="defaultmail" name="defaultmail" type="radio" value="local" {LOCAL_MAIL}>&nbsp;Internal MTA (default system configuration)</td>
+									</tr>
+									<tr>
+										<td nowrap colspan="2"><input onFocus="document.getElementById('default_mail').value=this.value" id="defaultmail" name="defaultmail" type="radio" value="smtp" {SMTP_MAIL}>&nbsp;External MTA (external SMTP server)</td>
+									</tr>
+									<th colspan="2">External MTA SMTP Server Settings (REQUIRED IF SMTP SELECTED)</th>
+									<tr><td nowrap colspan="2" id="field_required" align="center">WARNING! SYSTEM WILL TIMEOUT IF IT FAILS TO CONNECT TO SERVER!</td></tr>
+									<tr><td nowrap>SMTP Server Name:</td><td><input onkeypress="return keyPress(event,'normaltext');" class="textbox" id="mailserver" name="mailserver" type="text" value="{MAIL_SERVER}" size="40"></td></tr>
+									<tr><td nowrap>SMTP Server Port:</td><td><input onkeypress="return keyPress(event,'integer');" size=10 onkeypress="return keyPress(event,'integer');" class="textbox" id="mailport" name="mailport" type="text" value="{MAIL_PORT}"> DEFAULT=25</td></tr>
+									<tr><td nowrap>Authentication Required?:</td><td><input id="authentication" name="authentication" type="radio" value="1" {AUTHENTICATION}>YES&nbsp;<input id="authentication" name="authentication" type="radio" value="0" {NO_AUTHENTICATION}>NO</td></tr>
+									<tr><td nowrap>Login:</td><td><input onkeypress="return keyPress(event,'normaltext');" class="textbox" id="maillogin" name="maillogin" type="text" value="{MAIL_LOGIN}"></td></tr>
+									<tr><td nowrap>Password:</td><td><input onkeypress="return keyPress(event,'normaltext');" class="textbox" id="mailpassword" name="mailpassword" type="password" value="{MAIL_PASSWORD}"></td></tr>
+								</table>	
+							</div>
+							<div id="listingButtonsAJAX">{SHOW_BUTTONS}</div>
+						</fieldset>
+					</div>
+					<div id="sc2" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/menu_icons/admin_system_mailsend.gif" align="absmiddle" />&nbsp;<span id='subtitle'>Test Email Sending</span></legend>
+							<div id="listingOutputAJAX">
+								<table nowrap cellspacing="0" cellpadding="3">
+									<th colspan="2">Details</th>
+									<tr><td nowrap id="field_required">Sender Name:</td><td><input onkeypress="return keyPress(event,'normaltext');" size=40 class="textbox" id="sender_name" name="sender_name" type="text" value="{EMAIL_FULL_NAME}"></td></tr>
+									<tr><td nowrap id="field_required">Sender Email:</td><td><input onkeypress="return keyPress(event,'email');" size=40 class="textbox" id="sender_email" name="sender_email" type="text" value="{EMAIL_ADDRESS}"></td></tr>
+									<tr><td nowrap id="field_required">Recepient Email:</td><td><input onkeypress="return keyPress(event,'email');" size=40 class="textbox" id="recepients" name="recepients" type="text" value="{EMAIL_ADDRESS}"></td></tr>
+									<tr><td nowrap id="field_required">Email Subject:</td><td><input onkeypress="return keyPress(event,'normaltext');" size=40 class="textbox" id="subject" name="subject" type="text" value="{EMAIL_SUBJECT}"></td></tr>
+									<tr><td nowrap id="field_required">Email Content:</td><td><textarea onkeypress="return keyPress(event,'textarea');" cols="40" rows="5" class="textbox" id="content" name="content">{EMAIL_CONTENT}</textarea></td></tr>
+								</table>	
+							<div><input onclick='ajaxMain(document.forms[0],"testmail");' id="testmail" name="testmail" type="button" class="buttons" onmouseover="this.className='buttons_over'" onmouseout="this.className='buttons'" value="Send Test Email" {DEMO_BUTTON_HIDE}></div>
+							</div>
+						</fieldset>
+					</div>
+					<div id="logsection" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/log.gif" align="absmiddle" /><span id='logtitle'>No Log Data In Session</span></legend>											
+						<div id="logdata">
+							<BR />
+							<input onclick='getLog()' id="submitButton" name="submitButton" type="button" class="buttons" onmouseover="this.className='buttons_over'" onmouseout="this.className='buttons'" value="Refresh Log Data">
+						</div>
+						</fieldset>	
+					</div>
+					<div id="helpsection" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/help.gif" align="absmiddle" /><span id='helptitle'>No Context Help Data In Session</span></legend>											
+						<div id="helpdata">
+							<BR />
+							<input onclick='getHelp()' id="submitButton" name="submitButton" type="button" class="buttons" onmouseover="this.className='buttons_over'" onmouseout="this.className='buttons'" value="Refresh Context Help">
+						</div>
+						</fieldset>	
+					</div>
+					</form>
+				</DIV>		
+			</td></tr>
+		</table>
+		{SHOW_FOOTER}
+		</td> 
+	</tr>
+	</table>
+</td></tr></table>
+<script>var oriMessage = document.getElementById('title').innerHTML;</script>
+</body>
+</html>

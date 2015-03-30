@@ -1,0 +1,40 @@
+<!-- ============================================================================================================
+          HTML
+============================================================================================================= -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- ============================================================================================================
+          HEAD 
+============================================================================================================= -->
+<head>
+<title>JQUERY4U | jQuery RSS Feed Demo</title>
+<link rel="stylesheet" href="styles.css" />
+<script type="text/javascript" language="javascript" src="jquery-1.4.2.min.js"></script>
+<script type="text/javascript" language="javascript" src="http://www.google.com/jsapi?key=ABQIAAAAFEyVt-pBJaTXzM__EKlCrBRyn6VRRdQGMLQqRPPw1fs6QDtVcBRGklOHzrf7hmoAX3qgxg4t5ImqRA"></script>
+<script type="text/javascript" language="javascript" src="gfeedfetcher.js"></script>
+</head>
+<!-- ============================================================================================================
+          BODY 
+============================================================================================================= -->
+<body>
+         
+<div id="rssfeed-wrap">
+<h2>What the world is saying:</h2>
+<script type="text/javascript">
+var newsfeed=new gfeedfetcher("rssfeeds", "rssfeedsclass", "_new")
+newsfeed.addFeed("JQUERY BLOG", "http://jquery4u.com/rss/");
+newsfeed.addFeed("BLOGOOLA's Blog", "http://blogoola.com/blog/feed/");
+newsfeed.displayoptions("label datetime snippet");
+newsfeed.setentrycontainer("p");
+newsfeed.filterfeed(10, "date");
+newsfeed.init();
+</script>
+<p><a class="darklink" href="javascript:newsfeed.init()">Refresh live blog posts</a></p>
+</div>
+
+
+<!-- |===== FOOTER COPYRIGHT ==================== -->
+<div id="footercopyright"><span class="footertext">Development by the <a class="footertext plain" target="_blank" href="http://codingmagician.com">Coding Magician</a></span></div>
+</div>
+</body></html> 
+<!-- ====== END HTML ===============================================================================| -->   

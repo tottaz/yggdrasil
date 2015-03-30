@@ -1,0 +1,214 @@
+2006-12-18 22:21:34 Error: Array
+(
+    [Task] => Array
+        (
+            [client_id] => 2
+        )
+
+)
+
+2006-12-18 22:21:43 Error: Array
+(
+    [Task] => Array
+        (
+            [client_id] => 4
+        )
+
+)
+
+2006-12-18 22:24:01 Error: Array
+(
+    [Task] => Array
+        (
+            [client_id] => 2
+        )
+
+)
+
+2006-12-18 22:25:19 Error: here
+2006-12-18 22:26:55 Error: here
+2006-12-18 22:27:19 Error: here
+2006-12-18 22:28:12 Error: here
+2006-12-18 22:43:07 Error: here
+2006-12-18 22:43:07 Error: Array
+(
+    [Task] => Array
+        (
+            [client_id] => 2
+        )
+
+)
+
+2006-12-18 22:43:11 Error: here
+2006-12-18 22:43:11 Error: Array
+(
+    [Task] => Array
+        (
+            [client_id] => 4
+        )
+
+)
+
+2006-12-18 22:43:15 Error: here
+2006-12-18 22:43:15 Error: Array
+(
+    [Task] => Array
+        (
+            [client_id] => 2
+        )
+
+)
+
+2006-12-18 22:44:21 Error: here
+2006-12-18 22:44:21 Error: Array
+(
+    [Task] => Array
+        (
+            [client_id] => 2
+        )
+
+)
+
+2006-12-18 22:45:33 Error: here
+2006-12-18 22:45:33 Error: Array
+(
+    [Task] => Array
+        (
+            [client_id] => 4
+        )
+
+)
+
+2006-12-18 22:45:42 Error: here
+2006-12-18 22:45:42 Error: Array
+(
+    [Task] => Array
+        (
+            [client_id] => 2
+        )
+
+)
+
+2006-12-18 22:52:03 Error: here
+2006-12-18 22:52:03 Error: Array
+(
+    [Task] => Array
+        (
+            [project_id] => 1
+        )
+
+)
+
+2006-12-18 22:52:12 Error: Array
+(
+    [Task] => Array
+        (
+            [client_id] => 2
+        )
+
+)
+
+2006-12-18 22:52:34 Error: here
+2006-12-18 22:52:34 Error: Array
+(
+    [Task] => Array
+        (
+            [client_id] => 4
+        )
+
+)
+
+2006-12-18 23:00:10 Error: Array
+(
+    [Task] => Array
+        (
+            [project_id] => 8
+        )
+
+)
+
+2006-12-18 23:00:16 Error: Array
+(
+    [Task] => Array
+        (
+            [project_id] => 2
+        )
+
+)
+
+2006-12-18 23:00:47 Error: Array
+(
+    [Task] => Array
+        (
+            [client_id] => 2
+        )
+
+)
+
+2006-12-18 23:00:52 Error: here
+2006-12-18 23:00:52 Error: Array
+(
+    [Task] => Array
+        (
+            [project_id] => 5
+        )
+
+)
+
+2006-12-18 23:18:31 Error: Array
+(
+    [Task] => Array
+        (
+            [id] => 
+            [client_id] => 
+            [project_id] => 
+            [type_id] => 
+            [rate_id] => 
+            [name] => 
+            [time_start] => 
+            [time_end] => 
+            [amount] => aa
+            [billed] => 0
+            [notes] => 
+        )
+
+)
+
+2006-12-18 23:20:08 Error: Array
+(
+    [Task] => Array
+        (
+            [id] => 
+            [client_id] => 2
+            [project_id] => 
+            [type_id] => 
+            [rate_id] => 
+            [name] => 
+            [time_start] => 
+            [time_end] => 
+            [amount] => aa
+            [billed] => 0
+            [notes] => 
+        )
+
+)
+
+2006-12-18 23:20:13 Error: Array
+(
+    [Task] => Array
+        (
+            [id] => 
+            [client_id] => 2
+            [project_id] => 
+            [type_id] => 
+            [rate_id] => 8
+            [name] => 
+            [time_start] => 
+            [time_end] => 
+            [amount] => aa
+            [billed] => 0
+            [notes] => 
+        )
+
+)
+

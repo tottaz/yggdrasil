@@ -1,0 +1,33 @@
+<ul class="actions">
+  <?php if ($html->tagValue('Type/id')): ?>
+  <li><?php echo $html->link('View Type', $link->getLink('/types/view/' . $html->tagValue('Type/id'))); ?></li>
+  <li><?php echo $html->link('Delete Type', $link->getLink('/types/delete/' . $html->tagValue('Type/id')), null, 'Are you sure you want to delete Type ID ' . ('Type/id') . '?'); ?></li>
+  <?php endif; ?>
+  <li><?php echo $html->link('List Types', $link->getLink('/types/index')); ?></li>
+</ul>
+
+<fieldset>
+  <legend>Type Form</legend>
+
+  <?php echo $html->formTag($link->getLink('/types/form/'.$html->tagValue('Type/id')),'post'); ?>
+    <?php echo $html->hidden('Type/id')?>
+
+    <div class="outline">
+
+      <div class="optional">
+        <?php echo $error->messageFor('Type/name'); ?>
+        <div class="info"><?php echo $tooltip->show('Name','<p><b>Description:</b> field_description.</p><p><b>Requirements:</b></p><ul><li>Optional field.</li></ul>'); ?></div>
+        <div class="label"><?php echo $form->labelTag('Type/name', 'Name');?></div>
+        <div class="input"><?php echo $html->input('Type/name', array('maxlength' => $field_lengths['name'], 'size' => '60'));?></div>
+        <div class="clear"></div>
+      </div>
+
+    </div>
+
+    <div class="submit">
+      <?php echo $html->submit('Save');?>
+    </div>
+
+  </form>
+
+</fieldset>

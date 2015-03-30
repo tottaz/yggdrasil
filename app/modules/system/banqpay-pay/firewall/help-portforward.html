@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC 
+  "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Help - Port Forwarding</title>
+<meta name="Author" content="Scott Morizot" /></head>
+<body>
+
+<h2 align="center">Help - Port Forwarding</h2>
+
+<p>Port forwarding forwards all traffic on a specific port (or range of ports) from
+the firewall to a computer on the internal LAN.  This can
+be required to support special situations.  For instance,
+this is the only way to support file transfers with an ICQ
+client on an internal computer.  It's also required if an internal
+system hosts a service such as a web server.  However, it's also
+a dangerous option.  It allows Internet computers access to
+your internal network.  Use it carefully and only if you're
+certain you know what you're doing.</p>
+
+<p>Easy Firewall Generator supports the creation of a single port
+forwarding rule (or two if both tcp and udp are selected). If you
+require additional rules, use the generated rules as a template to build
+the additional rules in the output script. Be sure to create the
+appropriate rule both in the PREROUTING chain of the NAT table and the
+FORWARD chain of the INPUT table.</p>
+
+<p>The following lists may help you determine which ports to forward.
+
+<ul>
+<li>
+<a href="http://www.practicallynetworked.com/sharing/app_port_list.htm" target="_blank">
+http://www.practicallynetworked.com/sharing/app_port_list.htm</a>
+</li>
+
+<li>
+<a href="http://www.iana.org/assignments/port-numbers" target="_blank">
+http://www.iana.org/assignments/port-numbers</a>
+</li>
+
+<li>
+<a href="http://www.chebucto.ns.ca/~rakerman/port-table.html" target="_blank">
+http://www.chebucto.ns.ca/~rakerman/port-table.html</a>
+</li>
+
+</ul></p>
+
+<p align="center"><a href="javascript:window.close();">
+Close Window
+</a></p>
+
+</body>
+</html>
+

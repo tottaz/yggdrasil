@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Application Login</title>
+    <script type="text/javascript" src="ajax.js"></script>
+    <script type="text/javascript" src="formdata2querystring.js"></script>
+    <script type="text/javascript" src="applogin.js"></script>
+    <link rel="stylesheet" href="applogin.css" type="text/css"/>
+  </head>
+  <body>
+    <div class="readerText">
+      <a id="pageTop" name="pageTop">Page top</a>
+    </div>
+    <div id="uiDiv">
+      <form id="loginForm" method="POST" action="applogin.html">
+        <div id="promptDiv" class="basePrompt">
+          <span id="msgSpan"></span>
+          <span id="dotSpan"></span>
+        </div> <!-- promptDiv -->
+        <div id="fieldDiv">
+          <div class="fieldTitle">Login ID:</div>
+          <div class="fieldEntry">
+            <input type="text" name="LoginId" id="LoginId" size="24" maxlength="100" value=""/>
+          </div>
+          <div class="fieldTitle">Password:</div>
+          <div class="fieldEntry">
+            <input type="password" name="Pass" id="Pass" size="24" maxlength="100" value=""/>
+          </div>
+        </div> <!-- fieldDiv -->
+        <div id="buttonDiv">
+          <input type="submit" id="submitButton" name="submitButton" value="Submit"/>
+        </div>
+      </form>
+    </div>
+    <div class="readerText">
+      <a href="#pageTop">Back to form top</a>
+      End of page
+    </div>
+  </body>
+</html>

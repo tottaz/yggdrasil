@@ -1,0 +1,214 @@
+/* General Reset */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, hr, button{
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+	font-size:100%;
+	vertical-align: baseline;
+	background:none;
+}
+ol, ul {list-style:none;}
+h1, h2, h3, h4, h5, h6, li {line-height:100%;}
+blockquote, q {quotes:none;}
+table { border-spacing:0;}
+input, textarea, button {font-family:inherit; font-size:1em;}
+
+/*
+   login.css
+*/
+
+
+/* General Settings*/
+html{min-width:1002px; height:100%;}
+body{
+	color:#999;
+	min-width:1002px;
+	font:12px Arial, Helvetica, sans-serif;
+	background:#66CC00;
+}
+a{
+	color:#000;
+	text-decoration:none;
+}
+a:hover{text-decoration:underline;}
+a:focus{outline:none;}
+input,textarea,select{
+	font:11px Arial, Helvetica, sans-serif;
+	vertical-align:middle;
+	padding:0;
+	margin:0;
+}
+form,fieldset{
+	margin:0;
+	padding:0;
+	border-style:none;
+}
+
+
+#wrapper {
+	width:400px;
+	margin:80px auto;
+	background:#fff;
+	padding:40px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+  	-moz-box-shadow: 0px 0px 10px #CCCCCC;
+  	-webkit-box-shadow: 0px 0px 10px #CCCCCC;
+  	box-shadow: 0px 0px 10px #CCCCCC;
+}
+
+
+/* ==================================== */
+/* = Make everything look nice now :D = */
+/* ==================================== */
+
+.header-area .logo{
+	overflow:hidden;
+	width:100%;
+	font-size:36px;
+	line-height:38px;
+}
+.header-area .logo {
+	float:left;
+	color:#142c35;
+	padding-bottom:1px;
+	font-family: "Helvetica Neue", Helvetica, Arial, Sans-serif;
+	text-shadow:0 2px #fff;
+}
+
+.header-box{
+	padding:0 50px 37px;
+	width:920px;
+}
+.header-box strong{
+	float:left;
+	color:#142c35;
+	font-size:16px;
+	line-height:18px;
+	padding-top:34px;
+}
+.header-box strong a{
+	float:left;
+	overflow:hidden;
+	color:#142c35;
+}
+.header-box strong a:hover{
+	text-decoration:none;
+	border-bottom:1px solid #142c35;
+}
+
+/* =============== */
+/* = Form fields = */
+/* =============== */
+#login-box {
+	margin:30px 0 0 0;
+}
+
+.row label {
+	float:left;
+	color:#142c35;
+	font-size:16px;
+	line-height:18px;
+	width:140px;
+	padding:8px 0 2px;
+}
+
+.row {
+	width: 100%;
+	overflow: hidden;
+	margin: 0 0 10px;
+}
+.row label{margin-right:19px;}
+
+input.txt {
+	float:left;
+	background:url(../img/bg-text.png) repeat-x;
+	padding:6px 10px;
+	height: 20px;
+	border: 1px solid #dedede;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	color:#666;
+	font:16px/20px Arial, Helvetica, sans-serif;
+}
+input.small {
+	height: 12px;
+	font-size: 12px;
+}
+
+#forgot-password {
+	color:#990000;
+	font-size:10px;
+}
+
+/* =========== */
+/* = buttons = */
+/* =========== */
+.yellow-btn{
+	float: left;
+	clear: both;
+	background:url(../img/btn-yellow.gif) no-repeat;
+	font-size:14px;
+	font-weight:bold;
+	line-height:16px;
+	color:#fff;
+	margin:0;
+}
+.yellow-btn:hover {text-decoration:none;}
+.yellow-btn span {
+	float:right;
+	height: 22px;
+	cursor: pointer;
+	padding:8px 8px 0;
+	background:url(../img/btn-yellow.gif) no-repeat 100% -30px;
+}
+
+/* ========================== */
+/* = Errors & Notifications = */
+/* ========================== */
+
+.notification {
+    border: 1px solid;
+    margin: 20px 0px 0px 5px;
+    padding:5px 10px;
+
+}
+.info {
+    color: #00529B;
+    background-color: #BDE5F8;
+}
+.success {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+}
+.warning {
+    color: #9F6000;
+    background-color: #FEEFB3;
+}
+.error {
+    color: #D8000C;
+    background-color: #FFBABA;
+}
+
+.error {
+	color:#990000;
+}
+
+.success {
+	border:1px ;
+}
+h2 {
+	font-size: 22px;
+	margin: 15px 0 10px 0;
+}
+p {
+	font-size: 16px;
+	margin-bottom:1em;
+}
+
+input.hidden-submit { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+#login-box .yellow-btn {float: right; margin-right: 40px;margin-top:-30px;}

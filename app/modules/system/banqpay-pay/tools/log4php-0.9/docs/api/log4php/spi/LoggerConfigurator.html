@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class LoggerConfigurator</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class LoggerConfigurator</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-descendents">Descendents</a>
+			|													<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Implemented by classes capable of configuring log4php using a URL.</p>
+<p class="description"><p>Implemented by classes capable of configuring log4php using a URL.</p></p>
+	<ul class="tags">
+				<li><span class="field">abstract:</span> </li>
+				<li><span class="field">since:</span> 0.5</li>
+				<li><span class="field">version:</span> $Revision: 1.2 $</li>
+				<li><span class="field">author:</span> VxR &lt;<a href="mailto:vxr@vxr.it">mailto:vxr@vxr.it</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_log4php_spi_LoggerConfigurator_php.html">Program_Root/log4php/spi/LoggerConfigurator.php</a> (line <span class="field"><a href="../..//__filesource/fsource_log4php_spi_log4php_spi_LoggerConfigurator.php.html#a49">49</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+	<a name="sec-descendents"></a>
+	<div class="info-box">
+		<div class="info-box-title">Direct descendents</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Descendents</span>
+			|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../log4php/LoggerBasicConfigurator.html">LoggerBasicConfigurator</a></td>
+					<td>
+											Use this class to quickly configure the package.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../log4php/LoggerPropertyConfigurator.html">LoggerPropertyConfigurator</a></td>
+					<td>
+											Allows the configuration of log4php from an external file.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../log4php/xml/LoggerDOMConfigurator.html">LoggerDOMConfigurator</a></td>
+					<td>
+											Use this class to initialize the log4php environment using expat parser.
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+									<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#doConfigure" title="details" class="method-name">doConfigure</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"><a href="../../log4php/LoggerHierarchy.html">LoggerHierarchy</a></span>&nbsp;<span class="var-name">&$repository</span>)
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+													<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methoddoConfigure" id="doConfigure"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">doConfigure</span> (line <span class="line-number"><a href="../..//__filesource/fsource_log4php_spi_log4php_spi_LoggerConfigurator.php.html#a60">60</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Interpret a resource pointed by a <var>url</var> and configure accordingly.</p>
+<p class="description"><p>Interpret a resource pointed by a <var>url</var> and configure accordingly.
+ The configuration is done relative to the <var>repository</var> parameter.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			doConfigure
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"><a href="../../log4php/LoggerHierarchy.html">LoggerHierarchy</a></span>&nbsp;<span class="var-name">&$repository</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$url</span><span class="var-description">: The URL to parse</span>			</li>
+					<li>
+				<span class="var-type"><a href="../../log4php/LoggerHierarchy.html">LoggerHierarchy</a></span>
+				<span class="var-name">&$repository</span><span class="var-description">: The hierarchy to operation upon.</span>			</li>
+				</ul>
+		
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../log4php/LoggerPropertyConfigurator.html#methoddoConfigure">LoggerPropertyConfigurator::doConfigure()</a>
+								: Read configuration from a file.
+							</li>
+					<li>
+				<a href="../../log4php/xml/LoggerDOMConfigurator.html#methoddoConfigure">LoggerDOMConfigurator::doConfigure()</a>
+								: Configure the given <strong>repository</strong> using the resource pointed by <strong>url</strong>.
+							</li>
+				</ul>
+	</div>
+						
+		</div>
+	</div>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Tue,  9 Dec 2003 23:49:17 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.2.2</a>
+	</p>
+	</div></body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>App Monitor</title>
+    <script type="text/javascript" src="ajax.js"></script>
+    <script type="text/javascript" src="appmonitor2.js"></script>
+    <script type="text/javascript">
+      // URL to monitor
+      var TARGET_URL = '/fakeserver.php';
+      // Seconds between requests
+      var POLL_INTERVAL = 5;
+      // How many entries bars to show in the bar graph
+      var MAX_POLL_ENTRIES = 10;
+      // Seconds to wait for server response
+      var TIMEOUT_THRESHOLD = 10;
+    </script>
+    <link rel="stylesheet" href="appmonitor2.css" type="text/css"/>
+  </head>
+  <body>
+    <div id="mainDiv">
+      <div id="uiDiv">
+        <div id="statusDiv">
+          <div id="appStatusDiv">App Status: 
+            <span id="appCurrStatus"></span>
+          </div>
+          <div id="requestStatusDiv"></div>
+          <br class="clearBoth"/>
+        </div>
+        <div id="pollDiv"></div>
+        <div id="buttonDiv"></div>
+      </div>
+    </div>
+  </body>
+</html>

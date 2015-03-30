@@ -1,0 +1,139 @@
+/*-------------------------
+	Simple reset
+--------------------------*/
+
+
+*{
+	margin:0;
+	padding:0;
+}
+
+
+/*-------------------------
+	General Styles
+--------------------------*/
+
+
+html{
+	background-color:#f2f2f2;
+	background-position:center center;
+	background-repeat:none;
+	
+	background-image:-moz-radial-gradient(circle closest-corner, #f2f2f2 0%, #e3e3e3 100%);
+	background-image:-o-radial-gradient(circle closest-corner, #f2f2f2 0%, #e3e3e3 100%);
+	background-image:-webkit-radial-gradient(circle closest-corner, #f2f2f2 0%, #e3e3e3 100%);
+	background-image:radial-gradient(circle closest-corner, #f2f2f2 0%, #e3e3e3 100%);
+}
+
+body{
+	background-color:transparent !important;
+}
+
+a, a:visited {
+	outline:none;
+	color:#1c4f64;
+}
+
+a:hover{
+	text-decoration:none;
+}
+
+section, footer, header{
+	display: block;
+}
+
+
+/*----------------------------
+	The Chart
+-----------------------------*/
+
+
+#placeholder {
+	width: 580px;
+	border: 1px solid #CDCDCD;
+	padding: 20px;
+	border-radius: 3px;
+	background-color: white;
+	margin-bottom: 15px;
+	position: relative;
+	box-shadow: 1px 1px 2px #EEE, 0 -3px 5px #F3F3F3 inset;
+}
+
+#content {
+	margin: 0px auto;
+	padding: 45px;
+	position: relative;
+	width: 590px;
+}
+
+#chart{
+	width: 570px;
+	height: 400px;
+}
+
+.ex-tooltip{
+	position: absolute;
+	background: #EEE;
+	border-radius: 3px;
+	border-radius: 3px;
+	padding: 5px;
+	box-shadow: 0 1px 3px black;
+	box-shadow: 0 1px 3px black;
+	border-collapse: separate;
+	display: none;
+}
+
+
+/*----------------------------
+	The Footer
+-----------------------------*/
+
+
+footer{
+	background-color: #111111;
+	bottom: 0;
+	box-shadow: 0 -1px 2px rgba(0,0,0,0.4);
+	height: 45px;
+	left: 0;
+	position: fixed;
+	width: 100%;
+	z-index: 100000;
+}
+
+footer h2{
+	color: #EEEEEE;
+	font-size: 14px;
+	font-weight: normal;
+	left: 50%;
+	margin-left: -400px;
+	padding: 13px 0 0;
+	position: absolute;
+	width: 540px;
+	line-height: 1.4;
+	margin-top: 0;
+}
+
+footer h2 i{
+	font-style:normal;
+	color:#888;
+}
+
+footer a.tzine,a.tzine:visited{
+	color: #999999;
+	font-size: 12px;
+	left: 50%;
+	margin: 16px 0 0 110px;
+	position: absolute;
+	text-decoration: none;
+	top: 0;
+}
+
+footer a i{
+	color:#ccc;
+	font-style: normal;
+}
+
+footer a i b{
+	color:#c92020;
+	font-weight: normal;
+}

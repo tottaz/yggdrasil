@@ -1,0 +1,47 @@
+.tw {
+    width: 400px; height: 400px;
+}
+
+﻿div.tw {
+	margin: 20px;
+	overflow: hidden;    
+}
+ 
+.tw h2 {
+    color: white;
+    text-shadow: #808080 1px 1px 0;
+    text-align: center;
+}
+ 
+.tw p {
+    font-size: 12pt;
+    margin: 5px 0 0;
+    float: center;
+    clear: right;
+    width: 340px;
+    text-align: center;
+}
+
+.tw img {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 100px;
+}
+ 
+.tw p span {
+	font-size: 12pt;
+}
+ 
+.tw a:link, .tw a:active, .tw a:visited {
+	display: block;
+	clear: both;
+	text-decoration: none;
+	color: #222;
+	font-size: 8pt;
+}
+ 
+.tw a:hover {
+	color: #000;
+	text-decoration: underline;
+}

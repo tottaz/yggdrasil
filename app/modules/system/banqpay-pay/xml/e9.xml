@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hawhaw SYSTEM "http://www.banqpay.com/xml/hawhaw.dtd">
+<hawhaw>
+  <deck title="Help Desk">
+    <text br="2">If you browse this deck on a mobile phone, establishing a call is easy as following a link.</text>
+    <phone title="CALL">+1 416 727 6154</phone>
+  </deck>
+</hawhaw>

@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>.: jsolait :. | documentation | jsonrpc</title>
+    <link rel="stylesheet" type="text/css" href="/html.css" />
+    <meta name="author" content="Jan-Klaas Kollhof" />
+    <meta name="keywords" content="jsonrpc" />
+  </head>
+  <body>
+    <a name="top" id="top"></a>
+    <div class="navigationBar"><a href="./index.xhtml">documentation</a> | 
+                    xmlrpc</div>
+    <div class="menu">
+      <ul></ul>
+      <div class="copyright">copyright © 2004, Jan-Klaas Kollhof</div>
+    </div>
+    <div class="content">
+         <h1>Module jsonrpc</h1>
+             Provides an JSON-RPC imlementation.
+             It is very similar to the xmlrpc module and shares almost the same interface.
+          <div class="contentItem"><h2>public members:<a class="bttop" href="#top">▲</a></h2><div>
+              
+                 <h3>InvalidServerResponse()</h3><div class="indent">
+                              Exception thrown if a  server did not respond with response status 200 (OK).<br />
+                 </div>
+                 <h3>MalformedJSONRpc()</h3><div class="indent">
+                              Exception thrown if an XML-RPC response is not well formed.<br />
+                 </div>
+                 <h3>JSONRPCError()</h3><div class="indent">
+                              Exception thrown if the RPC response is a Fault. <br />
+                              <ul>
+                                    <li><b>JSONRPCError::error</b>        The error object returned by the rpc call.</li>
+                              </ul>
+                 </div>
+                 
+                 <br />
+                 <h3>marshall(obj)</h3><div class="indent">
+                             Marshalls an object to JSON.(see http://json.org)<br />
+                             It just calls the toJSON function of the objcect if it has such method.<br />
+                             So, to customize serialization of objects one just needs to specify/override the toJSON method 
+                             which should return a string conforming with the JSON spec.<br />
+                            <b>obj</b>     The object to marshall<br />
+                            <b>returns</b>     An JSON representation of the object.<br />
+                 </div>
+                 <h3>unmarshall(xml)</h3><div class="indent">
+                              Unmarshalls a JSON document to a JavaScript object. <br />
+                            It parses the JSON source and creates a JavaScript object.<br />
+                            <b>xml</b>     The source to unmarshall.<br />
+                            <b>returns</b>          The JavaScript object created.<br />
+                 </div>
+                 
+                 <br />
+                 
+                 <h3>ServiceProxy(url,methodNames,user,pass)</h3><div class="indent">
+                        Class for creating proxy objects which resemble the remote service.<br />
+                        Method calls to this proxy will result in calls to the remote service.<br />
+                        <br />
+                        The arguments are interpreted as shown in the examples:<br />
+                        <br />
+                        ServerProxy("url", ["methodName1",...])<br />
+                        ServerProxy("url", ["methodName1",...], "user", "pass")<br />
+                        ServerProxy("url", "user", "pass")<br />
+                        <ul>
+                            <li><b>url</b>                      The url of the service.</li>
+                            <li><b>methodNames</b>     Array of names of methods that can be called on the server.</li>
+                            <li><b>user</b> =null             The user name to use for HTTP authentication.</li>
+                            <li><b>pass</b> =null             The password to use for HTTP authentication.</li>
+                        </ul>
+                        
+                        The ServiceProxy objects expose all the methods of the remote service as JSONRPCMethod objects.
+                        In addition the object also has the following methods and properties.<br />
+                        <ul>
+                            <li><b>ServiceProxy::_addMethodNames(methodNames)</b><br />
+                                              Adds new JSONRPCMethods to the proxy server which can then be invoked.<br />
+                                            <b>methodNames</b>    Array of names of methods that can be called on the server.<br />
+                             </li>
+                             <li><b>ServiceProxy::_setAuthentication(user,pass)</b><br />
+                                              Sets username and password for HTTP Authentication for all methods of this service.<br />
+                                            <b>user</b>     The user name.<br />
+                                            <b>pass</b>     The password.<br />
+                             </li>
+                             <li><b>ServiceProxy::_url</b><br />
+                                  The url of the service to resemble.<br />
+                             </li>
+                             <li><b>ServiceProxy::_user</b><br />
+                                  The user used for HTTP authentication.<br />
+                             </li>
+                             <li><b>ServiceProxy::_password</b><br />
+                                  The password used for HTTP authentication.<br />
+                             </li>
+                             <li><b>ServiceProxy::_methods</b><br />
+                                  All JSONRPCMethod objects the proxy can call.<br />
+                             </li>
+                        </ul>
+                 </div>
+                 
+                 
+                 
+                 <h3>JSONRPCMethod(url, name, user, pass)</h3><div class="indent">
+                        Class for creating JSON-RPC methods.<br />
+                        Calling the created method will result in an JSON-RPC call to the service.<br />
+                        The return value of this call will be the return value of the RPC call.<br />
+                        JSON-RPC errors will be raised as Exceptions.<br />
+                        <br />
+                        <ul>
+                            <li><b>url</b>                  The URL of the service providing the method.</li>
+                            <li><b>name</b>    The name of the method to invoke.</li>
+                            <li><b>user</b> =null             The user name to use for HTTP authentication.</li>
+                            <li><b>pass</b> =null             The password to use for HTTP authentication.</li>
+                        </ul>
+                        Asynchronous operation:<br />
+                        If the last parameter passed to the method is an JSONRPCAsyncCallback object, <br />
+                        then the remote method will be called asynchronously. <br />
+                        The results and errors are passed to the callback.  <br />
+                        <br />
+                        <ul>
+                             <li><b>JSONRPCMethod::notify(...)</b><br />
+                                              Calls the remote method usig async. notification.<br />
+                                              This method will never be replied to by the remote service, so no callback is needed.<br />
+                             </li>
+                             <li><b>JSONRPCMethod::setAuthentication(user,pass)</b><br />
+                                              Sets username and password for HTTP Authentication.<br />
+                                            <b>user</b>     The user name.<br />
+                                            <b>pass</b>     The password.<br />
+                             </li>
+                             <li><b>JSONRPCMethod::methodName</b><br />
+                                  The name of the remote method.<br />
+                             </li>
+                             <li><b>JSONRPCMethod::url</b><br />
+                                  The url of the remote service containing the method.<br />
+                             </li>
+                             <li><b>JSONRPCMethod::user</b><br />
+                                  The user name used for HTTP authorization.<br />
+                             </li>
+                             <li><b>JSONRPCMethod::password</b><br />
+                                  The password used for HTTP authorization.<br />
+                             </li>
+                        </ul>
+                 </div>
+                 
+                 <h3>JSONRPCAsyncCallback(result, err)</h3><div class="indent">
+                            The interface of a callback for asynchronous JSON-RPC.
+                            <ul>
+                                <li><b>result</b>  The result of the call (null if error)</li>
+                                <li><b>err</b>  A JSONRPCError if there was one returned otherwise null</li>
+                            </ul>
+                    
+                 </div>
+                 
+          </div></div>
+          
+         <div class="contentItem"><h2>requirements:<a class="bttop" href="#top">▲</a></h2><div>
+              
+                <h3><a href="./urllib.xhtml">urllib</a></h3><div class="indent"> is required for making the HTTP request to the remote service.</div>
+         </div></div>
+     </div>
+  </body>
+</html>

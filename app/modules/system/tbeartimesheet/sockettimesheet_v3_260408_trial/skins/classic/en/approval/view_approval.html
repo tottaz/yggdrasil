@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{PAGE_TITLE}</title>
+{__CSS_GLOBAL__}
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/tabScript.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/functions.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/timesheet_functions.js"></script>
+</head>
+
+<body onload="showTab();">
+<div id="dhtmltooltip"></div>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/tooltip.js"></script>
+
+<table width="100%"><tr><td nowrap>
+	<table width="100%" height="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="main_table">
+		<table width="100%" class="module_page_table">
+			<tr><td>
+				<H1 id='title' name='title'>{H1_TITLE}</H1>
+			</td></tr>
+			<tr><td nowrap>
+				<ul id="tablist" style="display:none">
+					<li style="display:none"><span name='addupdate_hours_tab' id='addupdate_hours_tab' class="current" onmouseover="overtab('sc1',this)" onmouseout="outtab('sc1',this)" onclick="return expandcontent('sc1', this)">&nbsp;Add/Update Hours</span></li>
+					<li style="display:none"><span onmouseover="overtab('sc3',this)" onmouseout="outtab('sc3',this)" onclick="return expandcontent('sc3', this)"><img title='tabimage' src="{SKINROOT}/images/help.gif" align="absmiddle" />&nbsp;Help</span></li>
+				</ul>
+	
+				<DIV id="tabcontentcontainer">
+					<form name='addupdate' id='addupdate' method="post">
+					<input type="hidden" id="comment_before" name="comment_before">
+					<input type="hidden" id="d" name="d" value="{DAY}">
+					<input type="hidden" id="m" name="m" value="{MONTH}">
+					<input type="hidden" id="y" name="y" value="{YEAR}">
+					<input type="hidden" id="min_day" name="min_day" value="{MIN_DAY}">
+					<input type="hidden" id="min_week" name="min_week" value="{MIN_WEEK}">
+					<input type="hidden" id="total_week_value" name="total_week_value" value="{GRAND_TOTAL}">
+					<input type="hidden" id="total_week_name" name="total_week_name" value="{TOTAL_NAME}">
+					<input type="hidden" id="holiday" name="holiday" value="{HOLIDAY}">
+					<input type="hidden" id="status" name="status">
+					<input type="hidden" id="WeekDate" name="WeekDate" value="{WEEKDATE}">
+					<input type="hidden" id="WeekEnd" name="WeekEnd" value="{WEEKEND}">
+					<input type="hidden" name="reload_structure" id="reload_structure"/>
+					<input type="hidden" name="submit_status" id="submit_status" value='1'/>
+					<input type="hidden" name="UserID" id="UserID" value='{USERID}'/>
+					<input type="hidden" id="disable_timesheet" name="disable_timesheet" value="{DISABLE_TIMESHEET}">				
+	
+					<div id="sc1" class="tabcontent">
+						<fieldset>
+							<legend id="legendApprove">
+								Timesheet Submitted For Week: {WEEK_START} to {WEEK_END}
+							</legend>	
+							<div id="listingOutputAJAX">
+								{SHOW_TABLE}<BR />
+								<input style='display:none' id="comment_title" name="comment_title" type="text" readonly maxlength="230" onkeypress="return keyPress(event,'normaltext')"><BR />
+								{SHOW_TASK1}									
+								{SHOW_TIMEOFF1}
+							<input class="buttons_warn" onmouseover="this.className='buttons_over'" onmouseout="this.className='buttons_warn'" id="submit_ts" name="submit_ts" type="button" value="Close Window" onclick="window.close();">
+							</div>
+						</fieldset>
+					</div>
+					<div id="sc3" class="tabcontent">
+					</div>
+					</form>
+				</DIV>		
+			</td></tr>
+		</table>
+		</td> 
+	</tr>
+	</table>
+</td></tr></table>	
+</body>
+</html>

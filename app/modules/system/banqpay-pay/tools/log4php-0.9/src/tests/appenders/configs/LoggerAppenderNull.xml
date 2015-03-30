@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    @author VxR <vxr@vxr.it>
+    @version $Revision: 1.2 $
+    @since 0.3
+-->
+<log4php:configuration xmlns:log4php="http://www.vxr.it/log4php/" threshold="all" debug="true">
+
+    <appender name="test" class="LoggerAppenderNull" />
+    
+    <root>
+        <level value="debug" />
+        <appender_ref ref="test" />
+    </root>
+</log4php:configuration>

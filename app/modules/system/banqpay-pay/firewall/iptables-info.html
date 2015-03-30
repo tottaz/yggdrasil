@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC 
+  "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>iptables description</title>
+<meta name="Author" content="Scott Morizot" /></head>
+<body>
+
+<h1 align="center">IPTABLES in the Linux 2.4 Kernel</h1>
+
+<h2>Introduction</h2>
+
+<p>This document is intended to provide a brief overview of
+<strong>iptables</strong>, the concepts involved, and the manner in
+which those concepts are implemented in this Firewall Generator.
+IPTables replaces IPChains as the firewall of choice in the 2.4 linux
+kernel.  IPChains is a <i>stateless</i> firewall.  It examines each
+packet as a separate entity and each packet must therefore have a rule
+associated with it.  IPTables is a <i>stateful</i> firewall.  It tracks
+the state of a connection during its life.  Therefore each packet can be
+associated with a state.  Either it is attempting to establish a NEW
+connection, it is part of an ESTABLISHED connection or RELATED to a
+connection, or the packet is in an INVALID state.  A stateless firewall
+can be bypassed if an allowed protocol is discerned.  A stateful
+firewall, by comparison, detects that the packet is not part of an
+ongoing session and can be configured to prevent entry to the packet.  A
+stateful firewall is therefore more secure than a stateless firewall.
+Since many of the rules can rely on the state of the packet, a stateful
+firewall generally requires fewer rules than a stateless firewall.  This
+reduces the chances of human error as well.</p>
+
+<p>An iptables firewall consists of several tables, each with a default
+policy and builtin chains of rules.  Further rule chains can optionally
+be created in each table.  Different tables and chains are traversed
+according to the source and destination of the packet. A packet that is
+received via a network interface on the system goes through a sequence
+of steps before it is handled locally or forwarded to another host.</p>
+
+<h2>Table Descriptions</h2>
+
+<h3>filter Table</h3>
+
+<p>The filter table is the default table for any rule. It is where the
+bulk of the work in an iptables firewall occurs. Avoid filtering in any
+other table as it may not work. It has three commonly used builtin
+chains.  Those chains are INPUT, OUTPUT, and FORWARD.  Packets destined
+for the host traverse the INPUT chain.  Packets created by the host to
+send to another system traverse the OUTPUT chain.  Packets received by
+the host that are destined for another host traverse the FORWARD
+chain.</p>
+
+<h3>nat Table</h3>
+
+<p>The <i>Network Address Translation</i> or nat table is used to
+translate the source or destination field in packets.  A system with a
+static IP should use Source Network Address Translation (snat) since it
+uses fewer system resources.  However, iptables also supports hosts with
+a dynamic connection to the Internet with a <i>masquerade</i> feature.
+Masquerade uses the current address on the interface for address
+translation.<p>
+
+<h3>mangle table</h3>
+
+<p>The mangle table is used to alter certain fields in the headers of IP
+packets.  It can be used to change the <i>Time to Live</i> or TTL,
+change the <i>Type of Service</i> or TOS field, or mark packets for
+later filtering.</p>
+
+<h2>Packet Path</h2>
+
+<h3>Forwarded Packets</h3>
+
+<p>A packet that is intended for another host is called a forwarded
+packet. It first passes through the PREROUTING chain in the mangle
+table. It then traverses the PREROUTING chain in the nat table. This is
+where dnat rules are applied. The packet then traverses the FORWARD
+chain in the filter table. This is the only chain where filtering rules
+should be applied to the packet. The packet then passes to the
+POSTROUTING chain in the nat table. In this chain, snat and masquerading
+rules are applied.  The packet then passes out the outgoing
+interface.</p>
+
+<h3>Received Packets</h3>
+
+<p>Packets addressed to the localhost first traverse the PREROUTING
+chain in the mangle table.  Next they pass through the PREROUTING chain
+in the nat table.  This is where dnat rules are applied.  After the dnat
+rules, a routing decision must be made.  If the packet is really
+intended for the localhost, the INPUT chain in the filter table is
+traversed.  All filtering is done in this chain.  Packets that are
+accepted are then passed to the local process or application for which
+it is intended.</p>
+
+<h3>Sent Packets</h3>
+
+<p>Packets that are generated on the localhost first traverse the OUTPUT
+chain of the mangle table.  They then pass through the OUTPUT chain of
+the nat table.  Next, they pass through the OUTPUT chain of the filter
+table.  Once the packet has passed those chains, the system must
+determine where the packet should be routed.  Once that decision is
+made, the packet traverses the POSTROUTING chain in the nat table.  This
+where snat and masquerading rules are applied.  The packet then passes
+through the appropriate network interface.</p>
+
+<h2>Firewall Generator</h2>
+
+<p>The firewall scripts generated by this program use several
+conventions. Filter table rules are mostly divided among several
+user-defined rule chains. This is intended to make the firewall easier
+to follow and to minimize the number of rules each individual packet
+must traverse.  Bad packets are defined as packets in an INVALID state
+or any packets other than syn packets that are in a NEW state.  Packets
+that are in an ESTABLISHED or RELATED state are accepted.  They are part
+of an ongoing session.  Inbound TCP, UDP, and ICMP packets are passed to
+a separate chains to determine if they should be accepted.  By default,
+they are accepted from the internal interface and dropped from the
+external interface.  TCP requests from the internal network for forwarding
+are passes through an outbound chain to see if it should be refused.  By
+default, those requests are accepted.
+
+<h2>Redhat installation instructions</h2>
+
+<p><ol>
+<li>Ensure that ipchains will not automatically start.<br />
+   chkconfig --level 0123456 ipchains off<br />
+   This will make sure that the ipchains init.d script
+   is not linked to an S file in any of the rc directories.</li>
+
+<li>Stop ipchains if it's running.<br />
+   service ipchains stop</li>
+
+<li>Execute lsmod to see if the ipchains kernel module is still loaded.
+   If it is, use rmmod to unload it.</li>
+
+<li>Have the system link the iptables init.d startup script into run states
+   2, 3, and 5.<br />
+   chkconfig --level 235 iptables on</li>
+
+<li>Save this script and execute it to load the ruleset from this
+file. You may need to run the dos2unix command on it to remove carraige returns.</li>
+
+<li>Save the ruleset to /etc/sysconfig/iptables.  This can be done two
+ways.<br />
+   service iptables save<br />
+   iptables-save > /etc/sysconfig/iptables</li>
+
+<li>The ruleset will be restored by the /etc/init.d/iptables script on
+boot.</li>
+
+</ol></p>
+
+<p><strong>NOTE:</strong> The /etc/init.d/iptables script can be modified to run this script
+instead.  If you do so, save a copy so you can reapply your modifications
+after upgrading the iptables package.  The advantage of using this script for
+the ongoing operation of the firewall is it gives you greater control over
+the modules and rulesets used.  The above is simpler, however.</p>
+
+</body>
+</html>
+

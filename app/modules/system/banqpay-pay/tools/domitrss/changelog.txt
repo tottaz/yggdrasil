@@ -1,0 +1,43 @@
+DOMIT! RSS ChangeLog
+
+Version 0.2 (2004/08/03)
+- added support for PEAR:Cache_Lite library, which can be substituted for the default php_text_cache (thanks to Robert Castley for suggestion)
+- added parsedBy method to class xml_domit_rss_base_document
+- added createDocument method to class xml_domit_rss_base_document
+- added createDefaultCache method to class xml_domit_rss_base_document
+- added useCacheLite method to class xml_domit_rss_base_document
+- added getDataFromCache method to class xml_domit_rss_base_document
+- added loadRSS method to class xml_domit_rss_base_document
+- added parseRSS method to class xml_domit_rss_base_document
+- added parseRSSData method to class xml_domit_rss_base_document
+- added DOMIT_RSS_VERSION constant
+- replaced Windows end-of-line characters with Unix end-of-line characters in php_text_cache
+- updated class documentation and tutorial
+
+Version 0.3 (2004/09/28)
+- added support for http / proxy connections
+- fixed bug in parsing of comment nodes
+- added setConnection method to xml_domit_rss_base_document
+- added setAuthorization method to xml_domit_rss_base_document
+- added setProxyConnection method to xml_domit_rss_base_document
+- added setProxyAuthorization method to xml_domit_rss_base_document
+- added establishConnection method to php_text_cache
+- updated class docs and DOMIT! RSS Tutorial
+
+Version 0.4 (2004/10/08)
+- added establishConnection method to xml_domit_rss_shared.php
+- fixed bug in php_text_cache
+- updated parser to DOMIT! 0.99
+
+Version 0.5 (2005/08/14)
+- many bugfixes
+- added getXXX methods for all RSS elements 
+- updated parser to DOMIT! 1.0
+- all documentation rewritten in DocBook format
+
+Version 0.51 (2005/09/10)
+- removed ampersands when objects instantiated
+- added to error handling modes: DOMIT_RSS_ONERROR_DIE and DOMIT_RSS_ONERROR_CONTINUE
+- on errors, DOMIT RSS no longer dies by default
+- added setErrorHandler, setErrorLog, and setErrorMode methods
+- added setRSSTimeout method

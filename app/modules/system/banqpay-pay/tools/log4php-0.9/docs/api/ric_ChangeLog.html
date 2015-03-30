@@ -1,0 +1,994 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title></title>
+			<link rel="stylesheet" href="media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+						<h1 align="center">ChangeLog</h1>
+<pre>
+
+------------------------------------------------------------------------------
+ Release 0.9
+------------------------------------------------------------------------------
+
+2003-11-18  vxr
+	* tests/appenders/test.php 1.7:
+		Changed comments in Socket Appenders.
+
+	* log4php/spi/LoggerLoggingEvent.php 1.16:
+		Changed constructor param docu.
+
+2003-11-15  vxr
+	* log4php/spi/LoggerLoggingEvent.php 1.15:
+		Changed constructor priority param docu.
+
+	* log4php/appenders/LoggerAppenderConsole.php 1.11:
+		Minor changes.
+
+	* log4php/LoggerAppenderSkeleton.php 1.15:
+		Changed clearFilters() method.
+
+	* log4php/LoggerAppenderSkeleton.php 1.14:
+		Changed filter chain implementation.
+
+2003-11-13  vxr
+	* log4php/appenders/LoggerAppenderSocket.php 1.17:
+		Removed header and footer from xml stream (chainsaw
+		compatibility).
+
+	* tests/appenders/configs/LoggerAppenderSocketLog4j.xml 1.4:
+		Changed port (chainsaw compatibility).
+
+2003-11-11  vxr
+	* log4php/LoggerManager.php 1.18:
+		Swapped class/vars init code. Now php5b2 parses it.
+
+	* log4php/LoggerLevel.php 1.11:
+		Now getLevelXX() returns a reference
+
+	* log4php/xml/LoggerDOMConfigurator.php 1.12:
+		Added 'APPENDER-REF' to reflect dtd (changes was made in rel 1.11).
+
+	* log4php/spi/LoggerLoggingEvent.php 1.14:
+		Postponed LoggerLoggingEvent::getStartTime() so php5b2 can
+		parse the script.
+
+2003-11-08  vxr
+	* log4php/LoggerAppenderSkeleton.php 1.13:
+	* log4php/LoggerCategory.php 1.17:
+	* log4php/LoggerDefaultCategoryFactory.php 1.2:
+	* log4php/LoggerHierarchy.php 1.20:
+	* log4php/LoggerPropertyConfigurator.php 1.6:
+	* log4php/LoggerRoot.php 1.9:
+	* log4php/config/LoggerPropertyGetter.php 1.2:
+	* log4php/config/LoggerPropertySetter.php 1.4:
+	* log4php/helpers/LoggerOptionConverter.php 1.6:
+	* log4php/helpers/LoggerPatternConverter.php 1.13:
+	* log4php/helpers/LoggerPatternParser.php 1.10:
+	* log4php/layouts/LoggerLayoutHtml.php 1.14:
+	* log4php/layouts/LoggerPatternLayout.php 1.7:
+	* log4php/layouts/LoggerXmlLayout.php 1.16:
+	* log4php/or/LoggerObjectRenderer.php 1.3:
+	* log4php/or/LoggerRendererMap.php 1.4:
+	* log4php/spi/LoggerFactory.php 1.3:
+	* log4php/spi/LoggerFilter.php 1.4:
+	* log4php/spi/LoggerLoggingEvent.php 1.13:
+	* log4php/varia/LoggerLevelMatchFilter.php 1.2:
+	* log4php/varia/LoggerLevelRangeFilter.php 1.2:
+	* log4php/xml/LoggerDOMConfigurator.php 1.11:
+		Requires section refactored.
+
+------------------------------------------------------------------------------
+ Release 0.8
+------------------------------------------------------------------------------
+
+2003-10-28  vxr
+	* tests/appenders/configs/LoggerAppenderNullThreshold.xml 1.1:
+		Added Appender Threshold test.
+
+	* log4php/appenders/LoggerAppenderSocket.php 1.16:
+		Fixed remoteHost and port params getter/setter.
+
+	* tests/appenders/configs/LoggerAppenderSocket.xml 1.5:
+	* tests/appenders/configs/LoggerAppenderSocketLog4j.xml 1.3:
+		changed hostname param to remoteHost
+
+2003-10-23  vxr
+	* log4php/LoggerAppenderSkeleton.php 1.12:
+		Added optionconverter require_once.
+
+2003-10-19  vxr
+	* log4php/appenders/LoggerAppenderMail.php 1.8:
+		Fixed body test, fixed mail() &quot;to&quot; param, added a mail debug
+		statement.
+
+2003-10-04	vxr
+	* log4php/xml/LoggerDOMConfigurator.php 1.10:
+		Fixed CONFIGURATION tag (open,close) case (thanks to Sergio Strampelli).
+		Fixed class attribute on LAYOUT open.
+
+	* log4php/LoggerAppenderSkeleton.php 1.11:
+		Fixed non LoggerLevel threshold param assignments in 
+		setThreshold()  (thanks to Sergio Strampelli).
+
+------------------------------------------------------------------------------
+ Release 0.7
+------------------------------------------------------------------------------
+
+2003-09-20  vxr
+	* log4php/LoggerManager.php 1.17:
+		Minor doc fix.
+
+2003-09-19  vxr
+	* log4php/appenders/LoggerAppenderConsole.php 1.10:
+	* log4php/appenders/LoggerAppenderDailyFile.php 1.7:
+	* log4php/appenders/LoggerAppenderDb.php 1.7:
+	* log4php/appenders/LoggerAppenderEcho.php 1.5:
+	* log4php/appenders/LoggerAppenderFile.php 1.15:
+	* log4php/appenders/LoggerAppenderMail.php 1.7:
+	* log4php/appenders/LoggerAppenderMailEvent.php 1.10:
+	* log4php/appenders/LoggerAppenderNull.php 1.4:
+	* log4php/appenders/LoggerAppenderPhp.php 1.11:
+	* log4php/appenders/LoggerAppenderRollingFile.php 1.14:
+	* log4php/appenders/LoggerAppenderSyslog.php 1.11:
+	* log4php/config/LoggerPropertySetter.php 1.3:
+		Minor doc fixes.
+
+	* log4php/layouts/LoggerXmlLayout.php 1.15:
+		Fixed CDATA rendering.
+
+	* log4php/appenders/LoggerAppenderSocket.php 1.14:
+		Now setHostname() is deprecated. Please, use setRemoteHost().
+		Some Minor changes.
+
+	* log4php/LoggerManager.php 1.16:
+		Minor change to shutdown().
+
+	* log4php/helpers/LoggerTransform.php 1.1:
+		Utility class for transforming strings.
+
+2003-09-17  vxr
+	* log4php/appenders/LoggerAppenderSocket.php 1.13:
+		Added log4jNamespace option to clone the log4j XMLLayout output and
+		send it through socket.
+
+	* chainsaw/chainsaw.php 1.2:
+		Changes to dinamically load socket module on unix and win32 platforms
+
+	* log4php/appenders/LoggerAppenderRollingFile.php 1.13:
+		Minor doc changes.
+
+------------------------------------------------------------------------------
+ Release 0.6
+------------------------------------------------------------------------------
+
+2003-09-15  vxr
+	* log4php/layouts/LoggerXmlLayout.php 1.14:
+		Added log4j namespace clone function. With this chainsaw can read the logs
+		created with this layout.
+
+	* log4php/appenders/LoggerAppenderMailEvent.php 1.9:
+		Fixed append() method.
+
+	* log4php/log4php.html 1.12:
+		Added browse entry point
+
+	* log4php/xml/LoggerDOMConfigurator.php 1.8:
+		Docu integration.
+
+	* log4php/xml/LoggerDOMConfigurator.php 1.9:
+		Now layouts can be activated.
+
+	* log4php/LoggerAppenderSkeleton.php 1.10:
+		Removed log4j tags (contact log4j team first)
+
+	* log4php/LoggerAppender.php 1.14:
+		removed log4j tags (contact log4j team first)
+
+	* log4php/helpers/LoggerOptionConverter.php 1.5:
+		Minor doc changes.
+
+	* log4php/LoggerPropertyConfigurator.php 1.5:
+		Minor doc mods
+
+	* log4php/LoggerManager.php 1.15:
+		Added documentation to init costants
+
+2003-09-13  vxr
+	* log4php/helpers/LoggerOptionConverter.php 1.4:
+		Changed getSystemProperty implementation.
+
+	* log4php/spi/LoggerLoggingEvent.php 1.11:
+		Added experimental serialization support.
+
+	* log4php/LoggerAppenderSkeleton.php 1.9:
+		Fixed isAsSevereAsThreshold() detection.
+		Changed LoggerLog::error() statement in doAppend to ::debug().
+		Added obj serialization support.
+		Refactored docu.
+
+	* log4php/xml/LoggerDOMConfigurator.php 1.7:
+		Fixed a typing error.
+
+	* log4php/layouts/LoggerXmlLayout.php 1.13:
+		Added 'namespace' option.
+
+	* log4php/LoggerRoot.php 1.8:
+		Fixed constructor.
+
+	* log4php/LoggerAppender.php 1.13:
+		Moved LoggerAppender interface methods defined in
+		LoggerAppenderSkeleton.
+
+	* log4php/helpers/LoggerPatternConverter.php 1.12:
+		Added docu to Logger(.*)Converter.
+
+	* log4php/LoggerHierarchy.php 1.19:
+		Added hierarchy assigment to root and loggers.
+
+	* log4php/LoggerCategory.php 1.16:
+		Stripped repository assigment in constructor.
+
+	* log4php/layouts/LoggerLayoutHtml.php 1.13:
+		Removed LoggerLoggingLevel and LoggerLevel require_once.
+
+	* log4php/varia/LoggerLevelMatchFilter.php 1.1:
+	* log4php/varia/LoggerLevelRangeFilter.php 1.1:
+		First implementation.
+
+	* log4php/appenders/LoggerAppenderConsole.php 1.9:
+	* log4php/appenders/LoggerAppenderDailyFile.php 1.6:
+	* log4php/appenders/LoggerAppenderDb.php 1.6:
+	* log4php/appenders/LoggerAppenderEcho.php 1.4:
+	* log4php/appenders/LoggerAppenderFile.php 1.14:
+	* log4php/appenders/LoggerAppenderMail.php 1.6:
+	* log4php/appenders/LoggerAppenderMailEvent.php 1.7:
+	* log4php/appenders/LoggerAppenderNull.php 1.3:
+	* log4php/appenders/LoggerAppenderPhp.php 1.10:
+	* log4php/appenders/LoggerAppenderRollingFile.php 1.12:
+	* log4php/appenders/LoggerAppenderSocket.php 1.12:
+	* log4php/appenders/LoggerAppenderSyslog.php 1.10:
+		Complete code revision.
+		Included resources existence tests.
+		Turned log warnings to debug.
+
+2003-09-11  vxr
+	* log4php/Logger.php 1.8:
+	* log4php/LoggerManager.php 1.14:
+		Added factory param to getLogger().
+
+	* log4php/LoggerHierarchy.php 1.18:
+		Added factory param to getLogger().
+		Fixed a bug about level comparing in isDisabled().
+		Added a null level protection in setThreshold().
+
+	* log4php/spi/LoggerLoggingEvent.php 1.10:
+		Recoded the getLocationInformation() method.
+
+	* log4php/layouts/LoggerPatternLayout.php 1.6:
+		Changed doc to reflect date microseconds support.
+
+	* log4php/helpers/LoggerPatternParser.php 1.9:
+		Added microseconds id to predefined date constants.
+
+	* log4php/LoggerLevel.php 1.10:
+		Fixed default param mismatch.
+
+	* log4php/spi/LoggerLocationInfo.php 1.5:
+		Renamed caller param to fqcn
+
+	* log4php/helpers/LoggerPatternConverter.php 1.11:
+		Added microseconds support to LoggerDatePatternConverter
+
+	* log4php/helpers/LoggerOptionConverter.php 1.3:
+		Minor param fix.
+
+	* log4php/LoggerCategory.php 1.15:
+		Now fqcn is handled properly.
+
+------------------------------------------------------------------------------
+ Release 0.5
+------------------------------------------------------------------------------
+
+2003-09-10  vxr
+	* log4php/log4php.html 1.10:
+		New layout
+
+	* log4php/appenders/LoggerAppenderPhp.php 1.9:
+	* log4php/appenders/LoggerAppenderSyslog.php 1.9:
+		Changes to support the new LoggerLevel class.
+		Remapped levels.
+
+	* log4php/LoggerLevel.php 1.9:
+		Recoded to support subclassing.
+
+	* log4php/spi/LoggerLoggingEvent.php 1.9:
+		Let's say goodbye to $GLOBALS['log4php.LoggingEvent.microtime
+		support'] var.
+
+	* log4php/spi/LoggerConfigurator.php 1.2:
+	* log4php/spi/LoggerFactory.php 1.2:
+	* log4php/varia/LoggerDenyAllFilter.php 1.4:
+	* log4php/varia/LoggerStringMatchFilter.php 1.4:
+		Some minor doc changes.
+
+	* log4php/helpers/LoggerOptionConverter.php 1.2:
+		Some doc changes.
+		Fixed derived levels class loading in toLevel().
+
+	* log4php/LoggerManager.php 1.13:
+	* log4php/LoggerNDC.php 1.5:
+	* log4php/config/LoggerPropertySetter.php 1.2:
+	* log4php/or/LoggerRendererMap.php 1.3:
+		Some minor doc changes
+
+	* log4php/LoggerAppenderSkeleton.php 1.8:
+	* log4php/LoggerCategory.php 1.14:
+	* log4php/LoggerHierarchy.php 1.17:
+	* log4php/LoggerRoot.php 1.7:
+	* log4php/layouts/LoggerLayoutHtml.php 1.12:
+	* log4php/layouts/LoggerLayoutSimple.php 1.8:
+	* log4php/layouts/LoggerLayoutTTCC.php 1.12:
+	* log4php/layouts/LoggerXmlLayout.php 1.12:
+		Changes to support the new LoggerLevel class.
+
+	* log4php/LoggerPropertyConfigurator.php 1.3:
+		Changes to support the new LoggerLevel class.
+		Heavy modifications to doc.
+		Fixed an error in parseCategory().
+
+	* log4php/helpers/LoggerPatternConverter.php 1.10:
+		Changed LoggerBasicPatternConverter to support the new
+		LoggerLevel class.
+
+	* log4php/spi/LoggerLocationInfo.php 1.4:
+		LOG4PHP_LOGGER_LOCATION_INFO_NA set to 'NA'.
+		Added some doc.
+
+	* log4php/LoggerBasicConfigurator.php 1.2:
+		Now the class is a child of LoggerConfigurator
+
+	* log4php/xml/LoggerDOMConfigurator.php 1.6:
+		Fixed null assignments to filter and appender that could
+		destroy last configured filter and appender.
+
+	* log4php/xml/LoggerDOMConfigurator.php 1.5:
+		Extended namespace to all tags.
+
+2003-09-08  vxr
+	* log4php/LoggerBasicConfigurator.php 1.1:
+	* log4php/LoggerDefaultCategoryFactory.php 1.1:
+	* log4php/LoggerPropertyConfigurator.php 1.1:
+	* log4php/config/LoggerPropertyGetter.php 1.1:
+	* log4php/config/LoggerPropertySetter.php 1.1:
+	* log4php/helpers/LoggerOptionConverter.php 1.1:
+	* log4php/spi/LoggerConfigurator.php 1.1:
+	* log4php/spi/LoggerFactory.php 1.1:
+		First implementation.
+
+	* log4php/LoggerLayout.php 1.10:
+		Changed class existence check in factory().
+
+	* log4php/LoggerCategory.php 1.13:
+		Added setHierarchy() method.
+		Now setLevel() can manage null level.
+
+	* log4php/LoggerAppenderSkeleton.php 1.7:
+		Used requiresLayout() method in setLayout().
+
+	* log4php/LoggerAppender.php 1.12:
+		Changed class existence check.
+		Now factory() and singleton() methods dont emit warnings.
+
+	* log4php/xml/LoggerDOMConfigurator.php 1.4:
+		Heavy mods to make a more solid class.
+		Added variable substitution support.
+
+	* log4php/LoggerHierarchy.php 1.16:
+		Added getLoggerByFactory()
+
+	* log4php/LoggerManager.php 1.12:
+		A brand new init procedure was created.
+		Introduced LOG4PHP_INIT_OVERRIDE, LOG4PHP_CONFIGURATION and LOG4PHP_CONFIGURATOR_CLASS constants.
+
+	* log4php/LoggerLog.php 1.9:
+		Add internalDebugging() to set debug via debug().
+
+	* log4php/LoggerLevel.php 1.8:
+		Added toLevel() method (it will replace toCode()).
+		Added default value support.
+
+2003-09-06  vxr
+	* log4php/xml/LoggerDOMConfigurator.php 1.3:
+		Renamed configure() to configureRepository().
+		Added configure() that has only filename as parameter.
+		Now configuration functions return a value.
+
+	* log4php/appenders/LoggerAppenderRollingFile.php 1.11:
+		Added fileName expansion to have a full expanded filename
+		during rollOver() (Thanks to Sergio Strampelli).
+
+	* log4php/LoggerManager.php 1.10:
+		Rechanged LOG4PHP_CONFIGURATION_FILENAME to
+		LOG4PHP_CONFIG_FILENAME (Thanks to Sergio Strampelli).
+
+	* log4php/appenders/LoggerAppenderFile.php 1.13:
+		Added fseek after fopen to properly set internal file pointer
+		if 'append' is set.
+
+	* log4php/LoggerManager.php 1.11:
+		Changed {configurator}::configure() method call.
+
+------------------------------------------------------------------------------
+ Release 0.4
+------------------------------------------------------------------------------
+
+2003-09-02  vxr
+	* LoggerConfigXmlParser.php 1.13:
+		bye
+
+2003-09-01  vxr
+	* appenders/LoggerAppenderDailyFile.php 1.5:
+		Now requires use LOG4PHP_DIR.
+		Removed direct references to file property.
+		Some documention changes.
+		Now documentation points directly to classes.
+
+	* appenders/LoggerAppenderFile.php 1.12:
+	* appenders/LoggerAppenderRollingFile.php 1.10:
+		Fixed an undefined variable issue
+
+	* helpers/LoggerPatternConverter.php 1.9:
+	* layouts/LoggerPatternLayout.php 1.5:
+	* spi/LoggerFilter.php 1.3:
+	* varia/LoggerDenyAllFilter.php 1.3:
+		Now requires use LOG4PHP_DIR.
+		Renamed class constants.
+		Some documention changes.
+		Now documentation points directly to classes.
+
+	* layouts/LoggerXmlLayout.php 1.11:
+		Now requires use LOG4PHP_DIR.
+		Introduced LOG4PHP_LINE_SEP constants.
+		Rechanged event timeStamp rendering.
+		Some documention changes.
+		Now documentation points directly to classes.
+
+	* LoggerNDC.php 1.4:
+	* LoggerRoot.php 1.6:
+	* appenders/LoggerAppenderDailyFile.php 1.4:
+	* appenders/LoggerAppenderDb.php 1.5:
+	* appenders/LoggerAppenderEcho.php 1.3:
+	* appenders/LoggerAppenderFile.php 1.10:
+	* appenders/LoggerAppenderMail.php 1.5:
+	* appenders/LoggerAppenderMailEvent.php 1.6:
+	* appenders/LoggerAppenderNull.php 1.2:
+	* appenders/LoggerAppenderPhp.php 1.8:
+	* helpers/LoggerFormattingInfo.php 1.4:
+	* or/LoggerDefaultRenderer.php 1.2:
+	* or/LoggerObjectRenderer.php 1.2:
+	* or/LoggerRendererMap.php 1.2:
+	* spi/LoggerLocationInfo.php 1.3:
+	* spi/LoggerLoggingEvent.php 1.8:
+		Now requires use LOG4PHP_DIR.
+		Some documention changes.
+		Now documentation points directly to classes.
+
+	* Logger.php 1.7:
+		Now documentation points directly to classes.
+
+	* appenders/LoggerAppenderConsole.php 1.8:
+		Now requires use LOG4PHP_DIR.
+		Renamed constants.
+		Some documention changes.
+		Now documentation points directly to classes.
+
+	* appenders/LoggerAppenderFile.php 1.11:
+		Now requires use LOG4PHP_DIR.
+		Modified to use fileName property
+		Some documention changes.
+		Now documentation points directly to classes.
+
+	* layouts/LoggerLayoutHtml.php 1.11:
+		Now requires use LOG4PHP_DIR.
+		Introduced LOG4PHP_LINE_SEP constants.
+		Rechanged event timeStamp rendering.
+		Some code cleanups.
+		Some documention changes.
+		Now documentation points directly to classes.
+
+	* helpers/LoggerPatternParser.php 1.7:
+		Now requires use LOG4PHP_DIR.
+		Introduced LOG4PHP_LINE_SEP constants.
+		Renamed class constants.
+		Some documention changes.
+		Now documentation points directly to classes.
+
+	* appenders/LoggerAppenderSocket.php 1.11:
+		Now requires use LOG4PHP_DIR.
+		Introduced useXml option to switch between xml and serialized events rendering.
+		Some documention changes.
+		Now documentation points directly to classes.
+
+	* layouts/LoggerLayoutSimple.php 1.7:
+		Now requires use LOG4PHP_DIR.
+		Introduced LOG4PHP_LINE_SEP constants.
+		Some documention changes.
+		Now documentation points directly to classes.
+
+	* layouts/LoggerLayoutTTCC.php 1.11:
+		Now requires use LOG4PHP_DIR.
+		Introduced LOG4PHP_LINE_SEP constants.
+		Rechanged event timeStamp rendering (thanks to Sergio Strampelli).
+		Some documention changes.
+		Now documentation points directly to classes.
+
+	* LoggerManager.php 1.9:
+		A new initialization procedure was created.
+		Some documention changes.
+		Now documentation points directly to classes.
+
+	* appenders/LoggerAppenderRollingFile.php 1.9:
+		Now requires use LOG4PHP_DIR.
+		Fixed a bug in rollOver() method (thanks to Sergio Strampelli)
+		Some documention changes.
+		Now documentation points directly to classes.
+
+	* appenders/LoggerAppenderSyslog.php 1.8:
+		Now requires use LOG4PHP_DIR.
+		A constant syntax error fix.
+		Some documention changes.
+		Now documentation points directly to classes.
+
+	* LoggerAppenderSkeleton.php 1.6:
+	* LoggerCategory.php 1.12:
+	* LoggerLayout.php 1.9:
+	* LoggerLevel.php 1.7:
+	* LoggerLog.php 1.8:
+	* LoggerMDC.php 1.4:
+	* xml/LoggerDOMConfigurator.php 1.2:
+		Some documention changes.
+		Now documentation points directly to classes.
+
+	* LoggerHierarchy.php 1.15:
+		Some documention changes.
+		Some code cleanups.
+		Now documentation points directly to classes.
+
+	* LoggerAppender.php 1.11:
+		Now documentation points directly to classes.
+		Fixed singleton method.
+
+	* varia/LoggerStringMatchFilter.php 1.3:
+		Now requires use LOG4PHP_DIR.
+		Fix a bug in decide()
+		Renamed class constants.
+		Some documention changes.
+		Now documentation points directly to classes.
+
+2003-08-31  vxr
+	* LoggerAppenderSkeleton.php 1.5:
+		modified code documentation
+		now it is a LoggerAppender's child
+		fixed a priority check in isAsSevereAsThreshold() method (thanks to Sergio Strampelli)
+		changed LOGGER_FILTER constants to LOG4PHP_LOGGER_FILTER
+
+	* LoggerAppender.php 1.10:
+		modified code documentation
+		fixed include path in factory
+
+	* LoggerHierarchy.php 1.14:
+		Introduced the new LOG4PHP_DIR constant (thanks to Sergio Strampelli).
+		Modified the code documentation.
+		Added a singleton() method that holds the unique Hierarchy instance.
+		Implemented addRenderer().
+		Now getCurrentCategories() returns a reference.
+		Modified getCurrentLoggers() implementation.
+		Commented out getParser() because it's no longer used.
+		Modified resetConfiguration() implementation.
+		Modified shutdown() implementation.
+
+	* Logger.php 1.6:
+		modified code documentation
+
+	* xml/LoggerDOMConfigurator.php 1.1:
+		Initial release
+
+	* LoggerCategory.php 1.11:
+		modified code documentation
+		changed getAllAppenders(), removeAllAppenders() and removeAppender implementations.
+
+------------------------------------------------------------------------------
+ Release 0.3
+------------------------------------------------------------------------------
+
+2003-08-27  vxr
+	* LoggerAppenderSkeleton.php 1.4:
+		added activateOptions()
+
+	* spi/LoggerLoggingEvent.php 1.6:
+		Changed timestamp managing
+
+	* layouts/LoggerLayoutTTCC.php 1.8:
+		Introduced the possibility to append microseconds on timestamp.
+
+	* log4php.html 1.8:
+		Added new features to comparison table
+
+	* spi/LoggerLoggingEvent.php 1.5:
+		Changes to match original class.
+
+	* layouts/LoggerLayoutHtml.php 1.9:
+	* layouts/LoggerXmlLayout.php 1.9:
+		Changes to match original layout.
+
+	* LoggerHierarchy.php 1.13:
+	* LoggerManager.php 1.8:
+	* appenders/LoggerAppenderEcho.php 1.2:
+	* helpers/LoggerFormattingInfo.php 1.3:
+	* helpers/LoggerPatternConverter.php 1.6:
+	* helpers/LoggerPatternConverter.php 1.8:
+	* layouts/LoggerLayoutTTCC.php 1.9:
+	* layouts/LoggerPatternLayout.php 1.4:
+	* log4php.html 1.9:
+	* spi/LoggerLoggingEvent.php 1.7:
+		Documentation mods
+
+	* helpers/LoggerPatternConverter.php 1.7:
+	* helpers/LoggerPatternParser.php 1.6:
+		Bug fixes
+
+	* layouts/LoggerLayoutHtml.php 1.10:
+	* layouts/LoggerLayoutTTCC.php 1.10:
+	* layouts/LoggerXmlLayout.php 1.10:
+		Fixed some bugs and changed timestamp elaboration
+
+	* helpers/LoggerPatternConverter.php 1.5:
+		Now it supports the whole original converters.
+
+	* appenders/LoggerAppenderMailEvent.php 1.5:
+		Add Domenico Lordi email
+
+	* appenders/LoggerAppenderPhp.php 1.7:
+		This appender now use a default TTCC layout to render events.
+		User cannot specify its own layout
+
+	* or/LoggerDefaultRenderer.php 1.1:
+	* or/LoggerObjectRenderer.php 1.1:
+	* or/LoggerRendererMap.php 1.1:
+		Not tested
+
+	* LoggerHierarchy.php 1.11:
+		Implemented the two methods to support renderer
+
+	* LoggerConfigXmlParser.php 1.12:
+		Added renderer tag support
+
+	* appenders/LoggerAppenderEcho.php 1.1:
+		New appender to log via echo function
+
+	* LoggerAppender.php 1.9:
+	* LoggerAppenderSkeleton.php 1.3:
+	* LoggerCategory.php 1.10:
+	* LoggerHierarchy.php 1.12:
+	* LoggerLayout.php 1.8:
+	* LoggerLog.php 1.7:
+	* LoggerMDC.php 1.3:
+	* LoggerNDC.php 1.3:
+		Documentation changes
+
+	* LoggerMDC.php 1.2:
+	* LoggerNDC.php 1.2:
+		Added @version tag
+
+	* LoggerCategory.php 1.9:
+		No more file,line,function infos should be passed to debug(),info(),etc.. methods.
+		The work of collecting (on demand) such infos is deferred to LoggerLoggingEvent.
+
+	* helpers/LoggerPatternParser.php 1.5:
+		Now it can parse the whole original converters.
+		Some fixes.
+
+	* LoggerEvent.php 1.8:
+		No longer used (use spi/LoggerLoggingEvent instead)
+
+2003-08-26  vxr
+	* LoggerCategory.php 1.8:
+		Changed debug_backtrace() condition for better performance
+
+2003-08-25  vxr
+	* spi/LoggerLoggingEvent.php 1.4:
+		added Method informations
+
+	* helpers/LoggerPatternConverter.php 1.4:
+		Added method location converter
+
+	* LoggerCategory.php 1.7:
+		added Method information in logger wrappers
+
+	* layouts/LoggerLayoutHtml.php 1.8:
+		Added method info column
+
+	* layouts/LoggerXmlLayout.php 1.8:
+		recoded
+
+	* helpers/LoggerPatternParser.php 1.4:
+		added %M conversion
+
+	* LoggerLevel.php 1.6:
+		Added new debug points.
+
+	* LoggerConfigXmlParser.php 1.11:
+		introduced level tag and deprecate priority tag
+
+2003-08-23  vxr
+	* log4php.html 1.7:
+		Added comparison table and notes
+
+2003-08-22  vxr
+	* layouts/LoggerPatternLayout.php 1.3:
+	* spi/LoggerLoggingEvent.php 1.3:
+		Added a new debug point.
+
+	* layouts/LoggerXmlLayout.php 1.7:
+		Added a new debug point.
+		Misc bug fixes.
+
+	* appenders/LoggerAppenderFile.php 1.9:
+	* appenders/LoggerAppenderMail.php 1.4:
+		minor changes
+
+	* appenders/LoggerAppenderDb.php 1.4:
+		recoded activateOptions() method
+		add setTable(), getTable() method
+		some errors fixed
+
+	* appenders/LoggerAppenderConsole.php 1.7:
+		added a '@' in front of fopen
+
+	* LoggerConfigXmlParser.php 1.10:
+		fix an error in setter() method
+
+	* appenders/LoggerAppenderMailEvent.php 1.3:
+		Changed smtphost name to smtpHost
+		Fixed getter and setter name for smtpHost
+		Fixed append() method to fit new smtpHost name
+
+	* appenders/LoggerAppenderDailyFile.php 1.3:
+		fixed an error on setFile()
+
+	* log4php.html 1.6:
+		Added new features.
+		Recoded example.
+
+	* layouts/LoggerLayoutHtml.php 1.7:
+		Added File and Line columns.
+
+	* helpers/LoggerPatternParser.php 1.3:
+		Added new debug points.
+		Misc fixes and changes.
+
+	* helpers/LoggerPatternConverter.php 1.3:
+		Added new debug points.
+		Changed stringPad() method with the original log4j.
+		Misc fixes and changes.
+
+	* LoggerAppender.php 1.8:
+		Added an empty classname test
+
+2003-08-21  vxr
+	* appenders/LoggerAppenderConsole.php 1.6:
+	* appenders/LoggerAppenderDailyFile.php 1.2:
+	* appenders/LoggerAppenderDb.php 1.3:
+	* appenders/LoggerAppenderFile.php 1.8:
+	* appenders/LoggerAppenderMail.php 1.3:
+	* appenders/LoggerAppenderMailEvent.php 1.2:
+	* appenders/LoggerAppenderPhp.php 1.6:
+	* appenders/LoggerAppenderRollingFile.php 1.8:
+	* appenders/LoggerAppenderSocket.php 1.9:
+	* appenders/LoggerAppenderSyslog.php 1.6:
+	* helpers/LoggerFormattingInfo.php 1.2:
+	* helpers/LoggerPatternConverter.php 1.2:
+	* helpers/LoggerPatternParser.php 1.2:
+	* layouts/LoggerLayoutSimple.php 1.6:
+	* layouts/LoggerPatternLayout.php 1.2:
+	* layouts/LoggerXmlLayout.php 1.6:
+	* varia/LoggerDenyAllFilter.php 1.2:
+	* varia/LoggerStringMatchFilter.php 1.2:
+		Changed DocBook comment header
+		Changed Documentation
+		Bugs and Syntax error fixed
+
+	* LoggerEvent.php 1.7:
+		Changed DocBook comment header
+		Changed microtime managing. Now there is a getMicroSeconds() method
+
+	* LoggerConfigXmlParser.php 1.9:
+		Changed DocBook comment header
+		Fix bugs and syntax errors
+
+	* layouts/LoggerLayoutHtml.php 1.6:
+	* layouts/LoggerLayoutTTCC.php 1.7:
+	* spi/LoggerLoggingEvent.php 1.2:
+		Changed DocBook comment header
+		Changed Documentation
+		Bugs and Syntax error fixed
+		Now time reports microseconds
+
+	* spi/LoggerFilter.php 1.2:
+		Changed DocBook comment header
+		Changed Documentation
+
+	* LoggerAppenderSkeleton.php 1.2:
+		Changed DocBook comment header
+		Changed some methods documentation
+
+	* Logger.php 1.5:
+	* LoggerAppender.php 1.7:
+	* LoggerCategory.php 1.6:
+	* LoggerHierarchy.php 1.10:
+	* LoggerLayout.php 1.7:
+	* LoggerLevel.php 1.5:
+	* LoggerLog.php 1.6:
+	* LoggerManager.php 1.7:
+	* LoggerRoot.php 1.5:
+		Changed DocBook comment header
+
+2003-08-19  vxr
+	* LoggerLayout.php 1.6:
+	* layouts/LoggerLayoutHtml.php 1.5:
+	* layouts/LoggerLayoutSimple.php 1.5:
+	* layouts/LoggerLayoutTTCC.php 1.6:
+	* layouts/LoggerXmlLayout.php 1.5:
+		Some minor changes.
+
+	* appenders/LoggerAppenderConsole.php 1.5:
+	* appenders/LoggerAppenderDb.php 1.2:
+	* appenders/LoggerAppenderFile.php 1.7:
+	* appenders/LoggerAppenderMail.php 1.2:
+	* appenders/LoggerAppenderPhp.php 1.5:
+	* appenders/LoggerAppenderRollingFile.php 1.7:
+	* appenders/LoggerAppenderSocket.php 1.8:
+	* appenders/LoggerAppenderSyslog.php 1.5:
+		Now parent class is LoggerAppenderSkeleton
+
+	* LoggerHierarchy.php 1.9:
+		some minor changes.
+
+	* LoggerAppender.php 1.6:
+		Moved several methods to LoggerAppenderSkeleton
+
+	* LoggerEvent.php 1.6:
+		set to deprecated. This class will be deleted soon
+
+	* LoggerCategory.php 1.5:
+		used spi.LoggerLoggingEvent instead of LoggerEvent
+		add file an line number reporting capabilities
+
+	* LoggerLog.php 1.5:
+		Added debug, warn, error methods
+
+	* LoggerConfigXmlParser.php 1.8:
+		Recoded
+		Added filters parsing
+
+------------------------------------------------------------------------------
+ Release 0.2
+------------------------------------------------------------------------------
+
+2003-02-20  vxr
+	* LoggerLayout.php 1.4:
+		subpackage fix
+
+	* log4php.html 1.3:
+		addendum
+
+	* Logger.php 1.3:
+	* LoggerAppender.php 1.4:
+	* LoggerCategory.php 1.3:
+	* LoggerConfigXmlParser.php 1.6:
+	* LoggerEvent.php 1.4:
+	* LoggerHierarchy.php 1.7:
+	* LoggerLayout.php 1.3:
+	* LoggerLevel.php 1.3:
+	* LoggerLog.php 1.3:
+	* LoggerManager.php 1.5:
+	* LoggerRoot.php 1.3:
+	* appenders/LoggerAppenderConsole.php 1.3:
+	* appenders/LoggerAppenderFile.php 1.5:
+	* appenders/LoggerAppenderPhp.php 1.3:
+	* appenders/LoggerAppenderRollingFile.php 1.5:
+	* appenders/LoggerAppenderSocket.php 1.6:
+	* appenders/LoggerAppenderSyslog.php 1.3:
+	* layouts/LoggerLayoutHtml.php 1.3:
+	* layouts/LoggerLayoutSimple.php 1.3:
+	* layouts/LoggerLayoutTTCC.php 1.4:
+	* layouts/LoggerXmlLayout.php 1.3:
+		changes to comment header and methods
+
+2003-02-19  vxr
+	* layouts/LoggerLayoutHtml.php 1.2:
+		syntax error fixes
+
+	* layouts/LoggerLayoutTTCC.php 1.3:
+		doc tag fix
+
+	* LoggerHierarchy.php 1.6:
+	* LoggerManager.php 1.4:
+		implemented shutdown() method
+
+	* LoggerConfigXmlParser.php 1.5:
+		changed xml config filename to log4php.xml
+
+	* LoggerAppender.php 1.3:
+		singletion can now returns all instances
+
+	* appenders/LoggerAppenderConsole.php 1.2:
+	* appenders/LoggerAppenderFile.php 1.4:
+	* appenders/LoggerAppenderPhp.php 1.2:
+	* appenders/LoggerAppenderRollingFile.php 1.4:
+	* appenders/LoggerAppenderSocket.php 1.5:
+	* appenders/LoggerAppenderSyslog.php 1.2:
+		misc fix and changes
+
+2003-02-18  vxr
+	* appenders/LoggerAppenderSocket.php 1.4:
+		use serialize to transmit event
+
+	* appenders/LoggerAppenderFile.php 1.3:
+		add header and footer support
+
+	* LoggerEvent.php 1.3:
+		added getThreadName() method
+
+2003-02-13  vxr
+	* Logger.php 1.2:
+	* LoggerAppender.php 1.2:
+	* LoggerCategory.php 1.2:
+	* LoggerConfigXmlParser.php 1.4:
+	* LoggerEvent.php 1.2:
+	* LoggerHierarchy.php 1.5:
+	* LoggerLayout.php 1.2:
+	* LoggerLevel.php 1.2:
+	* LoggerLog.php 1.2:
+	* LoggerManager.php 1.3:
+	* LoggerRoot.php 1.2:
+	* appenders/LoggerAppenderFile.php 1.2:
+	* appenders/LoggerAppenderRollingFile.php 1.3:
+	* appenders/LoggerAppenderSocket.php 1.3:
+	* layouts/LoggerLayoutSimple.php 1.2:
+	* layouts/LoggerLayoutTTCC.php 1.2:
+	* layouts/LoggerXmlLayout.php 1.2:
+		added head disclaimer
+
+2003-02-12  vxr
+	* LoggerConfigXmlParser.php 1.3:
+		aggiunto activateOptions()
+
+	* appenders/LoggerAppenderSocket.php 1.2:
+		fix errori
+
+2003-02-10  vxr
+	* appenders/LoggerAppenderRollingFile.php 1.2:
+		cambiato name classe padre
+
+	* LoggerHierarchy.php 1.2:
+		fix errori sintassi
+
+	* LoggerHierarchy.php 1.3:
+		aggiunti tag versione e package
+
+	* LoggerConfigXmlParser.php 1.2:
+		cambiato package name
+        
+
+</pre>
+	<p class="notes" id="credit">
+		Documentation generated on Tue,  9 Dec 2003 23:48:59 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.2.2</a>
+	</p>
+	</body>
+</html>

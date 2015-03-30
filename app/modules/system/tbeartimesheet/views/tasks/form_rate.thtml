@@ -1,0 +1,10 @@
+<?php
+if (isset($rates) && count($rates))
+{
+  echo $html->selectTag('Task/rate_id', $rates, $html->tagValue('Task/rate_id'), array('id'=>'input_rate_id'));
+}
+else
+{
+  echo '<select name="data[Task][rate_id]" id="input_rate_id"><option value=""></option></select>';
+}
+?>

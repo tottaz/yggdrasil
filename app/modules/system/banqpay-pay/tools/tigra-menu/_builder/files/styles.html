@@ -1,0 +1,83 @@
+<!--
+Title: Tigra Menu Builder v1.0 (07/21/2005)
+Copyright (c)2005 Softcomplex, Inc. (www.softcomplex.com)
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Styles Templates List</title>
+
+<link rel="stylesheet" href="common.css">
+
+<script language="JavaScript" src="common.js"></script>
+<script language="JavaScript">
+
+function style_generate_list () {
+	if (!F_DATA.A_STYLES) return;
+	document.write(
+		'<table cellspacing="1" class="listTab">',
+		'<tr><th colspan="3" class="tabHead">Style Templates</th></tr>',
+		'<tr><th class="colHead">preview</th><th width="100%" class="colHead">Name</th><th class="colHead">actions</th></tr>'
+	);
+	for (var i = 0; i < F_DATA.A_STYLES.length; i++) {
+		var n_id = F_DATA.A_STYLES[i].n_id;
+		document.write (
+			'<tr><td id="style_template_preview_',n_id,
+			'" width="1%" background="images/grid.gif" class="propLitem"><div class="stylePreviewI',n_id,
+			'S0" onmouseout="this.className=\'stylePreviewI',n_id,
+			'S0\'"  onmouseover="this.className=\'stylePreviewI',n_id,
+			'S1\'"  onmousedown="this.className=\'stylePreviewI',n_id,
+			'S2\'" style="cursor:hand;width:150px;height:24px;margin:4px;">sample&nbsp;caption</div></td><td class="propLitem"><a href="javascript:F_PROPS.style_template_edit(',n_id,
+			')" title="click to edit this style template" style="font-weight:',(n_id == N_ID ? 'bold' : 'normal'),'" onclick="style_select(',n_id,')" id="styleTitleI',n_id,'">',
+			F_DATA.A_STYLES[i]['name'], '</a></td><td nowrap class="propActions">[<a href="javascript:F_PROPS.style_template_copy(',n_id,
+			')" title="click to duplicate this style template">copy</a>][<a href="javascript:F_PROPS.style_template_delete(',n_id,
+			')" title="click to delete this style template">delete</a>]',
+			(i?'[<a href="javascript:F_PROPS.style_template_up('+n_id+')" title="click to move this style template up">up</a>]':'[<span style="color:gray;">up</span>]'),
+			(i == F_DATA.A_STYLES.length - 1?'[<span style="color:gray;">down</span>]' : '[<a href="javascript:F_PROPS.style_template_down('+n_id+')" title="click to move this style template down">down</a>]'),
+			'</td></tr>'
+		);
+	}
+	document.write(
+		'<tr><th colspan="3" align="right" class="tabHead">[<a href="javascript:F_PROPS.style_template_create()">create new</a>]</th></tr>',
+		'</table>'
+	);
+}
+
+function style_select (n_id) {
+	for (var i = 0; i < F_DATA.A_STYLES.length; i++) {
+		var e_title = get_element('styleTitleI' + F_DATA.A_STYLES[i].n_id);
+		e_title.style.fontWeight = (F_DATA.A_STYLES[i].n_id == n_id ? 'bold' : 'normal')
+		e_title.blur();
+	}
+}
+
+style_reindex();
+
+if (F_DATA.A_STYLES) {
+	// if no data in URL then try last loaded style
+	if (N_ID == null)
+		N_ID = F_DATA.N_LAST_STYLE_ID;
+
+	// if no last loaded style then load first in the list
+	for (var i = 0; i < F_DATA.A_STYLES.length && N_ID == null; i++) 
+		if (F_DATA.A_STYLES[i] != null)
+			N_ID = F_DATA.A_STYLES[i].n_id;
+}
+
+style_generate_css();
+
+</script>
+</head>
+<body>
+<script language="JavaScript">
+
+style_generate_list();
+
+F_PROPS.location = 'style.html?id=' + N_ID;
+tab_active('styles');
+
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+/* --- menu styles ---
+note:
+	not all browsers render styles the same way so try out your style sheet
+	on different browsers before publishing;
+*/
+/* level 0 inner */
+.m0l0iout {
+	font-family: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-decoration: none;
+	padding: 4px;
+	color: #FFFFFF;
+}
+.m0l0iover {
+	font: 12px Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: underline;
+	padding: 4px;
+	color: #FFFFFF;
+}
+
+/* level 0 outer */
+.m0l0oout {
+	text-decoration : none;
+	border : 1px solid #FFFFFF;
+	background: #4682B4;
+}
+.m0l0oover {
+	text-decoration : none;
+	border : 1px solid #FFFFFF;
+	background: #5AA7E5;
+}
+
+/* level 1 inner */
+.m0l1iout {
+	font: 12px Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	padding: 4px;
+	color: #000000;
+}
+.m0l1iover {
+	font: bold 12px Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration : none;
+	padding: 4px;
+	color: #000000;
+}
+
+/* level 1 outer */
+.m0l1oout {
+	text-decoration : none;
+	border : 1px solid #FFFFFF;
+	background: #46B446;
+	filter: alpha(opacity=85);
+}
+.m0l1oover {
+	text-decoration : none;
+	border : 1px solid #FFFFFF;
+	background: #5AE55A;
+}
+
+/* level 2 inner */
+.m0l2iover {
+	font: 12px Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration : none;
+	padding: 4px;
+	color: #000000;
+}
+
+/* level 2 outer */
+.m0l2oout {
+	text-decoration : none;
+	border : 1px solid #FFFFFF;
+	background: #B44646;
+}
+.m0l2oover {
+	text-decoration : none;
+	border : 1px solid #FFFFFF;
+	background: #E55A5A;
+}

@@ -1,0 +1,65 @@
+YUI Library Release Notes
+
+*** version 0.10.0 ***
+
+In this release, the directory structure has been modified to provide more
+component organization.  This is the new format:
+
+yui/
+  |
+  -- build/
+  | |
+  | -- dom/
+  | |
+  | | -- assets/
+  | |
+  | | -- dom.js
+  | |
+  -- docs/
+  | |
+  | -- dom/
+  | |
+  -- examples/
+  | |
+  | -- dom/
+  | |
+  | | -- img/
+
+Notice there are three immediate directories under the
+root YUI.  They are:
+
+*build/*
+This directory contains the source files for each YUI component, and each
+component is presented as a sub-directory under build/.  Notice that there are
+generally two source files: component.js and component-min.js.  The "component"
+source is the raw, commented build and "component-min" is the minified version
+of the same file with comments and whitespace removed.  With some components,
+there is an assets sub-directory.  CSS and image dependencies for each
+component are stored in its assets sub-directory.
+
+Note: If a component makes use of images, the image source path in the
+component's CSS file will point to Akamai.  The physical images are also
+available in the assets/ directory for local availability.  Please modify the
+CSS image references if you wish to use your own image assets.
+
+*docs/*
+This directory contains the jsdoc-generated API reference for every YUI
+component.  Each component is presented as a sub-directory under docs/.
+
+*examples/*
+This directory contains functional examples for each component in the YUI
+Library.  The examples are not part of the formal distribution; rather,
+they provide demonstrations of each component in use.  Each example uses YUI
+Library source files from the build/ directory, while all example-specific
+dependencies are stored in sub-directories (e.g. examples/dom/img).
+Some components, including the AutoComplete Control and Connection Manager,
+make use of PHP to implement certain examples.
+
+For example:
+In yui/examples/dom, the dom.js source file and all YUI .js dependencies
+are drawn from yui/build/ directories.  All other example-specific sources are
+stored as sub-directories: yui/examples/dom/css and yui/examples/dom/img.
+
+Each functional example is also available and functional on
+developer.yahoo.com/yui/.  They reproduced here as part of the distribution
+for your convenience.

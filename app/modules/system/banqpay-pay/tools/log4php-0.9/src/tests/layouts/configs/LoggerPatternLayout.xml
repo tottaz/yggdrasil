@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    @author VxR <vxr@vxr.it>
+    @version $Revision: 1.2 $
+    @since 0.3
+-->
+<log4php:configuration xmlns:log4php="http://www.vxr.it/log4php/" threshold="all" debug="false">
+    <appender name="default" class="LoggerAppenderEcho">
+        <layout class="LoggerPatternLayout">
+            <param name="conversionPattern" value="%-5p [%t] [%X{env.OS}]: %m in %F line %L%n" />
+        </layout>
+    </appender>
+
+    <root>
+        <level value="debug" />
+        <appender_ref ref="default" />        
+    </root>
+</log4php:configuration>

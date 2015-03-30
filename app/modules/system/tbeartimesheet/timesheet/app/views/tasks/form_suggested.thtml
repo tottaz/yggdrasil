@@ -1,0 +1,3 @@
+<?php
+echo isset($suggested) ? $suggested['time'].' - $'.number_format($suggested['amount'],2) : 'not enough data to calculate';
+?>

@@ -1,0 +1,175 @@
+<!--
+
+  HAWHAW XML DTD
+  (C) Norbert Huffschmid
+      http://www.hawhaw.de/
+
+-->
+
+<!ELEMENT hawhaw	(deck)>
+
+<!ELEMENT deck		(text|a|linkset|img|hr|phone|form|table|voice_text|voice_help|voice_nomatch|voice_noinput)*>
+<!ATTLIST deck
+	title		CDATA #IMPLIED
+	align		(left|center|right) "left"
+	output		(automatic|bigscreen|wap|hdml|pda|imode|mml|voicexml|xhtml) "automatic"
+	redirection	CDATA #IMPLIED
+	cache		(yes|no) "yes"
+	charset		CDATA #IMPLIED
+	skin		CDATA #IMPLIED
+	background	CDATA #IMPLIED
+	bgcolor		CDATA #IMPLIED
+	size		CDATA #IMPLIED
+	color		CDATA #IMPLIED
+	link_color	CDATA #IMPLIED
+	vlink_color	CDATA #IMPLIED
+	face		CDATA #IMPLIED
+	language	CDATA #IMPLIED
+	waphome		CDATA #IMPLIED
+	voice_jingle	CDATA #IMPLIED
+	skin		CDATA #IMPLIED
+>
+
+<!ELEMENT text		(#PCDATA|voice_text)*>
+<!ATTLIST text
+	bold		(yes|no) "no"
+	italic		(yes|no) "no"
+	underline	(yes|no) "no"
+	big		(yes|no) "no"
+	small		(yes|no) "no"
+	boxed		(yes|no) "no"
+	br		CDATA #IMPLIED
+	color		CDATA #IMPLIED
+	boxcolor	CDATA #IMPLIED
+>
+
+<!ELEMENT a		(#PCDATA|voice_text)*>
+<!ATTLIST a
+	href		CDATA #REQUIRED
+	title		CDATA #IMPLIED
+	br		CDATA #IMPLIED
+	proxy		(yes|no) "yes"
+	voice_dtmf	CDATA #IMPLIED
+	voice_timeout	CDATA #IMPLIED
+>
+
+<!ELEMENT linkset	(a|voice_text)*>
+
+<!ELEMENT img		(voice_text)?>
+<!ATTLIST img
+	src		CDATA #IMPLIED
+	wbmp		CDATA #IMPLIED
+	html		CDATA #IMPLIED
+	alt		CDATA #IMPLIED
+	bmp		CDATA #IMPLIED
+	br		CDATA #IMPLIED
+	localsrc	CDATA #IMPLIED
+	chtml_icon	CDATA #IMPLIED
+	mml_icon	CDATA #IMPLIED
+>
+
+<!ELEMENT hr		EMPTY>
+<!ATTLIST hr
+	width		CDATA #IMPLIED
+	size		CDATA #IMPLIED
+>
+
+<!ELEMENT phone		(#PCDATA|voice_text)*>
+<!ATTLIST phone
+	title		CDATA #IMPLIED
+>
+
+<!ELEMENT form		(text|img|hr|input|select|radio|checkbox|hidden|submit|table|voice_text)*>
+<!ATTLIST form
+	action		CDATA #IMPLIED
+>
+
+<!ELEMENT input		(voice_text|voice_help|voice_nomatch|voice_noinput)*>
+<!ATTLIST input
+	name		CDATA #REQUIRED
+	value		CDATA #IMPLIED
+	label		CDATA #IMPLIED
+	format		CDATA #IMPLIED
+	size		CDATA #IMPLIED
+	maxlength	CDATA #IMPLIED
+	type		(text|password) "text"
+	mode		(alphabet|katagana|hiragana|numeric) "alphabet"
+	br		CDATA #IMPLIED
+	voice_type	CDATA #IMPLIED
+	voice_grammar_src	CDATA #IMPLIED
+	voice_grammar_type	CDATA #IMPLIED
+>
+
+<!ELEMENT select	(option|voice_text|voice_help|voice_nomatch|voice_noinput)*>
+<!ATTLIST select
+	name		CDATA #REQUIRED
+	type		(popup|spin) "popup"
+>
+
+<!ELEMENT option	EMPTY>
+<!ATTLIST option
+	label		CDATA #REQUIRED
+	value		CDATA #REQUIRED
+	selected	(yes|no) "no"
+>
+
+<!ELEMENT radio		(button|voice_text|voice_help|voice_nomatch|voice_noinput)*>
+<!ATTLIST radio
+	name		CDATA #REQUIRED
+>
+
+<!ELEMENT button	EMPTY>
+<!ATTLIST button
+	label		CDATA #REQUIRED
+	value		CDATA #REQUIRED
+	checked		(yes|no) "no"
+>
+
+<!ELEMENT checkbox	(voice_text|voice_help|voice_nomatch|voice_noinput)*>
+<!ATTLIST checkbox
+	name		CDATA #REQUIRED
+	value		CDATA #REQUIRED
+	label		CDATA #IMPLIED
+	checked		(yes|no) "no"
+>
+
+<!ELEMENT hidden	EMPTY>
+<!ATTLIST hidden
+	name		CDATA #REQUIRED
+	value		CDATA #REQUIRED
+>
+
+<!ELEMENT submit	EMPTY>
+<!ATTLIST submit
+	label		CDATA #REQUIRED
+	name		CDATA #IMPLIED
+>
+
+<!ELEMENT table		(tr|voice_text)*>
+
+<!ELEMENT tr		(td)*>
+
+<!ELEMENT td		(text|a|img)*>
+
+<!ELEMENT voice_text	(#PCDATA)>
+<!ATTLIST voice_text
+	audio_src	CDATA #IMPLIED
+>
+
+<!ELEMENT voice_help	(#PCDATA)>
+<!ATTLIST voice_help
+	audio_src	CDATA #IMPLIED
+	url		CDATA #IMPLIED
+>
+
+<!ELEMENT voice_nomatch	(#PCDATA)>
+<!ATTLIST voice_nomatch
+	audio_src	CDATA #IMPLIED
+	url		CDATA #IMPLIED
+>
+
+<!ELEMENT voice_noinput	(#PCDATA)>
+<!ATTLIST voice_noinput
+	audio_src	CDATA #IMPLIED
+	url		CDATA #IMPLIED
+>

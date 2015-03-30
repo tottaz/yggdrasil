@@ -1,0 +1,50 @@
+<?php
+
+// HAWHAW example for usage of radio buttons
+// Norbert Huffschmid
+// 1.5.2004
+
+include("zetapay/core/mobile/hawhaw.inc");  // Could need some checking if this exists..	
+
+if (!isset($_REQUEST['submit']))
+{
+  // pass 1
+
+  $SelPage = new HAW_deck("");
+  $SelPage->use_simulator();
+
+  $myForm = new HAW_form($_SERVER['PHP_SELF']); 
+
+  $text = new HAW_text("Please select your flight destination:"); 
+  $rb = new HAW_radio("dest"); 
+  $rb->add_button("Helsinki", "Helsinki");
+  $rb->add_button("Munich", "Munich", HAW_CHECKED);
+  $rb->add_button("Paris", "Paris");
+  $rb->add_button("Stockholm", "Stockholm");
+  $sbt = new HAW_submit("Submit", "submit");
+
+  $myForm->add_text($text);
+  $myForm->add_radio($rb);
+  $myForm->add_submit($sbt);
+
+  $SelPage->add_form($myForm);
+
+  $SelPage->create_page();
+}
+else
+{
+  // form has been submitted - pass 2
+
+  $ExcusePage = new HAW_deck("Example 3", HAW_ALIGN_CENTER);
+  $ExcusePage->use_simulator();
+
+  $text1 = new HAW_text("Sorry,", HAW_TEXTFORMAT_BIG | HAW_TEXTFORMAT_BOLD | HAW_TEXTFORMAT_ITALIC); 
+  $text2 = new HAW_text("All flights to " . $_REQUEST['dest'] . " are totally booked out!", HAW_TEXTFORMAT_ITALIC); 
+
+  $ExcusePage->add_text($text1);
+  $ExcusePage->add_text($text2);
+
+  $ExcusePage->create_page();
+}
+
+?>

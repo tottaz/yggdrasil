@@ -1,0 +1,20 @@
+
+/**
+ * @package JobBoard
+ * @copyright Copyright (c)2010 Tandolin
+ * @license GNU General Public License version 2, or later
+ */
+
+#applcont {width: 100%}
+#contleft {float: left; width: 73%; margin-left: 17%}
+#contright {float: right; width: 2%; clear: none;background-color:#F6F6F6; padding: 0px 3px 5px 8px; border: 1px solid #ddd}
+.controw label { padding-left: 6% }
+.controw input {float: right; margin-right:12%;padding-bottom:4px;}
+.fieldreq {color: #cc0000; margin-left:5px; font-weight:normal}
+.summtitle {color:#999;font-weight:bold}
+#fslabel {padding-top: 2px; clear:both; margin-right: 12%; text-align: right}
+.jsrow {color: #444; width: 100%;clear: both; padding-top: 3px; padding-bottom: 2px;border-bottom: 1px dotted #bbb}
+.lrow {border-bottom: none }
+ #loadr {margin-right:5px;padding-left: 18px;background:transparent url(../images/rnd_loader.gif) no-repeat scroll left}
+ .hidel {visibility:hidden}
+ .showel {visibility:visible}

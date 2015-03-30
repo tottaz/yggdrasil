@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class LoggerManager</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class LoggerManager</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Use the LoggerManager to get Logger instances.</p>
+<p class="description"><p>Use the LoggerManager to get Logger instances.</p></p>
+	<ul class="tags">
+				<li><span class="field">todo:</span> create a configurator selector</li>
+				<li><span class="field">see:</span> <a href="../log4php/Logger.html">Logger</a></li>
+				<li><span class="field">version:</span> $Revision: 1.18 $</li>
+				<li><span class="field">author:</span> VxR &lt;<a href="mailto:vxr@vxr.it">mailto:vxr@vxr.it</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_log4php_LoggerManager_php.html">Program_Root/log4php/LoggerManager.php</a> (line <span class="field"><a href="..//__filesource/fsource_log4php__log4php_LoggerManager.php.html#a40">40</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+									<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#exists" title="details" class="method-name">exists</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#getCurrentLoggers" title="details" class="method-name">getCurrentLoggers</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result"><a href="../log4php/Logger.html">Logger</a></span>
+										<a href="#getLogger" title="details" class="method-name">&amp;getLogger</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type"><a href="../log4php/spi/LoggerFactory.html">LoggerFactory</a></span>&nbsp;<span class="var-name">$factory</span> = <span class="var-default">null</span>])
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result"><a href="../log4php/LoggerHierarchy.html">LoggerHierarchy</a></span>
+										<a href="#getLoggerRepository" title="details" class="method-name">&amp;getLoggerRepository</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">object</span>
+										<a href="#getRootLogger" title="details" class="method-name">&amp;getRootLogger</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#resetConfiguration" title="details" class="method-name">resetConfiguration</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setRepositorySelector" title="details" class="method-name">setRepositorySelector</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$selector</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$guard</span>)
+									</div>
+								
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#shutdown" title="details" class="method-name">shutdown</a>
+										()
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+													<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodexists" id="exists"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">exists</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerManager.php.html#a49">49</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">check if a given logger exists.</p>
+<p class="description"><p>check if a given logger exists.</p></p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			exists
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: logger name</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetCurrentLoggers" id="getCurrentLoggers"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getCurrentLoggers</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerManager.php.html#a62">62</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns an array this whole Logger instances.</p>
+<p class="description"><p>Returns an array this whole Logger instances.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../log4php/Logger.html">Logger</a></li>
+				<li><span class="field">static:</span> </li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			getCurrentLoggers
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetLogger" id="getLogger"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getLogger</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerManager.php.html#a89">89</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the specified Logger.</p>
+<p class="description"><p>Returns the specified Logger.</p></p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../log4php/Logger.html">Logger</a></span>
+		<span class="method-name">
+			&amp;getLogger
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type"><a href="../log4php/spi/LoggerFactory.html">LoggerFactory</a></span>&nbsp;<span class="var-name">$factory</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: logger name</span>			</li>
+					<li>
+				<span class="var-type"><a href="../log4php/spi/LoggerFactory.html">LoggerFactory</a></span>
+				<span class="var-name">$factory</span><span class="var-description">: a <a href="../log4php/spi/LoggerFactory.html">LoggerFactory</a> instance or null</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetLoggerRepository" id="getLoggerRepository"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getLoggerRepository</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerManager.php.html#a101">101</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the LoggerHierarchy.</p>
+<p class="description"><p>Returns the LoggerHierarchy.</p></p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../log4php/LoggerHierarchy.html">LoggerHierarchy</a></span>
+		<span class="method-name">
+			&amp;getLoggerRepository
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetRootLogger" id="getRootLogger"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getRootLogger</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerManager.php.html#a75">75</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the root logger.</p>
+<p class="description"><p>Returns the root logger.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../log4php/LoggerRoot.html">LoggerRoot</a></li>
+				<li><span class="field">static:</span> </li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			&amp;getRootLogger
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodresetConfiguration" id="resetConfiguration"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">resetConfiguration</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerManager.php.html#a113">113</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Destroy loggers object tree.</p>
+<p class="description"><p>Destroy loggers object tree.</p></p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			resetConfiguration
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodsetRepositorySelector" id="setRepositorySelector"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setRepositorySelector</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerManager.php.html#a123">123</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Does nothing.</p>
+<p class="description"><p>Does nothing.</p></p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setRepositorySelector
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$selector</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$guard</span>)
+			</div>
+	
+		
+		
+	</div>
+<a name="methodshutdown" id="shutdown"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">shutdown</span> (line <span class="line-number"><a href="..//__filesource/fsource_log4php__log4php_LoggerManager.php.html#a132">132</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Safely close all appenders.</p>
+<p class="description"><p>Safely close all appenders.</p></p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			shutdown
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+						
+		</div>
+	</div>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Tue,  9 Dec 2003 23:49:33 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.2.2</a>
+	</p>
+	</div></body>
+</html>

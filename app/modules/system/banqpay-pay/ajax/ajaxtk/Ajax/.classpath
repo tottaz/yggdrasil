@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="jars/jstl.jar"/>
+	<classpathentry kind="lib" path="jars/ant-1.6.2.jar"/>
+	<classpathentry kind="lib" path="jars/standard.jar"/>
+	<classpathentry kind="lib" path="jars/servlet-api.jar"/>
+	<classpathentry kind="lib" path="jars/commons-cli-1.0.jar"/>
+	<classpathentry kind="lib" path="jars/gifencoder.jar"/>
+	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
+</classpath>

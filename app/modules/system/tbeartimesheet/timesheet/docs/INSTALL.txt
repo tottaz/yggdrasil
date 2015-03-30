@@ -1,0 +1,40 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// +---------------------------------------------------------------------------------------------------+//
+// + $Id: INSTALL.txt 4064 2006-12-04 05:29:12Z phpnut $
+// + Last Modified: $Date: 2006-12-03 23:29:12 -0600 (Sun, 03 Dec 2006) $
+// + Modified By: $LastChangedBy: phpnut $
+// +---------------------------------------------------------------------------------------------------+//
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+In order use CakePHP you must first have a server that has all the required libraries and programs to run CakePHP:
+
+Here are the requirements for setting up a server to run CakePHP:
+
+   1. An HTTP server (like Apache) with the following enabled.
+   2. PHP 4.3.2 or greater. Yes, CakePHP works great in either PHP 4 or 5.
+   3. A database engine (right now, there is support for MySQL, MsSQL, Oracle, Sqlite, PostgreSQL and a wrapper for ADODB).
+
+For development we can place the whole Cake installation directory inside the specified DocumentRoot.
+
+   1. Unpack latest distribution in your DocumentRoot.
+   2. Rename the directory to anything you like.
+   3. Access the install.
+      a. If mod_rewrite is working then http://www.example.com/my_directory
+		1. If you receive a "Bad Request" add the trailing slash, http://www.example.com/my_directory/
+   4. If mod_rewrite is not working you will need to remove the comment from app/config/core.php
+      a. Around line 40: define ('BASE_URL', env('SCRIPT_NAME'));
+      b. Then access using http://www.example.com/my_directory/index.php/pages to verify installation is working
+
+For more information on installation see http://manual.cakephp.org/chapter/installing
+
+Good resources for help.
+* The Bakery :: Everything CakePHP (http://bakery.cakephp.org/)
+* CakePHP Manual :: Your Rapid Development Cookbook (http://manual.cakephp.org/)
+* CakePHP API :: Docblock Your Best Friend (http://api.cakephp.org/)
+* CakePHP Google Group :: Community mailing list (http://groups-beta.google.com/group/cake-php)
+* CakePHP :: The Rapid Development Framework (http://www.cakephp.org/)
+* CakeForge :: Open Development for CakePHP (http://cakeforge.org/)
+* CakePHP Trac :: For the Development of CakePHP (Tickets, SVN browser, Roadmap, Changelogs) (https://trac.cakephp.org/)
+* Live chat about CakePHP (irc.freenode.net #cakephp)
+   Web Interface to IRC (http://irc.cakephp.org/irc.htm)

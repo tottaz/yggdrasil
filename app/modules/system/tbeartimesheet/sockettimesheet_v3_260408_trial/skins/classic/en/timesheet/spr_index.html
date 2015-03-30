@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{PAGE_TITLE}</title>
+{__CSS_GLOBAL__}
+<style type="text/css">@import url('{SKINROOT}/javascript/{BROWSER}/calendar/calendar-blue.css');</style>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/calendar/calendar.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/calendar/calendar-en.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/calendar/calendar-setup.js"></script>
+
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/helpScript.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/tabScript.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/functions.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/ajaxScript.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/treeview_prj_list.js"></script>
+<script type="text/javascript" src="{SKINROOT}/javascript/{BROWSER}/timesheet_functions.js"></script>
+<script>
+// AJAX CORNER
+
+function ajaxParser(){
+	if(request.readyState == 1){
+		document.getElementById('title').innerHTML = oriMessage + '&nbsp;&nbsp;&nbsp;<font id="executing"><img align="top" src="{SKINROOT}/images/executing.gif">Executing...</font>';
+	}
+	if(request.readyState == 4){ 
+		var result = request.responseText.split('regexAJAX');
+		document.getElementById('title').innerHTML = oriMessage;
+
+		if(document.getElementById('action').value == 'delete_quicklinks' || document.getElementById('action').value == 'add_quicklinks') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('quicklinks_button').innerHTML = result[1];
+			document.getElementById('menuAJAX').innerHTML = result[2];
+		}
+		if(document.getElementById('action').value == 'update_task') {	
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			refreshTimesheet(result);
+			expandcontent('sc1', document.getElementById('addupdate_hours_tab'));
+		}
+		if(document.getElementById('action').value == 'project_show_closed' ||
+		document.getElementById('action').value == 'project_show_open' ||
+		document.getElementById('action').value == 'project_show_both') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('project_tree').innerHTML = result[1];
+			//SHOW OR HIDE BUTTON
+			if(parseInt(result[2])) //HIDE BUTTON
+				document.getElementById('update_task').style.display = 'none';
+			else //SHOW BUTTON
+				document.getElementById('update_task').style.display = '';		
+		}	
+		if(document.getElementById('action').value.match('^add_timeoff:')) {
+			refreshTimesheet(result);
+		}
+		if(document.getElementById('action').value.match('^delete_timeoff:')) {
+			refreshTimesheet(result);
+		}
+		if(document.getElementById('action').value.match('^delete:')) {
+			refreshTimesheet(result);
+			document.getElementById('reload_structure').value = 1;
+		}
+		if(document.getElementById('action').value.match('^duplicate:')) {
+			refreshTimesheet(result);
+		}
+		if(document.getElementById('action').value.match('^copyprev:')) {
+			refreshTimesheet(result);
+			document.getElementById('reload_structure').value = 1;
+		}
+		if(document.getElementById('action').value.match('^submit:')) {
+			window.location='spr_index_submit.php?d='+result[1]+'&m='+result[2]+'&y='+result[3]+'&SPR_UserID='+document.getElementById('UserID').value; //Goto Project Update
+		}
+		
+		if(document.getElementById('action').value == 'reload_structure') {
+			document.getElementById('project_tree').innerHTML = result[1];
+			//SHOW OR HIDE BUTTON
+			if(parseInt(result[2])) //HIDE BUTTON
+				document.getElementById('update_task').style.display = 'none';
+			else //SHOW BUTTON
+				document.getElementById('update_task').style.display = '';			
+			document.getElementById('reload_structure').value = 0;
+		}		
+		if(document.getElementById('action').value == 'gethelp') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('helptitle').innerHTML = "Context Help";
+			document.getElementById('helpdata').innerHTML = result[1];
+			if(!document.getElementById('nohelp'))
+				document.getElementById('helpdetected').value = 1;			
+		}
+		if(document.getElementById('action').value == 'getlog') {
+			document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+			document.getElementById('logtitle').innerHTML = "Log Data";
+			document.getElementById('logdata').innerHTML = result[1];
+		}
+		//CLEAR THE RELEVANT TEXTBOXES AFTER AJAX
+		document.getElementById(document.getElementById('messageID').value).innerHTML = result[0];
+		document.getElementById('action').value = '';
+		if(!document.getElementById('action').value.match('^submit:')) {	
+			enableButtons(document.forms[0]);
+		}	
+		//DISABLE TIMESHEET CHECKING
+		if(document.getElementById('disable_timesheet').value) {
+			disableButtons(document.forms[0]);
+		}		
+	}
+	formParams = '';
+}
+
+function ajaxMain(formName,action){
+	document.getElementById('action').value = action;
+	getFormFields(formName);
+	if(formParams == '') {
+		for (i=0; i<formName.elements.length; i++) {
+			if(formName.elements[i].id) {
+				if(formName.elements[i].type == 'checkbox' || formName.elements[i].type == 'radio') {
+					 if(formName.elements[i].checked) {
+						formParams = formParams + "&" + formName.elements[i].id + "=" + encodeURIComponent(formName.elements[i].value);
+					}	
+				}
+				else {
+					formParams = formParams + "&" + formName.elements[i].id + "=" + encodeURIComponent(formName.elements[i].value);
+				}	
+			}	
+			else if(formName.elements[i].name) {
+				if(formName.elements[i].type == 'checkbox' || formName.elements[i].type == 'radio') {
+					 if(formName.elements[i].checked) {
+						formParams = formParams + "&" + formName.elements[i].name + "=" + encodeURIComponent(formName.elements[i].value);
+					}	
+				}
+				else {	
+					formParams = formParams + "&" + formName.elements[i].name + "=" + encodeURIComponent(formName.elements[i].value);
+				}	
+			}	
+		}
+	}
+
+	request.open('POST', '{AJAX_FORM_POST}', true); //THIS ONE FOR POST
+	request.onreadystatechange = ajaxParser;
+	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); //THIS ONE ADDED FOR POST ONLY
+	request.send(formParams); //THIS ONE FOR POST
+}
+
+function refreshTimesheet(result) {
+	document.getElementById('timesheetTable').innerHTML = result[1]+result[2];
+	document.getElementById('taskTimeoff1').innerHTML = '<input style="display:none" id="comment_title" name="comment_title" type="text" readonly maxlength="230"><BR>'+result[3]+result[4];
+	document.getElementById('total_week_value').value = result[5];
+	document.getElementById('total_week_name').value = result[6];
+	document.getElementById('holiday').value = result[7];
+}
+
+function reloadStructure() {
+	if(document.getElementById('reload_structure').value == 1) {
+		ajaxMain(document.forms[0],'reload_structure');
+	}
+}
+// AJAX CORNER
+</script>
+
+<script type="text/javascript">
+  function dateChanged(calendar) {
+    if (calendar.dateClicked) {
+      var y = calendar.date.getFullYear();
+      var m = parseFloat(calendar.date.getMonth()) + 1;     // integer, 0..11
+      var d = calendar.date.getDate();      // integer, 1..31
+		window.location ="index.php?d="+d+"&m="+m+"&y="+y+"&source=calendar";
+    }
+  };
+</script>
+
+<SCRIPT>
+//THE TIMESHEET SCRIPT
+function call_action(status) {
+	var action = new String(status);
+	var arr_action = action.split(':');
+	document.getElementById('status').value = status;
+	if(arr_action[0] == 'delete' || arr_action[0] == 'delete_timeoff') {
+		if(confirm('Are You Sure?'))
+			ajaxMain(document.forms[0],status);
+		else {
+			document.getElementById('status').value = '';
+			return false;	
+		}	
+	}		
+	else if(arr_action[0] == 'submit') {
+		if(!check_daily_hours()) {
+			document.getElementById('status').value = '';
+			return false;
+		}	
+		else if(!check_total_hours()) {
+			document.getElementById('status').value = '';
+			return false;
+		}	
+		else if(!check_empty_tasks()) {
+			document.getElementById('status').value = '';
+			return false;
+		}	
+		else {
+			document.getElementById('submit_ts').disabled = true;			
+			ajaxMain(document.forms[0],status);
+		}
+	}
+	else {
+		ajaxMain(document.forms[0],status);
+	}	
+}
+</script>
+<script>
+function Disable() {
+	if(event.button == 2) {
+		alert("Warning: New Window For Subordinates Timesheet Operation Not Allowed")
+	}
+}
+
+document.onmousedown=Disable;
+</script>
+</head>
+
+<body onload="showTab();">
+<table width="100%" cellpadding="0" cellspacing="2">
+	<tr>
+		<td><img src="{SKINROOT}/images/logo.gif" /></td>
+		<td height="100%" valign="bottom">
+			<table align="right" height="100%" cellspacing="5" cellpadding="0">
+			<tr>
+				<td class="td_top">Logged In: {FULL_NAME} |</td>
+				<td class="td_top">{ADMIN_USER_LINK}</td>
+				<td class="td_top">{LOGOUT_LINK}</td>
+			</tr></table>
+		</td>
+	</tr>
+	<tr><td class="spacer" colspan="2"></td></tr>
+</table>
+	
+<div class="div_top_menu">
+	{DIV_TOP_MENU}
+</div>
+	
+<div class="div_top_menu_foot"></div>
+<div id='submenu' class="div_sub_menu" align="right">Clock & Date Container</div>
+<script>startclock();</script>
+
+<table width="100%" height="100%"><tr><td nowrap valign="top">
+	<table width="100%" height="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="menu_table_parent">
+		<table class="menu_table_container">
+		<tr><td>
+			<table align="center"><tr><td width="100%">
+				<div class="menuCal" id="calendar-container"></div>
+			</td></tr></table>
+		</td></tr>
+		<tr><td>
+			{SIDE_MENU}
+		</td></tr>
+		<tr><td>
+			<div id="menuAJAX" name="menuAJAX">
+				{QUICKLINKS_MENU}
+			</div>
+		</td></tr>
+		</table>
+		</td>
+		<td class="main_table">
+		<table width="100%" class="module_page_table">
+			<tr><td>
+				<H1 id='title' name='title'>{H1_TITLE}</H1>
+				<div id="div_breadcrumbs" name="div_breadcrumbs">{BREADCRUMBS}</div>
+				<div id="{MESSAGE_ID}" name="{MESSAGE_ID}" {MESSAGE_BOX}>{MESSAGE}</div>
+			</td></tr>
+			<tr><td height="10"></td></tr>
+			<tr><td nowrap>
+				<ul id="tablist" style="display:none">
+					<li><span name='addupdate_hours_tab' id='addupdate_hours_tab' class="current" onmouseover="overtab('sc1',this)" onmouseout="outtab('sc1',this)" onclick="return expandcontent('sc1', this)"><img title='tabimage' src="{SKINROOT}/images/menu_icons/{MENU_ICON}" align="absmiddle" />&nbsp;Add/Update Hours</span></li>
+					<li><span class="current" onmouseover="overtab('sc2',this)" onmouseout="outtab('sc2',this)" onclick="reloadStructure();return expandcontent('sc2', this)"><img title='tabimage' src="{SKINROOT}/images/menu_icons/project_add.gif" align="absmiddle" />&nbsp;Add/Update Tasks</span></li>
+					<li><span onmouseover="overtab('sc3',this)" onmouseout="outtab('sc3',this)" onclick="return expandcontent('sc3', this)"><img title='tabimage' src="{SKINROOT}/images/menu_icons/timesheet_approved.gif" align="absmiddle" />&nbsp;My Approval Rules</span></li>
+					<li><span onmouseover="overtab('logsection',this)" onmouseout="outtab('logsection',this)" onclick="getLog();return expandcontent('logsection', this)"><img title='tabimage' src="{SKINROOT}/images/log.gif" align="absmiddle" />&nbsp;Log</span></li>
+					<li><span onmouseover="overtab('helpsection',this)" onmouseout="outtab('helpsection',this)" onclick="getHelp();return expandcontent('helpsection', this)"><img title='tabimage' src="{SKINROOT}/images/help.gif" align="absmiddle" />&nbsp;Help</span></li>
+				</ul>
+	
+				<DIV id="tabcontentcontainer">
+					<form name='addupdate' id='addupdate' {FORM_ACTION} method="post" onsubmit="submitonce(this)">
+					<input name="update_title" id="update_title" type="hidden" value="{UPDATE_TITLE}" />
+					<input name="action" id="action" type="hidden" />
+					<input name="submit_action" id="submit_action" type="hidden" value="{SUBMIT_ACTION}" />
+					<input name="messageID" id="messageID" value="{MESSAGE_ID}" type="hidden" />
+					<input name="quickLinksName" id="quickLinksName" type="hidden" value="{QUICKLINKS_NAME}"/>
+					<input name="quickLinksURL" id="quickLinksURL" type="hidden" value="{QUICKLINKS_URL}"/>
+					<input name="quickLinksDesc" id="quickLinksDesc" type="hidden" value="{QUICKLINKS_DESC}"/>
+					<input name="helpdetected" id="helpdetected" type="hidden"/>
+					<!-- TIMESHEET HIDDEN FIELDS -->
+					<input type="hidden" id="comment_before" name="comment_before">
+					<input type="hidden" id="d" name="d" value="{DAY}">
+					<input type="hidden" id="m" name="m" value="{MONTH}">
+					<input type="hidden" id="y" name="y" value="{YEAR}">
+					<input type="hidden" id="min_day" name="min_day" value="{MIN_DAY}">
+					<input type="hidden" id="min_week" name="min_week" value="{MIN_WEEK}">
+					<input type="hidden" id="total_week_value" name="total_week_value" value="{GRAND_TOTAL}">
+					<input type="hidden" id="total_week_name" name="total_week_name" value="{TOTAL_NAME}">
+					<input type="hidden" id="holiday" name="holiday" value="{HOLIDAY}">
+					<input type="hidden" id="status" name="status">
+					<input type="hidden" id="WeekDate" name="WeekDate" value="{WEEKDATE}">
+					<input type="hidden" id="WeekEnd" name="WeekEnd" value="{WEEKEND}">
+					<input type="hidden" name="reload_structure" id="reload_structure"/>
+					<input type="hidden" name="submit_status" id="submit_status" value='0'/>
+					<input type="hidden" name="UserID" id="UserID" value='{USERID}'/>
+					<input type="hidden" id="disable_timesheet" name="disable_timesheet" value="{DISABLE_TIMESHEET}">				
+					<input name="LogType" id="LogType" type="hidden" value="{LOGTYPE}"/>
+					<input name="LogAction" id="LogAction" type="hidden" value="{LOGACTION}"/>
+	
+					<!--TIMESHEET CLOCK INFORMATION-->
+					<input type="hidden" id="defaultHourStart" name="defaultHourStart" value="{DEFAULT_HOUR_START}">
+					<input type="hidden" id="defaultMinuteStart" name="defaultMinuteStart" value="{DEFAULT_MINUTE_START}">
+					<input type="hidden" id="defaultHourEnd" name="defaultHourEnd" value="{DEFAULT_HOUR_END}">
+					<input type="hidden" id="defaultMinuteEnd" name="defaultMinuteEnd" value="{DEFAULT_MINUTE_END}">
+	
+					<div id="sc1" class="tabcontent">
+						<fieldset>
+							<div>
+								<table class="no-border" align="left"><tr>
+									<td><select id="subordinate selection" name="subordinate selection" class="textbox" onChange="window.location='spr_index.php?SPR_UserID='+this.value">{SUBORDINATES_OPTIONS}</select></td>
+									<td><select id="week selection" name="week selection" class="textbox" onChange="window.location='spr_index.php'+this.value">{WEEKS_OPTIONS}</select></td>
+								</tr>
+								</table>
+							</div>
+							<BR /><BR />
+							<div>
+								<a href="{LINK_PREVIOUS_WEEK}"><img alt="Show Previous Week" src='{SKINROOT}/images/before.gif' border='0' align="absmiddle"></a> 
+								[ Week: {WEEK_START} to {WEEK_END} ]
+								<a href="{LINK_SUBSEQUENT_WEEK}"><img alt="Show Subsequent Week" src='{SKINROOT}/images/after.gif' border='0' align="absmiddle"></a>
+							</div>		
+							<div id="listingOutputAJAX">
+								<div id="timesheetTable">
+									{SHOW_TABLE}
+									{SHOW_BUTTONS}
+								</div>
+								<div id="taskTimeoff1">
+									<input style='display:none' id="comment_title" name="comment_title" type="text" readonly maxlength="230"><BR>
+									{SHOW_TASK1}									
+									{SHOW_TIMEOFF1}
+								</div>
+							</div>
+						</fieldset>
+					</div>
+					<div id="sc2" class="tabcontent">
+						<fieldset>
+							<legend>
+								<a href="{LINK_PREVIOUS_WEEK}"><img alt="Show Previous Week" src='{SKINROOT}/images/before.gif' border='0' align="absmiddle"></a> 
+								[ Week: {WEEK_START} to {WEEK_END} ]
+								<a href="{LINK_SUBSEQUENT_WEEK}"><img alt="Show Subsequent Week" src='{SKINROOT}/images/after.gif' border='0' align="absmiddle"></a>
+							</legend>	
+							<div id="listingOutputAJAX">
+							</div>
+							<div>
+								<table nowrap cellpadding="3" cellspacing="0" class="no-border">
+								<tr><td>
+									<input onFocus="ajaxMain(document.forms[0],'project_show_open')" id="project_status" name="project_status" type="radio" {STATUS_OPEN}>Open Project 
+									<input onFocus="ajaxMain(document.forms[0],'project_show_closed')" id="project_status" name="project_status" type="radio" {STATUS_CLOSED}>Closed Project 
+									<input onFocus="ajaxMain(document.forms[0],'project_show_both')" id="project_status" name="project_status" type="radio" {STATUS_BOTH}>Both
+									<BR /><BR />
+									<table {TABLE_TREE_CLASS} id="table_project_tree" name="table_project_tree" nowrap cellpadding="3" cellspacing="0">
+									<tr><td>
+									<div id='project_tree' name='project_tree'>{TREEVIEW}</div>
+									</td></tr></table>
+								</td></tr></table>						
+							</div>
+							<div>
+								<table nowrap class="no-border" cellpadding="5">
+									<tr>
+										<td><input {SHOW_UPDATE_TASK_BUTTON} onclick="ajaxMain(document.forms[0],'update_task')" class="buttons" onmouseover="this.className='buttons_over'" onmouseout="this.className='buttons'" id="update_task" name="update_task" type="button" value="Update Task"></td>
+									</tr>
+								</table>
+							</div>
+						</fieldset>
+					</div>
+					<div id="sc3" class="tabcontent">
+						<fieldset>
+							<p>
+							<legend><img src="{SKINROOT}/images/menu_icons/timesheet_approved.gif" align="absmiddle" />&nbsp;<span id='subtitle'>Task Approval</span></legend>
+								<div id="listingOutputAJAX">
+									<table nowrap cellspacing="0" cellpadding="3" class="no-border">
+										{TASK_APPROVAL}
+									</table>						
+								</div>
+							</p>	
+							<p>
+							<legend><img src="{SKINROOT}/images/menu_icons/timesheet_approved.gif" align="absmiddle" />&nbsp;<span id='subtitle'>Timeoff Approval</span></legend>
+								<div id="listingOutputAJAX">
+									<table nowrap cellspacing="0" cellpadding="3" class="no-border">
+										{TIMEOFF_APPROVAL}
+									</table>						
+								</div>
+							</p>	
+							<p>
+							<legend><img src="{SKINROOT}/images/menu_icons/timesheet_approved.gif" align="absmiddle" />&nbsp;<span id='subtitle'>Overall Approval</span></legend>
+								<div id="listingOutputAJAX">
+									<table nowrap cellspacing="0" cellpadding="3" class="no-border">
+										{OVERALL_APPROVAL}
+									</table>						
+								</div>
+							</p>	
+						</fieldset>
+					</div>				
+					<div id="logsection" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/log.gif" align="absmiddle" /><span id='logtitle'>No Log Data In Session</span></legend>											
+						<div id="logdata">
+							<BR />
+							<input onclick='getLog()' id="submitButton" name="submitButton" type="button" class="buttons" onmouseover="this.className='buttons_over'" onmouseout="this.className='buttons'" value="Refresh Log Data">
+						</div>
+						</fieldset>	
+					</div>
+					<div id="helpsection" class="tabcontent">
+						<fieldset><legend><img src="{SKINROOT}/images/help.gif" align="absmiddle" /><span id='helptitle'>No Context Help Data In Session</span></legend>											
+						<div id="helpdata">
+							<BR />
+							<input onclick='getHelp()' id="submitButton" name="submitButton" type="button" class="buttons" onmouseover="this.className='buttons_over'" onmouseout="this.className='buttons'" value="Refresh Context Help">
+						</div>
+						</fieldset>	
+					</div>
+					</form>
+				</DIV>		
+			</td></tr>
+		</table>
+		</td> 
+	</tr>
+	</table>
+</td></tr></table>
+
+<script>var oriMessage = document.getElementById('title').innerHTML;</script>
+<script>
+  Calendar.setup(
+    {
+      flat         : "calendar-container", // ID of the parent element
+      flatCallback : dateChanged,           // our callback function
+	  weekNumbers : false
+    }
+  );
+</script>
+<script>
+//DISABLE TIMESHEET CHECKING
+if(document.getElementById('disable_timesheet').value) {
+	disableButtons(document.forms[0]);
+}	
+</script>
+<script>
+</script>
+</body>
+</html>
