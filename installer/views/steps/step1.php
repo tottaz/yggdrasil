@@ -17,7 +17,7 @@
 	</tr>
 	<tr>
 		<td><span class="<?php echo $config_writable ? 'pass' : 'fail'; ?>"><?php echo $config_writable ? 'PASS' : 'FAIL</span>'; ?></span></td>
-		<td>The system/emily/config folder must be writable.</td>
+		<td>The app/config folder must be writable.</td>
 	</tr>
 	<tr>
 		<td><span class="<?php echo $upload_writable ? 'pass' : 'fail'; ?>"><?php echo $upload_writable ? 'PASS' : 'FAIL'; ?></span></td>

@@ -3,7 +3,7 @@
   <input type="hidden" name="theme" value="emily" />
 
   <h2>Last step!</h2>
-<p>Additional Greengarden configuration settings</p>
+<p>Additional Yggdrasil configuration settings</p>
   <table style="width: 100%;">
 	<tr>
 	  <th class="col1"><label for="notify_email">Notify Email</label></th>

@@ -25,7 +25,7 @@ class Grid_m extends App_Model {
 
 		//returns an array with data
 		function get($request){
-			$query = $this->db->get("it_akamai_data");
+			$query = $this->db->get("it_cdn_data");
 			return $query->result_array();
 		}
 		
@@ -45,7 +45,7 @@ class Grid_m extends App_Model {
 			$this->get_values($action);
 		
 			if ($this->validate($action)){ 
-				$this->db->insert("it_akamai_data", $this);
+				$this->db->insert("it_cdn_data", $this);
 				$action->success($this->db->insert_id());
 			}
 		}
@@ -55,7 +55,7 @@ class Grid_m extends App_Model {
 			$this->get_values($action);
 		
 			if ($this->validate($action)){ 
-				$this->db->update("it_akamai_data", $this, array("akamai_id" => $action->get_id()));
+				$this->db->update("it_cdn_data", $this, array("cdn_id" => $action->get_id()));
 				$action->success();
 			}
 		}
@@ -73,53 +73,53 @@ class Grid_m extends App_Model {
 		
 		//deletes an event
 		function delete($action){
-			$this->db->delete("it_akamai_data", array("akamai_id" => $action->get_id()));
+			$this->db->delete("it_cdn_data", array("cdn_id" => $action->get_id()));
 			$action->success();
 		}
 		
-		public function get_akamai_data() {
+		public function get_cdn_data() {
 		
 			return $this->db
 				->select("date, total_mb, total_hits, http_total_mb", false)
 				->order_by('date asc')
-				->get('it_akamai_data')
+				->get('it_cdn_data')
 				->result_array();
 		}
 		
-		public function get_akamai_total_mb() {
+		public function get_cdn_total_mb() {
 		
 			return $this->db
 				->select("date, http_total_mb", false)
 				->order_by('date asc')
-				->get('it_akamai_data')
+				->get('it_cdn_data')
 				->result_array();
 		}
 		
-		public function get_akamai_m95() {
+		public function get_cdn_m95() {
 		
 			return $this->db
 				->select("date, m95_mbps", false)
 				->order_by('date asc')
-				->get('it_akamai_data')
+				->get('it_cdn_data')
 				->result_array();
 		}
 		
-		public function get_akamai_totalhits() {
+		public function get_cdn_totalhits() {
 		
 			return $this->db
 				->select("date, total_hits", false)
 				->order_by('date asc')
-				->get('it_akamai_data')
+				->get('it_cdn_data')
 				->result_array();
 		}
 		
 		
-		public function get_akamai_data_record($id) {
+		public function get_cdn_data_record($id) {
 		
 			return $this->db
 				->select('*', false)
-				->where('akamai_id', $id)
-				->get('it_akamai_data')
+				->where('cdn_id', $id)
+				->get('it_cdn_data')
 				->row_array();
 			}
 		}

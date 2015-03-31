@@ -45,7 +45,7 @@ $route['404_override'] = 'dashboard';
 /**
  * @var	array	All the routable controller and module names
  */
-$routable_controllers = array('ajax', 'javascript', 'cron', 'api', 'maps', 'people', 'action', 'detox', 'media', 'timeline', 'users', 'analysis', 'dashboard' );
+$routable_controllers = array('ajax', 'javascript', 'cron', 'api', 'timeline', 'users', 'analysis', 'dashboard' );
 
 $route['admin'] = "dashboard";
 $route['admin/([a-zA-Z_-]+)/(:any)'] = "$1/admin/$2";

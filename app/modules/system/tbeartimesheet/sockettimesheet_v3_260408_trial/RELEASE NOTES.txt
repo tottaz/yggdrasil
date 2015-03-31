@@ -1,9 +1,0 @@
-
-15th January 2007- Socket Timesheet Version 3.0
-===============================================
-
-KNOWN ISSUES
-============
-1. Non-IE Browser cannot collapse treeview in projects and timesheet. All tasks in projects will expand by default regardless of User Preference.
-
-2. Auto Wrap Feature in User Preference for wrapping task in Timesheet does not work in Non-IE Browser

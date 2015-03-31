@@ -408,7 +408,7 @@ $("#sendalchemynews").on("click", function(){
 //    $("#sendalchemynews").replaceWith("<em>Getting...</em>");
     $.ajax({
         type: 'get',
-        url: 'http://localhost/greengarden/analysis/get_alchemy_news',
+        url: 'analysis/get_alchemy_news',
         crossDomain: true,
         data: $("#alchemynews").serialize(),
         error: function(jqXHR, textStatus) {

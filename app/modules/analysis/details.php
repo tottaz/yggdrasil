@@ -4,7 +4,7 @@
  * Contact module
  *
  * @author  Totta
- * @package greengarden\core\modules\analysis
+ * @package core\modules\analysis
  */
 class Module_Analysis extends Module
 {

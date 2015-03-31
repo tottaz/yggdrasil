@@ -50,7 +50,7 @@ class Installer {
 		$this->_ci->load->database($config);
 		$this->_ci->load->dbforge();
 
-		$schema = file_get_contents(APPPATH.'schema/greengarden.sql');
+		$schema = file_get_contents(APPPATH.'schema/yggdrasil.sql');
 
 		if ( ! $this->_write_db_config($config))
 		{
@@ -71,7 +71,7 @@ class Installer {
 
 		foreach ($data as $key => $val)
 		{
-			$schema = str_replace('{'.strtoupper($key).'}', mysqli_real_escape_string($val), $schema);
+			$schema = str_replace('{'.strtoupper($key).'}', mysqli_real_escape_string($this->_ci->db, $val), $schema);
 		}
 
 		$schema = explode('-- split --', $schema);
@@ -147,7 +147,7 @@ class Installer {
 \$db['default']['username'] = '{USERNAME}';
 \$db['default']['password'] = '{PASSWORD}';
 \$db['default']['database'] = '{DATABASE}';
-\$db['default']['dbdriver'] = 'mysql';
+\$db['default']['dbdriver'] = 'mysqli';
 \$db['default']['dbprefix'] = '{DBPREFIX}';
 \$db['default']['pconnect'] = FALSE;
 \$db['default']['db_debug'] = TRUE;

@@ -87,7 +87,7 @@ define('ENVIRONMENT', (isset($_SERVER['APP_ENV']) ? $_SERVER['APP_ENV'] : DEVELO
  *
  */
 
-//	require_once $_SERVER['DOCUMENT_ROOT'] . '/greengarden/wordpress/wp-load.php'; //change wp-load.php location according to your setup
+//	require_once $_SERVER['DOCUMENT_ROOT'] . '/wordpress/wp-load.php'; //change wp-load.php location according to your setup
 
 /*
  *---------------------------------------------------------------

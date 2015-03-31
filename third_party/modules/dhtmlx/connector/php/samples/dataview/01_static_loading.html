@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<title>Static loading</title>
+	<script src="../dhtmlx/dhtmlx.js" type="text/javascript"></script>
+	<script src="../../codebase/connector.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="STYLESHEET" type="text/css" href="../dhtmlx/dhtmlx.css">   
+	<style type="text/css" media="screen">
+		body { background-color:#EBEBEB; };
+	</style>
+</head>
+<body>
+	<h1>Static loading</h1>
+	<p>All data is loaded at once</p>
+	<div id="data_container" style="border:1px solid #A4BED4; background-color:white; width:710px;height:392px;"></div>
+	<script>
+		data = new dhtmlXDataView({
+			container:"data_container",
+			type:{
+				template:"<span class='dhx_strong'>{obj.Maintainer}</span>{obj.Package} <span class='dhx_light'>{obj.Version}</span>",
+				height:35
+			}
+		});
+		data.load("01_static_loading.php");
+	</script>
+
+</body>
+</html>
+

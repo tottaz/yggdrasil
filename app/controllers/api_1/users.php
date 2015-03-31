@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
- * Emily
+ * Yggdrasil
  *
- * @package		Emily
- * @author		Emily Dev Team
+ * @package		Yggdrasil
+ * @author		Yggdrasil Dev Team
  */
 // http://localhost/ananas2/api/1/users?API-KEY=oBThDgLsHOi8WJpwgf6IvJVQQ45E9LTudUN9i1RL
 //

@@ -35,7 +35,7 @@
 //            query.send(drawVisualization);
             
             visualization1 = new google.visualization.LineChart(document.getElementById('visualization1'));
-            query1 = new google.visualization.Query('https://www.google.com/a/cpanel/thunderbeardesign.com/ReportGviz?reportKey=c7740adf30bffd060dda0b7315b2badd');
+            query1 = new google.visualization.Query('https://www.google.com/a/cpanel/greenpeace.org/ReportGviz?reportKey=c7740adf30bffd060dda0b7315b2badd');
             query1.setRefreshInterval(5);
             query1.setQuery('select rdate, num_accounts');                        
             query1.send(drawVisualization1);
@@ -141,7 +141,7 @@
           <div id='visualization'></div>
       </div>    
 -->
-     <h1 style='width:95%; padding:20px; font-family:Tahoma;font-weight:normal;background:#f2f3f4;'>Google Apps Statistics for thunderbeardesign.com</h1>      
+     <h1 style='width:95%; padding:20px; font-family:Tahoma;font-weight:normal;background:#f2f3f4;'>Google Apps Statistics</h1>      
 
          <div id="visualization1" style="height: 250px; width: 350px; border: 1px solid; float: left;" />         
       </div>

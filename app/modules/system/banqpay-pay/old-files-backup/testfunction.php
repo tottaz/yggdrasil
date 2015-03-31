@@ -1,3 +1,0 @@
-<a href=pubkey.php?link=10&merchant_id=105&type=php>test fetching key</a>
-<a href=subcheck.php?email=kalle@epnn.com&password=t0138z&type=php>test authenticate user</a>
-<a href=process.php?type=visa&name=TorbjornZetterlund&number=4111111111111111&month=12&year=06&cvv2=585&amount=100&addr1=93Hillcrest&addr2=&city=Toronto&zip=M2N3N6&state=Ontario&country=Canada&phone=4167276154&account=99993987&merchantId=0cecb5e33-7f70-USD&merchantPwd=uTmy9a%23I&clientVersion=1.1&operation=P>Process credit Card</a>

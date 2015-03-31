@@ -1,0 +1,43 @@
+ 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>For demo purpose only :: &1</title>
+
+
+
+<script src="../dhtmlx/dhtmlx.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../codebase/connector.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="../dhtmlx/dhtmlx.css" type="text/css" charset="utf-8">
+</head>
+<body>
+				<div id="gridbox" width="450px" height="550px" style="background-color:white;overflow:hidden"></div>
+<script>
+if (!window.eXcell_tree)
+	alert("To check TreeGrid's samples you need to replace files in `dhtmlx` folder with ones from dhtmlx pro suite.");
+
+	mygrid = new dhtmlXGridObject('gridbox');
+	mygrid.setImagePath("../dhtmlx/imgs/");
+	mygrid.setHeader("Tree, Column A, Column B");
+	mygrid.setInitWidths("200,*,*")
+	mygrid.setColTypes("tree,ed,ed");
+	mygrid.setColSorting("connector,connector")
+	mygrid.init();
+	mygrid.loadXML("03_sql_config_connector.php");
+</script>
+<input type="button" name="add" value="add row" onclick="var id=mygrid.uid(); mygrid.addRow(id,'',0); mygrid.showRow(id);">
+<input type="button" name="delete" value="delete row" onclick="mygrid.deleteSelectedRows()">
+<div class='code'><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">require_once(</span><span style="color: #DD0000">"../config.php"</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">=</span><span style="color: #0000BB">mysql_connect</span><span style="color: #007700">(</span><span style="color: #0000BB">$mysql_server</span><span style="color: #007700">,</span><span style="color: #0000BB">$mysql_user</span><span style="color: #007700">,</span><span style="color: #0000BB">$mysql_pass</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">mysql_select_db</span><span style="color: #007700">(</span><span style="color: #0000BB">$mysql_db</span><span style="color: #007700">);
+<br />
+<br />&nbsp;&nbsp;&nbsp;require(</span><span style="color: #DD0000">"../../codebase/treegrid_connector.php"</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$tree&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">TreeGridConnector</span><span style="color: #007700">(</span><span style="color: #0000BB">$res</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$tree</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">enable_log</span><span style="color: #007700">(</span><span style="color: #DD0000">"temp.log"</span><span style="color: #007700">,</span><span style="color: #0000BB">true</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$tree</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">render_sql</span><span style="color: #007700">(</span><span style="color: #DD0000">"SELECT&nbsp;*&nbsp;from&nbsp;tasks&nbsp;WHERE&nbsp;complete&gt;49"</span><span style="color: #007700">,</span><span style="color: #DD0000">"taskId"</span><span style="color: #007700">,</span><span style="color: #DD0000">"taskName,duration,complete"</span><span style="color: #007700">,</span><span style="color: #DD0000">""</span><span style="color: #007700">,</span><span style="color: #DD0000">"parentId"</span><span style="color: #007700">);
+<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div></body>
+</html>

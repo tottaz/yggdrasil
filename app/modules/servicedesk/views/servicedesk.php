@@ -11,7 +11,7 @@ var data = google.visualization.arrayToDataTable([
 	]);
 
 	var options = {
-		title : 'Akamai Usage Total MB',
+		title : 'CDN Usage Total MB',
 		hAxis : {
 			title : 'Date',
 			titleTextStyle : {

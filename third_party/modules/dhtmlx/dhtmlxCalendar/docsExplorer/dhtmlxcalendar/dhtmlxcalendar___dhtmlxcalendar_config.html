@@ -1,0 +1,365 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+ lang="en" dir="ltr">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><link rel="stylesheet" href="../codebase/default.css" type="text/css" media="screen" title="no title" charset="utf-8"><title>
+    dhtmlxcalendar:dhtmlxcalendar_config    [DHX documentation]
+  </title></head>
+
+<body>
+<div class="dokuwiki">
+  
+  <div class="stylehead">
+
+    <div class="header">
+    <a class="logo" href="http://dhtmlx.com" title="DHTMLX Home Page"></a>
+    <span class="tittle-dhtmlx">DHTMLX Docs & Samples Explorer</span>
+
+    <div class="search-field">
+        <form action="/dhtmlx/docs/doku.php" accept-charset="utf-8" id="dw__search"><div class="no"><input type="hidden" name="do" value="search" /><input type="text" id="qsearch__in" accesskey="f" name="id" title="Search" /><button type="submit"></button><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>    </div>
+        <div class="buttons">
+                <a class="doc"></a>
+                <a title="DHTMLX Samples homepage" href="../samples.html" class="sample"/></a>
+        </div>
+     <!-- <div class="pagename">
+        [[<a href="#"  title="Backlinks">dhtmlxcalendar:dhtmlxcalendar_config</a>]]
+      </div>
+      <div class="logo">
+        <a href="/dhtmlx/docs/doku.php"  name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[H]">DHX documentation</a>      </div>
+
+      <div class="clearer"></div>-->
+        
+    </div>
+
+    
+<!--   <div class="bar" id="bar__top">
+      <div class="bar-left" id="bar__topleft">
+        <form class="button btn_edit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Edit this page" class="button" accesskey="e" title="Edit this page [E]" /></div></form>        <form class="button btn_revs" method="get" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="revisions" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Old revisions" class="button" accesskey="o" title="Old revisions [O]" /></div></form>      </div>
+
+      <div class="bar-right" id="bar__topright">
+        <form class="button btn_recent" method="get" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="recent" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Recent changes" class="button" accesskey="r" title="Recent changes [R]" /></div></form>        <form action="/dhtmlx/docs/doku.php" accept-charset="utf-8" id="dw__search"><div class="no"><input type="hidden" name="do" value="search" /><input type="text" id="qsearch__in" accesskey="f" name="id" title="Search" /><button type="submit"></button><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>&nbsp;
+      </div>
+
+      <div class="clearer"></div>
+    </div> -->
+
+<!--        <div class="breadcrumbs">
+      <span class="bchead">Trace:</span> <span class="bcsep">&raquo;</span> <span class="curid"><a href="/dhtmlx/docs/doku.php?id=dhtmlxcalendar:dhtmlxcalendar_config"  class="breadcrumbs" title="dhtmlxcalendar:dhtmlxcalendar_config">dhtmlxcalendar_config</a></span>    </div>
+    -->
+
+    
+  </div>
+  
+  
+  <div class="page">
+    <!-- wikipage start -->
+    <!-- TOC START -->
+<div class="toc">
+<div class="tocheader toctoggle" id="toc__header">Table of Contents</div>
+<div id="toc__inside">
+
+<ul class="toc">
+<li class="level1"><div class="li"><span class="li"><a href="#configuration" class="toc">Configuration</a></span></div>
+<ul class="toc">
+<li class="level2"><div class="li"><span class="li"><a href="#setting_skin" class="toc">Setting skin</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="#attaching_calendar_to_an_input" class="toc">Attaching calendar to an input</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="#changing_start_day_of_a_week" class="toc">Changing start day of a week</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="#date_formatting" class="toc">Date formatting</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="#hiding_showing_calendar" class="toc">Hiding/showing calendar</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="#hiding_showing_time_panel" class="toc">Hiding/showing time panel</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="#making_calendar_multilingual" class="toc">Making calendar multilingual</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="#setting_getting_date" class="toc">Setting/getting date</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="#setting_holidays" class="toc">Setting holidays</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="#setting_inactive_dates" class="toc">Setting inactive dates</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="#setting_a_new_calendar_s_container" class="toc">Setting a new calendar&#039;s container</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="#setting_calendar_s_position" class="toc">Setting calendar&#039;s position</a></span></div></li></ul>
+</li></ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<p>
+<div class='backlinks'><div class='backlink last_backlink'><img src="icons___file.gif"  class="media" alt="" /><a href="../index.html" class="wikilink1" title="start">Index</a></div><div class='arrow'></div><div class='backlink last_backlink'><img src="icons___calendar.gif"  class="media" alt="" /><a href="index.html" class="wikilink1" title="dhtmlxcalendar:toc">dhtmlxcalendar</a></div></div>
+
+</p>
+
+<h1><a name="configuration" id="configuration">Configuration</a></h1>
+<div class="level1">
+
+</div>
+<div class="secedit"><form class="button btn_secedit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="lines" value="57-85" /><input type="hidden" name="rev" value="1335474000" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Edit" class="button" title="Configuration" /></div></form></div>
+<h2><a name="setting_skin" id="setting_skin">Setting skin</a></h2>
+<div class="level2">
+
+<p>
+You can set one of the predefined skins by using the method <strong>setSkin()</strong> (<a href="dhtmlxcalendar___api_method_dhtmlxcalendar_setskin.html" class="wikilink1" title="dhtmlxcalendar:api_method_dhtmlxcalendar_setskin">see details</a>):
+
+</p>
+<pre class="code javascript">myCalendar.<span class="me1">setSkin</span><span class="br0">&#40;</span><span class="st0">'omega'</span><span class="br0">&#41;</span>;</pre><table class="inline">
+	<tr class="row0">
+		<th class="col0 centeralign">  &#039;dhx_skyblue&#039;  </th><th class="col1 centeralign">  &#039;dhx_web&#039;  </th><th class="col2 centeralign">  &#039;omega&#039;  </th>
+	</tr>
+	<tr class="row1">
+		<td class="col0 centeralign">  <img src="dhtmlxcalendar___calendar_dhx_skyblue.png"  class="media" alt="" />  </td><td class="col1 centeralign">  <img src="dhtmlxcalendar___calendar_dhx_web.png"  class="media" alt="" />  </td><td class="col2 centeralign">  <img src="dhtmlxcalendar___calendar_dhx_omega.png"  class="media" alt="" />  </td>
+	</tr>
+</table>
+
+</div>
+<div class="secedit"><form class="button btn_secedit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="lines" value="86-503" /><input type="hidden" name="rev" value="1335474000" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Edit" class="button" title="Setting skin" /></div></form></div>
+<h2><a name="attaching_calendar_to_an_input" id="attaching_calendar_to_an_input">Attaching calendar to an input</a></h2>
+<div class="level2">
+
+<p>
+When calendar is initialized as a date input field you can attach it to any number of inputs  through the method <strong>attachObj()</strong> (<a href="dhtmlxcalendar___api_method_dhtmlxcalendar_attachobj.html" class="wikilink1" title="dhtmlxcalendar:api_method_dhtmlxcalendar_attachobj">see details</a>):
+
+</p>
+<pre class="code javascript">myCalendar.<span class="me1">attachObj</span><span class="br0">&#40;</span><span class="st0">&quot;input3&quot;</span><span class="br0">&#41;</span>;<span class="co1">// now in addition to inputs that 'myCalendar' is attached while initialization, it will be attached to input with the id 'input3'.</span></pre>
+<p>
+Then, if you want to detach calendar from some input you can use the method <strong>detachObj</strong> (<a href="dhtmlxcalendar___api_method_dhtmlxcalendar_detachobj.html" class="wikilink1" title="dhtmlxcalendar:api_method_dhtmlxcalendar_detachobj">see details</a>):
+
+</p>
+<pre class="code javascript">myCalendar.<span class="me1">detachObj</span><span class="br0">&#40;</span><span class="st0">&quot;input3&quot;</span><span class="br0">&#41;</span>;</pre>
+</div>
+<div class="secedit"><form class="button btn_secedit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="lines" value="504-1156" /><input type="hidden" name="rev" value="1335474000" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Edit" class="button" title="Attaching calendar to an input" /></div></form></div>
+<h2><a name="changing_start_day_of_a_week" id="changing_start_day_of_a_week">Changing start day of a week</a></h2>
+<div class="level2">
+
+<p>
+You can control the start day of a week through the <strong>setWeekStartDay</strong> (<a href="dhtmlxcalendar___api_method_dhtmlxcalendar_setweekstartday.html" class="wikilink1" title="dhtmlxcalendar:api_method_dhtmlxcalendar_setweekstartday">see details</a>). Week can start from any day:
+
+</p>
+<pre class="code javascript"><span class="co1">//week starts from Monday</span>
+   myCalendar.<span class="me1">setWeekStartDay</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span>;
+<span class="co1">//week starts from Sunday</span>
+   myCalendar.<span class="me1">setWeekStartDay</span><span class="br0">&#40;</span><span class="nu0">7</span><span class="br0">&#41;</span>;</pre>
+<p>
+ <span class="curid"><a href="dhtmlxcalendar___dhtmlxcalendar_config.html" class="wikilink1" title="dhtmlxcalendar:dhtmlxcalendar_config">Back to top</a></span>
+</p>
+
+</div>
+<div class="secedit"><form class="button btn_secedit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="lines" value="1157-1576" /><input type="hidden" name="rev" value="1335474000" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Edit" class="button" title="Changing start day of a week" /></div></form></div>
+<h2><a name="date_formatting" id="date_formatting">Date formatting</a></h2>
+<div class="level2">
+
+<p>
+You can use the default date format of calendar or set your own one.<br/>
+ The default date format in dhtmlxCalendar is &#039;%Y-%m-%d&#039;.
+
+</p>
+<ul>
+<li class="level1"><div class="li"> A custom date format for the whole Calendar can be set with the help of <strong>setDateFormat</strong> method  (<a href="dhtmlxcalendar___api_method_dhtmlxcalendar_setdateformat.html" class="wikilink1" title="dhtmlxcalendar:api_method_dhtmlxcalendar_setdateformat">see details</a>): <br/>
+ <pre class="code javascript">myCalendar.<span class="me1">setDateFormat</span><span class="br0">&#40;</span><span class="st0">&quot;%d.%m.%Y&quot;</span><span class="br0">&#41;</span>;</pre></div>
+</li>
+<li class="level1"><div class="li"> To get date in the specified format you should use the <strong>getFormatedDate()</strong> method (<a href="dhtmlxcalendar___api_method_dhtmlxcalendar_getformateddate.html" class="wikilink1" title="dhtmlxcalendar:api_method_dhtmlxcalendar_getformateddate">see details</a>):<br/>
+ <pre class="code javascript">myCalendar.<span class="me1">getFormatedDate</span><span class="br0">&#40;</span><span class="st0">&quot;%d.%m.%Y&quot;</span><span class="sy0">,</span> <span class="st0">&quot;2011-06-01&quot;</span><span class="br0">&#41;</span>;</pre></div>
+</li>
+</ul>
+
+<p>
+<span class="curid"><a href="dhtmlxcalendar___dhtmlxcalendar_config.html" class="wikilink1" title="dhtmlxcalendar:dhtmlxcalendar_config">Back to top</a></span>
+</p>
+
+</div>
+<div class="secedit"><form class="button btn_secedit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="lines" value="1577-2286" /><input type="hidden" name="rev" value="1335474000" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Edit" class="button" title="Date formatting" /></div></form></div>
+<h2><a name="hiding_showing_calendar" id="hiding_showing_calendar">Hiding/showing calendar</a></h2>
+<div class="level2">
+
+<p>
+Calendar can be easily shown/hidden in the following way:
+
+</p>
+<pre class="code javascript"><span class="co1">//to show calendar</span>
+   myCalendar.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;
+<span class="co1">//to hide calendar  </span>
+   myCalendar.<span class="me1">hide</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;</pre>
+<p>
+
+<span class="curid"><a href="dhtmlxcalendar___dhtmlxcalendar_config.html" class="wikilink1" title="dhtmlxcalendar:dhtmlxcalendar_config">Back to top</a></span>
+</p>
+
+</div>
+<div class="secedit"><form class="button btn_secedit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="lines" value="2287-2546" /><input type="hidden" name="rev" value="1335474000" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Edit" class="button" title="Hiding/showing calendar" /></div></form></div>
+<h2><a name="hiding_showing_time_panel" id="hiding_showing_time_panel">Hiding/showing time panel</a></h2>
+<div class="level2">
+
+<p>
+You can define whether or not calendar will show the time panel (by default, the time panel is shown):
+
+</p>
+<pre class="code javascript"><span class="co1">//to hide panel</span>
+   myCalendar.<span class="me1">hideTime</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;
+<span class="co1">//to show panel</span>
+   myCalendar.<span class="me1">showTime</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;</pre>
+<p>
+ 
+<span class="curid"><a href="dhtmlxcalendar___dhtmlxcalendar_config.html" class="wikilink1" title="dhtmlxcalendar:dhtmlxcalendar_config">Back to top</a></span>
+</p>
+
+</div>
+<div class="secedit"><form class="button btn_secedit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="lines" value="2547-2852" /><input type="hidden" name="rev" value="1335474000" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Edit" class="button" title="Hiding/showing time panel" /></div></form></div>
+<h2><a name="making_calendar_multilingual" id="making_calendar_multilingual">Making calendar multilingual</a></h2>
+<div class="level2">
+
+<p>
+dhtmlxCalendar allows its users to add and use different languages with the ability to switch between them dynamically. First, you need to define necessary language settings. This can be done in the following way:
+
+</p>
+<pre class="code javascript"><span class="co1">//settings for a new language (Russian)</span>
+dhtmlXCalendarObject.<span class="me1">prototype</span>.<span class="me1">langData</span><span class="br0">&#91;</span><span class="st0">&quot;ru&quot;</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#123;</span>
+	dateformat<span class="sy0">:</span> <span class="st0">'%d.%m.%Y'</span><span class="sy0">,</span>
+	monthesFNames<span class="sy0">:</span> <span class="br0">&#91;</span><span class="st0">&quot;Январь&quot;</span><span class="sy0">,</span><span class="st0">&quot;Февраль&quot;</span><span class="sy0">,</span><span class="st0">&quot;Март&quot;</span><span class="sy0">,</span><span class="st0">&quot;Апрель&quot;</span><span class="sy0">,</span><span class="st0">&quot;Май&quot;</span><span class="sy0">,</span><span class="st0">&quot;Июнь&quot;</span><span class="sy0">,</span><span class="st0">&quot;Июль&quot;</span><span class="sy0">,</span><span class="st0">&quot;Август&quot;</span><span class="sy0">,</span><span class="st0">&quot;Сентябрь&quot;</span><span class="sy0">,</span><span class="st0">&quot;Октябрь&quot;</span><span class="sy0">,</span><span class="st0">&quot;Ноябрь&quot;</span><span class="sy0">,</span><span class="st0">&quot;Декабрь&quot;</span><span class="br0">&#93;</span><span class="sy0">,</span>
+	monthesSNames<span class="sy0">:</span> <span class="br0">&#91;</span><span class="st0">&quot;Янв&quot;</span><span class="sy0">,</span><span class="st0">&quot;Фев&quot;</span><span class="sy0">,</span><span class="st0">&quot;Мар&quot;</span><span class="sy0">,</span><span class="st0">&quot;Апр&quot;</span><span class="sy0">,</span><span class="st0">&quot;Май&quot;</span><span class="sy0">,</span><span class="st0">&quot;Июн&quot;</span><span class="sy0">,</span><span class="st0">&quot;Июл&quot;</span><span class="sy0">,</span><span class="st0">&quot;Авг&quot;</span><span class="sy0">,</span><span class="st0">&quot;Сен&quot;</span><span class="sy0">,</span><span class="st0">&quot;Окт&quot;</span><span class="sy0">,</span><span class="st0">&quot;Ноя&quot;</span><span class="sy0">,</span><span class="st0">&quot;Дек&quot;</span><span class="br0">&#93;</span><span class="sy0">,</span>
+	daysFNames<span class="sy0">:</span> <span class="br0">&#91;</span><span class="st0">&quot;Воскресенье&quot;</span><span class="sy0">,</span><span class="st0">&quot;Понедельник&quot;</span><span class="sy0">,</span><span class="st0">&quot;Вторник&quot;</span><span class="sy0">,</span><span class="st0">&quot;Среда&quot;</span><span class="sy0">,</span><span class="st0">&quot;Четверг&quot;</span><span class="sy0">,</span><span class="st0">&quot;Пятница&quot;</span><span class="sy0">,</span><span class="st0">&quot;Суббота&quot;</span><span class="br0">&#93;</span><span class="sy0">,</span>
+	daysSNames<span class="sy0">:</span> <span class="br0">&#91;</span><span class="st0">&quot;Вс&quot;</span><span class="sy0">,</span><span class="st0">&quot;Пн&quot;</span><span class="sy0">,</span><span class="st0">&quot;Вт&quot;</span><span class="sy0">,</span><span class="st0">&quot;Ср&quot;</span><span class="sy0">,</span><span class="st0">&quot;Чт&quot;</span><span class="sy0">,</span><span class="st0">&quot;Пт&quot;</span><span class="sy0">,</span><span class="st0">&quot;Сб&quot;</span><span class="br0">&#93;</span><span class="sy0">,</span>
+	weekstart<span class="sy0">:</span> <span class="nu0">1</span>
+<span class="br0">&#125;</span></pre>
+<p>
+
+When you have the necessary language settings, you can switch between them using<br/>
+ the <strong>loadUserLanguage()</strong> method (<a href="dhtmlxcalendar___api_method_dhtmlxcalendar_loaduserlanguage.html" class="wikilink1" title="dhtmlxcalendar:api_method_dhtmlxcalendar_loaduserlanguage">see details</a>):
+
+</p>
+<pre class="code javascript">myCalendar.<span class="me1">loadUserLanguage</span><span class="br0">&#40;</span><span class="st0">&quot;ru&quot;</span><span class="br0">&#41;</span>;</pre>
+<p>
+ 
+<span class="curid"><a href="dhtmlxcalendar___dhtmlxcalendar_config.html" class="wikilink1" title="dhtmlxcalendar:dhtmlxcalendar_config">Back to top</a></span>
+</p>
+
+</div>
+<div class="secedit"><form class="button btn_secedit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="lines" value="2853-4106" /><input type="hidden" name="rev" value="1335474000" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Edit" class="button" title="Making calendar multilingual" /></div></form></div>
+<h2><a name="setting_getting_date" id="setting_getting_date">Setting/getting date</a></h2>
+<div class="level2">
+
+<p>
+To set/get the currently selected date you should use one of two respective methods: 
+
+</p>
+<pre class="code javascript"><span class="co1">//to set date</span>
+   myCalendar.<span class="me1">setDate</span><span class="br0">&#40;</span>date<span class="br0">&#41;</span>;
+<span class="co1">//to get date   </span>
+   <span class="kw2">var</span> currentDate <span class="sy0">=</span> myCalendar.<span class="me1">getDate</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;</pre>
+<p>
+
+<span class="curid"><a href="dhtmlxcalendar___dhtmlxcalendar_config.html" class="wikilink1" title="dhtmlxcalendar:dhtmlxcalendar_config">Back to top</a></span>
+</p>
+
+</div>
+<div class="secedit"><form class="button btn_secedit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="lines" value="4107-4411" /><input type="hidden" name="rev" value="1335474000" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Edit" class="button" title="Setting/getting date" /></div></form></div>
+<h2><a name="setting_holidays" id="setting_holidays">Setting holidays</a></h2>
+<div class="level2">
+
+<p>
+You have a possibility to set holidays in calendar. The way holidays are rendered in calendar is determined by the <acronym title="Cascading Style Sheets">CSS</acronym> file. To set a date as holiday you should use the <strong>setHolidays()</strong> method (<a href="dhtmlxcalendar___api_method_dhtmlxcalendar_setholidays.html" class="wikilink1" title="dhtmlxcalendar:api_method_dhtmlxcalendar_setholidays">see details</a>).
+
+</p>
+<pre class="code javascript">myCalendar.<span class="me1">setHolidays</span><span class="br0">&#40;</span><span class="st0">'2011-09-25'</span><span class="br0">&#41;</span>;<span class="co1">// sets September 25, 2011 as holiday</span></pre>
+<p>
+
+<span class="curid"><a href="dhtmlxcalendar___dhtmlxcalendar_config.html" class="wikilink1" title="dhtmlxcalendar:dhtmlxcalendar_config">Back to top</a></span>
+</p>
+
+</div>
+<div class="secedit"><form class="button btn_secedit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="lines" value="4412-4863" /><input type="hidden" name="rev" value="1335474000" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Edit" class="button" title="Setting holidays" /></div></form></div>
+<h2><a name="setting_inactive_dates" id="setting_inactive_dates">Setting inactive dates</a></h2>
+<div class="level2">
+
+<p>
+Use the methods <a href="dhtmlxcalendar___api_method_dhtmlxcalendar_disabledays.html" class="wikilink1" title="dhtmlxcalendar:api_method_dhtmlxcalendar_disabledays">disableDays()</a>, <a href="dhtmlxcalendar___api_method_dthmlxcalendar_setinsensitivedays.html" class="wikilink1" title="dhtmlxcalendar:api_method_dthmlxcalendar_setinsensitivedays">setInsensitiveDays()</a>, <a href="dhtmlxcalendar___api_method_dhtmlxcalendar_setsensitive.html" class="wikilink1" title="dhtmlxcalendar:api_method_dhtmlxcalendar_setsensitive">setSensitiveRange()</a>, <a href="dhtmlxcalendar___api_method_dthmlxcalendar_setinsensitiverange.html" class="wikilink1" title="dhtmlxcalendar:api_method_dthmlxcalendar_setinsensitiverange">setInsensitiveRange()</a> to set insensitive/inactive dates in calendar (such dates are dimmed). 
+
+</p>
+<pre class="code javascript"><span class="co1">//all dates starting from June 08, 2011 will be dimmed. Dates until June 08, 2011 will be active.</span>
+  setInsensitiveRange<span class="br0">&#40;</span><span class="st0">&quot;2011-06-08&quot;</span><span class="sy0">,</span><span class="kw2">null</span><span class="br0">&#41;</span>;
+<span class="co1">//all dates starting from June 08, 2011 will be active. Dates until July 08, 2011 will be dimmed.</span>
+  setSensitiveRange<span class="br0">&#40;</span><span class="st0">&quot;2011-06-08&quot;</span><span class="sy0">,</span><span class="kw2">null</span><span class="br0">&#41;</span>;
+<span class="co1">//June 10, 2011, June 17, 2011, June 18, 2011 will be dimmed. All other dates will be active.</span>
+  setInsensitiveDays<span class="br0">&#40;</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="st0">&quot;2011-06-10&quot;</span><span class="sy0">,</span><span class="kw2">new</span> Date<span class="br0">&#40;</span><span class="nu0">2011</span><span class="sy0">,</span><span class="nu0">5</span><span class="sy0">,</span><span class="nu0">17</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="st0">&quot;2011-06-18&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>;
+<span class="co1">//mondays, tuesdays and thursdays of each week in the calendar will be dimmed. All other dates will be active.</span>
+  disableDays<span class="br0">&#40;</span><span class="st0">&quot;week&quot;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">2</span><span class="sy0">,</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="br0">&#41;</span>;</pre>
+<p>
+
+<span class="curid"><a href="dhtmlxcalendar___dhtmlxcalendar_config.html" class="wikilink1" title="dhtmlxcalendar:dhtmlxcalendar_config">Back to top</a></span>
+</p>
+
+</div>
+<div class="secedit"><form class="button btn_secedit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="lines" value="4864-5980" /><input type="hidden" name="rev" value="1335474000" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Edit" class="button" title="Setting inactive dates" /></div></form></div>
+<h2><a name="setting_a_new_calendar_s_container" id="setting_a_new_calendar_s_container">Setting a new calendar&#039;s container</a></h2>
+<div class="level2">
+
+<p>
+When calendar is initialized as an individual object you can change a container it&#039;s placed into by using the method <strong>setParent()</strong> (<a href="dhtmlxcalendar___api_method_dhtmlxcalendar_setparent.html" class="wikilink1" title="dhtmlxcalendar:api_method_dhtmlxcalendar_setparent">see details</a>):
+
+</p>
+<pre class="code javascript">myCalendar.<span class="me1">setParent</span><span class="br0">&#40;</span><span class="st0">&quot;container2&quot;</span><span class="br0">&#41;</span>;</pre>
+<p>
+
+<span class="curid"><a href="dhtmlxcalendar___dhtmlxcalendar_config.html" class="wikilink1" title="dhtmlxcalendar:dhtmlxcalendar_config">Back to top</a></span>
+</p>
+
+</div>
+<div class="secedit"><form class="button btn_secedit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="lines" value="5981-6348" /><input type="hidden" name="rev" value="1335474000" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Edit" class="button" title="Setting a new calendar's container" /></div></form></div>
+<h2><a name="setting_calendar_s_position" id="setting_calendar_s_position">Setting calendar&#039;s position</a></h2>
+<div class="level2">
+
+<p>
+When calendar is initialized as a date input field you can set the position pop-up calendar will appear from. For this purpose you should use the <strong>setPosition()</strong> method (<a href="dhtmlxcalendar___api_method_dhtmlxcalendar_setposition.html" class="wikilink1" title="dhtmlxcalendar:api_method_dhtmlxcalendar_setposition">see details</a>): 
+
+</p>
+<pre class="code javascript">myCalendar.<span class="me1">setPosition</span><span class="br0">&#40;</span><span class="st0">'right'</span><span class="br0">&#41;</span>;<span class="co1">// 'bottom' by default</span></pre>
+<p>
+
+<span class="curid"><a href="dhtmlxcalendar___dhtmlxcalendar_config.html" class="wikilink1" title="dhtmlxcalendar:dhtmlxcalendar_config">Back to top</a></span>
+
+</p>
+
+</div>
+<div class="secedit"><form class="button btn_secedit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="lines" value="6349-" /><input type="hidden" name="rev" value="1335474000" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Edit" class="button" title="Setting calendar's position" /></div></form></div>
+    <!-- wikipage stop -->
+  </div>
+
+  <div class="clearer">&nbsp;</div>
+
+  
+  <div class="stylefoot">
+
+    <div class="meta">
+      <div class="user">
+              </div>
+     <!-- <div class="doc">
+        dhtmlxcalendar/dhtmlxcalendar_config.txt &middot; Last modified: 2012/04/27 01:00 (external edit)      </div>
+    </div>-->
+
+   
+    <!--<div class="bar" id="bar__bottom">-->
+      <!--<div class="bar-left" id="bar__bottomleft">-->
+        <!--<form class="button btn_edit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Edit this page" class="button" accesskey="e" title="Edit this page [E]" /></div></form>-->
+        <!--<form class="button btn_revs" method="get" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="revisions" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Old revisions" class="button" accesskey="o" title="Old revisions [O]" /></div></form>-->
+      <!--</div>-->
+      <!--<div class="bar-right" id="bar__bottomright">-->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!--<form class="button btn_index" method="get" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="index" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Index" class="button" accesskey="x" title="Index [X]" /></div></form>-->
+        <!--<a class="nolink" href="#dokuwiki__top"><input type="button" class="button" value="Back to top" onclick="window.scrollTo(0, 0)" title="Back to top" /></a>&nbsp;-->
+      <!--</div>-->
+      <!--<div class="clearer"></div>-->
+    <!--</div>-->
+
+  </div>
+
+  
+
+</div>
+
+<div class="footerinc">
+
+
+</div>
+
+<div class="no"><img src="/dhtmlx/docs/lib/exe/indexer.php?id=dhtmlxcalendar%3Adhtmlxcalendar_config&amp;1366131630" width="1" height="1" alt=""  /></div>
+     <div class="footer">
+        <div class="footer-logo"></div>
+        <div class="copyright">Copyright © 1998-2011 DHTMLX LTD.<br />All rights reserved.</div>
+        <form class="button btn_edit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_config" /><input type="submit" value="Edit this page" class="button" accesskey="e" title="Edit this page [E]" /></div></form>    	    </div>
+</body>
+</html>

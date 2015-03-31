@@ -2,9 +2,9 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Greengarden Install Wizard</title>
+	<title>Yggdrasil Install Wizard</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	<link rel="stylesheet" href='<?php echo BASE_URL . "installer/assets/css/style.css" ?>' type="text/css" media="screen" title="Greengarden Installer" charset="utf-8">
+	<link rel="stylesheet" href='<?php echo BASE_URL . "installer/assets/css/style.css" ?>' type="text/css" media="screen" title="Yggdrasil Installer" charset="utf-8">
 
 	<!-- Javascript -->
         <script src='<?php echo BASE_URL . "installer/assets/js/jquery.js" ?>' type="text/javascript" charset="utf-8"></script>

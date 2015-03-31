@@ -1,3 +1,0 @@
-<!-- BEGIN: block -->
-this is <b>ex7-inc2.xtpl</b>, and we're inside the <b>block</b> block, to which you refer as <b>main.inc.block</b> from your php.
-<!-- END: block -->

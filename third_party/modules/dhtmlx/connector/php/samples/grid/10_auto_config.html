@@ -1,0 +1,32 @@
+ 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>For demo purpose only :: &1</title>
+
+
+
+
+<script src="../dhtmlx/dhtmlx.js" type="text/javascript" charset="utf-8"></script>
+<script src="../dhtmlx/dhtmlxdataprocessor.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../codebase/connector.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="../dhtmlx/dhtmlx.css" type="text/css" charset="utf-8">
+</head>
+<body>
+				<div id="gridbox" width="350px" height="550px" style="background-color:white;overflow:hidden"></div>
+<script>
+	mygrid = new dhtmlXGridObject('gridbox');
+	mygrid.setImagePath("../dhtmlx/imgs/");
+	mygrid.enableSmartRendering(true)
+	mygrid.enableMultiselect(true)
+	mygrid.init();
+	
+	mygrid.loadXML("10_auto_config.php");
+	var dp = new dataProcessor("10_auto_config.php");
+	dp.init(mygrid);
+</script>
+<input type="button" name="add" value="add row" onclick="var id=mygrid.uid(); mygrid.addRow(id,'',0); mygrid.showRow(id);">
+<input type="button" name="delete" value="delete row" onclick="mygrid.deleteSelectedRows()">
+
+</body>
+</html>

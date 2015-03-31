@@ -1,11 +1,11 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
- * Emily
+ * Yggdrasil
  *
  * A simple, fast, contact and software licenses software
  *
- * @package		Emily
- * @author		Emily Dev Team
+ * @package		Yggdrasil
+ * @author		Yggdrasil Dev Team
 // ------------------------------------------------------------------------
 
 /**

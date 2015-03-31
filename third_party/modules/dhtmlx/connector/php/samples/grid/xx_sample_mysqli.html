@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>MySQLi connector with dhtmlxGrid - read-only version</title>
+	<script src="../dhtmlx/dhtmlx.js" type="text/javascript" charset="utf-8"></script>
+<script src="../dhtmlx/dhtmlxdataprocessor.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../codebase/connector.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="../dhtmlx/dhtmlx.css" type="text/css" charset="utf-8">
+	<script>
+		function doOnLoad() {
+			mygrid = new dhtmlXGridObject('gridbox');
+			mygrid.setImagePath("./codebase/imgs/");
+			mygrid.setSkin('dhx_skyblue');
+			mygrid.setHeader("Event name, Details");
+			mygrid.setInitWidths("300,*")
+			mygrid.setColTypes("ro,ro");
+			mygrid.init();
+			mygrid.loadXML("xx_sample_mysqli_connector.php");
+		}
+	</script>
+</head>
+<body onload="doOnLoad();">
+	<div id="gridbox" style="width: 700px; height: 300px; background-color:white;overflow:hidden; border: 1px solid #dfdfdf;"></div>
+</body>
+</html>

@@ -17,10 +17,10 @@
 	<link rel="stylesheet" href="third_party/modules/dhtmlx/grid/dhtmlxcalendar_dhx_skyblue.css" type="text/css" media="screen" title="no title" charset="utf-8">
         
         
-	<h1 style='width:95%; padding:20px; font-family:Tahoma;font-weight:normal;background:#f2f3f4;'>Akamai Usage Data</h1>
+	<h1 style='width:95%; padding:20px; font-family:Tahoma;font-weight:normal;background:#f2f3f4;'>CDN Usage Data</h1>
         <input type="button" value="Get as PDF" onclick="mygrid.toPDF('third_party/modules/dhtmlx/grid/grid-pdf/generate.php');">
         <input type="button" value="Get as Excel" onclick="mygrid.toExcel('third_party/modules/dhtmlx/grid/grid-excel/generate.php');">        
-	<div id="akamai" style="width:95%; height:400px;">
+	<div id="cdn" style="width:95%; height:400px;">
 	</div>
 	<input type="button" value='Add' onclick='add_row();'>
 	<input type="button" value='Delete selected' onclick='mygrid.deleteSelectedRows()'>
@@ -95,7 +95,7 @@
             return (a.toLowerCase()>b.toLowerCase()?1:-1)*(order=="asc"?1:-1);
         }
         
-	mygrid = new dhtmlXGridObject('akamai');
+	mygrid = new dhtmlXGridObject('cdn');
 	mygrid.setImagePath("third_party/modules/dhtmlx/grid/imgs/");
 	mygrid.setHeader("Date, Week, Total Mb, 95_5_mbps, Peak mbps, Total Hits, HTTP Total Mb, Stream Total Mb");
 //        mygrid.attachFooter("A, B, C");

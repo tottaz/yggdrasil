@@ -39,10 +39,10 @@ class Itreports extends Admin_Controller {
 
 			$this->load->model("Grid_m");
 
-			$this->template->total_mb = $this->Grid_m->get_akamai_total_mb();
-			$this->template->m95 = $this->Grid_m->get_akamai_m95();
-			$this->template->total_hits = $this->Grid_m->get_akamai_totalhits();
-			$this->template->build('akamai');
+			$this->template->total_mb = $this->Grid_m->get_cdn_total_mb();
+			$this->template->m95 = $this->Grid_m->get_cdn_m95();
+			$this->template->total_hits = $this->Grid_m->get_cdn_totalhits();
+			$this->template->build('cdn');
 		}
 
 		// here you should place all your functions
@@ -51,21 +51,21 @@ class Itreports extends Admin_Controller {
 			$this->template->build('googlecp');
 		}
 
-		public function akamaigrid()
+		public function cdngrid()
 		{
-			$this->template->build('akamaigrid');
+			$this->template->build('cdngrid');
 		}
 
-		public function akamai() {
+		public function cdn() {
 
 			$this->load->model("Grid_m");
 			
-			$this->template->total_mb = $this->Grid_m->get_akamai_total_mb();
-			$this->template->m95 = $this->Grid_m->get_akamai_m95();
-			$this->template->total_hits = $this->Grid_m->get_akamai_totalhits();
+			$this->template->total_mb = $this->Grid_m->get_cdn_total_mb();
+			$this->template->m95 = $this->Grid_m->get_cdn_m95();
+			$this->template->total_hits = $this->Grid_m->get_cdn_totalhits();
 			
 			// Load the views
-			$this->template->build('akamai');
+			$this->template->build('cdn');
 		}
 
 		public function data()
@@ -75,7 +75,7 @@ class Itreports extends Admin_Controller {
 			$this->load->model("Grid_m");
 			
 			$connector = new GridConnector($this->db, "phpCI");
-			$connector->configure("default_it_akamai_data", "akamai_id", "date, total_mb,
+			$connector->configure("default_it_cdn_data", "cdn_id", "date, total_mb,
 									m95_mbps, peak_mbps, total_hits, http_total_mb, stream_total_mb");
 			$connector->useModel($this->Grid_m);
 			$connector->event->attach($this);

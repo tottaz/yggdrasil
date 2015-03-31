@@ -1,5 +1,5 @@
 <h2>Step 2: Enter the database details.</h2>
-<p style="font-size:90%">Please note, <strong>if you have already installed Greengarden and are upgrading DO NOT</strong> continue with these steps. This will overwrite your existing Greengarden tables, you need to put your database.php back in the config folder. </p>
+<p style="font-size:90%">Please note, <strong>if you have already installed Yggdrasil and are upgrading DO NOT</strong> continue with these steps. This will overwrite your existing Yggdrasil tables, you need to put your database.php back in the config folder. </p>
 <?php if (isset($error)): ?>
 <p class="notification error"><?php echo $error; ?></p>
 <?php endif; ?>

@@ -4332,7 +4332,7 @@ img { max-width: 100%; }
    ========================================================================== */
 /* ======================== Body & Wrapper ======================== */
 .black-body { background-color: #1a1a1a; }
-.white-body { background-color: #000000; }
+.white-body { background-color: #fff; }
 
 
 #wrapper { background-color: black; }
@@ -4373,7 +4373,7 @@ img { max-width: 100%; }
 #footer .ft-copyright p span { color: #8e9095; }
 
 /* ======================== Sections ======================== */
-.section { margin: 0px 0; padding: 50px 0 50px; }
+.section { margin: 0px 0; padding: 0px 0 50px; }
 .section.st-no-padding { padding: 0; }
 .section.st-padding-xs { padding-top: 10px; padding-bottom: 10px; }
 .section.st-padding-sm { padding-top: 30px; padding-bottom: 30px; }

@@ -116,7 +116,6 @@
 					<?php if (is_sadmin()) :?>
 					<li><?php echo anchor('admin/apikey', __('global:apikey')); ?></li>
 					<li><?php echo anchor('admin/settings', __('global:settings')); ?></li>
-					<li><?php echo anchor('user_guide/guide?transition=cube#/', __('global:introduction')); ?></li>
 					<?php endif;?>
 					<li><?php echo anchor('admin/users/logout', __('global:logout')); ?></li>
 			</div>
@@ -131,151 +130,22 @@
                   <div class="mb-content">
                      <nav>
                         <ul id="mb-main-menu">
+                        <br>
 							<?php if (is_sadmin() or isset($this->permissions['dashboard'])): ?>
 								<li class=""> <?php echo anchor('dashboard', __('global:dashboard')); ?>
 								</li>
 							<?php endif ?>
-
-					<?php if (is_sadmin() or isset($this->permissions['crm'])): ?>
-                           <li class="menu-item-has-children">
-							  <a href="#"><?php echo lang('crm:crm'); ?></a>
-                              <a class="submenu-toggler" href="#"><i class="fa fa-plus"></i></a>
-                              <ul>
-								<li><?php echo anchor('http://localhost/greengarden/wordpress/wp-admin/admin.php?page=CiviCRM', __('crm:dashboard')); ?></li>
-								<li><?php echo anchor('http://localhost/greengarden/wordpress/wp-admin/admin.php?page=CiviCRM&q=civicrm/contact/search&reset=1', __('crm:find_contacts')); ?> </li>
-								<li><?php echo anchor('http://localhost/greengarden/wordpress/wp-admin/admin.php?page=CiviCRM&q=civicrm/contact/add&reset=1&ct=Individual', __('crm:add_contact')); ?> </li>
-								<li><?php echo anchor('http://localhost/greengarden/wordpress/wp-admin/admin.php?page=CiviCRM&q=civicrm/contribute&reset=1', __('crm:campaigns')); ?> </li>
-								<li><?php echo anchor('http://localhost/greengarden/wordpress/wp-admin/admin.php?page=CiviCRM&q=civicrm/case&reset=1', __('crm:cases')); ?> </li>
-								<li><?php echo anchor('http://localhost/greengarden/wordpress/wp-admin/admin.php?page=CiviCRM&q=civicrm/event&reset=1', __('crm:events')); ?> </li>
-								<li><?php echo anchor('http://localhost/greengarden/wordpress/wp-admin/admin.php?page=CiviCRM&q=civicrm/mailing/browse/scheduled&reset=1&scheduled=true', __('crm:mailings')); ?> </li>
-                              </ul>
-                           </li>
-					<?php endif ?>
 
 					<?php if (is_sadmin() or isset($this->permissions['media'])): ?>
                            <li class="menu-item-has-children">
 							  <a href="#"><?php echo lang('global:search'); ?></a>
                               <a class="submenu-toggler" href="#"><i class="fa fa-plus"></i></a>
                               <ul>
-								<li><?php echo anchor('media/addarticle', __('global:addarticle')); ?> </li>
-								<li><?php echo anchor('media/import', __('global:import')); ?> </li>
-								<li><?php echo anchor('media/search', __('global:search')); ?> </li>
 								<li><?php echo anchor('analysis/alchemynews', __('global:searchalchemynews')); ?> </li>
-								<li><?php echo anchor('media/read_feeds', __('global:loadfeed')); ?> </li>
                               </ul>
                            </li>
 					<?php endif ?>
 
-					<?php if (is_sadmin() or isset($this->permissions['analysis'])): ?>
-                           <li class="menu-item-has-children">
-							  <a href="#"><?php echo lang('global:analysis'); ?></a>
-                              <a class="submenu-toggler" href="#"><i class="fa fa-plus"></i></a>
-                              <ul>
-								<li><?php echo anchor('analysis', __('global:screenscrape')); ?> </li>
-								<li><?php echo anchor('luminoso', __('global:luminoso')); ?> </li>
-								<li><?php echo anchor('analysis/alchemy', __('global:alchemy')); ?> </li>
-								<li><?php echo anchor('analysis/ab', __('global:A/B')); ?> </li>
-						      </ul>
-                           </li>
-					<?php endif ?>
-
-					<?php if (is_sadmin() or isset($this->permissions['media'])): ?>
-                           <li class="menu-item-has-children">
-							  <a href="#"><?php echo lang('global:media'); ?></a>
-                              <a class="submenu-toggler" href="#"><i class="fa fa-plus"></i></a>
-                              <ul>
-								<li><?php echo anchor('media/insights/drilldown', __('global:drilldown')); ?> </li>
-								<li><?php echo anchor('media/stats', __('global:stats')); ?> </li>
-								<li><?php echo anchor('media/insights', __('global:insights')); ?> </li>
-								<li class="divider"></li>
-								<li><?php echo anchor('media/insights/wordcloud_country', __('global:wordcloud_country')); ?> </li>
-								<li><?php echo anchor('media/insights/wordcloud_journalist', __('global:wordcloud_journalist')); ?> </li>
-								<li><?php echo anchor('media/insights/wordcloud_media', __('global:wordcloud_media')); ?> </li>
-								<li><?php echo anchor('media/insights/wordcloud_wire', __('global:wordcloud_wire')); ?> </li>
-								<li><?php echo anchor('media/insights/wordcloud_keyword', __('global:wordcloud_keyword')); ?> </li>
-								<li class="divider"></li>
-								<li><?php echo anchor('media/insights/chart_newsitem_day', __('global:perday')); ?> </li>
-								<li><?php echo anchor('media/insights/chart_article_by_feed', __('global:arcticlebyfeed')); ?> </li>
-								<li><?php echo anchor('media/insights/chart_article_by_country', __('global:articlebycountry')); ?> </li>
-								<li class="divider"></li>
-								<li><?php echo anchor('media/insights/chart_newsitem_by_country_media_type', __('global:newsitembycountrymediatype')); ?> </li>
-								<li><?php echo anchor('media/insights/chart_newsitem_by_country_media_distribution', __('global:newsitembycountrymediadistribution')); ?> </li>                      
-								<li><?php echo anchor('media/insights/news_items_by_month', __('global:newsitemsbymonth')); ?> </li>
-								<li class="divider"></li>
-								<li><?php echo anchor('media/insights/chart_tier1_online_media', __('global:tier1onlinemedia')); ?> </li>
-                              </ul>
-                           </li>
-					<?php endif ?>
-
-					<?php if (is_sadmin() or isset($this->permissions['whois'])): ?>				
-					 <li class="menu-item-has-children">
-						<a href="#"><?php echo lang('global:emily'); ?></a>
-	                      <a class="submenu-toggler" href="#"><i class="fa fa-plus"></i></a>
-	                      <ul>
-							<li class="divider"></li>
-							<li><?php echo anchor('whois', __('global:whois')); ?></li>
-							<li><?php echo anchor('reports/crew_guest_list', __('global:crew_guest_list')); ?> </li>
-							<li><?php echo anchor('reports/crewchange', __('global:crewchange')); ?> </li>
-							<li><?php echo anchor('reports/muster_list', __('global:muster_list')); ?> </li>
-							<li class="divider"></li>
-							<li><?php echo anchor('people', __('global:people')); ?></li>
-							<li><?php echo anchor('people/index/crew', __('global:crew')); ?> </li>
-							<li><?php echo anchor('people/import', __('global:import')); ?> </li>
-							<li><?php echo anchor('people/history/crew', __('global:crew_history')); ?> </li>
-							<li><?php echo anchor('people/history', __('global:all_history')); ?> </li> 
-							<li><?php echo anchor('people/cashbook', __('global:cashbook')); ?> </li> 
-							<li><?php echo anchor('bringob/deschedule', __('global:deschedule')); ?> </li> 
-							<li class="divider"></li>
-	                        <li><?php echo anchor('schedule', __('global:schedule')); ?></li>	
-							<li><?php echo anchor('admin/tables/ports', __('global:ports')); ?></li>
-							<li><?php echo anchor('agents', __('global:agents')); ?> </li>
-							<li><?php echo anchor('schedule/history', __('global:portsofcall')); ?> </li>                                                        
-							<li class="divider"></li>
-							<li><?php echo anchor('noonreport/logviewer', __('global:logviewer')); ?></li>
-							<li><?php echo anchor('maps/fleetmon', __('global:location')); ?> </li>
-							<li><?php echo anchor('maps/googletest', __('global:location')); ?> </li>
-							<li><?php echo anchor('noonreport/reports', __('global:check')); ?> </li>
-							<li class="divider"></li>
-							<li><?php echo anchor('admin/tables/enter', __('global:config')); ?></li>
-							<li><?php echo anchor('admin/tables/country', __('global:country')); ?> </li>
-							<li><?php echo anchor('admin/tables/marital', __('global:marital')); ?> </li>
-							<li><?php echo anchor('admin/tables/meals', __('global:meals')); ?> </li>
-							<li><?php echo anchor('admin/tables/passport', __('global:passport')); ?> </li>
-							<li><?php echo anchor('admin/tables/rank', __('global:rank')); ?> </li>
-							<li><?php echo anchor('admin/tables/ships', __('global:ships')); ?> </li>
-							<li><?php echo anchor('admin/tables/type', __('global:type')); ?> </li>
-							<li><?php echo anchor('admin/tables/ports', __('global:ports')); ?> </li>
-						</ul>
-					</li>
-					<?php endif ?>
-					<?php if (is_sadmin() or isset($this->permissions['media'])): ?>
-						 <li class="menu-item-has-children">
-							<a href="#"><?php echo lang('global:admin'); ?></a>
-	                          <a class="submenu-toggler" href="#"><i class="fa fa-plus"></i></a>
-	                          <ul>
-								<li><?php echo anchor('admin/media/campaigns', __('global:campaigns')); ?> </li>
-								<li><?php echo anchor('admin/media/feeds', __('global:feeds')); ?></li>
-								<li><?php echo anchor('admin/media/feedtype', __('global:feedtype')); ?></li>
-								<li><?php echo anchor('admin/media/frames', __('global:frames')); ?> </li>
-								<li><?php echo anchor('admin/media/hitwords', __('global:hitwords')); ?></li>
-								<li><?php echo anchor('admin/media/issues', __('global:media_issue')); ?> </li>
-								<li><?php echo anchor('admin/media/journalists', __('global:journalists')); ?> </li>
-								<li><?php echo anchor('admin/media/keywords', __('global:keywords')); ?> </li>
-								<li class="divider"></li>
-								<li><?php echo anchor('admin/media/mediagrid', __('global:media')); ?> </li>
-								<li><?php echo anchor('admin/media/media_audiences', __('global:audience')); ?> </li>
-								<li><?php echo anchor('admin/media/media_contacts', __('global:media_contacts')); ?> </li>
-								<li><?php echo anchor('admin/media/media_distribution', __('global:media_distribution')); ?> </li>
-								<li><?php echo anchor('admin/media/media_orientation', __('global:media_orientation')); ?> </li>
-								<li><?php echo anchor('admin/media/media_segmentation', __('global:media_segmentation')); ?> </li>
-								<li><?php echo anchor('admin/media/media_type', __('global:media_type')); ?> </li>
-								<li class="divider"></li>
-								<li><?php echo anchor('admin/media/offices', __('global:media_office')); ?> </li>
-								<li><?php echo anchor('admin/media/programme', __('global:programme')); ?> </li>
-								<li><?php echo anchor('admin/media/wires', __('global:wires')); ?> </li>
-							</ul>
-						</li>
-					<?php endif ?>
 					<?php if (is_sadmin() or isset($this->permissions['system'])): ?> 
 						 <li class="menu-item-has-children">
 							<a href="#"><?php echo lang('system:system'); ?></a>
@@ -287,15 +157,10 @@
 								<li><?php echo anchor('admin/system/monitoring', __('system:serverstat')); ?> </li>
 								<li class="divider"></li>
 								<li><?php echo anchor('admin/system/logs', __('system:logs')); ?> </li>
-								<li><?php echo anchor('admin/system/cronlogs', __('system:cronlogs')); ?> </li>
-								<li><?php echo anchor('admin/system/listcronlogs', __('system:cronstats')); ?> </li>
 								<li><?php echo anchor('admin/system/listapilogs', __('system:apilogs')); ?> </li>
 								<li><?php echo anchor('admin/system/phpinfo', __('system:phpinfo')); ?> </li>
 								<li class="divider"></li>
 								<li><?php echo anchor('admin/modules', __('system:modules')); ?> </li>
-								<li class="divider"></li>
-								<li><?php echo anchor('admin/social', __('social:setup')); ?></li>
-								<li><?php echo anchor('admin/social/linkedacc', __('social:sociallinked')); ?></li>
 							 </ul>
 						</li>
 						<?php endif ?>
@@ -364,6 +229,7 @@
                   </ul>
                </header>
             </div>
+
 	<?php if ($module != 'dashboard'): ?>
 <!-- main-container -->
     <div>
@@ -398,19 +264,26 @@
 	</div><!-- /shortcuts -->
 	<?php endif ?>
 
-<?php echo $template['partials']['notifications']; ?>
-<?php echo $template['body']; ?>
+	<div class="section">
+	   <section>
+	      <div class="container">
 
-<?php  if ($module !== 'dashboard') { ?>
+		<?php echo $template['partials']['notifications']; ?>
+		<?php echo $template['body']; ?>
 
-<!-- end main-container -->
+		<?php  if ($module !== 'dashboard') { ?>
+
+		<!-- end main-container -->
+          </div> <!-- container -->
+       </section>
+    </div> <!-- section -->
 
 	<!-- footer -->
 	<footer id="footer">
 		<div class="footer-inner">
 			<div id="footer-wrap" class="container">
 				<div class="col-md-4">
-					<?php echo __('global:allrelatedmediacopyright', array(COPYRIGHT_YEAR, '<a href="http://torbjornzetterlund.com/">torbjornzetterlund.com</a>')); ?>
+					<?php echo __('global:allrelatedmediacopyright', array(COPYRIGHT_YEAR, '<a href="http://torbjornzetterlund.com/">Yggdrisil</a>')); ?>
 				</div>
 				<div class="col-md-4">
 					<p>Version <?php echo APP_VERSION; ?> &nbsp; -- &nbsp; Rendered in {elapsed_time} sec. using {memory_usage}.</p>
