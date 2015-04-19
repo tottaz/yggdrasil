@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------
 */
 
-class WYSIWYG_Controller extends App_Controller
+class WYSIWYG_Controller extends My_Controller
 {
 
 	/**

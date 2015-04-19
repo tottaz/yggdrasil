@@ -22,9 +22,9 @@ $config['supported_languages'] = array(
         'direction'    => 'ltr',
         'codes'        => array('en', 'english', 'en_US'),
         'ckeditor'    => NULL
-    ),
+/*     ),
     
-/*    'de' => array(
+   'de' => array(
         'name'        => 'Deutsch',
         'folder'    => 'german',
         'direction'    => 'ltr',
@@ -80,14 +80,14 @@ $config['supported_languages'] = array(
         'codes'        => array('dutch', 'nld', 'nl-NL'),
         'ckeditor'    => NULL
     ),
-*/
+
     'se' => array(
         'name'        => 'Svenska',
         'folder'    => 'swedish',
         'direction'    => 'ltr',
         'codes'        => array('se', 'swedish', 'se_SE'),
         'ckeditor'    => NULL
-/*    ),
+    ),
     'sl' => array(
         'name'        => 'Slovensko',
         'folder'    => 'slovenian',

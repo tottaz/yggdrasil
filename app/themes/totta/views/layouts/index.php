@@ -136,14 +136,9 @@
 								</li>
 							<?php endif ?>
 
-					<?php if (is_sadmin() or isset($this->permissions['media'])): ?>
-                           <li class="menu-item-has-children">
-							  <a href="#"><?php echo lang('global:search'); ?></a>
-                              <a class="submenu-toggler" href="#"><i class="fa fa-plus"></i></a>
-                              <ul>
-								<li><?php echo anchor('analysis/alchemynews', __('global:searchalchemynews')); ?> </li>
-                              </ul>
-                           </li>
+					<?php if (is_sadmin() or isset($this->permissions['calendar'])): ?>
+						<li><?php echo anchor('calendar', __('global:calendar')); ?> 
+						</li>
 					<?php endif ?>
 
 					<?php if (is_sadmin() or isset($this->permissions['system'])): ?> 
@@ -192,7 +187,7 @@
                   </div>
                   <div class="mb-footer">
                      <h4>About us</h4>
-                     <p>We are team of creative photographers. We passionate with photography and other creative things.</p>
+                     <p>Yggdrasil is based on Codeigniter 3.0</p>
                      <div class="mb-social">
                         <a href=""><i class="fa fa-twitter"></i></a>
                         <a href=""><i class="fa fa-facebook"></i></a>

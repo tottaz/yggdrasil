@@ -128,11 +128,11 @@ class Admin extends Admin_Controller
 
 				if ($this->delete_files($apath, $andfolder))
 				{
-					$this->session->set_flashdata('success', sprintf(lang('system:'.$which.'_msg'), $item_count, $name));
+					$this->session->set_userdata('success', sprintf(lang('system:'.$which.'_msg'), $item_count, $name));
 				}
 				else
 				{
-					$this->session->set_flashdata('error', sprintf(lang('system:'.$which.'_msg_err'), $name));
+					$this->session->set_userdata('error', sprintf(lang('system:'.$which.'_msg_err'), $name));
 				}
 			}
 		}
@@ -250,22 +250,22 @@ class Admin extends Admin_Controller
 					unlink($this->_cron_log_folder . $value);
 				}
 			}
-			$this->session->set_flashdata('success', sprintf(lang('logs:array_success'), count($array)));
+			$this->session->set_userdata('success', sprintf(lang('logs:array_success'), count($array)));
 		} 
 		else if (file_exists($this->_cron_log_folder . $item)) 
 		{
 		
 			if (unlink($this->_cron_log_folder . $item)) {
-				$this->session->set_flashdata('success', sprintf(lang('logs:success'), $item));
+				$this->session->set_userdata('success', sprintf(lang('logs:success'), $item));
 			} 
 			else 
 			{
-				$this->session->set_flashdata('error', lang('logs:error'));
+				$this->session->set_userdata('error', lang('logs:error'));
 			}
 		} 
 		else 
 		{
-			$this->session->set_flashdata('error', lang('logs:error'));
+			$this->session->set_userdata('error', lang('logs:error'));
 		}
 		redirect('admin/system/cronlogs');
 	}
@@ -321,21 +321,21 @@ class Admin extends Admin_Controller
 					unlink($this->_log_folder . $value);
 				}
 			}
-			$this->session->set_flashdata('success', sprintf(lang('logs:array_success'), count($array)));
+			$this->session->set_userdata('success', sprintf(lang('logs:array_success'), count($array)));
 		} else if (file_exists($this->_log_folder . $item)) 
 		{
 			if (unlink($this->_log_folder . $item)) 
 			{
-				$this->session->set_flashdata('success', sprintf(lang('logs:success'), $item));
+				$this->session->set_userdata('success', sprintf(lang('logs:success'), $item));
 			} 
 			else 
 			{
-				$this->session->set_flashdata('error', lang('logs:error'));
+				$this->session->set_userdata('error', lang('logs:error'));
 			}
 		} 
 		else 
 		{
-			$this->session->set_flashdata('error', lang('logs:error'));
+			$this->session->set_userdata('error', lang('logs:error'));
 		}
 		redirect('admin/system/logs');
 	}

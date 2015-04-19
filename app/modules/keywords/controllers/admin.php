@@ -68,11 +68,11 @@ class Admin extends Admin_Controller
 					// Fire an event. A new keyword has been added.
 					Events::trigger('keyword_created', $id);
 
-					$this->session->set_flashdata('success', sprintf(lang('keywords:add_success'), $name));
+					$this->session->set_userdata('success', sprintf(lang('keywords:add_success'), $name));
 				}
 				else
 				{
-					$this->session->set_flashdata('error', sprintf(lang('keywords:add_error'), $name));
+					$this->session->set_userdata('error', sprintf(lang('keywords:add_error'), $name));
 				}
 
 				redirect('admin/keywords');
@@ -122,11 +122,11 @@ class Admin extends Admin_Controller
 				{
 					// Fire an event. A keyword has been updated.
 					Events::trigger('keyword_updated', $id);
-					$this->session->set_flashdata('success', sprintf(lang('keywords:edit_success'), $name));
+					$this->session->set_userdata('success', sprintf(lang('keywords:edit_success'), $name));
 				}
 				else
 				{
-					$this->session->set_flashdata('error', sprintf(lang('keywords:edit_error'), $name));
+					$this->session->set_userdata('error', sprintf(lang('keywords:edit_error'), $name));
 				}
 
 				redirect('admin/keywords');
@@ -154,11 +154,11 @@ class Admin extends Admin_Controller
 		{
 			// Fire an event. A keyword has been deleted.
 			Events::trigger('keyword_deleted', $id);
-			$this->session->set_flashdata('success', lang('keywords:delete_success'));
+			$this->session->set_userdata('success', lang('keywords:delete_success'));
 		}
 		else
 		{
-			$this->session->set_flashdata('error', lang('keywords:delete_error'));
+			$this->session->set_userdata('error', lang('keywords:delete_error'));
 		}
 
 		redirect('admin/keywords');

@@ -1,55 +1,102 @@
-<div id="body" class="unselectable">
-	<div id="content" style="visibility: hidden">
-		<div id="metro-sections-container" class="metro">
-			<div class="metro-sections" data-bind="foreach: sections">
-				<div class="metro-section" data-bind="sortable: { data: tiles }">
-					<div data-bind="attr: { id: uniqueId, 'class': tileClasses }">
-						<a class="metro-tile-link"> <!-- ko if: tileImage -->
-						<div class="tile-image">
-							<img data-bind="attr: { src: tileImage }" src="app/modules/dashboard/img/desktop.png" />
-						</div> <!-- /ko --> <!-- ko if: iconSrc --> <!-- ko if: slides().length == 0 -->
-						<div data-bind="attr: { 'class': iconClasses }">
-							<img data-bind="attr: { src: iconSrc }" src="app/modules/dashboard/img/desktop.png" />
-						</div> <!-- /ko --> <!-- /ko -->
-						<div data-bind="foreach: slides">
-							<div class="tile-content-main">
-								<div data-bind="html: $data"></div>
-							</div>
-						</div> <!-- ko if: label --> <span class="tile-label" data-bind="html: label">Label</span> <!-- /ko --> <!-- ko if: counter --> <span class="tile-counter" data-bind="html: counter">10</span> <!-- /ko --> <!-- ko if: subContent -->
-						<div data-bind="attr: { 'class': subContentClasses }, html: subContent">
-							subContent
-						</div> <!-- /ko --> </a>
-					</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span10">
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="accordion" id="accordionChart1">
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a style="text-align: left;text-decoration: none" class="accordion-toggle btn btn-danger"
+                                   data-toggle="collapse" data-parent="#accordion2" href="#collapseChart1">
+                                    <i class="icon-bar-chart"></i> Spline Chart <i class="icon-minus pull-right"></i>
+                                </a>
+                            </div>
+                            <div id="collapseChart1" class="accordion-body collapse in">
+                                <div class="accordion-inner">
+                                    <div id="spline">
 
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-<script type="text/javascript">
-	// Bootstrap initialization
-	$(document).ready(function() {
-		$('.dropdown-toggle').dropdown();
-	}); 
-</script>
+                    </div>
+                </div>
+                <div class="span6">
+                    <div class="accordion" id="accordionChart2">
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a style="text-align: left;text-decoration: none" class="accordion-toggle btn btn-danger"
+                                   data-toggle="collapse" data-parent="#accordion2" href="#collapseChart2">
+                                    <i class="icon-bar-chart"></i> Spline Chart <i class="icon-minus pull-right"></i>
+                                </a>
+                            </div>
+                            <div id="collapseChart2" class="accordion-body collapse in">
+                                <div class="accordion-inner">
+                                    <div id="stacked">
 
-<script type="text/javascript">
-	window.currentUser = new User({
-		firstName : "None",
-		lastName : "Anonymous",
-		photo : "app/modules/dashboard/img/userno-frame.png",
-		isAnonymous : true
-	}); 
-</script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript" src="app/modules/dashboard/js/CombinedDashboard.js"></script>
+                    </div>
+                </div>
+            </div>
 
-<script type="text/javascript">
-	window.profileData = null;
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="accordion" id="accordionChart3">
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a style="text-align: left;text-decoration: none" class="accordion-toggle btn btn-danger"
+                                   data-toggle="collapse" data-parent="#accordion2" href="#collapseChart3">
+                                    <i class="icon-bar-chart"></i> Spline Chart <i class="icon-minus pull-right"></i>
+                                </a>
+                            </div>
+                            <div id="collapseChart3" class="accordion-body collapse in">
+                                <div class="accordion-inner">
+                                    <div id="column">
 
-	$(document).ready(function() {
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-	}); 
-</script>
+                    </div>
+                </div>
+                <div class="span6">
+                    <div class="accordion" id="accordionChart4">
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a style="text-align: left;text-decoration: none" class="accordion-toggle btn btn-danger"
+                                   data-toggle="collapse" data-parent="#accordion2" href="#collapseChart4">
+                                    <i class="icon-bar-chart"></i> Spline Chart <i class="icon-minus pull-right"></i>
+                                </a>
+                            </div>
+                            <div id="collapseChart4" class="accordion-body collapse in">
+                                <div class="accordion-inner">
+                                    <div id="pie">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/row-->
+
+    <hr>
+
+
+</div><!--/.fluid-container-->
+
+<script type="text/javascript" src="<?php echo base_url();?>app/modules/dashboard/js/chart-spline.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>app/modules/dashboard/js/chart-stacked.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>app/modules/dashboard/js/chart-column.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>app/modules/dashboard/js/chart-pie.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>app/modules/dashboard/js/highcharts.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>app/modules/dashboard/js/exporting.js"></script>

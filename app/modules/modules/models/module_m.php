@@ -11,7 +11,7 @@
 * @author		Ananas Dev Team
 // ------------------------------------------------------------------------
 */
-class Module_m extends App_Model
+class Module_m extends My_Model
 {
 	protected $_table = 'modules';
 

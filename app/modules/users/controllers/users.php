@@ -113,7 +113,7 @@ class Users extends Admin_Controller
 			}
 			else
 			{
-				$this->session->set_flashdata('success', lang('user_logged_in'));
+				$this->session->set_userdata('success', lang('user_logged_in'));
 			}
 
 			// Don't allow protocols or cheeky requests
@@ -158,7 +158,7 @@ class Users extends Admin_Controller
 		}
 		else
 		{
-			$this->session->set_flashdata('success', lang('user_logged_out'));
+			$this->session->set_userdata('success', lang('user_logged_out'));
 			redirect('');
 		}
 	}
@@ -170,7 +170,7 @@ class Users extends Admin_Controller
 	{
 		if (isset($this->current_user->id))
 		{
-			$this->session->set_flashdata('notice', lang('user_already_logged_in'));
+			$this->session->set_userdata('notice', lang('user_already_logged_in'));
 			redirect();
 		}
 
@@ -261,7 +261,7 @@ class Users extends Admin_Controller
 				// don't fill this input in trick.
 				if ($this->input->post('d0ntf1llth1s1n') !== ' ')
 				{
-					$this->session->set_flashdata('error', lang('user_register_error'));
+					$this->session->set_userdata('error', lang('user_register_error'));
 					redirect(current_url());
 				}
 
@@ -355,7 +355,7 @@ class Users extends Admin_Controller
 					// show the "you need to activate" page while they wait for their email
 					if (Settings::get('activation_email'))
 					{
-						$this->session->set_flashdata('notice', $this->ion_auth->messages());
+						$this->session->set_userdata('notice', $this->ion_auth->messages());
 						redirect('users/activate');
 					}
 					else
@@ -363,7 +363,7 @@ class Users extends Admin_Controller
 						$this->ion_auth->deactivate($id);
 
 						/* show that admin needs to activate your account */
-						$this->session->set_flashdata('notice', lang('user_activation_by_admin_notice'));
+						$this->session->set_userdata('notice', lang('user_activation_by_admin_notice'));
 						redirect('users/register'); /* bump it to show the flash data */
 					}
 				}
@@ -434,7 +434,7 @@ class Users extends Admin_Controller
 			// Try to activate this user
 			if ($this->ion_auth->activate($id, $code))
 			{
-				$this->session->set_flashdata('activated_email', $this->ion_auth->messages());
+				$this->session->set_userdata('activated_email', $this->ion_auth->messages());
 
 				// Deprecated
 				$this->hooks->_call_hook('post_user_activation');
@@ -469,7 +469,7 @@ class Users extends Admin_Controller
 			redirect(base_url());
 		}
 
-		$this->template->activated_email = ($email = $this->session->flashdata('activated_email')) ? $email : '';
+		$this->template->activated_email = ($email = $this->session->userdata('activated_email')) ? $email : '';
 
 		$this->template
 			->title(lang('user_activated_account_title'))
@@ -493,7 +493,7 @@ class Users extends Admin_Controller
 		//if user is logged in they don't need to be here. and should use profile options
 		if ($this->current_user)
 		{
-			$this->session->set_flashdata('error', lang('user_already_logged_in'));
+			$this->session->set_userdata('error', lang('user_already_logged_in'));
 			redirect('my-profile');
 		}
 
@@ -568,7 +568,7 @@ class Users extends Admin_Controller
 		//if user is logged in they don't need to be here. and should use profile options
 		if ($this->current_user)
 		{
-			$this->session->set_flashdata('error', lang('user_already_logged_in'));
+			$this->session->set_userdata('error', lang('user_already_logged_in'));
 			redirect('my-profile');
 		}
 
@@ -690,11 +690,11 @@ class Users extends Admin_Controller
 			if ($this->ion_auth->update_user($user->id, $user_data, $profile_data) !== FALSE)
 			{
 				Events::trigger('post_user_update');
-				$this->session->set_flashdata('success', $this->ion_auth->messages());
+				$this->session->set_userdata('success', $this->ion_auth->messages());
 			}
 			else
 			{
-				$this->session->set_flashdata('error', $this->ion_auth->errors());
+				$this->session->set_userdata('error', $this->ion_auth->errors());
 			}
 
 			redirect('users/edit'.(($id > 0) ? '/'.$id : ''));

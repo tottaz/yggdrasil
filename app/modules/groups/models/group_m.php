@@ -7,7 +7,7 @@
  * @package		AppamAPP\Core\Modules\Groups\Models
  *
  */
-class Group_m extends App_Model
+class Group_m extends My_Model
 {
 	/**
 	 * Check a rule based on it's role

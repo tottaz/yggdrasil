@@ -1,0 +1,18 @@
+/*
+#E67E22
+#D35400
+*/
+
+.c-primary {color: #E67E22;}
+::-moz-selection{color:#fff;background:#E67E22}
+::selection{color:#fff;background:#E67E22}
+.nicescroll-cursors{background-color:#E67E22!important}
+
+.topnav.fixed-topnav .section {background: rgba(196, 113, 30,0.9);-moz-box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.2);-webkit-box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.2);-o-box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.2);box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.2);}
+.topnav.fixed-topnav li.current a, .topnav.fixed-topnav ul.nav > li > a:hover {color: #000!important;}
+h2, h3 {color: #E67E22;}
+.bg-primary:not(i), i.bg-primary::before, .bg-primary.form-control:focus {background-color: #E67E22;}
+.bg-primary h2, .bg-primary h3 {color:#000;}
+.work-filter ul li a:hover, .work-filter ul li a.active {background-color: #C4711E;}
+.overlay {background-color: rgba(196, 113, 30,.9);}
+.map-container #full-map .pulse-label{-webkit-animation:pulse 1.5s infinite;background:rgba(196, 113, 30,0.5);}

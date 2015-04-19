@@ -1,4 +1,6 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 /*
 | -------------------------------------------------------------------
 | AUTO-LOADER
@@ -20,16 +22,17 @@
 |
 | 1. Packages
 | 2. Libraries
-| 3. Helper files
-| 4. Custom config files
-| 5. Language files
-| 6. Models
+| 3. Drivers
+| 4. Helper files
+| 5. Custom config files
+| 6. Language files
+| 7. Models
 |
 */
 
 /*
 | -------------------------------------------------------------------
-|  Auto-load Packges
+|  Auto-load Packages
 | -------------------------------------------------------------------
 | Prototype:
 |
@@ -38,6 +41,7 @@
 */
 
 $autoload['packages'] = array();
+
 
 /*
 | -------------------------------------------------------------------
@@ -48,12 +52,34 @@ $autoload['packages'] = array();
 |
 | Prototype:
 |
-|	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
+|	$autoload['libraries'] = array('database', 'email', 'session');
+|
+| You can also supply an alternative library name to be assigned
+| in the controller:
+|
+|	$autoload['libraries'] = array('user_agent' => 'ua');
 */
 
-$autoload['libraries'] = array('asset', 'PAN', 'database', 'settings/settings', 'session', 'template', 'parser');
-// Add autoload for Sparks
-//$autoload['libraries'] = array('redis');
+//$autoload['libraries'] = array();
+$autoload['libraries'] = array('asset', 'PAN', 'database','settings/settings', 
+								'session', 'template', 'parser', 'email');
+
+/*
+| -------------------------------------------------------------------
+|  Auto-load Drivers
+| -------------------------------------------------------------------
+| These classes are located in the system/libraries folder or in your
+| application/libraries folder within their own subdirectory. They
+| offer multiple interchangeable driver options.
+|
+| Prototype:
+|
+|	$autoload['drivers'] = array('cache');
+*/
+
+$autoload['drivers'] = array();
+
+
 /*
 | -------------------------------------------------------------------
 |  Auto-load Helper Files
@@ -63,10 +89,12 @@ $autoload['libraries'] = array('asset', 'PAN', 'database', 'settings/settings', 
 |	$autoload['helper'] = array('url', 'file');
 */
 
+//$autoload['helper'] = array();
 $autoload['helper'] = array('url', 'form', 'date', 'text', 'string', 
                             'ion_auth', 'file', 'html', 'app', 
                             'language', 'pagination', 'app_logger', 'gravatar', 
                             'debug', 'modules/module', 'array', 'markdown', 'users/user');
+
 /*
 | -------------------------------------------------------------------
 |  Auto-load Config files
@@ -80,7 +108,7 @@ $autoload['helper'] = array('url', 'form', 'date', 'text', 'string',
 |
 */
 
-$autoload['config'] = array('language');
+$autoload['config'] = array();
 
 
 /*
@@ -96,7 +124,7 @@ $autoload['config'] = array('language');
 |
 */
 
-$autoload['language'] = array('errors');
+$autoload['language'] = array();
 
 
 /*
@@ -105,8 +133,12 @@ $autoload['language'] = array('errors');
 | -------------------------------------------------------------------
 | Prototype:
 |
-|	$autoload['model'] = array('model1', 'model2');
+|	$autoload['model'] = array('first_model', 'second_model');
 |
+| You can also supply an alternative model name to be assigned
+| in the controller:
+|
+|	$autoload['model'] = array('first_model' => 'first');
 */
 
-$autoload['models'] = array();
+$autoload['model'] = array();

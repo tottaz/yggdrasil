@@ -887,7 +887,7 @@ class Asset {
 	public static function render($group = false, $inline_dep = null, $attr = array())
 	{
 
-                $r = self::render_css($group, $inline_dep, $attr);
+        $r = self::render_css($group, $inline_dep, $attr);
 		$r .= self::render_js($group, $inline_dep, $attr);
                 
 		return $r;

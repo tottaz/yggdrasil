@@ -14,13 +14,13 @@
  * @subpackage	Controllers
  * @category	Javascript
  */
-class Ajax extends App_Controller {
+class Ajax extends My_Controller {
     
 	/**
 	 * Used in a javascript callback url.
 	 * 
 	 * Basically this is just an interface to url_title() defined 
-	 * in /system/cms/helpers/App_url_helper.php.
+	 * in /system/cms/helpers/My_url_helper.php.
 	 * 
 	 * @see /system/cms/modules/files/js/functions.js, url_title()
 	 */

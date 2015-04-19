@@ -130,7 +130,7 @@ class Admin extends Admin_Controller {
 	{
 		if (APP_DEMO)
 		{
-			$this->session->set_flashdata('notice', lang('global:demo_restrictions'));
+			$this->session->set_userdata('notice', lang('global:demo_restrictions'));
 			redirect('admin/settings');
 		}
 		
@@ -176,11 +176,11 @@ class Admin extends Admin_Controller {
 			Events::trigger('settings_updated', $settings_stored);
 
 			// Success...
-			$this->session->set_flashdata('success', $this->lang->line('settings_save_success'));
+			$this->session->set_userdata('success', $this->lang->line('settings_save_success'));
 		}
 		elseif (validation_errors())
 		{
-			$this->session->set_flashdata('error', validation_errors());
+			$this->session->set_userdata('error', validation_errors());
 		}
 
 		// Redirect user back to index page or the module/section settings they are editing

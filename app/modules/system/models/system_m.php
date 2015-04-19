@@ -3,7 +3,7 @@
  * Maintenance Module
  *
  */
-class System_m extends App_Model
+class System_m extends My_Model
 {
 	public function export($table = '', $type = 'xml', $table_list)
 	{

@@ -14,7 +14,7 @@
  * @subpackage	Models
  * @category	Key
  */
-class Key_m extends App_Model {
+class Key_m extends My_Model {
 	/**
 	 * @var string	The name of the settings table
 	 */

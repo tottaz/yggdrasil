@@ -236,10 +236,35 @@ $lang = array(
 	'global:media_issue' => 'Issues',    
 	'global:media_office' => 'Offices',
 	'global:feedtype' => 'Feed Type',
-	'global:searchalchemynews' => 'Search AlchemyData News',
+	'global:newssearch' => 'Search News',
 
 	/** Greetings **/
 	'global:greetings'	=>	array('Ahoi!', 'Hello,', 'Hey,', 'Sup,'),
+	/** End Greetings **/
+
+	/** Projects **/
+	'global:projects'		=>	'Projects',
+	'global:createproject'	=>	'Create Project',	
+	'global:projectlist'	=>	'Manage Projects',
+
+	/** Online Media **/
+	'global:onlinemedia'	=>	'Online Media',
+	'global:searchalchemynews'	=>	'Search News',
+
+	/** Social Accounts **/
+	'global:socialaccounts'		=>	'Social Accounts',
+	'global:socialaccountconnect'	=>	'Connect Social Account',	
+	'global:managesocialaccount'	=>	'Manage Social Accounts',
+
+	/** Post **/
+	'global:postcontent'	=>	'Post Content',
+	'global:createpost'		=>	'Create Post',	
+	'global:manageposts'	=>	'Manage Posts',
+	'global:suggestions'	=>	'Suggestions',
+
+	/** Feeds **/
+	'global:addfeed'		=>	'Add Feed',	
+	'global:managefeeds'	=>	'Manage Feeds',
 	/** End Greetings **/
 
 	/** Dashboard **/	

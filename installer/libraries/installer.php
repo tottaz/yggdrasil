@@ -22,6 +22,8 @@ class Installer {
 	 */
 	private $_ci;
 
+	public $dbdriver = 'mysqli';
+
 	/**
 	 * Loads in the CI super object
 	 *
@@ -30,18 +32,22 @@ class Installer {
 	 */
 	public function __construct()
 	{
-		$this->_ci =& get_instance();
-	}
+		$this->_ci = & get_instance();
+
+            if (!function_exists('mysqli_connect')) {
+                $this->dbdriver = 'mysql';
+            }
+    }
 
 	public function install($data)
 	{
-		$config['port']     = $this->_ci->session->userdata('port');
-		$config['hostname'] = $this->_ci->session->userdata('hostname');
-		$config['database'] = $this->_ci->session->userdata('database');
-		$config['username'] = $this->_ci->session->userdata('username');
-		$config['password'] = $this->_ci->session->userdata('password');
-		$config['dbdriver'] = 'mysql';
-		$config['dbprefix'] = $this->_ci->session->userdata('dbprefix');
+		$config['port']		= $this->_ci->session->userdata('port');
+		$config['hostname']	= $this->_ci->session->userdata('hostname');
+		$config['database']	= $this->_ci->session->userdata('database');
+		$config['username']	= $this->_ci->session->userdata('mysql_username');
+		$config['password']	= $this->_ci->session->userdata('password');
+		$config['dbdriver'] = $this->dbdriver;
+		$config['dbprefix']	= $this->_ci->session->userdata('dbprefix');
 		$config['db_debug'] = TRUE;
 		$config['char_set'] = "utf8";
 		$config['dbcollat'] = "utf8_general_ci";
@@ -61,8 +67,8 @@ class Installer {
 
 		$data['dbprefix'] = $config['dbprefix'];
 		$data['version'] = file_get_contents(APPPATH.'VERSION');
-//		$data['rss_password'] = random_string('alnum', 12);
-//		$data['timezone'] = @date_default_timezone_get();
+		$data['rss_password'] = random_string('alnum', 12);
+		$data['timezone'] = @date_default_timezone_get();
 
 		// Include migration config to know which migration to start from
 		include './app/config/migration.php';
@@ -71,7 +77,22 @@ class Installer {
 
 		foreach ($data as $key => $val)
 		{
-			$schema = str_replace('{'.strtoupper($key).'}', mysqli_real_escape_string($this->_ci->db, $val), $schema);
+            
+            if (strtoupper($key) == "TAX_RATE") {
+                // Fixes an issue with MySQL in Strict Mode if the tax was empty.
+                $val = (float) $val;
+            }
+            
+            switch ($this->dbdriver) {
+                case 'mysql':
+                    $escaped_val = mysql_real_escape_string($val);
+                    break;
+                case 'mysqli':
+                    $escaped_val = mysqli_real_escape_string($this->_ci->db->conn_id, $val);
+                    break;
+            }
+            
+            $schema = str_replace('{'.strtoupper($key).'}', $escaped_val, $schema);
 		}
 
 		$schema = explode('-- split --', $schema);
@@ -80,10 +101,18 @@ class Installer {
 		{
 			if ( ! $this->_ci->db->query(rtrim(trim($query), "\n;")))
 			{
-				show_error('MySQL ERROR: '.mysql_error());
+                            
+                switch ($this->dbdriver) {
+                    case 'mysql':
+                        $error = mysql_error();
+                        break;
+                    case 'mysqli':
+                        $error = mysqli_error($this->_ci->db->conn_id);
+                        break;
+                }                            
+				show_error(strtoupper($this->dbdriver).' ERROR: '.$error);
 			}
 		}
-
 		return TRUE;
 	}
 
@@ -147,7 +176,7 @@ class Installer {
 \$db['default']['username'] = '{USERNAME}';
 \$db['default']['password'] = '{PASSWORD}';
 \$db['default']['database'] = '{DATABASE}';
-\$db['default']['dbdriver'] = 'mysqli';
+\$db['default']['dbdriver'] = '{$this->dbdriver}';
 \$db['default']['dbprefix'] = '{DBPREFIX}';
 \$db['default']['pconnect'] = FALSE;
 \$db['default']['db_debug'] = TRUE;

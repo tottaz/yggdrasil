@@ -10,7 +10,7 @@ class Module_Dashboard extends Module {
 				'en' => 'Dashboard',
 			),
 			'description' => array(
-				'en' => 'Main page dashboard',
+				'en' => 'Dashboard',
 			),
 			'frontend' => NULL,
 			'backend'  => TRUE,

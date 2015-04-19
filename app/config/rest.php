@@ -178,7 +178,7 @@ $config['rest_ip_blacklist'] = '';
 |
 */
 
-$config['rest_database_group'] = ENVIRONMENT;
+$config['rest_database_group'] = 'default';
 
 /*
 |--------------------------------------------------------------------------

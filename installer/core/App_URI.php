@@ -1,1 +1,1 @@
-<?php include FCPATH.'app/core/App_URI.php';
+<?php include FCPATH.'app/core/My_URI.php';

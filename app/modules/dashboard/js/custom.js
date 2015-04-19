@@ -1,4 +1,29 @@
 $(document).ready(function(){
+	
+	$("#username").focus(function() {
+		
+		$(this).parent(".input-prepend").addClass("input-prepend-focus");
+	
+	});
+	
+	$("#username").focusout(function() {
+		
+		$(this).parent(".input-prepend").removeClass("input-prepend-focus");
+	
+	});
+	
+	$("#password").focus(function() {
+		
+		$(this).parent(".input-prepend").addClass("input-prepend-focus");
+	
+	});
+	
+	$("#password").focusout(function() {
+		
+		$(this).parent(".input-prepend").removeClass("input-prepend-focus");
+	
+	});
+	
 			
 	/* ---------- Add class .active to current link  ---------- */
 	$('ul.main-menu li a').each(function(){

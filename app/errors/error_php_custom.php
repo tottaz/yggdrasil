@@ -115,17 +115,17 @@ function koggle(elem)
 <div id="exception_error">
 	<h1><span class="type"><?php echo $type ?> [ <?php echo $code ?> ]:</span> <span class="message"><?php echo $message ?></span></h1>
 	<div id="<?php echo $error_id ?>" class="content">
-		<p><span class="file"><?php echo App_Exceptions::debug_path($file) ?> [ <?php echo $line ?> ]</span></p>
+		<p><span class="file"><?php echo My_Exceptions::debug_path($file) ?> [ <?php echo $line ?> ]</span></p>
 		
-		<?php echo App_Exceptions::debug_source($file, $line) ?>
+		<?php echo My_Exceptions::debug_source($file, $line) ?>
 		
 		<ol class="trace">
-			<?php foreach (App_Exceptions::trace($trace) as $i => $step): ?>
+			<?php foreach (My_Exceptions::trace($trace) as $i => $step): ?>
 			<li>
 				<p>
 					<span class="file">
 					<?php if ($step['file']): $source_id = $error_id.'source'.$i; ?>
-						<a href="#<?php echo $source_id ?>" onclick="return koggle('<?php echo $source_id ?>')"><?php echo App_Exceptions::debug_path($step['file']) ?> [ <?php echo $step['line'] ?> ]</a>
+						<a href="#<?php echo $source_id ?>" onclick="return koggle('<?php echo $source_id ?>')"><?php echo My_Exceptions::debug_path($step['file']) ?> [ <?php echo $step['line'] ?> ]</a>
 					<?php else: ?>
 						{<?php echo 'PHP internal call'; ?>}
 					<?php endif ?>
@@ -163,7 +163,7 @@ function koggle(elem)
 			<table cellspacing="0">
 			<?php foreach ($included as $file): ?>
 				<tr>
-					<td><code><?php echo App_Exceptions::debug_path($file) ?></code></td>
+					<td><code><?php echo My_Exceptions::debug_path($file) ?></code></td>
 				</tr>
 			<?php endforeach ?>
 			</table>
@@ -175,7 +175,7 @@ function koggle(elem)
 			<table cellspacing="0">
 			<?php foreach ($included as $file): ?>
 				<tr>
-					<td><code><?php echo App_Exceptions::debug_path($file) ?></code></td>
+					<td><code><?php echo My_Exceptions::debug_path($file) ?></code></td>
 				</tr>
 			<?php endforeach ?>
 			</table>

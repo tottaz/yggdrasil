@@ -109,7 +109,7 @@ class Admin extends Admin_Controller
 			if ($this->theme_m->get_all())
 			{
 				// Success...
-				$this->session->set_flashdata('success', lang('themes.re-index_success'));
+				$this->session->set_userdata('success', lang('themes.re-index_success'));
 
 				redirect('admin/themes/options/'.$slug);
 			}
@@ -160,7 +160,7 @@ class Admin extends Admin_Controller
 				Events::trigger('theme_options_updated', $options_array);
 
 				// Success...
-				$this->session->set_flashdata('success', lang('themes.save_success'));
+				$this->session->set_userdata('success', lang('themes.save_success'));
 
 				redirect('admin/themes/options/'.$slug);
 
@@ -188,12 +188,12 @@ class Admin extends Admin_Controller
 			// Fire an event. A default theme has been set.
 			Events::trigger('theme_set_default', $theme);
 
-			$this->session->set_flashdata('success', sprintf(lang('themes.set_default_success'), $theme));
+			$this->session->set_userdata('success', sprintf(lang('themes.set_default_success'), $theme));
 		}
 
 		else
 		{
-			$this->session->set_flashdata('error', sprintf(lang('themes.set_default_error'), $theme));
+			$this->session->set_userdata('error', sprintf(lang('themes.set_default_error'), $theme));
 		}
 
 		if ($this->input->post('method') == 'admin_themes')

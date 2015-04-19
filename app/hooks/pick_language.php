@@ -23,12 +23,12 @@ function pick_language()
 	// If we've been redirected from HTTP to HTTPS on admin, ?session= will be set to maintain language
 	if ($_SERVER['SERVER_PORT'] == 443 and ! empty($_GET['session']))
 	{
-		session_start($_GET['session']);
+//		session_start($_GET['session']);
 	}
 
 	else
 	{
-		session_start();
+//		session_start();
 	}
 
 	// Lang set in URL via ?lang=something

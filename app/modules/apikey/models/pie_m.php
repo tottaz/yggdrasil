@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Models
  * @category	Pie
  */
-class Pie_m extends App_Model {
+class Pie_m extends My_Model {
 
     public $error;
 

@@ -1,4 +1,6 @@
-<?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 /*
 | -------------------------------------------------------------------------
 | Hooks
@@ -17,4 +19,3 @@ $hook['pre_controller'][] = array(
 	'filepath' => 'hooks'
 );
 
-/* End of file hooks.php */

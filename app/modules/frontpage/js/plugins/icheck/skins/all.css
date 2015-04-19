@@ -1,0 +1,94 @@
+/* iCheck plugin skins
+----------------------------------- */
+@import url("minimal/_all.css");
+/*
+@import url("minimal/minimal.css");
+@import url("minimal/red.css");
+@import url("minimal/green.css");
+@import url("minimal/blue.css");
+@import url("minimal/aero.css");
+@import url("minimal/grey.css");
+@import url("minimal/orange.css");
+@import url("minimal/yellow.css");
+@import url("minimal/pink.css");
+@import url("minimal/purple.css");
+*/
+
+@import url("square/_all.css");
+/*
+@import url("square/square.css");
+@import url("square/red.css");
+@import url("square/green.css");
+@import url("square/blue.css");
+@import url("square/aero.css");
+@import url("square/grey.css");
+@import url("square/orange.css");
+@import url("square/yellow.css");
+@import url("square/pink.css");
+@import url("square/purple.css");
+*/
+
+@import url("flat/_all.css");
+/*
+@import url("flat/flat.css");
+@import url("flat/red.css");
+@import url("flat/green.css");
+@import url("flat/blue.css");
+@import url("flat/aero.css");
+@import url("flat/grey.css");
+@import url("flat/orange.css");
+@import url("flat/yellow.css");
+@import url("flat/pink.css");
+@import url("flat/purple.css");
+*/
+
+@import url("line/_all.css");
+/*
+@import url("line/line.css");
+@import url("line/red.css");
+@import url("line/green.css");
+@import url("line/blue.css");
+@import url("line/aero.css");
+@import url("line/grey.css");
+@import url("line/orange.css");
+@import url("line/yellow.css");
+@import url("line/pink.css");
+@import url("line/purple.css");
+*/
+
+@import url("polaris/polaris.css");
+
+@import url("futurico/futurico.css");
+
+.icheck-list > label{display:block;margin-bottom:15px}
+.icheck-list > label:last-child{margin-bottom:0}
+.form-horizontal .icheck-inline{margin-top:12px}
+.icheck-inline > label{display:inline-block;margin-right:15px;margin-left: 0; min-height:27px;}
+.rtl .icheck-inline > label {margin-left: 15px;margin-right: 0;}
+.icheck-inline > label:last-child{margin-right:0}
+div[class*='icheckbox_'],div[class*='iradio_']{margin-right:5px;top:-1px!important}
+.icheck-colors{padding:0;margin:0;list-style:none;height: 30px;}
+.icheck-colors > li{-moz-transition:all .1s ease-out 0;-webkit-transition:all .1s ease-out 0;transition:all .1s ease-out 0;border-radius:50%;padding:0;margin:4px;float:left;display:inline-block;height:20px;width:20px;background:#000;opacity:.6;filter:alpha(opacity=60)}
+.rtl .icheck-colors > li {float: right;margin-right: 0 !important;margin-left: 10px !important;}
+
+.icheck-colors > li:first-child{margin-left:0}
+.icheck-colors > li:hover{opacity:1;filter:alpha(opacity=100);cursor:pointer}
+.icheck-colors > li.active{height:26px;width:26px;margin-top:0;opacity:.6;filter:alpha(opacity=60)}
+.icheck-colors > li.red{background:#d54e21}
+.icheck-colors > li.green{background:#78a300}
+.icheck-colors > li.blue{background:#0e76a8}
+.icheck-colors > li.aero{background:#9cc2cb}
+.icheck-colors > li.grey{background:#73716e}
+.icheck-colors > li.orange{background:#f70}
+.icheck-colors > li.yellow{background:#fc0}
+.icheck-colors > li.pink{background:#ff66b5}
+.icheck-colors > li.purple{background:#6a5a8c}
+
+ div[class*='iradio_'] {margin-right: 5px;margin-left: 0;}
+.rtl  div[class*='iradio_'] {margin-right: 0;margin-left: 5px;}
+.rtl div[class*='icheckbox_'] {margin-right: 0;margin-left: 5px;}
+
+div[class*='iradio_']:not(.checked) {background-color:rgba(255,255,255,0.6);border-radius:25px;-webkit-border-radius: 25px;-moz-border-radius:25px;border-radius:50%;-webkit-border-radius: 50%;-moz-border-radius:50%;}
+
+
+.rtl .icheck-inline > label {margin-right: 0;margin-left: 15px;}

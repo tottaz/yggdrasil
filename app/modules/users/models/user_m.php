@@ -14,7 +14,7 @@
  * @subpackage	Models
  * @category	Users
  */
-class User_m extends App_Model
+class User_m extends My_Model
 {
 	/**
 	 * @var	string	The name of the clients table

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<!-- saved from url=(0035)http://wizard.ts/index.php/examples -->
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Verity Wizard - examples</title>
+    <link rel="stylesheet" href="css/verity-wizard.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="plugins/highlight/styles/github.css" type="text/css" media="screen, projection">
+    <script src="plugins/jquery-2.1.1.min.js"></script>
+    <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="plugins/highlight/highlight.pack.js"></script>
+    <script src="js/verity-wizard.js"></script>
+    <script src="js/example.js"></script>
+
+</head>
+<body>
+<div class="container">
+<div class="site-index">
+
+<div class="jumbotron">
+    <h1>Step Form Wizard - Options</h1>
+
+    <p class="lead">Here is all options of Step Form Wizard plugin.</p>
+</div>
+
+<div class="body-content">
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="body-content">
+            <h2>Options</h2>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Option</th>
+                    <th>Description</th>
+                    <th>Values</th>
+                    <th>Default</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>duration</td>
+                    <td>Length of animation time between steps.</td>
+                    <td>Number</td>
+                    <td>500</td>
+                </tr>
+                <tr>
+                    <td>timingFunction</td>
+                    <td>Animation function. More easing functions are available with the use of plugins, most notably the
+                        <a href="http://jqueryui.com/">jQuery UI suite</a>.</td>
+                    <td>swing | linear</td>
+                    <td>'swing'</td>
+                </tr>
+                <tr>
+                    <td>linkNav</td>
+                    <td>Navigation as a link or simple text.</td>
+                    <td>true | false</td>
+                    <td>true</td>
+                </tr>
+                <tr>
+                    <td>showNav</td>
+                    <td>Position of navigation. You can also hide navigation.</td>
+                    <td>'top' | 'right' | 'bottom' | 'left' | true | false</td>
+                    <td>true</td>
+                </tr>
+                <tr>
+                    <td>showNavNumbers</td>
+                    <td>If numbers in navigation aren't necessary, you can hide them.</td>
+                    <td>true | false</td>
+                    <td>true</td>
+                </tr>
+                </tr>
+                <tr>
+                    <td>showLegend</td>
+                    <td>Show headline legend on top of the content.</td>
+                    <td>true | false</td>
+                    <td>true</td>
+                </tr>
+                <tr>
+                    <td>showButtons</td>
+                    <td>Show navigation buttons (Next, Prev, Finish) at bottom of the wizard.</td>
+                    <td>true | false</td>
+                    <td>true</td>
+                </tr>
+                </tr>
+                <tr>
+                    <td>nextBtn</td>
+                    <td>Template for next button. Class "next-btn" is necessary, other classes can be replaced.</td>
+                    <td>Javascript with HTML as default.</td>
+                    <td><pre><code>$('&lt;a class="next-btn sf-right sf-btn" href="#">NEXT&lt;/a>')</code></pre></td>
+                </tr>
+                </tr>
+                <tr>
+                    <td>prevBtn</td>
+                    <td>Template for previous button. Class "prev-btn" is necessary, other classes can be replaced.</td>
+                    <td>Javascript with HTML as default.</td>
+                    <td><pre><code>$('&lt;a class="prev-btn sf-left sf-btn" href="#">PREV&lt;/a>')</code></pre></td>
+                </tr>
+                <tr>
+                    <td>prevBtn</td>
+                    <td>Template for finish button. Class "finish-btn" is necessary, other classes can be replaced.</td>
+                    <td>Javascript with HTML as default.</td>
+                    <td><pre><code>$('&lt;input class="finish-btn sf-right sf-btn" type="submit" value="finish"/>')</code></pre></td>
+                </tr>
+                <tr>
+                    <td>onNext</td>
+                    <td>Function for any issue of your choice (for example control of validation.</td>
+                    <td>Name of function or anonymous function. First parameter is a number of actual step, second parameter is jquery wrap for wizard.</td>
+                    <td>function(i) {}</td>
+                </tr>
+                <tr>
+                    <td>onPrev</td>
+                    <td>Function for any issue of your choice (for example control of validation.</td>
+                    <td>Name of function or anonymous function. First parameter is a number of actual step, second parameter is jquery wrap for wizard.</td>
+                    <td>function(i) {}</td>
+                </tr>
+                <tr>
+                    <td>onFinish</td>
+                    <td>Function for any issue of your choice (for example control of validation.</td>
+                    <td>Name of function or anonymous function. First parameter is a number of actual step, second parameter is jquery wrap for wizard.</td>
+                    <td>function(i) {}</td>
+                </tr>
+                <tr>
+                    <td>onSlideChanged</td>
+                    <td>Function for any issue of your choice (for example control of validation.</td>
+                    <td>Name of function or anonym function. First parameter is a number of actual step, second is the number of coming step.</td>
+                    <td>function(to, from) {}</td>
+                </tr>
+                <tr>
+                    <td>stepOffset</td>
+                    <td>This is offset in pixels between two steps.</td>
+                    <td>Number</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>height</td>
+                    <td>Height can be little tricky and you have 4 options to handle it.</td>
+                    <td>'first' (height as first step) | 'auto' (flexible height) | 'tallest' (height as tallest step) | number (height in pixels)</td>
+                    <td>'first'</td>
+                </tr>
+                <tr>
+                    <td>theme</td>
+                    <td>Graphics design for wizard</td>
+                    <td>'sea' | 'sky' | 'simple' | 'circle'</td>
+                    <td>'sea'</td>
+                </tr>
+                <tr>
+                    <td>markPrevSteps</td>
+                    <td>Visually different previous steps</td>
+                    <td>false | true</td>
+                    <td>false</td>
+                </tr>
+                <tr>
+                    <td>startStep</td>
+                    <td>Starting step after wizard is loaded </td>
+                    <td>Number (counting from 0)</td>
+                    <td>0</td>
+                </tr>
+                </tbody>
+            </table>
+            <h2 style="margin-top: 60px;">Trigger events</h2>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th style="width: 110px;">Name</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>sf-loaded</td>
+                    <td>Is triggered after wizard is initialized.</td>
+                    <td><pre><code>$("#wizard_example_1").on('sf-loaded', function(e) {
+    alert('Step form wizard was loaded');
+})</code></pre></td>
+                </tr>
+                <tr>
+                    <td>sf-step-before</td>
+                    <td>Is triggered before transition to next/before <br/> step and still can be interrupted.</td>
+                    <td><pre><code>$("#wizard_example_1").on('sf-step-before', function(e) {
+    alert('Prepare for next step! Or not if you call preventDefault');
+    e.preventDefault(); // this you have to call if you need to interrupt transition to next step
+})</code></pre></td>
+                </tr>
+                <tr>
+                    <td>sf-step-after</td>
+                    <td>Is triggered after transition to next/before <br/> step is done.</td>
+                    <td><pre><code>$("#wizard_example_1").on('sf-step-after', function(e) {
+    alert('End of transition');
+})</code></pre></td>
+                </tr>
+                <tr>
+                    <td>sf-finish</td>
+                    <td>Is triggered after transition to next/before <br/> step was done.</td>
+                    <td><pre><code>$("#wizard_example_1").on('sf-finish', function(e) {
+    alert('Sending form to process or not?');
+    e.preventDefault(); // this you have to call if you need to interrupt submit form
+})</code></pre></td>
+                </tr>
+            </table>
+
+            <h2 style="margin-top: 60px;">Methods</h2>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th style="width: 110px;">Name</th>
+                    <th>Description</th>
+                    <th>Return</th>
+                    <th>Example</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>next</td>
+                    <td>For shifting step to next one. It will submit form if you call method on last step</td>
+                    <td>true | false</td>
+                    <td><pre><code>var sfw = $("#wizard_example").stepFormWizard();
+sfw.next();</code></pre></td>
+                </tr>
+                <tr>
+                    <td>prev</td>
+                    <td>For shifting step to previous one.</td>
+                    <td>true | false</td>
+                    <td><pre><code>var sfw = $("#wizard_example").stepFormWizard();
+sfw.prev();</code></pre></td>
+                </tr>
+                <tr>
+                    <td>finish</td>
+                    <td>For submitting form.</td>
+                    <td>true | false</td>
+                    <td><pre><code>var sfw = $("#wizard_example").stepFormWizard();
+sfw.finish();</code></pre></td>
+                </tr>
+                <tr>
+                    <td>refresh</td>
+                    <td>If you need redrawing of wizard after pictures or font were loaded.</td>
+                    <td>undefined</td>
+                    <td><pre><code>var sfw = $("#wizard_example").stepFormWizard();
+sfw.finish();</code></pre></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer class="footer">
+    <div class="container">
+        <p class="pull-left">© <a href="http://ajoke.cz/wizard">ajoke.cz/wizard</a> 2014</p>
+    </div>
+</footer>
+
+</body>
+</html>

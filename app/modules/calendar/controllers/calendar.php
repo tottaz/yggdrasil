@@ -25,7 +25,6 @@ class Calendar extends Admin_Controller {
 	public function index() {
 
 		$this -> template->title($this -> module_details['name']) 
-		//				->append_css('module::bootstrap.css')
 						->append_css('module::font-awesome.css')
 						->append_css('module::style.css')
 						->append_css('module::fullcalendar.css')
@@ -43,7 +42,6 @@ class Calendar extends Admin_Controller {
 	public function scalendar() {
 
 		$this -> template->title($this -> module_details['name']) 
-		//				->append_css('module::bootstrap.css')
 						->append_css('module::bootstrap-responsive.min.css')
 						->append_css('module::style.css')
 						->append_css('module::style-responsive.css');

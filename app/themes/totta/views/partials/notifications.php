@@ -1,4 +1,4 @@
-<?php if ($message = $this->session->flashdata('success')): ?>
+<?php if ($message = $this->session->userdata('success')): ?>
 	<div class="alert alert-success alert-dismissable"><?php echo $message; ?>
         <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
         </div>
@@ -9,7 +9,7 @@
         </div>
 <?php endif; ?>
 
-<?php if ( $message = $this->session->flashdata('error')): ?>
+<?php if ( $message = $this->session->userdata('error')): ?>
 	<div class="alert alert-danger alert-dismissable"><b><?php echo __('global:error');?>:</b> <?php echo $message; ?>
         <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
         </div>        

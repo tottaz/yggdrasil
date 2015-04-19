@@ -88,11 +88,11 @@ class Admin_fields extends Admin_Controller {
 		// Tear down the assignment
 		if ( ! $this->streams->cp->teardown_assignment_field($assign_id))
 		{
-		    $this->session->set_flashdata('notice', lang('user_profile_delete_failure'));
+		    $this->session->set_userdata('notice', lang('user_profile_delete_failure'));
 		}
 		else
 		{
-		    $this->session->set_flashdata('success', lang('user_profile_delete_success'));			
+		    $this->session->set_userdata('success', lang('user_profile_delete_success'));			
 		}
 	
 		redirect('admin/users/fields');

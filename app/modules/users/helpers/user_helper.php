@@ -76,7 +76,7 @@ function role_or_die($module, $role, $redirect_to = 'admin', $message = '')
 	}
 	elseif ( ! group_has_role($module, $role))
 	{
-		ci()->session->set_flashdata('error', ($message ? $message : lang('cp_access_denied')) );
+		ci()->session->set_userdata('error', ($message ? $message : lang('cp_access_denied')) );
 		redirect($redirect_to);
 	}
 	return TRUE;

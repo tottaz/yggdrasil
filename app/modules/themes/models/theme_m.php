@@ -3,7 +3,7 @@
  * Theme model
  *
  */
-class Theme_m extends App_Model
+class Theme_m extends My_Model
 {
 	/**
 	 * Default Theme

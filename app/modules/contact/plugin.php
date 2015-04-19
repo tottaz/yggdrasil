@@ -356,7 +356,7 @@ class Plugin_Contact extends Plugin
 				// maybe it's a bot?
 				if ($this->input->post('d0ntf1llth1s1n') !== ' ')
 				{
-					$this->session->set_flashdata('error', lang('contact_submit_error'));
+					$this->session->set_userdata('error', lang('contact_submit_error'));
 					redirect(current_url());
 				}
 	
@@ -390,7 +390,7 @@ class Plugin_Contact extends Plugin
 							
 							if ($this->upload->display_errors() > '')
 							{
-								$this->session->set_flashdata('error', $this->upload->display_errors());
+								$this->session->set_userdata('error', $this->upload->display_errors());
 								redirect(current_url());
 							}
 							else
@@ -450,7 +450,7 @@ class Plugin_Contact extends Plugin
 							$message = $this->attribute('error', lang('contact_error_message'));
 						}
 						
-						$this->session->set_flashdata('error', $message);
+						$this->session->set_userdata('error', $message);
 						redirect(current_url());
 					}
 				}
@@ -471,7 +471,7 @@ class Plugin_Contact extends Plugin
 					$message = $this->attribute('sent', lang('contact_sent_text'));
 				}
 	
-				$this->session->set_flashdata('success', $message);
+				$this->session->set_userdata('success', $message);
 				Events::trigger('contact_form_success', $_POST);
 				redirect( ($redirect ? $redirect : current_url()) );
 			}

@@ -3,7 +3,7 @@
  * @author		PyroCMS Dev Team
  * @package		PyroCMS\Core\Modules\Users\Models
  */
-class Profile_m extends App_Model
+class Profile_m extends My_Model
 {
 	/**
 	 * Get a user profile

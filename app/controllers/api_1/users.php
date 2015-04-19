@@ -5,7 +5,7 @@
  * @package		Yggdrasil
  * @author		Yggdrasil Dev Team
  */
-// http://localhost/ananas2/api/1/users?API-KEY=oBThDgLsHOi8WJpwgf6IvJVQQ45E9LTudUN9i1RL
+// http://localhost/yggdrasil/api/1/users?apikey=ixZePbqTLpCfiVvkTwLPEHb8kmekJeGJiQRAIAoQ
 //
 
 class Users extends REST_Controller {

@@ -64,7 +64,7 @@ class Admin_groups extends Admin_Controller
 			if (($group_id = $this->group_m->insert($this->input->post()))) {
 				$this->permission_m->save($group_id, $this->input->post('modules'), $this->input->post('module_roles'));
 				
-				$this->session->set_flashdata('success', sprintf(lang('groups:add_success'), $this->input->post('name')));
+				$this->session->set_userdata('success', sprintf(lang('groups:add_success'), $this->input->post('name')));
 				
 				redirect('admin/users/groups');
 			} else {
@@ -123,7 +123,7 @@ class Admin_groups extends Admin_Controller
 			{
 				$this->permission_m->save($group->id, $this->input->post('modules'), $this->input->post('module_roles'));
 				
-				$this->session->set_flashdata('success', sprintf(lang('groups:edit_success'), $this->input->post('name')));
+				$this->session->set_userdata('success', sprintf(lang('groups:edit_success'), $this->input->post('name')));
 				redirect('admin/users/groups');
 			}
 			
@@ -159,8 +159,8 @@ class Admin_groups extends Admin_Controller
 	public function delete($id = 0)
 	{
 		$this->group_m->delete($id)
-			? $this->session->set_flashdata('success', lang('groups:delete_success'))
-			: $this->session->set_flashdata('error', lang('groups:delete_error'));
+			? $this->session->set_userdata('success', lang('groups:delete_success'))
+			: $this->session->set_userdata('error', lang('groups:delete_error'));
 
 		redirect('admin/users/groups');
 	}

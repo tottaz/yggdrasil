@@ -60,11 +60,11 @@ class Admin extends Admin_Controller
 				// Fire an event. Permissions have been saved.
 				Events::trigger('permissions_saved', array($group_id, $modules, $roles));
 
-				$this->session->set_flashdata('success', lang('permissions:message_group_saved_success'));
+				$this->session->set_userdata('success', lang('permissions:message_group_saved_success'));
 			}
 			else
 			{
-				$this->session->set_flashdata('error', lang('permissions:message_group_saved_error'));
+				$this->session->set_userdata('error', lang('permissions:message_group_saved_error'));
 			}
 
 			$this->input->post('btnAction') === 'save_exit' 
@@ -76,7 +76,7 @@ class Admin extends Admin_Controller
 		// If the group data could not be retrieved
 		if ( ! $group) {
 			// Set a message to notify the user.
-			$this->session->set_flashdata('error', lang('permissions:message_no_group_id_provided'));
+			$this->session->set_userdata('error', lang('permissions:message_no_group_id_provided'));
 			// Send him to the main index to select a proper group.
 			redirect('admin/permissions');
 		}

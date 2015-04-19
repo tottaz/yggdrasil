@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------
 */
 
-class Settings_m extends App_Model {
+class Settings_m extends My_Model {
 
     
         protected $table = 'settings';

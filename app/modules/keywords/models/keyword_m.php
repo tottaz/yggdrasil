@@ -5,7 +5,7 @@
  * @author		PyroCMS Dev Team
  * @package		PyroCMS\Core\Modules\Keywords\Models
  */
-class Keyword_m extends App_Model {
+class Keyword_m extends My_Model {
 	
 	/**
 	 * Get applied

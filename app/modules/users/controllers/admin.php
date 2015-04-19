@@ -80,7 +80,7 @@ class Admin extends Admin_Controller {
 		}
 
 		// This persists the login redirect
-		$this->session->set_flashdata('login_redirect', $this->session->flashdata('login_redirect'));
+		$this->session->set_userdata('login_redirect', $this->session->userdata('login_redirect'));
 
 		//validate form input
 		$this->form_validation->set_rules('username', 'Username', 'required');
@@ -95,9 +95,6 @@ class Admin extends Admin_Controller {
 			// Kill the session
 			$this->session->unset_userdata('redirect_to');
 
-			// Deprecated.
-			$this->hooks->_call_hook('post_user_login');
-
 			// trigger a post login event for third party
 			Events::trigger('post_user_login');
 
@@ -105,53 +102,9 @@ class Admin extends Admin_Controller {
 
 			if ($this->ion_auth->login($this->input->post('username'), $this->input->post('password'), $remember, 0)) 
 			{
-				$redirect = $this->session->flashdata('login_redirect') ? $this->session->flashdata('login_redirect') : 'admin';
-				$this->session->set_flashdata('success', $this->ion_auth->messages());
+				$redirect = $this->session->userdata('login_redirect') ? $this->session->userdata('login_redirect') : 'admin';
+				$this->session->set_userdata('success', $this->ion_auth->messages());
 				redirect($redirect, 'refresh');
-			}
-			// Username/password combination not found - try other methods 
-			// Switch to LDAP
-			if (Settings::get('ldap_auth')== 1) 
-			{
-				if ($ldap = $this->getLdap($this->input->post('username'), $this->input->post('password'))) 
-				{
-				// Switch to LDAP
-				// User exists in LDAP, check to see if the username is already used
-				
-					if (!$this->db->select('*')->from('users')->where('username', $this->input->post('username'))->get()->row_array()) 
-					{
-						// User exists in LDAP, set them up
-						$username	= $this->input->post('username');
-						$password	= '';
-						$email      = $ldap['mail'][0];
-						// add code to use Settings::get(default_user_group) to set default group
-						$group	= Settings::get('default_user_group'); //Default 
-						$additional_data = array(
-						'first_name'    => $ldap['givenname'][0],
-						'last_name'	    => $ldap['sn'][0],
-						'via_ldap'      => 'ldap',
-						'ldap_data'      => '',
-						);
-						if ($this->ion_auth->register($username, $password, $email, $additional_data, $group)) 
-						{
-							$this->ion_auth->login($this->input->post('username'), $this->input->post('password'), $remember, 1);
-							$redirect = $this->session->flashdata('login_redirect') ? $this->session->flashdata('login_redirect') : 'admin';
-							$this->session->set_flashdata('success', $this->ion_auth->messages());
-							redirect($redirect, 'refresh');
-						} else {
-							$this->session->set_flashdata('error', $this->ion_auth->errors());
-							redirect('admin/users/login', 'refresh'); 
-						}
-					}  else {
-						$this->ion_auth->login($this->input->post('username'), $this->input->post('password'), $remember, 1);
-						$redirect = $this->session->flashdata('login_redirect') ? $this->session->flashdata('login_redirect') : 'admin';
-						$this->session->set_flashdata('success', $this->ion_auth->messages());
-						redirect($redirect, 'refresh');
-					}
-				} else {
-					$this->session->set_flashdata('error', $this->ion_auth->errors());
-					redirect('admin/users/login', 'refresh');
-				}
 			}
 		}
 		$this->template
@@ -159,50 +112,6 @@ class Admin extends Admin_Controller {
 			// Set the layout
 			->build('login');
 	}
-
-	// ------------------------------------------------------------------------
- 
-	// Register LDAP user
-	public function getLdap($username, $password) 
-	{
-		// See if LDAP was installed
-		if (!function_exists('ldap_connect')) return false;
-			if ($ldap = @ldap_connect(Settings::get('ldap_connect'), Settings::get('ldap_port')))
-			{
-				ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, Settings::get('ldap_protocol'));
-			if ($list = @ldap_search($ldap, Settings::get('ldap_dc'), '(|(uid=' . $username . ')(mail=' . $username . '))')) 
-			{
-				if ($entries = @ldap_get_entries($ldap, $list)) 
-				{
-					if (is_array($entries)) 
-					{
-  						foreach ($entries as $user) 
-  						{
-							if (is_array($user) && array_key_exists('dn', $user)) {
-								if (@ldap_bind($ldap, $user['dn'], $password)) {
-									return $user;
-								} else {
-									//return false;
-								}
-							} else {
-								// Not a user
-							}
-						}
-					} else {
-						//echo '<p>No users found</p>';
-					}
-				} else {
-					 //echo '<p>Could not get entries</p>';
-				}
-			} else {
-				 //echo '<p>LDAP Search problem</p>';
-			}
-		} else {
-			//echo '<p>Could not connect</p>';
-		}
-		return false;
-	}
-	// ------------------------------------------------------------------------
 
 	/**
 	 * Changes the user's password
@@ -226,7 +135,7 @@ class Admin extends Admin_Controller {
 			if ($change) {
 				$this->logout('success', 'Your password has been changed. Please login again.');
 			} else {
-				$this->session->set_flashdata('error', $this->ion_auth->errors());
+				$this->session->set_userdata('error', $this->ion_auth->errors());
 				redirect('admin/users/change_password', 'refresh');
 			}
 		}
@@ -241,8 +150,8 @@ class Admin extends Admin_Controller {
 	 * Log the user out and set a message, then redirect to login.
 	 *
 	 * @access	public
-	 * @param	string	The name of the flashdata message
-	 * @param	string	The flashdata message
+	 * @param	string	The name of the userdata message
+	 * @param	string	The userdata message
 	 * @return	void
 	 */
 	public function logout($message_name = NULL, $message = '') 
@@ -250,7 +159,7 @@ class Admin extends Admin_Controller {
 		$logout = $this->ion_auth->logout();
 		if ($message_name !== NULL) 
 		{
-			$this->session->set_flashdata($message_name, $message);
+			$this->session->set_userdata($message_name, $message);
 		}
 		redirect('admin/users/login', 'refresh');
 	}
@@ -271,18 +180,18 @@ class Admin extends Admin_Controller {
 			$username = $this->user_m->getUsernameByEmail($this->input->post('email'));
 			if (empty($username)) 
 			{
-				$this->session->set_flashdata('error', 'Could not find any user with the following email: '.$this->input->post('email'));
+				$this->session->set_userdata('error', 'Could not find any user with the following email: '.$this->input->post('email'));
 				redirect("admin/users/forgot_password", 'refresh');
 			}
 			
 			if ($this->ion_auth->forgotten_password($username))
 			{
-				$this->session->set_flashdata('success', $this->ion_auth->messages());
+				$this->session->set_userdata('success', $this->ion_auth->messages());
 				redirect("admin/users/login", 'refresh');
 			}
 			else
 			{
-				$this->session->set_flashdata('error', $this->ion_auth->errors(). '<p>for '.$username.'</p>');
+				$this->session->set_userdata('error', $this->ion_auth->errors(). '<p>for '.$username.'</p>');
 				redirect("admin/users/forgot_password", 'refresh');
 			}
 		}
@@ -308,10 +217,10 @@ class Admin extends Admin_Controller {
 		$reset = $this->ion_auth->forgotten_password_complete($code);
 
 		if ($reset) {
-			$this->session->set_flashdata('success', $this->ion_auth->messages());
+			$this->session->set_userdata('success', $this->ion_auth->messages());
 			redirect("admin/users/login", 'refresh');
 		} else {
-			$this->session->set_flashdata('error', $this->ion_auth->errors());
+			$this->session->set_userdata('error', $this->ion_auth->errors());
 			redirect("admin/users/forgot_password", 'refresh');
 		}
 	}
@@ -335,12 +244,12 @@ class Admin extends Admin_Controller {
 		if ($activation)
 		{
 			//redirect them to the auth page
-			$this->session->set_flashdata('success', $this->ion_auth->messages());
+			$this->session->set_userdata('success', $this->ion_auth->messages());
 			redirect("admin/users", 'refresh');
 		}
 		else
 		{
-			$this->session->set_flashdata('error', $this->ion_auth->errors());
+			$this->session->set_userdata('error', $this->ion_auth->errors());
 			redirect("admin/users/forgot_password", 'refresh');
 		}
 	}
@@ -369,7 +278,7 @@ class Admin extends Admin_Controller {
 			if ($this->ion_auth->logged_in() AND $this->ion_auth->is_sadmin())
 			{
 				$this->ion_auth->deactivate($id);
-				$this->session->set_flashdata('success', 'The user has been deactivated.');
+				$this->session->set_userdata('success', 'The user has been deactivated.');
 			}
 			redirect('admin/users','refresh');
 		}
@@ -415,7 +324,7 @@ class Admin extends Admin_Controller {
 			);
 			if ($this->ion_auth->register($username, $password, $email, $additional_data, $group))
 			{
-				$this->session->set_flashdata('success', 'The user has been created.');
+				$this->session->set_userdata('success', 'The user has been created.');
 				redirect("admin/users", 'refresh');
 			}
 		}
@@ -447,7 +356,7 @@ class Admin extends Admin_Controller {
 		// Got user?
 		if ( ! $member)
 		{
-			$this->session->set_flashdata('error', $this->lang->line('user_edit_user_not_found_error'));
+			$this->session->set_userdata('error', $this->lang->line('user_edit_user_not_found_error'));
 			redirect('admin/users');
 		}
 
@@ -478,11 +387,11 @@ class Admin extends Admin_Controller {
 			{
 				if ($this->ion_auth->update_user($id, $update_data))
 				{
-					$this->session->set_flashdata('success', $this->ion_auth->messages());
+					$this->session->set_userdata('success', $this->ion_auth->messages());
 				}
 				else
 				{
-					$this->session->set_flashdata('error', $this->ion_auth->errors());
+					$this->session->set_userdata('error', $this->ion_auth->errors());
 				}
 
 				redirect('admin/users');
@@ -521,8 +430,8 @@ class Admin extends Admin_Controller {
 
 		$key	= random_string('alnum', 8);
 		$value	= random_string('alnum', 20);
-		$this->session->set_flashdata('csrfkey', $key);
-		$this->session->set_flashdata('csrfvalue', $value);
+		$this->session->set_userdata('csrfkey', $key);
+		$this->session->set_userdata('csrfvalue', $value);
 
 		return array($key=>$value);
 	}

@@ -32,7 +32,7 @@ function log_action($action, $item_id = 0, $message = '') {
     $message = empty($message) ? lang($action) : $message;
     
     if (empty($message)) {
-        trigger_error('Action message does not exist for '.$action.'. Create it in /language/App_lang.php.');
+        trigger_error('Action message does not exist for '.$action.'. Create it in /language/My_lang.php.');
     }
     
     return $CI->db->insert('action_logs', array(
@@ -54,7 +54,7 @@ function log_action($action, $item_id = 0, $message = '') {
  * 
  * If both $action and $item_id have a value, it returns all $action actions pertaining to $item_id.
  * 
- * Returns an array. Triggers an error if the action does not exist in App_lang.
+ * Returns an array. Triggers an error if the action does not exist in My_lang.
  * 
  * Usage:
  * 
@@ -72,7 +72,7 @@ function get_logged_actions($action = '', $item_id = 0) {
     static $userIdCache = array();    
     
     if (!empty($action) and !is_int($action) and !lang($action)) {
-        trigger_error('Action message does not exist for '.$action.'. Create it in /language/App_lang.php.');
+        trigger_error('Action message does not exist for '.$action.'. Create it in /language/My_lang.php.');
     }
     
     $CI = &get_instance();

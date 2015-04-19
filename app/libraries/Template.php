@@ -5,12 +5,6 @@
  *
  * Build your CodeIgniter pages much easier with partials, breadcrumbs, layouts and themes
  *
- * @package			CodeIgniter
- * @subpackage		Libraries
- * @category		Libraries
- * @author			Philip Sturgeon
- * @license			http://philsturgeon.co.uk/code/dbad-license
- * @link			http://philsturgeon.co.uk/code/codeigniter-template
  */
 class Template
 {
@@ -22,7 +16,6 @@ class Template
 	private $_theme_path = NULL;
 	private $_layout = FALSE; // By default, dont wrap the view with anything
 	private $_layout_subdir = ''; // Layouts and partials will exist in views/layouts
-	// but can be set to views/foo/layouts with a subdirectory
 
 	private $_title = '';
 	private $_metadata = array();
@@ -207,9 +200,7 @@ class Template
 	 */
 	public function build($view, $data = array(), $return = FALSE, $IE_cache = TRUE)
 	{
-
-
-                // Set whatever values are given. These will be available to all view files
+        // Set whatever values are given. These will be available to all view files
 		is_array($data) OR $data = (array) $data;
 
 		// Merge in what we already have with the specific data
@@ -397,7 +388,6 @@ class Template
                 Asset::js($files, $min_file, $group);
                 return $this;
 	}
-
 
 	/**
 	 * Set metadata for output later

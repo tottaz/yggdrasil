@@ -4,7 +4,7 @@
  * @author		PyroCMS Dev Team
  * @package		PyroCMS\Core\Modules\Contact\Models
  */
-class Contact_m extends App_Model {
+class Contact_m extends My_Model {
 	
 	public function get_log()
 	{

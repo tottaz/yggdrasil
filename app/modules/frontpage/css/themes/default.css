@@ -1,0 +1,14 @@
+/*
+#319db5
+#2E73AB
+*/
+
+.c-primary {color: #319DB5;}
+::-moz-selection{color:#fff;background:#319db5}
+::selection{color:#fff;background:#319db5}
+.nicescroll-cursors{background-color:#D4D4D4!important}
+
+.topnav.fixed-topnav .section {background: rgba(0,0,0,.85);}
+.topnav.fixed-topnav li.current a, .topnav.fixed-topnav ul.nav > li > a:hover {color: #4E9FC7!important;}
+h2, h3 {color: #319db5;}
+.bg-primary:not(i), i.bg-primary::before, .bg-primary.form-control:focus {background-color: #2B2E33;}

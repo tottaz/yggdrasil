@@ -14,7 +14,7 @@
  *
  * @subpackage	Controllers
  */
-class Public_Controller extends App_Controller {
+class Public_Controller extends My_Controller {
 	/**
 	 * @var	array 	An array of methods to be secured by login
 	 */
@@ -37,18 +37,18 @@ class Public_Controller extends App_Controller {
 	 */
 	public function __construct() {
 		parent::__construct();
-
+		
 		$this -> benchmark -> mark('public_controller_start');
 
 		Events::trigger('public_controller');
 
 		// Check the frontend hasnt been disabled by an admin
-//		if (!$this -> settings -> frontend_enabled && (empty($this -> current_user) OR $this -> current_user -> group != 'admin')) {
-//			header('Retry-After: 600');
+		if (!$this -> settings -> frontend_enabled && (empty($this -> current_user) OR $this -> current_user -> group != 'admin')) {
+			header('Retry-After: 600');
 
-//			$error = $this -> settings -> unavailable_message ? $this -> settings -> unavailable_message : lang('cms_fatal_error');
-//			show_error($error, 503);
-//		}
+			$error = $this -> settings -> unavailable_message ? $this -> settings -> unavailable_message : lang('cms_fatal_error');
+			show_error($error, 503);
+		}
 
 		// Load the current theme so we can set the assets right away
 		ci() -> theme = $this -> theme_m -> get();
@@ -58,6 +58,7 @@ class Public_Controller extends App_Controller {
 		}
 
 		// Set the theme as a path for Asset library
+
 		Asset::add_path('theme', $this -> theme -> path . '/');
 		Asset::set_path('theme');
 

@@ -1,0 +1,10 @@
+/*
+ * jQuery idleTimer plugin
+ * version 0.8.092209
+ * by Paul Irish. 
+ * MIT license
+ * adapted from YUI idle timer by nzakas: http://github.com/nzakas/yui-misc/
+ * Copyright (c) 2009 Nicholas C. Zakas
+ */
+ (function(e){e.idleTimer=function t(n){var r=false,i=true,s=3e4,o="mousemove keydown DOMMouseScroll mousewheel mousedown",u=function(){r=!r;t.olddate=+(new Date);e(document).trigger(e.data(document,"idleTimer",r?"idle":"active")+".idleTimer")},a=function(){i=false;clearTimeout(e.idleTimer.tId);e(document).unbind(".idleTimer")},f=function(){clearTimeout(e.idleTimer.tId);if(i){if(r){u()}e.idleTimer.tId=setTimeout(u,s)}};t.olddate=t.olddate||+(new Date);if(typeof n=="number"){s=n}else if(n==="destroy"){a();return this}else if(n==="getElapsedTime"){return+(new Date)-t.olddate}e(document).bind(e.trim((o+" ").split(" ").join(".idleTimer ")),f);e.idleTimer.tId=setTimeout(u,s);e.data(document,"idleTimer","active")}})(jQuery)
+

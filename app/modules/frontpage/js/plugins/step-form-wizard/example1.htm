@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Step From Wizard - example 1</title>
+
+    <script src="plugins/jquery-2.1.1.min.js"></script>
+
+    <!-- bootstrap for better look example, but not necessary -->
+    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.css" type="text/css" media="screen, projection">
+
+    <!-- Step Form Wizard plugin -->
+    <link rel="stylesheet" href="step-form-wizard/css/step-form-wizard.css" type="text/css" media="screen, projection">
+    <script src="step-form-wizard/js/step-form-wizard.js"></script>
+
+    <!-- nicer scroll in steps -->
+    <link rel="stylesheet" href="plugins/mcustom-scrollbar/jquery.mCustomScrollbar.css">
+    <script src="plugins/mcustom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+
+    <script>
+        var sfw;
+        $(document).ready(function () {
+            sfw = $("#wizard_example").stepFormWizard({});
+        })
+        $(window).load(function () {
+            /* only if you want use mcustom scrollbar */
+            $(".sf-wizard fieldset").mCustomScrollbar({
+                theme: "dark-3",
+                scrollButtons: {
+                    enable: true
+                }
+            });
+            /* ***************************************/
+
+            /* this function call can help with broken layout after loaded images or fonts */
+            sfw.refresh();
+        });
+    </script>
+
+    <style>
+        pre {margin: 45px 0 60px;}
+        h2 {margin: 60px 0 30px 0;}
+        p {margin-bottom: 10px;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="site-index">
+        <div class="body-content">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Default setting</h2>
+
+                    <form id="wizard_example" action="">
+                        <fieldset>
+                            <legend>Basic information</legend>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email address</label>
+                                        <input type="email" class="form-control" id="exampleInputEmail1"
+                                               name="exampleInputEmail1" placeholder="Enter email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Password</label>
+                                        <input type="password" class="form-control" id="exampleInputPassword1"
+                                               name="exampleInputPassword1" placeholder="Password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Password again</label>
+                                        <input type="password" class="form-control" id="exampleInputPasswordAgain1"
+                                               name="exampleInputPasswordAgain1" placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Favorite number</label>
+                                        <select class="form-control" name="favoriteNumber">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Own animals</label>
+
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="animal[]" value="goat"> Goat
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="animal[]" value="cow"> Cow
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="animal[]" value="rooster"> Rooster
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="animal[]" value="crocodile"> Crocodile
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    In publishing and graphic design, lorem ipsum is common placeholder text used to
+                                    demonstrate the graphic elements of a document or visual presentation, such as web
+                                    pages, typography, and graphical layout. It is a form of "greeking".
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Condition</legend>
+                            In publishing and graphic design, lorem ipsum is common placeholder text used to demonstrate
+                            the graphic elements of a document or visual presentation, such as web pages, typography,
+                            and graphical layout. It is a form of "greeking".
+                            Even though using "lorem ipsum" often arouses curiosity due to its resemblance to classical
+                            Latin, it is not intended to have meaning. Where text is visible in a document, people tend
+                            to focus on the textual content rather than upon overall presentation, so publishers use
+                            lorem ipsum when displaying a typeface or design in order to direct the focus to
+                            presentation. "Lorem ipsum" also approximates a typical distribution of letters in English.
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" value="option1" checked>
+                                    Yes, it is totaly right.
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" value="option2">
+                                    No, I check it twice and it is not right.
+                                </label>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Final step</legend>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p>
+                                        Even though using "lorem ipsum" often arouses curiosity due to its resemblance
+                                        to classical Latin, it is not intended to have meaning. Where text is visible in
+                                        a document, people tend to focus on the textual content rather than upon overall
+                                        presentation, so publishers use lorem ipsum when displaying a typeface or design
+                                        in order to direct the focus to presentation. "Lorem ipsum" also approximates a
+                                        typical distribution of letters in English.
+                                    </p>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputName1">Your name</label>
+                                                <input type="text" class="form-control" id="exampleInputName1"
+                                                       name="exampleInputName1" placeholder="Your name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputCat1">Name of your cat</label>
+                                                <input type="text" class="form-control" id="exampleInputCat1"
+                                                       name="exampleInputCat1" placeholder="Name of your cat">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputHam1"></label>
+                                                <input type="text" class="form-control" id="exampleInputHam1"
+                                                       name="exampleInputHam1" placeholder="Name of your hamster">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputGrocer1"></label>
+                                                <input type="text" class="form-control" id="exampleInputGrocer1"
+                                                       name="exampleInputGrocer1"
+                                                       placeholder="Name of your grocery seller">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" value="option1" checked>
+                                                    Option one is this and that&mdash;be sure to include why it's great
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" value="option2">
+                                                    Option two can be something else and selecting it will deselect
+                                                    option one
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="superPower"> I want have super-power
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="moreSuperPower"> I have one or more
+                                                    super-power already
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <p>
+                                        Even though using "lorem ipsum" often arouses curiosity due to its resemblance
+                                        to classical Latin, it is not intended to have meaning. Where text is visible in
+                                        a document, people tend to focus on the textual content rather than upon overall
+                                        presentation, so publishers use lorem ipsum when displaying a typeface or design
+                                        in order to direct the focus to presentation. "Lorem ipsum" also approximates a
+                                        typical distribution of letters in English.
+                                    </p>
+
+                                    <p>
+                                        Using "lorem ipsum" often arouses curiosity due to its resemblance to classical
+                                        Latin, it is not intended to have meaning. Where text is visible in a document,
+                                        people tend to focus on the textual content rather than upon overall
+                                        presentation, so publishers use lorem ipsum when displaying a typeface or design
+                                        in order to direct the focus to presentation. "Lorem ipsum" also approximates a
+                                        typical distribution of letters in English.
+                                    </p>
+                                </div>
+                                <noscript>
+                                    <input class="nocsript-finish-btn sf-right nocsript-sf-btn" type="submit"
+                                           name="no-js-clicked" value="finish"/>
+                                </noscript>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 up-20">
+                <pre>$(window).load(function(){
+    $("#wizard_example").skyFormWizard({  })
+});
+                </pre>
+                </div>
+            </div>
+
+
+            <footer class="footer">
+                <div class="container">
+                    <p class="pull-left">© ajoke.cz 2014</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
+</body>
+</html>

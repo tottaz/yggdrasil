@@ -30,14 +30,14 @@
 	<div id="wrapper">
 
 		<div id="content" class="no_object_notification">
-		<?php if ($message = $this->session->flashdata('success')): ?>
+		<?php if ($message = $this->session->userdata('success')): ?>
 			<div class="notification success"><?php echo $message; ?></div>
 		<?php endif; ?>
 		<?php if (isset($messages['success'])): ?>
 			<div class="notification success"><?php echo $messages['success']; ?></div>
 		<?php endif; ?>
 
-		<?php if ( $message = $this->session->flashdata('error')): ?>
+		<?php if ( $message = $this->session->userdata('error')): ?>
 			<div class="notification error"><b>Error:</b> <?php echo $message; ?></div>
 		<?php endif; ?>
 		<?php if (isset($messages['error'])): ?>

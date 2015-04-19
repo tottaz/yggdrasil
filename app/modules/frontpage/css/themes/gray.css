@@ -1,0 +1,16 @@
+/*
+#7F8C8D
+*/
+
+.c-primary {color: #7F8C8D;}
+::-moz-selection{color:#fff;background:#7F8C8D}
+::selection{color:#fff;background:#7F8C8D}
+.nicescroll-cursors{background-color:rgba(149,165,166,1)!important}
+.topnav.fixed-topnav .section {background: rgba(143, 155, 156,0.9);-moz-box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.2);-webkit-box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.2);-o-box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.2);box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.2);}
+.topnav.fixed-topnav li.current a, .topnav.fixed-topnav ul.nav > li > a:hover {color: #000!important;}
+h2, h3 {color: #7F8C8D;}
+.bg-primary:not(i), i.bg-primary::before, .bg-primary.form-control:focus {background-color: #7F8C8D;}
+.bg-primary h2, .bg-primary h3 {color:#000;}
+.work-filter ul li a:hover, .work-filter ul li a.active {background-color: #7F8C8D;}
+.overlay {background-color: rgba(127, 140, 141,.9);}
+.map-container #full-map .pulse-label{-webkit-animation:pulse 1.5s infinite;background:rgba(127, 140, 141,0.5);}

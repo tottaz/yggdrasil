@@ -59,11 +59,11 @@ class Admin extends Admin_Controller
 							
 			// Clear the module cache
 			$this->appcache->delete_all('module_m');
-			$this->session->set_flashdata('success', sprintf(lang('modules.install_success'), $slug));
+			$this->session->set_userdata('success', sprintf(lang('modules.install_success'), $slug));
 		}
 		else
 		{
-			$this->session->set_flashdata('error', sprintf(lang('modules.install_error'), $slug));
+			$this->session->set_userdata('error', sprintf(lang('modules.install_error'), $slug));
 		}
 
 		redirect('admin/modules');
@@ -87,11 +87,11 @@ class Admin extends Admin_Controller
 			
 			// Clear the module cache
 			$this->appcache->delete_all('module_m');
-			$this->session->set_flashdata('success', sprintf(lang('modules.enable_success'), $slug));
+			$this->session->set_userdata('success', sprintf(lang('modules.enable_success'), $slug));
 		}
 		else
 		{
-			$this->session->set_flashdata('error', sprintf(lang('modules.enable_error'), $slug));
+			$this->session->set_userdata('error', sprintf(lang('modules.enable_error'), $slug));
 		}
 
 		redirect('admin/modules');
@@ -115,11 +115,11 @@ class Admin extends Admin_Controller
 			
 			// Clear the module cache
 			$this->appcache->delete_all('module_m');
-			$this->session->set_flashdata('success', sprintf(lang('modules.disable_success'), $slug));
+			$this->session->set_userdata('success', sprintf(lang('modules.disable_success'), $slug));
 		}
 		else
 		{
-			$this->session->set_flashdata('error', sprintf(lang('modules.disable_error'), $slug));
+			$this->session->set_userdata('error', sprintf(lang('modules.disable_error'), $slug));
 		}
 
 		redirect('admin/modules');
@@ -142,12 +142,12 @@ class Admin extends Admin_Controller
 			// Fire an event. A module has been upgraded. 
 			Events::trigger('module_upgraded', $slug);
 			
-			$this->session->set_flashdata('success', sprintf(lang('modules.upgrade_success'), $slug));
+			$this->session->set_userdata('success', sprintf(lang('modules.upgrade_success'), $slug));
 		}
 		// If upgrade failed
 		else
 		{
-			$this->session->set_flashdata('error', sprintf(lang('modules.upgrade_error'), $slug));
+			$this->session->set_userdata('error', sprintf(lang('modules.upgrade_error'), $slug));
 		}
 		
 		redirect('admin/modules');

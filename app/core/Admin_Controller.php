@@ -13,7 +13,7 @@
  *
  * @subpackage	Controllers
  */
-class Admin_Controller extends App_Controller {
+class Admin_Controller extends My_Controller {
 /**
 	 * @var	array 	An array of methods to be secured by login
 	 */
@@ -51,23 +51,17 @@ class Admin_Controller extends App_Controller {
 		{
 			if ( ! $this->ion_auth->logged_in() and $this->method != 'no_internet_access') 
 			{
-				$this->session->set_flashdata('login_redirect', $this->uri->uri_string());
+				$this->session->set_userdata('login_redirect', $this->uri->uri_string());
 				redirect('admin/users/login');
 			}
 		// Be an admin or have access to this module a bit
 			$module = $this->router->fetch_module();
 			if ( ! $this->ion_auth->is_sadmin() and (empty($this->permissions) or ($module !== 'dashboard' and empty($this->permissions[$module])))) 
 			{
-				$this->session->set_flashdata('error', lang('cp_access_denied'));
+				$this->session->set_userdata('error', lang('cp_access_denied'));
 				redirect('dashboard');
 			// show_error('Permission Denied');
 			}
-			 
-//			if($this->uri->uri_string = 'admin/users/login') 
-//			{
-				// set default uri string to dashboard
-//				$this->uri->uri_string = 'dashboard';
-//			}
 		}
 		// If the setting is enabled redirect request to HTTPS
 		if ($this->settings->admin_force_https and strtolower(substr(current_url(), 4, 1)) != 's')

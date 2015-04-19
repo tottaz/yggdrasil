@@ -1,0 +1,28 @@
+/*
+ * File:        TableTools.css
+ * Description: Styles for TableTools 2
+ * Author:      Allan Jardine (www.sprymedia.co.uk)
+ * Language:    Javascript
+ * License:     GPL v2 / 3 point BSD
+ * Project:     DataTables
+ * 
+ * Copyright 2009-2012 Allan Jardine, all rights reserved.
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ * CSS name space:
+ *   DTTT                  DataTables TableTools
+ *
+ * Style sheet provides:
+ *   CONTAINER             TableTools container element and styles applying to all components
+ *   BUTTON_STYLES         Action specific button styles
+ *   SELECTING             Row selection styles
+ *   COLLECTIONS           Drop down list (collection) styles
+ *   PRINTING              Print display styles
+ */
+
+
+/*
+ * CONTAINER
+ * TableTools container element and styles applying to all components
+ */
