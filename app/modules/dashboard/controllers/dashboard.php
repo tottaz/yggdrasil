@@ -18,7 +18,7 @@ class Dashboard extends Admin_Controller {
 
 	public function __construct() {
 		parent::__construct();
-
+	
 		$this -> load -> helper('array');
 	}
 
@@ -28,7 +28,7 @@ class Dashboard extends Admin_Controller {
 						->append_css('module::font-awesome.css')
 						->append_css('module::style.css')
 						->append_css('module::bootstrap-responsive.min.css');
-						
+			
 		$this -> template -> build('dashboard');
 	}
 }

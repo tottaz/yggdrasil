@@ -72,7 +72,7 @@ class My_Controller extends CI_Controller {
 		$sitelang['lang'] = $langs[CURRENT_LANGUAGE];
 		$sitelang['lang']['code'] = CURRENT_LANGUAGE;
 		$this->load->vars($sitelang);
-		
+
 		// Set php locale time
 		if (isset($langs[CURRENT_LANGUAGE]['codes']) && sizeof($locale = (array) $langs[CURRENT_LANGUAGE]['codes']) > 1)
 		{

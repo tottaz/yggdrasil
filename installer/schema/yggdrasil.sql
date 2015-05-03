@@ -37,7 +37,7 @@ CREATE TABLE `{DBPREFIX}hidden_notifications` (
 
 -- split --
 
-CREATE TABLE `{DBPREFIX}it_cdn_data` (
+CREATE TABLE `{DBPREFIX}itdatas` (
 `cdn_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `total_mb` decimal(20,2) NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE `{DBPREFIX}it_cdn_data` (
 
 -- split --
 
-INSERT INTO `{DBPREFIX}it_cdn_data` (`cdn_id`, `date`, `total_mb`, `m95_mbps`, `peak_mbps`, `total_hits`, `http_total_mb`, `stream_total_mb`, `last_modified`) VALUES
+INSERT INTO `{DBPREFIX}itdatas` (`cdn_id`, `date`, `total_mb`, `m95_mbps`, `peak_mbps`, `total_hits`, `http_total_mb`, `stream_total_mb`, `last_modified`) VALUES
 (3, '2013-01-07', 0.00, 0.00, 0.00, 0, 0.00, 0.00, '2013-03-04 09:21:06'),
 (4, '2013-01-14', 1828978.86, 29.48, 54.73, 99690523, 1828978.64, 0.22, '2013-03-04 09:21:10'),
 (7, '2013-01-21', 0.00, 0.00, 0.00, 0, 0.00, 0.00, '2013-03-04 09:21:13'),
