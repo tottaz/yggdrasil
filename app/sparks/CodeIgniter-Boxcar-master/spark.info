@@ -1,7 +1,0 @@
-name: boxcar
-
-version: 1.0.1
-
-compatibility: 2.0.2
-
-tags: ["sdk", "api", "boxcar", "boxcar.io"]

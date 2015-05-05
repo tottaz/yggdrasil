@@ -108,8 +108,7 @@ $autoload['helper'] = array('url', 'form', 'date', 'text', 'string',
 |
 */
 
-$autoload['config'] = array();
-
+$autoload['config'] = array('language');
 
 /*
 | -------------------------------------------------------------------

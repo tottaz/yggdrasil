@@ -62,7 +62,6 @@
 <?php
 	Asset::css('style.css', array('media' => 'all'));
 	Asset::css('bootstrap.css', array('media' => 'all'));
-//	Asset::css('bootstrap-theme.css', array('media' => 'all'));
 	Asset::css('custom.css', array('media' => 'all'));
 
     Asset::js('vendor/modernizr-2.6.2.min.js');
@@ -138,6 +137,11 @@
 
 					<?php if (is_sadmin() or isset($this->permissions['calendar'])): ?>
 						<li><?php echo anchor('calendar', __('global:calendar')); ?> 
+						</li>
+					<?php endif ?>
+
+					<?php if (is_sadmin() or isset($this->permissions['newssearch'])): ?>
+						<li><?php echo anchor('newssearch', __('global:newssearch')); ?> 
 						</li>
 					<?php endif ?>
 
@@ -225,7 +229,6 @@
                </header>
             </div>
 
-	<?php if ($module != 'dashboard'): ?>
 <!-- main-container -->
     <div>
         <ul class="breadcrumb">
@@ -257,16 +260,13 @@
 			<?php endif; ?>
 		</ul>
 	</div><!-- /shortcuts -->
-	<?php endif ?>
 
 	<div class="section">
 	   <section>
 	      <div class="container">
 
-		<?php echo $template['partials']['notifications']; ?>
+		<?php //echo $template['partials']['notifications']; ?>
 		<?php echo $template['body']; ?>
-
-		<?php  if ($module !== 'dashboard') { ?>
 
 		<!-- end main-container -->
           </div> <!-- container -->
@@ -305,9 +305,6 @@
 	<div class="scrollTop">
 		<a href="javascript:void(0);">Scroll to Top</a>
 	</div>
-	<?php
-	} 
-	?>
      </div> <!-- main -->
   </div> <!-- wrapper -->
 

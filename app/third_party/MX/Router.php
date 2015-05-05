@@ -34,6 +34,7 @@ require dirname(__FILE__).'/Modules.php';
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
+
  **/
 class MX_Router extends CI_Router
 {
@@ -202,7 +203,7 @@ class MX_Router extends CI_Router
 		{
 			return $segments;
 		}
-		
+
 		$this->located = -1;
 	}
 

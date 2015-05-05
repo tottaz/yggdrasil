@@ -20,53 +20,10 @@ $lang = array(
  	'global:overview' => 'Overview',
  	'global:error' => 'Error',
 	'global:version' => 'App :1',
-	'global:allrelatedmediacopyright' => 'GreenGarden is Copyright :1 :2',
+	'global:allrelatedmediacopyright' => 'Yggdrasil is Copyright :1 :2',
 	'global:insecure_action' => 'Insecure action was attempted but caught',
-	
-	'global:campaigns'              =>  'Campaigns',
-	'global:media_contacts'         =>  'Media Contacts',
-	'global:media_distribution'     =>  'Media Distribution',
-	'global:media_orientation'      =>  'Media Orientation',
-	'global:media_segmentation'     =>  'Media Segmentation',
-	'global:media_type'             =>  'Media Type',
-	'global:audience'             	=>  'Media Audience',
-	
-	'global:wordcloud_country'      =>  'Wordcloud Countries',
-	'global:wordcloud_media'        =>  'Wordcloud Medias',
-	'global:wordcloud_wire'         =>  'Wordcloud Wires',
-	'global:wordcloud_journalist'   =>  'Wordcloud Journalists',
-	'global:wordcloud_keyword'      =>  'Wordcloud Keywords',
-	'global:insights'               =>	'Insights',
-	'global:loadfeed'				=>	'Load Feeds',
-	
-	'global:perday'                 => 'Articles per day',     
-	'global:arcticlebyfeed'         => 'Articles by feed',     
-	'global:articlebycountry'               => 'Articles by country',     
-	'global:newsitembycountrymediatype'               => 'News items by media type',     
-	'global:newsitembycountrymediadistribution'               => 'News item by distribution',     
-	'global:newsitemsbymonth'               => 'News item by month',
-	'global:tier1onlinemedia'              => 'Tier 1 online media',	
-	
-	'global:maps' => 'Media Map',
-	
-	'global:library' => 'Library',
-	'global:action' => 'Action',    
-	
-	'global:enter' => 'Enter',    
-	'global:logviewer' => 'Log Extract Viewer',    
-	'global:download' => 'Download',
-	'global:sync' => 'Sync',
-	'global:check' => 'Check MGO/FW',
-	  
-	'global:config'  => 'Config',
-	'global:country' => 'Country',
-	'global:martial' => 'Martial',
-	'global:meals' => 'Meals',
-	'global:passport' => 'Passport',
-	'global:rank' => 'Rank',
-	'global:ships' => 'Ships',
-	'global:type' => 'Type',
-
+	'global:maps' => 'Media Map',   
+	'global:enter' => 'Enter',    	  
 	'global:upload_failed' => 'There was a problem uploading your file. Please try again. If the problem persists, please contact support@thunderbeaardesign.com.',
 	'global:upload_not_allowed' => 'The file type of the file you were trying to upload is not allowed. If you need to upload a file of that type, please compress it into a .zip or any other archive format you might find appropriate.',
 	'global:copied' => 'Copied!',
@@ -92,169 +49,43 @@ $lang = array(
 	'global:backtoadmin' => 'Back to Admin',
 	'global:type' => 'Type',
 	'global:name'		=>	'Name',
-	'global:first_name'		=>	'First Name',
-	'global:last_name'		=>	'Last Name',
-	'global:for'	=>	'for',
-	'global:from'	=>	'from',
+	'global:first_name'	=>	'First Name',
+	'global:last_name'	=>	'Last Name',
+	'global:for'		=>	'for',
+	'global:from'		=>	'from',
 	'global:phone'		=>	'Phone',
 	'global:email'		=>	'Email',
 	'global:contacts'	=>	'Contacts',
-	'global:week' => 'Weekly',
-	'global:quarterly' => 'Quarterly',
+	'global:week'		=> 'Weekly',
+	'global:quarterly'	=> 'Quarterly',
     'global:every_six_months' => 'Every 6 months',
-    'global:biyearly' => 'Every 2 years',
-	'global:month' => 'Monthly',
-	'global:year' => 'Yearly',
+    'global:biyearly'	=> 'Every 2 years',
+	'global:month'		=> 'Monthly',
+	'global:year'		=> 'Yearly',
 	'global:fax'		=>	'Fax',
 	'global:mobile'		=>	'Mobile',
 	'global:address'	=>	'Address',
-	'global:api_key' => 'API Key',
+	'global:api_key'	=> 'API Key',
 	'global:website'	=>	'Website',
 	'global:action'		=>	'Action',
 	'global:items'		=>	'Items',
-	'global:dashboard'	=> 'Dashboard',
-	'global:settings'	=> 'Settings',
-	'global:sync'           =>  'Sync',
-	'global:drilldown'           =>  'Drilldown',	
-	'global:changepassword' => 'Change Password',
-	'global:logout' 	=> 'Log Out',
-	'global:status' => 'Status',
-	'global:user' => 'User',
-	'global:title' => 'Title',
-	'global:subtitle' => 'Subtitle',
-	'global:to' => 'To (separate multiple addresses with a comma)',
-	'global:subject' => 'Subject',
-	'global:thanks' => 'Thanks!',
-	'global:reports' => 'Reports',
-	'global:item' => 'Item',
-	'global:report' => 'Report',
-	'global:saveandinsert' => 'Save and Insert',
-	'global:details'	=>	'Details',
-	'global:license_key' => 'License Key',
-	'global:version' => 'Version',
-	'global:content' => 'Content',
-	'global:add'	=>	'Add',
-	'global:edit'	=>	'Edit',
-	'global:read'	=>	'Read',
-	'global:view'	=>	'View',    
-	'global:resend'	=>	'Resend',
-	'global:sent' =>        'Sent',
-	'global:not_sent' =>    'Not sent',
-	'global:view'	=>	'View',
-	'global:delete'	=>	'Delete',
-	'global:remove'	=>	'Remove',
-	'global:sort'	=>	'Sort',
-	'global:deleteitem' => 'Delete Item',
-	'global:dragtoreorder' => 'Drag To Reorder',
-	'global:start' => 'Start',
-	'global:stop' => 'Stop',
-	'global:created'	=>	'Created',
-	'global:updated'	=>	'Updated',
-	'global:update'	=>	'Update',
-	'global:yesdelete' => 'Yes, delete!',
-	'global:confirm_emphisised'	=>	'There is no going back!',
-	'global:color' => 'Color',
-	'global:save' => 'Save',
-	'global:unknown' => 'Unknown',
-	'global:upload_ini_size' => 'The file you uploaded exceeds the size limit imposed by your PHP installation.',
-	'global:upload_error' => 'A problem occurred while uploading the file. Please try again.',
-	'global:recurring' => 'Recurring',
-	'global:unsent' => 'Unsent',
-	'global:duplicate' => 'Duplicate',
-	'global:urltosend'	=>	'Here is the url to send:',
-	'global:copytoclipboard'	=>	'Copy to clipboard',
-	'global:id'           =>	'Id',
-	'global:name'         =>	'Family Names',
-	'global:rank'         =>	'Rank',
-	'global:nationality'  =>	'Nationality',
-	'global:dateofbirth'  =>	'Date of birth',
-	'global:placeofbirth' =>	'Place of birth',
-	'global:passportno'   =>	'Passport Number',
-	'global:typeofid'     =>	'Type of id',
-	'global:viewpdf'   =>	'PDF',
-	'global:excel'   =>	'Excel',
-	'global:knowas'   =>	'Know as',
-	'global:lastname'   =>	'Last Name',
-	'global:fullname'   =>  'Last, Frist Name',
-	'global:nickname'   =>  'Nick Name',
-	'global:list'   =>  'List',
-	'global:residence' => 'Residence',
+	'global:dashboard'	=>	'Dashboard',
+	'global:settings'	=>	'Settings',
+	'global:calendar'   =>  'Calendar',
+	'global:logout' 	=>	'Logout',
+	'global:login'		=> 	'login',
+	'global:newssearch'	=>	'newssearch',
+	'global:edit'		=> 	'edit',
+	'global:delete'		=>	'delete',
     
 	'global:optional_increment' => '<strong>Optional</strong> - will auto increment',
 
 	'global:apikey' => 'Api Key',
 
-	'login:ahoy' => 'Ahoy!',
-	'login:readytodothis' => 'Ready to do this?',
-	'login:sup' => 'Sup?',
-	'login:sup' => 'Login',    
-	'global:actions' => 'Actions',
-	'global:media' => 'Media',
-	'global:socialmedia' => 'Social Media',
-	'global:coal' => 'Coal',
-	'global:hrreports' => 'HR Reports',
-	
-	'global:search' => 'Search',
-	'global:addarticle' => 'Add Article',
-	'global:socialmedia' => 'Social Media',
-	'global:twitter' => 'twitter',
-	'global:facebook' => 'facebook',
-	
-	'global:reportslisting' => 'Reports Listing',
-	'global:createreports' => 'Create Reports from Templates',
-	'global:mediareport' => 'Media Report',
-	'global:socialreport' => 'Social Report',
-	'global:relationship' => 'Media Relationship Report',
-	'global:topmedia' => 'Top Media Report',
-	'global:topjournalist' => 'Top Journalist Report',
-	'global:topsocial' => 'Top Social Report',
-	'global:analysis' => 'Analysis',
-	'global:contacts' => 'Contacts',
-	'global:newjournalist' => 'New Journalist',
-	'global:newmedia' => 'New Media',
-	'global:newactivity' => 'New Activity',
-	'global:newemail' => 'New Email',
-	'global:importcontacts' => 'Import Contacts',
-	'global:importactvities' => 'Import Activities',
-	'global:newgroup' => 'New Group',
-	'global:managegroup' => 'Manage Groups',
-	'global:newtag' => 'New Tag',
-	'global:managetags' => 'Manage Tags (Categories)',
-	'global:findandmerge' => 'Find and Merge Duplicate Contacts',
-	'global:feeds' => 'Feeds',
-	'global:admin' => 'Admin',
-	'global:hitwords' => 'Hitwords',
-	'global:keywords' => 'Keywords',
-	'global:journalists' => 'Journalists',
-	'global:media' => 'Media',
-	'global:wires' => 'Wires',
-	'global:frames' => 'Frames',
-	'global:stats' => 'Media Analysis',
-	'global:introduction' => 'Intro',
-	'global:manual' => 'User Guide',    
-	'global:programme' => 'Programme',
-	'global:media_issue' => 'Issues',    
-	'global:media_office' => 'Offices',
-	'global:feedtype' => 'Feed Type',
-	'global:newssearch' => 'Search News',
-
 	/** Greetings **/
 	'global:greetings'	=>	array('Ahoi!', 'Hello,', 'Hey,', 'Sup,'),
 	/** End Greetings **/
 
-	/** Projects **/
-	'global:projects'		=>	'Projects',
-	'global:createproject'	=>	'Create Project',	
-	'global:projectlist'	=>	'Manage Projects',
-
-	/** Online Media **/
-	'global:onlinemedia'	=>	'Online Media',
-	'global:searchalchemynews'	=>	'Search News',
-
-	/** Social Accounts **/
-	'global:socialaccounts'		=>	'Social Accounts',
-	'global:socialaccountconnect'	=>	'Connect Social Account',	
-	'global:managesocialaccount'	=>	'Manage Social Accounts',
 
 	/** Post **/
 	'global:postcontent'	=>	'Post Content',
@@ -265,20 +96,13 @@ $lang = array(
 	/** Feeds **/
 	'global:addfeed'		=>	'Add Feed',	
 	'global:managefeeds'	=>	'Manage Feeds',
-	/** End Greetings **/
 
-	/** Dashboard **/	
-	'dashboard:expectedcrue'    => 'Crue Expected',
-	'dashboard:peopleonboard'   => 'People On Board',
-	'dashboard:users'           => 'Journalist',
-	'dashboard:media'           => 'Media',   
-	'dashboard:networkmap'      => 'Networkmap',
 	/** End Dashboard **/
 
 	/** Users **/
 
 	// ==============================
-	// = LOGIN PAGE COMPLETED - Lee =
+	// = LOGIN PAGE                 =
 	// ==============================
 	'login:forgotinstructions'	=>	'Please enter your email address so we can send you an email to reset your password.',
 	'login:reset'				=>	'Reset &raquo;',
@@ -303,18 +127,6 @@ $lang = array(
 	'contact:method'		=>	'Contact Method',
 	// 'contact:view_all'		=>	'View All',
 	/** End Contact Log **/
-
-	/** Reports **/
-	'reports:pership' => 'per ship',
-	'reports:datefrom' => 'From',
-	'reports:allships' => 'All ships',
-	'reports:dateto' => 'To',
-	'reports:byship' => 'Ship',
-
-	'reports:view' => 'View Report',
-	'reports:show_all' => 'Show Reports',
-	'reports:nodata' => 'No :1.',
-	/** End Reports **/
 	
 	/** Users **/
 	'users:create_user' => 'Create User',
@@ -423,70 +235,9 @@ $lang = array(
 	'general:save' => 'save',
 	'general:delete' => 'delete',
 
-	/** Wires **/
-	'wires:add_a_new_wire' => 'Add a new wire',
-	'wires:add_wire' => 'add wire',
-
 	/** Keywords **/
 	'keywords:create_user' => 'Create User',
-	 
-	/** Feeds  **/
-	'feeds:url' => 'Url',    
-	'feeds:checktime' => 'Checktime',
-	'feeds:add_a_new_feed' => 'Add a new feed',
-	'feeds:feeds_in_the_database' => 'Feeds In The Database',
-	'feeds:office' => 'NRO',
-	'feeds:issue' => 'Issue Search',
-	
-	/** Campaigns  **/
-	'campaign:add_a_new_campaign' => 'ADD A NEW CAMPAIGN',    
-	'campaign:add_campaign' => 'Add Campaign',
-	
-	/** Insights  **/
-	'insights:main' => 'Main',    
-	'insights:timeline' => 'Timeline',
-	
-	/** Library  **/
-	'library:add_a_new_library_item' => 'Add a new library item',    
-	'library:add_library_item' => 'Add library item',        
-	'library:items_in_the_library' => 'Items in the library',
-	'library:publication_date' => 'Publication Date',
-	'library:create_item' => 'Create Item',        
-	'library:library' => 'Library',
-	'library:title' => 'Title',
-	'library:author' => 'Author',
-	'library:publisher' => 'Publisher',
-	'library:organisation' => 'Organisation',
-	'library:ISBN' => 'ISBN',
-	'library:internal' => 'Internal',
-	'library:annotation' => 'Annotation',
-	'library:file_name' => 'File Name',
-	'library:URL-FTP' => 'URL-FTP',
-	'library:date_added' => 'Date Added',
-	'library:name' => 'Name',
-	'library:economics_politics' => 'Economics/Politics',
-	'library:organisms' => 'Organisms',
-	'library:substances' => 'Substances',
-	'library:biosphere' => 'Biosphere',
-	'library:health' => 'Health',
-	'library:GPspecials' => 'GP specials',
-	'library:type' => 'Type',
-	'library:language' => 'Language',
-	'library:oldDB' => 'old DB',
-	'library:oldID' => 'old ID',
-	'library:oldKeyword' => 'old Keyword',
-	'library:archive_location' => 'Archieve Location',
-	'library:archive_number' => 'Archieve Number',
-	'library:archive_status' => 'Archieve Status',
-	'library:archieve_date' => 'Archieve Date',
-	'library:archieve_comment' => 'Archieve Comment',
-	'library:companies' => 'Companies',
-	'library:dunnos' => 'Dunnos',
-	'library:int_classification' => 'International Classification',
-	'library:human_activity' => 'Human Activity',
-	'library:geography' => 'Geography',
-	'library:full_text' => 'Full Text',
-	
+	 	
 	/** MIS Report  **/    
 	'misreport:misreport'  => 'GPIS Advisory Report',
 	'misreport:odp'  => '1. 3 years ODP',
@@ -505,12 +256,7 @@ $lang = array(
 	'misreport:kpifrglobal' => 'KPIs: FR Income Growth - Global',
 	'misreport:contributionbynro' => 'Contribution - by NRO',
 	'misreport:contributionbynroyear' => 'Contribution - by NRO from 2012-2014',   
-	/** Action  **/
-	
-	'unit:add_a_new_unit' => 'Add a new unit',
-	'unit:add_unit' => 'Add Unit',
-	'unit:unit_in_the_database' => 'Number of units in the database',
-	
+
 	//
 	// Action
 	//
@@ -519,58 +265,6 @@ $lang = array(
 	'action:action_data' => 'Action Data',
 	'action:action_analysis' => 'Action Analysis',
 	'action:actiongrid' => 'Edit Action Data',
-	
-	//
-	// Coal
-	//
-	'coal:coal' => 'Coal',
-	'coal:coal_data' => 'Coal Data',
-	'coal:coal_analysis' => 'Coal Analysis',    
-	'coal:coalgrid' => 'Edit Coal Data',
-
-	//
-	// Coal
-	//
-	'crm:crm' => 'CRM',
-	'crm:dashboard' => 'CRM Dashboard',
-	'crm:find_contacts' => 'Find Contacts',
-	'crm:add_contact' => 'Add Contact',
-	'crm:campaigns' => 'Campaigns',	
-	'crm:petitions' => 'Petitions',
-	'crm:events' => 'Events',
-	'crm:mailings' => 'Mailings',
-	'crm:cases' => 'Cases',
-	//
-	// HR Reports
-	//
-	'hrreports:hr_staffcostgrid' => 'Staff Cost Grid',
-	'hrreports:hr_agegrid' => 'Age Grid',
-	'hrreports:hr_hrgrid' => 'HR Data Grid',    
-	'hrreports:hr_reports' => 'Reports',
-	'hrreports:globalfte' => 'Global FTE\'s',
-	'hrreports:turnover' => 'Turnover',
-	'hrreports:diversitygender' => 'Diversity: Gender division in management positions',
-	'hrreports:diversityage' => 'Diversity - Age',
-	'hrreports:diversitynationality' => 'Diversity - Nationality',
-	'hrreports:diversityyearsgp' => 'Diversity - Number of years in GP',
-	'hrreports:diversitynewhires' => 'New Hires',
-	'hrreports:diversityperformance' => 'Performance Management',    
-
-	//
-	// Programme
-	//
-	'programme:add_a_new_programme' => 'Add new programme',
-	'programme:add_programme' => 'Add programme',
-	'programme:programme_in_the_database' => 'Programme in database',
-	
-	//
-	//  Social
-	//
-	'social:social' => 'Social Media',
-	'social:setup' => 'Setup',
-	'social:socialanalysis' => 'Social Analysis',
-	'social:sociallinked' => 'Your Linked',
-	'social:yourtimeline' => 'Your Timeline',  
 
 	//
 	//  System
@@ -598,16 +292,6 @@ $lang = array(
 	'system:apilogs' => 'API Logs',
 	'system:phpinfo' => 'PHPINFO',
 
-	//
-	//  Social
-	//
-	'global:screenscrape' => 'Screenscrape',
-	'global:luminoso' => 'Luminoso',
-	'global:alchemy' => 'Alchemy',
-	'global:A/B' => 'A/L Testing',
-	'global:mediadash' => 'Media Dash',  
-
-
 	/** Global Yggdrasil **/
 	'global:overview' => 'Overview',
 	'global:error' => 'Error',
@@ -615,207 +299,14 @@ $lang = array(
 	'global:allrelatedmediacopyright' => 'Copyright :1 :2',
 	'global:developedat' => 'Developed at',
 	'global:insecure_action' => 'Insecure action was attempted but caught',
-	'global:whois' => 'Who\'s on Board',
-	'global:people' => 'People',
-	'global:schedule' => 'Schedule',
-	'global:agents' => 'Agents',
-	'global:noonreport' => 'Noon Report',
-	'global:tables' => 'Tables',
-	'global:ports' => 'Ports',
-	'global:agentsandports' => 'Agents and ports',
-	'global:joinport' => 'Joined in',
-
-	'global:enter' => 'Enter',    
-	'global:logviewer' => 'Log Extract Viewer',    
-	'global:download' => 'Download',
-	'global:sync' => 'Sync',
-	'global:check' => 'Check MGO/FW',
-
-	/**  Map    **/
-	'global:fleetmonais' => 'AIS Location',    
-	'global:noonreportlocation'  => 'Actual Location',
-
-	/**    **/
-	'global:location' => 'Location',    
-	'global:config'  => 'Config',
-	'global:country' => 'Country',
-	'global:marital' => 'Marital status',
-	'global:meals' => 'Diet',
-	'global:passport' => 'Passport types',
-	'global:rank' => 'Ranks',
-	'global:ships' => 'Ships',
-	'global:type' => 'Office/department',
 
 	'global:upload_failed' => 'There was a problem uploading your file. Please try again. If the problem persists, please contact support@thunderbeaardesign.com.',
 	'global:upload_not_allowed' => 'The file type of the file you were trying to upload is not allowed. If you need to upload a file of that type, please compress it into a .zip or any other archive format you might find appropriate.',
 	'global:copied' => 'Copied!',
 	'global:users' => 'Users',
-	'global:noonreport' => 'Noon Report',    
-	'global:schedule' => 'Schedule',
-	'global:deschedule' => 'Remove scheduled people',
-	'global:agents' => 'Agents',
-	'global:people' => 'People',
-	'global:import' => 'Bulk import',
-	'global:crew' => 'Crew',
-	'global:crew_history' => 'History',
-	'global:all_history' => 'All history',
-	'global:cashbook' => 'Cashbook format',
-
-	'global:whois' => 'Who is onboard',    
-	'global:database' => 'Database',    
-	'global:send_to_office'	=>	'Send to office',
-	'global:couldnotsendemail' => 'Could not send the email.  Please check your settings.',
-	'global:emailsent' => 'Email has been sent!',
-	'global:yes' => 'Yes',
-	'global:no' => 'No',
-	'global:notyetsent' => 'Not sent to office',
-	'global:dontshowagain' => "Don't show this again",
-	'global:enable' => 'Enable',
-	'global:is_enabled' => 'Enabled?',
-	'global:is_completed' => 'Completed?',
-	'global:Y' => 'Y',
-	'global:N' => 'N',
-	'global:notes' => 'Notes',
-	'global:description' => 'Description', 
-	'global:backtoadmin' => 'Back to Admin',
-	//	'global:type' => 'Type',
-	'global:name'		=>	'Name',
-	'global:sex'		=>	'Sex',
-	'global:first_name'		=>	'First Name',
-	'global:last_name'		=>	'Last Name',
-	'global:for'	=>	'for',
-	'global:from'	=>	'from',
-	'global:phone'		=>	'Phone',
-	'global:email'		=>	'Email',
-	'global:contacts'	=>	'Contacts',
-	'global:week' => 'Weekly',
-	'global:quarterly' => 'Quarterly',
-	'global:every_six_months' => 'Every 6 months',
-	'global:biyearly' => 'Every 2 years',
-	'global:month' => 'Monthly',
-	'global:year' => 'Yearly',
-	'global:fax'		=>	'Fax',
-	'global:mobile'		=>	'Mobile',
-	'global:address'	=>	'Address',
-	'global:api_key' => 'API Key',
-	'global:website'	=>	'Website',
-	'global:action'		=>	'Action',
-	'global:items'		=>	'Items',
-	'global:dashboard'	=> 'Dashboard',
-	'global:settings'	=> 'Settings',
-	'global:sync'           =>  'Sync',
-	'global:changepassword' => 'Change Password',
-	'global:logout' 	=> 'Log Out',
-	'global:status' => 'Status',
-	'global:office' => 'Office',
-	'global:user' => 'User',
-	'global:title' => 'Title',
-	'global:subtitle' => 'Subtitle',
-	'global:to' => 'To (separate multiple addresses with a comma)',
-	'global:subject' => 'Subject',
-	'global:thanks' => 'Thanks!',
-	'global:reports' => 'Lists',
-	'global:item' => 'Item',
-	'global:report' => 'Report',
-	'global:saveandinsert' => 'Save and Insert',
-	'global:details'	=>	'Details',
-	'global:license_key' => 'License Key',
-	'global:version' => 'Version',
-	'global:content' => 'Content',
-	'global:add'	=>	'Add',
-	'global:edit'	=>	'Edit',
-	'global:resend'	=>	'Resend',
-	'global:sent' => 'Sent',
-	'global:not_sent' => 'Not sent',
-	'global:view'	=>	'View',
-	'global:delete'	=>	'Delete',
-	'global:remove'	=>	'Remove',
-	'global:sort'	=>	'Sort',
-	'global:deleteitem' => 'Delete Item',
-	'global:dragtoreorder' => 'Drag To Reorder',
-	'global:start' => 'Start',
-	'global:stop' => 'Stop',
-	'global:created'	=>	'Created',
-	'global:updated'	=>	'Updated',
-	'global:update'	=>	'Update',
-	'global:yesdelete' => 'Yes, delete!',
-	'global:confirm_emphisised'	=>	'There is no going back!',
-	'global:color' => 'Color',
-	'global:save' => 'Save',
-	'global:unknown' => 'Unknown',
-	'global:upload_ini_size' => 'The file you uploaded exceeds the size limit imposed by your PHP installation.',
-	'global:upload_error' => 'A problem occurred while uploading the file. Please try again.',
-	'global:recurring' => 'Recurring',
-	'global:unsent' => 'Unsent',
-	'global:duplicate' => 'Duplicate',
-	'global:urltosend'	=>	'Here is the url to send:',
-	'global:copytoclipboard'	=>	'Copy to clipboard',
-	'global:id'           =>	'Id',
-	'global:name'         =>	'Name',
-	'global:rank'         =>	'Rank',
-	'global:nationality'  =>	'Nationality',
-	'global:dateofbirth'  =>	'Date of birth',
-	'global:placeofbirth' =>	'Place of birth',
-	'global:passportno'   =>	'Passport Number',
-	'global:typeofid'     =>	'Type of id',
-	'global:crew_guest_list'   =>	'Current crew list',
-	'global:people_list'       =>	'People List',
-	'global:crewchange'    =>	'Crew changes',
-	'global:muster_list'  =>	'Muster List',
-	'global:historical'   =>	'Historical List',
-	'global:who_has_been_onboard'   =>	'Who has been onboard List',
-	'global:arrival'   =>	'Arrivals',
-	'global:passportissue'   =>	'Passport issue',
-	'global:passportexp'   =>	'Passport expiration',
-	'global:joindate'   =>	'Sign on date',
-	'global:seamansno' => 'Seaman\'s book',
-	'global:seamansexp' => 'Seaman\'s book expiration',
-	'global:flightdetails'   =>	'Flight details',
-	'global:viewpdf'   =>	'PDF',
-	'global:excel'   =>	'Excel',
-	'global:knowas'   =>	'Name',
-	'global:lastname'   =>	'Last Name',
-	'global:fullname'   =>  'Last, Frist Name',
-	'global:nickname'   =>  'Nick Name',
-	'global:list'   =>  'List',
-	'global:departuretime'  =>  'Departure Date',
-	'global:expectedarrivaltime'  => 'Arrival',
-	'global:shipname' => 'Ship',
-	'global:datefrom' => 'From',
-	'global:dateto' => 'To',
-	'global:dayson' => 'Days on',
-	'global:residence' => 'Residence',
-	'global:history' => 'History',
-	'global:portsofcall' => 'Ports of call',
-	'global:nonlatinname' => 'Other name',
 
 	'global:optional_increment' => '<strong>Optional</strong> - will auto increment',
 
-	'login:ahoy' => 'Ahoy!',
-	'login:readytodothis' => 'Ready to do this?',
-	'login:sup' => 'Sup?',
-	'global:actions' => 'Actions',
-
-
-	/** Greetings **/
-	'global:greetings'	=>	array('Ahoi!', 'Hello,', 'Hey,', 'Sup,'),
-	/** End Greetings **/
-
-	/** Dashboard **/	
-	'dashboard:expectedcrue'	=>	'Crew Expected',
-	'dashboard:peopleonboard'       => 	'People On Board',
-	'dashboard:birthdays'           =>      'Upcoming birthdays',
-
-	/** End Dashboard **/
-
-	/** Dashboard **/	
-
-	'sync:ship1'           => 	'Rainbow Warrior',
-	'sync:ship2'           => 	'Esperanza',
-	'sync:ship3'           => 	'Arctic Sunrise',
-	'sync:ship4'           =>   'GPI Ship Unit',
-	'sync:changes'         => 	'Get changes from ship server and update office database accordingly. Requires network connectivity.',
-	'sync:offchanges'      => 	'Get changes from office server and update ship database accordingly. Requires network connectivity.',    
 	/** End Dashboard **/
 		
 	/** Contact Log **/
@@ -828,24 +319,8 @@ $lang = array(
 	'contact:calling_title'         =>	'Calling office ":1"',
 	// 'contact:view_all'		=>	'View All',
 	/** End Contact Log **/
-
-	/** Reports **/
-	'reports:pership' => 'per ship',
-	'reports:datefrom' => 'From',
-	'reports:allships' => 'All ships',
-	'reports:dateto' => 'To',
-	'reports:byship' => 'Ship',
-
-	'reports:view' => 'View Report',
-	'reports:show_all' => 'Show Reports',
-	'reports:nodata' => 'No :1.',
-	/** End Reports **/
-	
-	/** Users **/
-	'users:create_user' => 'Create User',
-		
-	/** End Settings **/	
-
+			
+	/** End Settings **/
 	'update:ifyourenotsurecontactus' => "If you're not sure what to do, please <a href='http://thunderbeardesign.com/forums/newtopic/2/'>start a new tech support topic in the forums</a>.",
 	'update:youmodified' => 'You modified',
 	'update:youdeleted' => 'You deleted',

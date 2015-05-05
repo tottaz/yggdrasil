@@ -47,7 +47,7 @@ $config['enable_emulate_request'] = FALSE;
 |	E.g: My Secret REST API
 |
 */
-$config['rest_realm'] = 'GREENGARDEN API';
+$config['rest_realm'] = 'Yggdrasil API';
 
 /*
 |--------------------------------------------------------------------------

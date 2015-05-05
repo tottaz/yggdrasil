@@ -206,6 +206,21 @@ class Modules
 				if (is_file($fullpath.$file_ext)) return array($fullpath, $file);
 			}
 		}
+
+		/* is the file in an admin theme? */
+		if ($base == 'views/') {
+			if (defined('ADMIN_THEME')) {
+				// check system folder
+				if (is_file(APPPATH.'themes/'.ADMIN_THEME.'/'.$base.$path.$file_ext))
+				{
+					return array(APPPATH.'themes/'.ADMIN_THEME.'/'.$base.$path, $file);	
+				}
+			}
+			else {
+				if (is_file(APPPATH.$base.$path.$file_ext)) return array(APPPATH.$base.$path, $file);
+			}
+			show_error("Unable to locate the file: {$path}{$file_ext}");
+		}
 		
 		return array(FALSE, $file);	
 	}

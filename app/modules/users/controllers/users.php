@@ -485,11 +485,6 @@ class Users extends Admin_Controller
 	{
 		$this->template->title(lang('user_reset_password_title'));
 
-		if (APP_DEMO)
-		{
-			show_error(lang('global:demo_restrictions'));
-		}
-
 		//if user is logged in they don't need to be here. and should use profile options
 		if ($this->current_user)
 		{
@@ -563,7 +558,6 @@ class Users extends Admin_Controller
 	 */
 	public function reset_complete()
 	{
-		APP_DEMO and show_error(lang('global:demo_restrictions'));
 
 		//if user is logged in they don't need to be here. and should use profile options
 		if ($this->current_user)
@@ -644,7 +638,6 @@ class Users extends Admin_Controller
 		// Settings valid?
 		if ($this->form_validation->run())
 		{
-			APP_DEMO and show_error(lang('global:demo_restrictions'));
 
 			// Get our secure post
 			$secure_post = $this->input->post();

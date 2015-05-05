@@ -38,7 +38,7 @@
         <?php endforeach; ?>
       </div>
             <div class="buttons padding-top">
-                    <?php $this -> load -> view('partials/buttons', array('buttons' => array('save'))); ?>
+                    <?php $this->load->view('partials/buttons', array('buttons' => array('save'))); ?>
             </div>
 	<?php echo form_close(); ?>
 <?php else: ?>
@@ -74,19 +74,6 @@
 	    });
 	} else {
 	    $('.'+$('[name=email_server]').val()).slideDown();
-	}
-	
-    });
-    
-    $('.'+$('[name=ldap]').val()).show();
-    
-    $('[name=ldap]').change(function() {
-	if ($('.ldap:visible').length > 0) {
-	    $('.ldap:visible').slideUp(function() {
-		$('.'+$('[name=ldap]').val()).slideDown();
-	    });
-	} else {
-	    $('.'+$('[name=ldap]').val()).slideDown();
 	}
 	
     });

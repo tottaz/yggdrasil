@@ -273,7 +273,8 @@ switch (ENVIRONMENT)
  *---------------------------------------------------------------
  *
  */
-	if (is_file($application_folder.'/config/database.php')) {
+
+	if (is_file($application_folder.'/config/database.php')) {		
 		file_get_contents($application_folder.'/config/database.php') or $application_folder = FCPATH."installer"; 
 	} else {
 		$application_folder = FCPATH."installer";
@@ -284,11 +285,6 @@ switch (ENVIRONMENT)
 	// The path to the "application" folder
 	if (is_dir($application_folder))
 	{
-//		if (($_temp = realpath($application_folder)) !== FALSE)
-//		{
-//			$application_folder = $_temp;
-//		}
-
 		define('APPPATH', $application_folder.DIRECTORY_SEPARATOR);
 	}
 	else
@@ -333,20 +329,12 @@ switch (ENVIRONMENT)
 
 	define('VIEWPATH', $view_folder);
 
-/* --------------------------------------------------------------------
- * LOAD THE DATAMAPPER BOOTSTRAP FILE
- * --------------------------------------------------------------------
- */
-//require_once FCPATH.'third_party/modules/datamapper/bootstrap.php';        
-
-        
-    define('APP_DEMO', (file_exists(FCPATH.'DEMO'))); 
-
 /*
- * --------------------------------------------------------------------
- * LOAD THE BOOTSTRAP FILE
- * --------------------------------------------------------------------
- *
- * And away we go...
- */
+* --------------------------------------------------------------------
+* LOAD THE BOOTSTRAP FILE
+* --------------------------------------------------------------------
+*
+* And away we go...
+*/
+
 require_once BASEPATH.'core/CodeIgniter.php';
