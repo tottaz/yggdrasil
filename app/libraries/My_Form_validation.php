@@ -12,7 +12,7 @@ class My_Form_validation extends CI_Form_validation
 		$this->CI =& get_instance();
 	//	$this->CI->load->library("cimongo/cimongo");
 		parent::__construct($rules);
-		$this->CI->load->language('extra_validation');
+		$this->CI->load->language('form_validation');
 	}
 
 	// --------------------------------------------------------------------

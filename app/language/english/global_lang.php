@@ -77,6 +77,8 @@ $lang = array(
 	'global:newssearch'	=>	'newssearch',
 	'global:edit'		=> 	'edit',
 	'global:delete'		=>	'delete',
+	'global:created'	=>	'created',
+	'global:remove'		=>	'remove',
     
 	'global:optional_increment' => '<strong>Optional</strong> - will auto increment',
 

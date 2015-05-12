@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $route['default_controller'] = "frontpage";
-$route['404_override'] = '';
+$route['404_override'] = 'errors/error_404';
 $route['translate_uri_dashes'] = FALSE;
 
 /**
@@ -62,6 +62,9 @@ $routable_controllers = array('ajax', 'api', 'users', 'analysis', 'dashboard' );
 $route['admin'] = "dashboard";
 $route['admin/([a-zA-Z_-]+)/(:any)'] = "$1/admin/$2";
 $route['admin/([a-zA-Z_-]+)'] = "$1/admin/index";
+
+$route['admin/([a-zA-Z_-]+)/(:any)/(:any)'] = "$1/admin/$2/$3";
+$route['admin/([a-zA-Z_-]+)/(:any)/(:any)/(:any)'] = "$1/admin/$2/$3/$4";
 
 $route['api/1/(:any)'] = 'api_1/$1';
 $route['api/ajax/(:any)']          	    = 'api/ajax/$1';

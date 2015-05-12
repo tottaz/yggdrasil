@@ -100,7 +100,7 @@ class My_Controller extends CI_Controller {
 		define('IS_CLI', defined('STDIN'));
 		
 		// Create a hook point with access to instance but before custom code
-//		$this->hooks->_call_hook('post_core_controller_constructor');
+		$this->hooks->call_hook('post_core_controller_constructor');
 		
 		$this->current_user = $this->template->current_user = $this->ion_auth->get_user();
 		// Work out module, controller and method and make them accessable throught the CI instance

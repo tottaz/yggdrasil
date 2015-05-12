@@ -65,7 +65,7 @@ $(document).ready(function () {
 		return false;
 	});
 	
-	$('.delete-key').live('click', function () {
+	$('.delete-key').on('click', function () {
 		$(this).closest('tr').fadeOut().find('input').val('');
 		return false;
 	});

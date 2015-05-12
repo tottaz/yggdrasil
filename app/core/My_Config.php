@@ -24,11 +24,7 @@ class My_Config extends CI_Config
 			return $this->slash_item('base_url').$this->item('index_page');
 		}
 		else
-		{
-			// -- Old busted shit
-			//$suffix = ($this->item('url_suffix') == FALSE) ? '' : $this->item('url_suffix');
-			// -- end old busted shit
-			
+		{	
 			// -- Hot newness
 			if(strpos($uri, '|') > 0)
 			{
