@@ -3,7 +3,7 @@ yggdrasil
 
 Yggdrasil php framework for non-public applications
 
-Yggdrasil is a web pplication framework based on the CodeIgniter 3.0 php framework - Yggdrasil makes it easy to build web applications. We have not reinvented the wheel we have created Yggdrasil from available open-source libraries such as <a href="http://www.codeigniter.com/" rel="external">CodeIgniter</a><span style="font-size: 14px; line-height: 1.5;">,&nbsp;</span><a href="https://github.com/philsturgeon/codeigniter-restserver" rel="external" style="font-size: 14px; line-height: 1.5;">CodeIgniter Rest Server</a><span style="font-size: 14px; line-height: 1.5;">,&nbsp;</span><a href="https://github.com/benedmunds/CodeIgniter-Ion-Auth" rel="external">CodeIgniter-Ion-Auth</a><span style="font-size: 14px; line-height: 1.5;">,&nbsp;</span><a href="https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc" rel="external" style="font-size: 14px; line-height: 1.5;">HMVC Modular Extensions</a><span style="font-size: 14px; line-height: 1.5;">,&nbsp;</span></div>
+Yggdrasil is a web application framework based on the CodeIgniter 3.0 php framework - Yggdrasil makes it easy to build web applications. We have not reinvented the wheel we have created Yggdrasil from available open-source libraries such as <a href="http://www.codeigniter.com/" rel="external">CodeIgniter</a><span style="font-size: 14px; line-height: 1.5;">,&nbsp;</span><a href="https://github.com/philsturgeon/codeigniter-restserver" rel="external" style="font-size: 14px; line-height: 1.5;">CodeIgniter Rest Server</a><span style="font-size: 14px; line-height: 1.5;">,&nbsp;</span><a href="https://github.com/benedmunds/CodeIgniter-Ion-Auth" rel="external">CodeIgniter-Ion-Auth</a><span style="font-size: 14px; line-height: 1.5;">,&nbsp;</span><a href="https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc" rel="external" style="font-size: 14px; line-height: 1.5;">HMVC Modular Extensions</a><span style="font-size: 14px; line-height: 1.5;">,&nbsp;</span></div>
 
 <h1>Software Architecture principals</h1>
 
@@ -27,11 +27,16 @@ The default theme is based&nbsp;<a href="http://twitter.github.io/bootstrap/" st
 
 The main modules are Users, Settings, Maintenance, Modules and Logs.
 
-The Users module is built to support group management, permission settings, user login (support local as well as LDAP), user creation.
+The Users module is built to support group management, permission settings, user login and user creation.
 
-The Settings module is used to configure the system.
+The Settings module is used for the configuration of the yggdrasil platform.
 
 The module module is used to enable or disable modules in the system, it is also used when a new module is intorudced as it will add the new module to the module table in the database.
 
-The maintenance module is used to clear cache or backup data from the database.
+The system module is used to clear cache or backup data from the database.
+
 The log module reads the log file created by the application when there is a problem in the applicaiton.
+
+<h1>To get stared</h1>
+After you install yggdrasil, it is recommended that you go to app -> config -> config.php to change the Session Variables - set the $config['sess_driver'] to database.
+
