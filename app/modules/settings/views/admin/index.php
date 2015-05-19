@@ -1,6 +1,3 @@
-<?php echo validation_errors(); ?>
-<?php echo form_error('options[size]'); ?>
-
 <div class="container">
 <?php if ($setting_sections): ?>
 	<?php echo form_open('admin/settings/edit', 'class="crud"'); ?>

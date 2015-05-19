@@ -40,6 +40,7 @@ function get_supported_lang()
 	$supported_lang = Settings::get('supported_languages');
 
 	$arr = array();
+
 	foreach ($supported_lang as $key => $lang)
 	{
 		$arr[] = $key . '=' . $lang['name'];

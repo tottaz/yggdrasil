@@ -44,7 +44,7 @@ class Installer {
 		$config['port']		= $this->_ci->session->userdata('port');
 		$config['hostname']	= $this->_ci->session->userdata('hostname');
 		$config['database']	= $this->_ci->session->userdata('database');
-		$config['username']	= $this->_ci->session->userdata('mysql_username');
+		$config['username']	= $this->_ci->session->userdata('username');
 		$config['password']	= $this->_ci->session->userdata('password');
 		$config['dbdriver'] = $this->dbdriver;
 		$config['dbprefix']	= $this->_ci->session->userdata('dbprefix');
@@ -52,6 +52,7 @@ class Installer {
 		$config['char_set'] = "utf8";
 		$config['dbcollat'] = "utf8_general_ci";
 		$config['autoinit'] = TRUE;
+
 
 		$this->_ci->load->database($config);
 		$this->_ci->load->dbforge();
@@ -66,8 +67,6 @@ class Installer {
 		$replace = array();
 
 		$data['dbprefix'] = $config['dbprefix'];
-		$data['version'] = file_get_contents(APPPATH.'VERSION');
-		$data['rss_password'] = random_string('alnum', 12);
 		$data['timezone'] = @date_default_timezone_get();
 
 		// Include migration config to know which migration to start from
@@ -77,12 +76,6 @@ class Installer {
 
 		foreach ($data as $key => $val)
 		{
-            
-            if (strtoupper($key) == "TAX_RATE") {
-                // Fixes an issue with MySQL in Strict Mode if the tax was empty.
-                $val = (float) $val;
-            }
-            
             switch ($this->dbdriver) {
                 case 'mysql':
                     $escaped_val = mysql_real_escape_string($val);
@@ -123,7 +116,7 @@ class Installer {
 			'{USERNAME}' 	=> $config['username'],
 			'{PASSWORD}' 	=> $config['password'],
 			'{DATABASE}' 	=> $config['database'],
-			'{PORT}'	=> $config['port'],
+			'{PORT}'		=> $config['port'],
 			'{DBPREFIX}'	=> $config['dbprefix'],
 		);
 
@@ -188,6 +181,11 @@ class Installer {
 \$db['default']['autoinit'] = TRUE;
 \$db['default']['stricton'] = FALSE;
 \$db['default']['port']	   = {PORT};
+\$db['default']['encrypt'] = FALSE;
+\$db['default']['compress'] = FALSE;
+\$db['default']['stricton'] = FALSE;
+\$db['default']['failover'] = array();
+\$db['default']['save_queries'] = TRUE;
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

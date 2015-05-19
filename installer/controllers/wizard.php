@@ -114,9 +114,9 @@ class Wizard extends CI_Controller {
 		}
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
-		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
-		$this->form_validation->set_rules('username', 'Username', 'required|xss_clean');
+		$this->form_validation->set_rules('first_name', 'First Name', 'required');
+		$this->form_validation->set_rules('last_name', 'Last Name', 'required');
+		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('notify_email', 'Notify Email', 'required|valid_email');
 		$this->form_validation->set_rules('password', 'Password', 'required|min_length[5]|max_length[20]|matches[password_confirm]');
 		$this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'required');

@@ -68,7 +68,7 @@ class Module_m extends My_Model
 			->where('slug', $slug)
 			->get($this->_table)
 			->row();
-		
+
 		// store these
 		$this->_module_exists[$slug] = count($row) > 0;
 		$this->_module_enabled[$slug] = $row->enabled;
