@@ -38,14 +38,4 @@ class Calendar extends Admin_Controller {
 						
 		$this -> template -> build('calendar');
 	}
-
-	public function scalendar() {
-
-		$this -> template->title($this -> module_details['name']) 
-						->append_css('module::bootstrap-responsive.min.css')
-						->append_css('module::style.css')
-						->append_css('module::style-responsive.css');
-						
-		$this -> template -> build('scalendar');
-	}
 }

@@ -1,0 +1,192 @@
+/*======PAGING. BRICKS SKIN=========*/
+.dhx_pbox{
+	margin-top:3px;
+	border:1px solid #D4D0C8;
+	border-top: 0px;
+	font-size:10px;
+}
+.dhx_pline{
+	background-color:white;
+	margin: -15px 10px 10px 10px;
+	padding:0px 5px 0px 5px;
+	float:left;
+}
+
+.dhx_page, .dhx_pager_info{
+	margin:3px;
+	text-align:center;
+	font-family: tahoma;
+	font-size:12px;
+	float:left;
+	cursor:pointer;
+	color:black;
+	background-color:gray;
+	padding:1px;
+}
+.dhx_pager_info{
+	white-space:nowrap;
+	background-color:white;
+	margin: -8px 10px 10px 10px;
+	padding: 0px 5px 0px 5px;
+	cursor:default;
+}
+
+.dhx_page div{
+	background-color:white;
+	width:16px;
+	height:17px;
+	vertical-align:middle;
+}
+div.dhx_page_active{
+	font-weight:bold;
+	background-color:lightgrey;
+	cursor:default;
+	color:white;
+}
+
+/* for modern grid skin */
+.dhx_pbox_modern{
+	margin-top:3px;
+	border:1px solid #D6D6D6;
+	border-top: 0px;
+	font-size:10px;
+}
+.dhx_pline_modern{
+	background-color:white;
+	margin: -15px 10px 10px 10px;
+	padding:0px 5px 0px 5px;
+	float:left;
+}
+
+.dhx_page_modern, .dhx_pager_info_modern{
+	margin:3px;
+	text-align:center;
+	font-family: tahoma;
+	font-size:12px;
+	float:left;
+	cursor:pointer;
+	color:#055A78;
+	background-color:#D6D6D6;
+	padding:1px;
+}
+.dhx_pager_info_modern{
+	white-space:nowrap;
+	background-color:white;
+	margin: -8px 10px 10px 10px;
+	padding: 0px 5px 0px 5px;
+	cursor:default;
+}
+
+.dhx_page_modern div{
+	background-color:white;
+	width:16px;
+	height:17px;
+	vertical-align:middle;
+}
+div.dhx_page_active_modern{
+	font-weight:bold;
+	background-color:#055A78;
+	cursor:default;
+	color:white;
+}
+
+/* light grid skin*/
+.dhx_pbox_light{
+	margin-top:3px;
+	border:1px solid #C2D5DC;
+	border-top: 0px;
+	font-size:10px;
+}
+.dhx_pline_light{
+	background-color:white;
+	margin: -15px 10px 10px 10px;
+	padding:0px 5px 0px 5px;
+	float:left;
+}
+
+.dhx_page_light, .dhx_pager_info_light{
+	margin:3px;
+	text-align:center;
+	font-family: tahoma;
+	font-size:12px;
+	float:left;
+	cursor:pointer;
+	color:#055A78;
+	background-color:#93AFBA;
+	padding:1px;
+}
+.dhx_pager_info_light{
+	white-space:nowrap;
+	background-color:white;
+	margin: -8px 10px 10px 10px;
+	padding: 0px 5px 0px 5px;
+	cursor:default;
+}
+
+.dhx_page_light div{
+	background-color:white;
+	width:16px;
+	height:17px;
+	vertical-align:middle;
+}
+div.dhx_page_active_light{
+	font-weight:bold;
+	background-color:#D1DFE3;
+	cursor:default;
+	color:white;
+}
+
+
+/* skyblue grid skin*/
+.dhx_pbox_skyblue{
+	margin-top:3px;
+	border:1px solid #C2D5DC;
+	border-top: 0px;
+	font-size:10px;
+}
+.dhx_pline_skyblue{
+	background-color:white;
+	margin: -15px 10px 10px 10px;
+	padding:0px 5px 0px 5px;
+	float:left;
+}
+
+.dhx_page_skyblue, .dhx_pager_info_skyblue{
+	margin:3px;
+	text-align:center;
+	font-family: tahoma;
+	font-size:12px;
+	float:left;
+	cursor:pointer;
+	color:#055A78;
+	background-color:#93AFBA;
+	padding:1px;
+}
+.dhx_pager_info_skyblue{
+	white-space:nowrap;
+	background-color:white;
+	margin: -8px 10px 10px 10px;
+	padding: 0px 5px 0px 5px;
+	cursor:default;
+}
+
+.dhx_page_skyblue div{
+	background-color:white;
+	width:16px;
+	height:17px;
+	vertical-align:middle;
+}
+div.dhx_page_active_skyblue{
+	font-weight:bold;
+	background-image:url(../imgs/sky_blue_grid.gif);
+	border:1px solid #A4BED4;
+	padding:0px;
+	cursor:default;
+	padding:0px;
+	color:black;
+}
+div.dhx_page_active_skyblue div.dhx_page_active_skyblue{
+	border:0px solid #A4BED4;
+}
+
+

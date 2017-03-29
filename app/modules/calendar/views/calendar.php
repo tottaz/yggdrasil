@@ -2,7 +2,7 @@
     <script src="../bootstrap/js/html5.js"></script>
     <![endif]-->
 
-<div class="container-fluid">
+<div class="container">
     <div class="row-fluid">
         <div class="span10 well" style="background-color: #ffffff;">
             <div id="calendar">

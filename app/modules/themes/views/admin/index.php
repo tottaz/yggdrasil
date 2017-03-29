@@ -1,71 +1,73 @@
-<section class="title">
-	<h4><?php echo $module_details['name']; ?></h4>
-</section>
+<div class="container">
+	<section class="title">
+		<h4><?php echo $module_details['name']; ?></h4>
+	</section>
 
-<section class="item">
-	<?php if ($themes): ?>
-	
-		<?php echo form_open('admin/themes/set_default'); ?>
-		<?php echo form_hidden('method', $this->method); ?>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th width="50px" class="align-center"><?php echo lang('themes.default_theme_label'); ?></th>
-					<th width="15%"><?php echo lang('themes.theme_label'); ?></th>
-					<th class="collapse"><?php echo lang('global:description'); ?></th>
-					<th class="collapse" width="15%"><?php echo lang('global:author'); ?></th>
-					<th width="50px" class="align-center"><?php echo lang('themes.version_label'); ?></th>
-					<th width="250px"></th>
-				</tr>
-			</thead>
-			<tfoot>
-				<tr>
-					<td colspan="6">
-						<div class="inner"><?php $this->load->view('partials/pagination'); ?></div>
-					</td>
-				</tr>
-			</tfoot>
-			<tbody>
-				<?php foreach ($themes as $theme): ?>
-				<tr>
-					<td class="align-center"><input type="radio" name="theme" value="<?php echo $theme->slug; ?>"
-						<?php echo isset($theme->is_default) ? 'checked' : ''; ?> />
-					</td>
-					<td>
-						<?php if ( ! empty($theme->website)): ?>
-							<?php echo anchor($theme->website, $theme->name, array('target'=>'_blank')); ?>
-						<?php else: ?>
-							<?php echo $theme->name; ?>
-						<?php endif; ?>
-					</td>
-					<td class="collapse"><?php echo $theme->description; ?></td>
-					<td class="collapse">
-						<?php if ($theme->author_website): ?>
-							<?php echo anchor($theme->author_website, $theme->author, array('target'=>'_blank')); ?>
-						<?php else: ?>
-							<?php echo $theme->author; ?>
-						<?php endif; ?>
-					</td>
-	
-					<td class="align-center"><?php echo $theme->version; ?></td>
-					<td class="actions">
-						<?php echo isset($theme->options) ? anchor('admin/themes/options/'.$theme->slug, lang('themes.options'), 'title="'.$theme->name.'" class="btn btn-success btn-sm options"') : ''; ?>
-						<a href="<?php echo $theme->screenshot; ?>" rel="screenshots" title="<?php echo $theme->name; ?>" class="btn btn-danger btn-sm modal"><?php echo lang('buttons.preview'); ?></a>
-					</td>
-				</tr>
-				<?php endforeach; ?>
-			</tbody>
-		</table>
+	<section class="item">
+		<?php if ($themes): ?>
 		
-		<div>
-			<?php $this->load->view('partials/buttons', array('buttons' => array('save') )); ?>
-		</div>
+			<?php echo form_open('admin/themes/set_default'); ?>
+			<?php echo form_hidden('method', $this->method); ?>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th width="50px" class="align-center"><?php echo lang('themes.default_theme_label'); ?></th>
+						<th width="15%"><?php echo lang('themes.theme_label'); ?></th>
+						<th class="collapse"><?php echo lang('global:description'); ?></th>
+						<th class="collapse" width="15%"><?php echo lang('global:author'); ?></th>
+						<th width="50px" class="align-center"><?php echo lang('themes.version_label'); ?></th>
+						<th width="250px"></th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td colspan="6">
+							<div class="inner"><?php $this->load->view('partials/pagination'); ?></div>
+						</td>
+					</tr>
+				</tfoot>
+				<tbody>
+					<?php foreach ($themes as $theme): ?>
+					<tr>
+						<td class="align-center"><input type="radio" name="theme" value="<?php echo $theme->slug; ?>"
+							<?php echo isset($theme->is_default) ? 'checked' : ''; ?> />
+						</td>
+						<td>
+							<?php if ( ! empty($theme->website)): ?>
+								<?php echo anchor($theme->website, $theme->name, array('target'=>'_blank')); ?>
+							<?php else: ?>
+								<?php echo $theme->name; ?>
+							<?php endif; ?>
+						</td>
+						<td class="collapse"><?php echo $theme->description; ?></td>
+						<td class="collapse">
+							<?php if ($theme->author_website): ?>
+								<?php echo anchor($theme->author_website, $theme->author, array('target'=>'_blank')); ?>
+							<?php else: ?>
+								<?php echo $theme->author; ?>
+							<?php endif; ?>
+						</td>
 		
-		<?php echo form_close(); ?>
-	
-	<?php else: ?>
-		<div class="blank-slate">
-			<p><?php echo lang('themes.no_themes_installed'); ?></p>
-		</div>
-	<?php endif; ?>
-</section>
+						<td class="align-center"><?php echo $theme->version; ?></td>
+						<td class="actions">
+							<?php echo isset($theme->options) ? anchor('admin/themes/options/'.$theme->slug, lang('themes.options'), 'title="'.$theme->name.'" class="btn btn-success btn-sm options"') : ''; ?>
+							<a href="<?php echo $theme->screenshot; ?>" rel="screenshots" title="<?php echo $theme->name; ?>" class="btn btn-danger btn-sm modal"><?php echo lang('buttons.preview'); ?></a>
+						</td>
+					</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+			
+			<div>
+				<?php $this->load->view('partials/buttons', array('buttons' => array('save') )); ?>
+			</div>
+			
+			<?php echo form_close(); ?>
+		
+		<?php else: ?>
+			<div class="blank-slate">
+				<p><?php echo lang('themes.no_themes_installed'); ?></p>
+			</div>
+		<?php endif; ?>
+	</section>
+</div>

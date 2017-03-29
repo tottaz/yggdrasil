@@ -1,4 +1,4 @@
-
+<div class="container">
 <form class="form-horizontal" role="form" id="alchemynews" name="alchemynews" action="#">
   <div class="form-group">
     <label class="control-label col-sm-2" for="title"><?php echo __('analysis:title') ?></label>
@@ -77,7 +77,7 @@
         </div>
     </div>
 </form>
-
+</div>
 
 
 <div class="container" id="output"></div>

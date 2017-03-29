@@ -1,0 +1,72 @@
+div.gridbox table.obj.row20px tr td {
+	line-height: 13px;
+	vertical-align: middle !important;
+	padding-left: 4px !important;
+	padding-right: 4px !important;
+	padding-bottom: 0px !important;
+	border-collapse: separate !important;
+}
+
+div.gridbox table.obj th, div.gridbox table.hdr th {
+    margin: 0 !important;
+    padding: 0 !important;
+	border-spacing: 0px;
+	border: none;
+}
+
+div.gridbox_dhx_skyblue table.hdr td {
+	border-collapse: separate !important;
+	border-top: 1px solid #FDFDFD !important;
+	padding: 5px 0 !important;
+}
+
+.dhx_toolbar_base_dhx_skyblue div.dhx_toolbar_btn div {
+	line-height: 13px;
+}
+
+
+div.gridbox table.hdr {
+	border-collapse: separate !important;
+}
+
+div.gridbox table.obj.row20px {
+	margin: 0px !important;
+	border-collapse: separate !important;
+}
+
+div.gridbox table.obj tr td.editable {
+	padding: 0px !important;
+}
+
+.header_editor {
+	font-size: 11px !important;
+	line-height: 13px !important;
+	font-family: Tahoma !important;
+	margin: 0px !important;
+	height: 12px !important;
+	border: 1px solid #7f9db9 !important;
+}
+
+.header_editor:focus {
+	border: 1px solid #7f9db9 !important;
+}
+
+.dhx_combo_edit:focus {
+	border: none !important;
+}
+
+div.gridbox table.obj.row20px tr td:first-child,
+div.gridbox table.obj.row20px tr td:first-child {
+	border-color: #FDFDFD #A4BED4 #A4BED4 #FDFDFD !important;
+	border-width: 1px 0 !important;
+}
+
+div.dhx_toolbar_poly_dhx_skyblue table.buttons_cont td.td_btn_img {
+	line-height: 2.4px !important;
+}
+
+div.gridbox table.hdr,
+div.gridbox table.obj.row20px {
+	border: none !important;
+	margin: 0px;
+}

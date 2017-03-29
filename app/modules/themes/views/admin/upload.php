@@ -1,23 +1,25 @@
-<section class="title">
-	<h4><?php echo lang('themes.upload_title');?></h4>
-</section>
+</div class="container">
+	<section class="title">
+		<h4><?php echo lang('themes.upload_title');?></h4>
+	</section>
 
-<section class="item">
+	<section class="item">
 
-<?php echo form_open_multipart('admin/themes/upload', array('class' => 'crud'));?>
+	<?php echo form_open_multipart('admin/themes/upload', array('class' => 'crud'));?>
 
-	<ul>
-		<li>
-			<h4><?php echo lang('themes.upload_desc'); ?></h4>
-		</li>
+		<ul>
+			<li>
+				<h4><?php echo lang('themes.upload_desc'); ?></h4>
+			</li>
+			
+			<li>
+				<input type="file" name="userfile" class="input" />
+			</li>
+		</ul>
 		
-		<li>
-			<input type="file" name="userfile" class="input" />
-		</li>
-	</ul>
-	
-	<div><?php $this->load->view('partials/buttons', array('buttons' => array('upload') )); ?></div>
-	
-<?php echo form_close(); ?>
+		<div><?php $this->load->view('partials/buttons', array('buttons' => array('upload') )); ?></div>
+		
+	<?php echo form_close(); ?>
 
-</section>
+	</section>
+</div>

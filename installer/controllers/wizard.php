@@ -35,6 +35,9 @@ class Wizard extends CI_Controller {
 		parent::__construct();
 		$this->config_path = FCPATH.'app/config';
 		$this->upload_path = FCPATH.'uploads/';
+
+		//Switch off Error Reporting from Server
+//		error_reporting(0);
 		
 		include_once FCPATH.'app/libraries/Asset.php';
 		Asset::add_path(APPPATH.'assets/', BASE_URL);
@@ -77,15 +80,21 @@ class Wizard extends CI_Controller {
 		{
 			$data['port'] = ( ! $data['port']) ? '3306' : $data['port'];
 
-			$link = @mysql_connect($data['hostname'].':'.$data['port'], $data['username'], $data['password'], TRUE);
+			$link = mysqli_connect($data['hostname'], $data['username'], $data['password']);
+
+			if (!$link) {
+				$data['error'] = "Error: Unable to connect to MySQL." . PHP_EOL;
+			    $data['error'] .= "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+			    $data['error'] .= "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+			}
 
             if ($link)
 			{
                 // If the database is not there create it
-                mysql_query('CREATE DATABASE IF NOT EXISTS '.$data['database'], $link);
+                mysqli_query($link, 'CREATE DATABASE IF NOT EXISTS '. $data['database']);
             }
 			
-			if ($link AND @mysql_select_db($data['database'], $link))
+			if ($link AND mysqli_select_db($link, $data['database']))
 			{
 				$this->session->set_userdata('hostname', $data['hostname']);
 				$this->session->set_userdata('username', $data['username']);
@@ -99,7 +108,8 @@ class Wizard extends CI_Controller {
 			}
 			else
 			{
-				$data['error'] = 'Database Error: '.mysql_error();
+				$data['error'] = 'Failed to connect to MySQL: ' 
+					. mysqli_connect_error();
 			}
 		}
 		$this->_output_step('steps/step2', $data);

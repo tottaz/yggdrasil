@@ -1,0 +1,24 @@
+<!-- top header -->		
+<header>
+	<topheader id="topheader">
+		<div class="navbar-inner">
+		 <div class="container">
+		   <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+			 <span class="icon-bar"></span>
+			 <span class="icon-bar"></span>
+			 <span class="icon-bar"></span>
+		   </a>
+		<div class="user-nav">
+		{{ if user:logged_in }}
+		    <li>{{ helper:lang line="welcomeback" }}<b> </b></li>
+			<li><a href="{{ url:site uri='dashboard' }}">{{ helper:lang line="dashboard" }}Home</a></li>
+			<li><a href="{{ url:site uri='admin/apikey' }}">{{ helper:lang line="apikey" }}Api Key</a></li>
+			<li><a href="{{ url:site uri='users/logout' }}">{{ helper:lang line="logout_label" }}Logout</a></li>
+		{{ else }}
+		    <li><a href="{{ url:site uri='admin/user/login' }}">{{ helper:lang line="login" }}Login</a></li>
+		{{ endif }}
+		</div>
+		 </div>
+		</div>
+	</topheader>
+</header>

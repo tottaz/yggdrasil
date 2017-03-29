@@ -369,6 +369,7 @@ $config['encryption_key'] = 'g54h623580';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
+
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'yggdrasil';
 $config['sess_expiration'] = 7200;

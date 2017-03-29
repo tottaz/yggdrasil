@@ -74,7 +74,7 @@ $lang = array(
 	'global:calendar'   =>  'Calendar',
 	'global:logout' 	=>	'Logout',
 	'global:login'		=> 	'login',
-	'global:newssearch'	=>	'newssearch',
+	'global:newssearch'	=>	'Search News',
 	'global:edit'		=> 	'edit',
 	'global:delete'		=>	'delete',
 	'global:created'	=>	'created',
@@ -98,6 +98,13 @@ $lang = array(
 	/** Feeds **/
 	'global:addfeed'		=>	'Add Feed',	
 	'global:managefeeds'	=>	'Manage Feeds',
+
+
+	/** Groups **/
+	'global:groups'			=>	'User Groups',	
+
+	/** IT Reports **/
+	'global:itreports'			=>	'CDN Usage',	
 
 	/** End Dashboard **/
 

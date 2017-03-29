@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>Filtering and Autocomplete mode</title>
+	<script>
+		window.dhx_globalImgPath="../dhtmlx/imgs/";
+	</script>
+
+
+
+<script src="../dhtmlx/dhtmlx.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../codebase/connector.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="../dhtmlx/dhtmlx.css" type="text/css" charset="utf-8">
+</head>
+<body>
+	<div id="combo_zone4" style="width:200px; height:30px;"></div>
+	<hr/>
+	<div id="combo_zone5" style="width:200px; height:30px;"></div>
+	<hr/>
+	<div id="combo_zone6" style="width:200px; height:30px;"></div>
+	<script>
+        var z=new dhtmlXCombo("combo_zone4","alfa4",200);
+		z.loadXML("02_sql_connector.php");
+	</script>
+	<script>
+        var z=new dhtmlXCombo("combo_zone5","alfa4",200);
+		z.enableFilteringMode(true,"02_sql_connector.php",true);
+	</script>
+	<script>
+        var z=new dhtmlXCombo("combo_zone6","alfa4",200);
+		z.enableFilteringMode(true,"02_sql_srnd_connector.php",true,true);
+	</script>
+<div class='code'><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">require_once(</span><span style="color: #DD0000">"../config.php"</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">=</span><span style="color: #0000BB">mysql_connect</span><span style="color: #007700">(</span><span style="color: #0000BB">$mysql_server</span><span style="color: #007700">,</span><span style="color: #0000BB">$mysql_user</span><span style="color: #007700">,</span><span style="color: #0000BB">$mysql_pass</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">mysql_select_db</span><span style="color: #007700">(</span><span style="color: #0000BB">$mysql_db</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;require(</span><span style="color: #DD0000">"../../codebase/combo_connector.php"</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$combo&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">ComboConnector</span><span style="color: #007700">(</span><span style="color: #0000BB">$res</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$combo</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">enable_log</span><span style="color: #007700">(</span><span style="color: #DD0000">"temp.log"</span><span style="color: #007700">);
+<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$combo</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">render_sql</span><span style="color: #007700">(</span><span style="color: #DD0000">"SELECT&nbsp;*&nbsp;FROM&nbsp;country_data&nbsp;&nbsp;WHERE&nbsp;country_id&nbsp;&gt;40&nbsp;"</span><span style="color: #007700">,</span><span style="color: #DD0000">"country_id"</span><span style="color: #007700">,</span><span style="color: #DD0000">"name"</span><span style="color: #007700">);
+<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div></body>
+</html>

@@ -1,0 +1,94 @@
+/* DHTMLX SKY Blue */
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue {
+	background-image: url("../imgs/dhtmlxcalendar_dhx_skyblue/bg_main.gif");
+	background-position: center top;
+	background-repeat: no-repeat;
+}
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_bottom {
+	position: relative;
+	width: 100%;
+	height: 2px;
+	left: 0px;
+	overflow: hidden;
+	background-image: url("../imgs/dhtmlxcalendar_dhx_skyblue/bg_main.gif");
+	background-position: center -248px;
+	background-repeat: no-repeat;
+	padding: 0px;
+	margin: 0px;
+	z-index: 1;
+}
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_month_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_month_hdr,
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_days_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell,
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_days_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell_first,
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell,
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_time_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_time_hdr,
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_time_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_time_hdr div.dhtmlxcalendar_time_label,
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_selector_obj div.dhtmlxcalendar_selector_obj_arrow,
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_middle ul.dhtmlxcalendar_selector_line li.dhtmlxcalendar_selector_cell,
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_wn div.dhtmlxcalendar_days_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell_wn,
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_wn div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell_wn {
+	background-image: url("../imgs/dhtmlxcalendar_dhx_skyblue/bg_days.gif");
+}
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_month_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_month_hdr div.dhtmlxcalendar_month_arrow.dhtmlxcalendar_month_arrow_left,
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_left {
+	background-image: url("../imgs/dhtmlxcalendar_dhx_skyblue/arrow_left.gif");
+}
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_month_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_month_hdr div.dhtmlxcalendar_month_arrow.dhtmlxcalendar_month_arrow_left_hover,
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_left.dhtmlxcalendar_selector_cell_left_hover {
+	background-image: url("../imgs/dhtmlxcalendar_dhx_skyblue/arrow_left_hover.gif");
+}
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_month_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_month_hdr div.dhtmlxcalendar_month_arrow.dhtmlxcalendar_month_arrow_right,
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_right {
+	background-image: url("../imgs/dhtmlxcalendar_dhx_skyblue/arrow_right.gif");
+}
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_month_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_month_hdr div.dhtmlxcalendar_month_arrow.dhtmlxcalendar_month_arrow_right_hover,
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_right.dhtmlxcalendar_selector_cell_right_hover {
+	background-image: url("../imgs/dhtmlxcalendar_dhx_skyblue/arrow_right_hover.gif");
+}
+
+
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_left,
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_right {
+	background-color: #e6f1ff;
+}
+
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_selector_cover {
+	background-color: white;
+	opacity: 0.5;
+	-moz-opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_month_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_month_hdr span.dhtmlxcalendar_month_label_month,
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_month_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_month_hdr span.dhtmlxcalendar_month_label_year {
+	font-weight: bold;
+}
+
+/* labels */
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line div.dhtmlxcalendar_label.dhtmlxcalendar_label_title {
+	background-image: url("../imgs/dhtmlxcalendar_dhx_skyblue/bg_days.gif");
+	background-position: -157px -100px;
+	background-repeat: no-repeat;
+}
+.dhtmlxcalendar_container.dhtmlxcalendar_skin_dhx_skyblue div.dhtmlxcalendar_wn div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line div.dhtmlxcalendar_label.dhtmlxcalendar_label_title {
+	background-image: url("../imgs/dhtmlxcalendar_dhx_skyblue/bg_days.gif");
+	background-position: -160px -100px;
+	background-repeat: no-repeat;
+}
+
+
+/* skin detect */
+div.dhtmlxcalendar_skin_detect {
+	position: absolute;
+	display: block;
+	visibility: hidden;
+	left: -100px;
+	top: 0px;
+	width: 10px;
+	height: 10px;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	overflow: hidden;
+}
+

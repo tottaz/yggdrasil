@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+ lang="en" dir="ltr">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><link rel="stylesheet" href="../codebase/default.css" type="text/css" media="screen" title="no title" charset="utf-8"><title>
+    dhtmlxcalendar:dhtmlxcalendar_init    [DHX documentation]
+  </title></head>
+
+<body>
+<div class="dokuwiki">
+  
+  <div class="stylehead">
+
+    <div class="header">
+    <a class="logo" href="http://dhtmlx.com" title="DHTMLX Home Page"></a>
+    <span class="tittle-dhtmlx">DHTMLX Docs & Samples Explorer</span>
+
+    <div class="search-field">
+        <form action="/dhtmlx/docs/doku.php" accept-charset="utf-8" id="dw__search"><div class="no"><input type="hidden" name="do" value="search" /><input type="text" id="qsearch__in" accesskey="f" name="id" title="Search" /><button type="submit"></button><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>    </div>
+        <div class="buttons">
+                <a class="doc"></a>
+                <a title="DHTMLX Samples homepage" href="../samples.html" class="sample"/></a>
+        </div>
+     <!-- <div class="pagename">
+        [[<a href="#"  title="Backlinks">dhtmlxcalendar:dhtmlxcalendar_init</a>]]
+      </div>
+      <div class="logo">
+        <a href="/dhtmlx/docs/doku.php"  name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[H]">DHX documentation</a>      </div>
+
+      <div class="clearer"></div>-->
+        
+    </div>
+
+    
+<!--   <div class="bar" id="bar__top">
+      <div class="bar-left" id="bar__topleft">
+        <form class="button btn_edit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_init" /><input type="submit" value="Edit this page" class="button" accesskey="e" title="Edit this page [E]" /></div></form>        <form class="button btn_revs" method="get" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="revisions" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_init" /><input type="submit" value="Old revisions" class="button" accesskey="o" title="Old revisions [O]" /></div></form>      </div>
+
+      <div class="bar-right" id="bar__topright">
+        <form class="button btn_recent" method="get" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="recent" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_init" /><input type="submit" value="Recent changes" class="button" accesskey="r" title="Recent changes [R]" /></div></form>        <form action="/dhtmlx/docs/doku.php" accept-charset="utf-8" id="dw__search"><div class="no"><input type="hidden" name="do" value="search" /><input type="text" id="qsearch__in" accesskey="f" name="id" title="Search" /><button type="submit"></button><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>&nbsp;
+      </div>
+
+      <div class="clearer"></div>
+    </div> -->
+
+<!--        <div class="breadcrumbs">
+      <span class="bchead">Trace:</span> <span class="bcsep">&raquo;</span> <span class="curid"><a href="/dhtmlx/docs/doku.php?id=dhtmlxcalendar:dhtmlxcalendar_init"  class="breadcrumbs" title="dhtmlxcalendar:dhtmlxcalendar_init">dhtmlxcalendar_init</a></span>    </div>
+    -->
+
+    
+  </div>
+  
+  
+  <div class="page">
+    <!-- wikipage start -->
+    <!-- TOC START -->
+<div class="toc">
+<div class="tocheader toctoggle" id="toc__header">Table of Contents</div>
+<div id="toc__inside">
+
+<ul class="toc">
+<li class="level1"><div class="li"><span class="li"><a href="#initialization_of_dhtmlxcalendar" class="toc">Initialization of dhtmlxCalendar</a></span></div>
+<ul class="toc">
+<li class="level2"><div class="li"><span class="li"><a href="#included_files_steps_1_2" class="toc">Included files (steps 1, 2)</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="#initialization_step_3" class="toc">Initialization (step 3)</a></span></div></li></ul>
+</li></ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<p>
+<div class='backlinks'><div class='backlink last_backlink'><img src="icons___file.gif"  class="media" alt="" /><a href="../index.html" class="wikilink1" title="start">Index</a></div><div class='arrow'></div><div class='backlink last_backlink'><img src="icons___calendar.gif"  class="media" alt="" /><a href="index.html" class="wikilink1" title="dhtmlxcalendar:toc">dhtmlxcalendar</a></div></div>
+
+</p>
+
+<h1><a name="initialization_of_dhtmlxcalendar" id="initialization_of_dhtmlxcalendar">Initialization of dhtmlxCalendar</a></h1>
+<div class="level1">
+
+<p>
+To use dhtmlxCalendar in your application you should make 3 steps:
+</p>
+<ol>
+<li class="level1"><div class="li"> Download the &#039;dhtmlxCalendar&#039; or &#039;dhtmlxSuite&#039; package and unpack it into a folder.</div>
+</li>
+<li class="level1"><div class="li"> Include to your html file the related <acronym title="Cascading Style Sheets">CSS</acronym> and <acronym title="JavaScript">JS</acronym> files.</div>
+</li>
+<li class="level1"><div class="li"> Call an object constructor.</div>
+</li>
+</ol>
+
+</div>
+<div class="secedit"><form class="button btn_secedit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="lines" value="57-353" /><input type="hidden" name="rev" value="1366106239" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_init" /><input type="submit" value="Edit" class="button" title="Initialization of dhtmlxCalendar" /></div></form></div>
+<h2><a name="included_files_steps_1_2" id="included_files_steps_1_2">Included files (steps 1, 2)</a></h2>
+<div class="level2">
+
+<p>
+Each DHTMLX component can be used standalone or as a part of the general library.
+</p>
+
+<p>
+<strong>If you use dhtmlxCalendar standalone</strong> you need to include 3 files: 
+</p>
+<ul>
+<li class="level1"><div class="li"> dhtmlxcalendar.js</div>
+</li>
+<li class="level1"><div class="li"> dhtmlxcalendar.css</div>
+</li>
+<li class="level1"><div class="li"> dhtmlxcalendar_dhx_skyblue.css<br/>
+ <br/>
+ <pre class="code javascript"><span class="sy0">&lt;!</span>DOCTYPE html<span class="sy0">&gt;</span>
+<span class="sy0">&lt;</span>html<span class="sy0">&gt;</span>
+  <span class="sy0">&lt;</span>head<span class="sy0">&gt;</span>
+      <span class="sy0">&lt;</span>link rel<span class="sy0">=</span><span class="st0">&quot;stylesheet&quot;</span> type<span class="sy0">=</span><span class="st0">&quot;text/css&quot;</span> href<span class="sy0">=</span><span class="st0">&quot;../codebase/dhtmlxcalendar.css&quot;</span><span class="sy0">&gt;</span>
+      <span class="sy0">&lt;</span>link rel<span class="sy0">=</span><span class="st0">&quot;stylesheet&quot;</span> type<span class="sy0">=</span><span class="st0">&quot;text/css&quot;</span> href<span class="sy0">=</span><span class="st0">&quot;../codebase/skins/dhtmlxcalendar_dhx_skyblue.css&quot;</span><span class="sy0">&gt;</span>
+      <span class="sy0">&lt;</span>script src<span class="sy0">=</span><span class="st0">&quot;../codebase/dhtmlxcalendar.js&quot;</span><span class="sy0">&gt;&lt;/</span>script<span class="sy0">&gt;</span>
+  <span class="sy0">&lt;/</span>head<span class="sy0">&gt;</span>
+ <span class="sy0">&lt;</span>body<span class="sy0">&gt;</span>
+ ...
+ <span class="sy0">&lt;/</span>body<span class="sy0">&gt;</span>
+<span class="sy0">&lt;/</span>html<span class="sy0">&gt;</span></pre></div>
+</li>
+</ul>
+
+<p>
+
+<strong>If you use dhtmlxCalendar as a part of &#039;dhtmlxSuite&#039; package</strong> you need to include 2 files:
+</p>
+<ul>
+<li class="level1"><div class="li"> dhtmlx.js</div>
+</li>
+<li class="level1"><div class="li"> dhtmlx.css<br/>
+ <br/>
+ <pre class="code javascript"><span class="sy0">&lt;</span>link rel<span class="sy0">=</span><span class="st0">&quot;STYLESHEET&quot;</span> type<span class="sy0">=</span><span class="st0">&quot;text/css&quot;</span> href<span class="sy0">=</span><span class="st0">&quot;../codebase/dhtmlx.css&quot;</span><span class="sy0">&gt;</span>
+<span class="sy0">&lt;</span>script src<span class="sy0">=</span><span class="st0">&quot;../codebase/dhtmlx.js&quot;</span> type<span class="sy0">=</span><span class="st0">&quot;text/javascript&quot;</span><span class="sy0">&gt;&lt;/</span>script<span class="sy0">&gt;</span></pre></div>
+</li>
+</ul>
+
+</div>
+<div class="secedit"><form class="button btn_secedit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="lines" value="354-1270" /><input type="hidden" name="rev" value="1366106239" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_init" /><input type="submit" value="Edit" class="button" title="Included files (steps 1, 2)" /></div></form></div>
+<h2><a name="initialization_step_3" id="initialization_step_3">Initialization (step 3)</a></h2>
+<div class="level2">
+
+<p>
+There are 6 ways to initialize dhtmlxCalendar on the page.
+
+</p>
+<table class="inline">
+	<tr class="row0">
+		<th class="col0 centeralign">  Way of initialization  </th><th class="col1 centeralign">  Code  </th><th class="col2 centeralign">  Image  </th>
+	</tr>
+	<tr class="row1">
+		<td class="col0 centeralign">  <strong>Initialization in a div</strong>  </td><td class="col1 leftalign"><pre class="code javascript"><span class="sy0">&lt;</span>div id<span class="sy0">=</span><span class="st0">&quot;box&quot;</span> style<span class="sy0">=</span><span class="st0">&quot;position:relative;height:250px;&quot;</span><span class="sy0">&gt;&lt;/</span>div<span class="sy0">&gt;</span>
+&nbsp;
+<span class="sy0">&lt;</span>script<span class="sy0">&gt;</span>
+     <span class="kw2">var</span> myCalendar <span class="sy0">=</span> <span class="kw2">new</span> dhtmlXCalendarObject<span class="br0">&#40;</span><span class="st0">&quot;box&quot;</span><span class="br0">&#41;</span>;
+     <span class="kw2">var</span> myCalendar.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;
+<span class="sy0">&lt;/</span>script<span class="sy0">&gt;</span></pre></td><td class="col2 centeralign">  <img src="dhtmlxcalendar___calendar_in_div.png"  class="media" alt="" />  </td>
+	</tr>
+	<tr class="row2">
+		<td class="col0 centeralign">  <strong>Attaching to an input</strong>  </td><td class="col1 leftalign"><pre class="code javascript"><span class="sy0">&lt;</span>input type<span class="sy0">=</span><span class="st0">&quot;text&quot;</span> id<span class="sy0">=</span><span class="st0">&quot;calendar&quot;</span><span class="sy0">&gt;</span>
+<span class="sy0">&lt;</span>input type<span class="sy0">=</span><span class="st0">&quot;text&quot;</span> id<span class="sy0">=</span><span class="st0">&quot;calendar2&quot;</span><span class="sy0">&gt;</span>
+&nbsp;
+<span class="sy0">&lt;</span>script<span class="sy0">&gt;</span>
+     <span class="kw2">var</span> myCalendar <span class="sy0">=</span> <span class="kw2">new</span> dhtmlXCalendarObject<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="st0">&quot;calendar&quot;</span><span class="sy0">,</span><span class="st0">&quot;calendar2&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span>;
+<span class="sy0">&lt;/</span>script<span class="sy0">&gt;</span></pre></td><td class="col2 centeralign">  <img src="dhtmlxcalendar___calendar_to_input.png"  class="media" alt="" />  </td>
+	</tr>
+	<tr class="row3">
+		<td class="col0 centeralign">  <strong>Attaching to an input with an icon</strong>  </td><td class="col1 leftalign"><pre class="code javascript"><span class="sy0">&lt;</span>input type<span class="sy0">=</span><span class="st0">&quot;text&quot;</span> id<span class="sy0">=</span><span class="st0">&quot;calendar_input&quot;</span><span class="sy0">&gt;</span>
+<span class="sy0">&lt;</span>span<span class="sy0">&gt;&lt;</span>img id<span class="sy0">=</span><span class="st0">&quot;calendar_icon&quot;</span> src<span class="sy0">=</span><span class="st0">&quot;../common/calendar.gif&quot;</span> border<span class="sy0">=</span><span class="st0">&quot;0&quot;</span><span class="sy0">&gt;&lt;/</span>span<span class="sy0">&gt;</span>
+&nbsp;
+<span class="sy0">&lt;</span>script<span class="sy0">&gt;</span>
+     <span class="kw2">var</span> myCalendar <span class="sy0">=</span> <span class="kw2">new</span> dhtmlXCalendarObject<span class="br0">&#40;</span><span class="br0">&#123;</span>input<span class="sy0">:</span> <span class="st0">&quot;calendar_input&quot;</span><span class="sy0">,</span> button<span class="sy0">:</span> <span class="st0">&quot;calendar_icon&quot;</span><span class="br0">&#125;</span><span class="br0">&#41;</span>;
+<span class="sy0">&lt;/</span>script<span class="sy0">&gt;</span></pre></td><td class="col2 centeralign">  <img src="dhtmlxcalendar___calendar_in_input_icon.png"  class="media" alt="" />  </td>
+	</tr>
+	<tr class="row4">
+		<td class="col0 centeralign">  <strong>Attaching to a custom icon</strong>  </td><td class="col1 leftalign"><pre class="code javascript"><span class="sy0">&lt;</span>span<span class="sy0">&gt;&lt;</span>img id<span class="sy0">=</span><span class="st0">&quot;calendar_icon&quot;</span> src<span class="sy0">=</span><span class="st0">&quot;../common/calendar.gif&quot;</span> border<span class="sy0">=</span><span class="st0">&quot;0&quot;</span><span class="sy0">&gt;&lt;/</span>span<span class="sy0">&gt;</span>
+<span class="sy0">&lt;</span>span id<span class="sy0">=</span><span class="st0">&quot;date_here&quot;</span><span class="sy0">&gt;&amp;</span>nbsp;&lt;/span<span class="sy0">&gt;</span>
+&nbsp;
+<span class="sy0">&lt;</span>script<span class="sy0">&gt;</span>
+     <span class="kw2">var</span> myCalendar <span class="sy0">=</span> <span class="kw2">new</span> dhtmlXCalendarObject<span class="br0">&#40;</span><span class="br0">&#123;</span>button<span class="sy0">:</span> <span class="st0">&quot;calendar_icon&quot;</span><span class="br0">&#125;</span><span class="br0">&#41;</span>;
+<span class="sy0">&lt;/</span>script<span class="sy0">&gt;</span></pre></td><td class="col2 centeralign">  <img src="dhtmlxcalendar___calendar_to_icon.png"  class="media" alt="" />  </td>
+	</tr>
+	<tr class="row5">
+		<td class="col0 centeralign">  <strong>Using inside dhtmlxForm</strong>  </td><td class="col1 leftalign"><pre class="code javascript">formData <span class="sy0">=</span> <span class="br0">&#91;</span>
+     <span class="br0">&#123;</span>type<span class="sy0">:</span> <span class="st0">&quot;calendar&quot;</span><span class="sy0">,</span> label<span class="sy0">:</span> <span class="st0">&quot;Start Date&quot;</span><span class="sy0">,</span> skin<span class="sy0">:</span> <span class="st0">&quot;dhx_skyblue&quot;</span><span class="sy0">,</span> dateFormat<span class="sy0">:</span> <span class="st0">&quot;%Y-%m-%d %H:%i&quot;</span><span class="sy0">,</span> enableTime<span class="sy0">:</span> <span class="kw2">true</span><span class="br0">&#125;</span><span class="sy0">,</span>
+     <span class="br0">&#123;</span>type<span class="sy0">:</span> <span class="st0">&quot;calendar&quot;</span><span class="sy0">,</span> label<span class="sy0">:</span> <span class="st0">&quot;End Date&quot;</span><span class="sy0">,</span>   skin<span class="sy0">:</span> <span class="st0">&quot;dhx_skyblue&quot;</span><span class="sy0">,</span> dateFormat<span class="sy0">:</span> <span class="st0">&quot;%Y-%m-%d&quot;</span><span class="br0">&#125;</span>
+<span class="br0">&#93;</span>;
+myForm <span class="sy0">=</span> <span class="kw2">new</span> dhtmlXForm<span class="br0">&#40;</span><span class="st0">&quot;myForm&quot;</span><span class="sy0">,</span> formData<span class="br0">&#41;</span>;</pre></td><td class="col2 rightalign">  <img src="dhtmlxcalendar___calendar_in_dhtmlxform.png"  class="media" alt="" /> </td>
+	</tr>
+	<tr class="row6">
+		<td class="col0 centeralign">  <strong>Using inside dhtmlxToolbar</strong>  </td><td class="col1 leftalign"><pre class="code javascript">myToolbar <span class="sy0">=</span> <span class="kw2">new</span> dhtmlXToolbarObject<span class="br0">&#40;</span><span class="st0">&quot;toolbarObj&quot;</span><span class="br0">&#41;</span>;
+myToolbar.<span class="me1">loadXML</span><span class="br0">&#40;</span><span class="st0">&quot;../common/dhxtoolbar_data.xml?&quot;</span><span class="sy0">+</span><span class="kw2">new</span> Date<span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getTime</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+     myToolbar.<span class="me1">addInput</span><span class="br0">&#40;</span><span class="st0">&quot;calendar&quot;</span><span class="sy0">,</span> <span class="kw2">null</span><span class="sy0">,</span> <span class="st0">&quot;12.06.2013&quot;</span><span class="sy0">,</span> <span class="nu0">90</span><span class="br0">&#41;</span>;
+     myCalendar <span class="sy0">=</span> <span class="kw2">new</span> dhtmlXCalendarObject<span class="br0">&#40;</span>myToolbar.<span class="me1">getInput</span><span class="br0">&#40;</span><span class="st0">&quot;calendar&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>;
+     myCalendar.<span class="me1">setDateFormat</span><span class="br0">&#40;</span><span class="st0">&quot;%d.%m.%Y&quot;</span><span class="br0">&#41;</span>;
+<span class="br0">&#125;</span><span class="br0">&#41;</span>;</pre></td><td class="col2 centeralign">  <img src="dhtmlxcalendar___calendar_in_dhtmlxtoolbar.png"  class="media" alt="" />  </td>
+	</tr>
+</table>
+
+</div>
+<div class="secedit"><form class="button btn_secedit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="lines" value="1271-" /><input type="hidden" name="rev" value="1366106239" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_init" /><input type="submit" value="Edit" class="button" title="Initialization (step 3)" /></div></form></div>
+    <!-- wikipage stop -->
+  </div>
+
+  <div class="clearer">&nbsp;</div>
+
+  
+  <div class="stylefoot">
+
+    <div class="meta">
+      <div class="user">
+              </div>
+     <!-- <div class="doc">
+        dhtmlxcalendar/dhtmlxcalendar_init.txt &middot; Last modified: 2013/04/16 13:57 by 192.168.1.111      </div>
+    </div>-->
+
+   
+    <!--<div class="bar" id="bar__bottom">-->
+      <!--<div class="bar-left" id="bar__bottomleft">-->
+        <!--<form class="button btn_edit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_init" /><input type="submit" value="Edit this page" class="button" accesskey="e" title="Edit this page [E]" /></div></form>-->
+        <!--<form class="button btn_revs" method="get" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="revisions" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_init" /><input type="submit" value="Old revisions" class="button" accesskey="o" title="Old revisions [O]" /></div></form>-->
+      <!--</div>-->
+      <!--<div class="bar-right" id="bar__bottomright">-->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!--<form class="button btn_index" method="get" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="index" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_init" /><input type="submit" value="Index" class="button" accesskey="x" title="Index [X]" /></div></form>-->
+        <!--<a class="nolink" href="#dokuwiki__top"><input type="button" class="button" value="Back to top" onclick="window.scrollTo(0, 0)" title="Back to top" /></a>&nbsp;-->
+      <!--</div>-->
+      <!--<div class="clearer"></div>-->
+    <!--</div>-->
+
+  </div>
+
+  
+
+</div>
+
+<div class="footerinc">
+
+
+</div>
+
+<div class="no"><img src="/dhtmlx/docs/lib/exe/indexer.php?id=dhtmlxcalendar%3Adhtmlxcalendar_init&amp;1366131630" width="1" height="1" alt=""  /></div>
+     <div class="footer">
+        <div class="footer-logo"></div>
+        <div class="copyright">Copyright © 1998-2011 DHTMLX LTD.<br />All rights reserved.</div>
+        <form class="button btn_edit" method="post" action="/dhtmlx/docs/doku.php"><div class="no"><input type="hidden" name="do" value="edit" /><input type="hidden" name="rev" value="" /><input type="hidden" name="id" value="dhtmlxcalendar:dhtmlxcalendar_init" /><input type="submit" value="Edit this page" class="button" accesskey="e" title="Edit this page [E]" /></div></form>    	    </div>
+</body>
+</html>

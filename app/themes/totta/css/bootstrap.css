@@ -3970,15 +3970,15 @@ textarea.input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  background-color: #66cc00;
-  border-color: #66cc00;
+  background-color: #0DAE71;
+  border-color: #0DAE71;
 }
 .navbar-default .navbar-brand {
-  color: #66cc00;
+  color: #0DAE71;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-  color: #66cc00;
+  color: #0DAE71;
   background-color: transparent;
 }
 .navbar-default .navbar-text {
@@ -4016,7 +4016,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
-  border-color: #66cc00;
+  border-color: #0DAE71;
 }
 .navbar-default .navbar-nav > .dropdown > a:hover .caret,
 .navbar-default .navbar-nav > .dropdown > a:focus .caret {
@@ -4069,14 +4069,14 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 .navbar-inverse {
   background-color: #222222;
-  border-color: #66cc00;
+  border-color: #0DAE71;
 }
 .navbar-inverse .navbar-brand {
-  color: #66cc00;
+  color: #0DAE71;
 }
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
-  color: #66cc00;
+  color: #0DAE71;
   background-color: transparent;
 }
 .navbar-inverse .navbar-text {
@@ -4138,7 +4138,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 @media (max-width: 767px) {
   .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
-    border-color: #66cc00;
+    border-color: #0DAE71;
   }
   .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
     color: #999999;

@@ -67,7 +67,7 @@ class Installer {
 		$replace = array();
 
 		$data['dbprefix'] = $config['dbprefix'];
-		$data['timezone'] = @date_default_timezone_get();
+		$data['timezone'] = date_default_timezone_get();
 
 		// Include migration config to know which migration to start from
 		include './app/config/migration.php';
@@ -93,11 +93,10 @@ class Installer {
 		foreach ($schema as $query)
 		{
 			if ( ! $this->_ci->db->query(rtrim(trim($query), "\n;")))
-			{
-                            
+			{                            
                 switch ($this->dbdriver) {
                     case 'mysql':
-                        $error = mysql_error();
+                       $error = mysql_error();
                         break;
                     case 'mysqli':
                         $error = mysqli_error($this->_ci->db->conn_id);

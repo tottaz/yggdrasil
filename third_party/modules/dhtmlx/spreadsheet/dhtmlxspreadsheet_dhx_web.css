@@ -1,0 +1,63 @@
+div.gridbox_dhx_web.spreadsheet .odd_dhx_web {
+	background-color: transparent;
+}
+
+div.gridbox_dhx_web.spreadsheet table.obj tr.rowselected,
+div.gridbox_dhx_web.spreadsheet table.obj.row20px tr.rowselected td {
+	background-color: transparent;
+}
+
+div.gridbox_dhx_web.spreadsheet table.obj tr.rowselected td.cellselected {
+	background-color: #ACDAF0 !important;
+}
+
+div.gridbox_dhx_web.spreadsheet table.obj.row20px tr td:first-child, div.gridbox table.obj.row20px tr td:first-child {
+	border-right: 1px solid #8B8B8B !important;
+	border-bottom: 1px solid #8B8B8B !important;
+	border-top: none !important;
+	border-left: none !important;
+	background-color: #ECECEC !important;
+}
+
+div.gridbox_dhx_web.spreadsheet table.obj tr td {
+	border-top: none !important;
+	border-left: none !important;
+}
+
+.dhtmlxGrid_selection {
+	background-color: #ACDAF0 !important;
+}
+
+div.gridbox_dhx_web.spreadsheet .header_editor {
+	width: 100%;
+	height: 100%;
+	border: none !important;
+	margin: 0px !important;
+	padding: 0px 4px 0px 4px !important;
+	font-size: 12px;
+	font-family: Tahoma;
+}
+
+div.gridbox_dhx_web.spreadsheet .no_paddings {
+	height: 25px;
+	padding: 0px 0px 0px 0px !important;
+}
+
+div.gridbox_dhx_web.spreadsheet .no_paddings_parent {
+	padding: 2px !important;
+}
+
+.dhx_toolbar_base_dhx_web {
+	border: 1px solid #8B8B8B;
+	border-bottom: none;
+}
+
+div.gridbox_dhx_web.spreadsheet {
+	font-size: 12px;
+	font-family: Tahoma;
+	line-height: normal;
+}
+
+.selectall {
+	border-color: #6B6B6B !important;
+}

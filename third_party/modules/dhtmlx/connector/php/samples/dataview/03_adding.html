@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--conf
+<sample in_favorites="true">
+	<product version="1.0" edition="std"/>
+	<modifications>
+		<modified date="080205"/>
+	</modifications>
+<sampledescription><![CDATA[ ]]></sampledescription></sample>
+ --> 
+
+<html>
+<head>
+	<title>Connecting to database</title>
+	<script src="../dhtmlx/dhtmlx.js" type="text/javascript"></script>
+	<script src="../dhtmlx/dhtmlxdataprocessor.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../codebase/connector.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="STYLESHEET" type="text/css" href="../dhtmlx/dhtmlx.css">
+	<style type="text/css" media="screen">
+		body { background-color:#EBEBEB; };
+	</style>
+<body>
+	<h1>Connecting to database</h1>
+
+	<form style="float:right;">
+		Product <input type="text" id="p_name" value="dhtmlxDataView"><br>
+		Version <input type="text" id="v_name" value="3.0"><br>
+		Maintainer <input type="text" id="m_name" value="Ivan"><br>
+		<input type="button" value="Add &rarr;" onclick='add_data()'>
+		<hr>
+		<input type="button" value="Remove selected &rarr;" onclick='remove_data()'>
+	</form>
+	
+	<div id="data_container" style="border:1px solid #A4BED4; background-color:white;width:596px;height:396px;"></div>
+	<script>
+		data = new dhtmlXDataView({
+			
+			container:"data_container",
+			edit:true,
+			type:{
+				template:"{obj.Package} : {obj.Version}<br/>{obj.Maintainer}",
+				template_edit:"<input class='dhx_item_editor' bind='obj.Package'>",
+				height:40
+			}
+		});
+		data.load("03_adding.php");
+		
+		var dp = new dataProcessor("03_adding.php");
+		dp.init(data);
+		
+		function add_data(argument) {
+			data.add({
+				Package: document.getElementById("p_name").value,
+				Version: document.getElementById("v_name").value,
+				Maintainer: document.getElementById("m_name").value,
+			},0)
+		}
+		function remove_data(){
+			data.remove(data.getSelected());
+		}
+	</script>
+	
+
+
+</body>
+</html>
+

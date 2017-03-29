@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title>Set interval with two inputs</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="featured" content="yes"><meta name="title" content="Samples" />
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<link rel="icon" href="../common/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="../common/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="../common/css/style.css" type="text/css" media="screen" />
+
+	</head>
+	<body onload="doOnLoad();">
+        <div class="header">
+            <a class="logo" href="http://www.dhtmlx.com" title="DHTMLX homepage"></a>
+            <div class="tittle-dhtmlx">DHTMLX Docs & Samples Explorer</div>
+            <div class="search-field">
+                <form action="http://docs.dhtmlx.com/doku.php" accept-charset="utf-8" id="dw__search"><div class="no"><input type="hidden" name="do" value="search" /><input type="text" id="qsearch__in" accesskey="f" name="id" title="Search" /><input class="button" type="submit" value=""><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>
+            </div>
+            <div class="buttons">
+                <a class="doc_inact" href="../../../docsExplorer/index.html" title="DHTMLX Documentation homepage"></a>
+                <a class="sample"></a>
+            </div>
+        </div>
+        <div class="content">
+            <div class="navigation-div">
+                <a href="../../../docsExplorer/samples.html" class="navigation"><img src="../common/icons/file.gif" alt="" >All components</a>
+                <div class="arrow"></div>
+                <a href="../index.html" class="navigation"><img height="22" src="../common/icons/calendar.gif" alt="" >dhtmlxCalendar</a>
+                <div class="arrow"></div>
+                <a href="./index.html" class="navigation"><img src="../common/icons/none.gif" alt="" >Intervals</a>
+            </div>
+            <div style="display:block;">
+                <h3>Set interval with two inputs</h3>
+            </div>
+            <div class="navigation-div">
+                <a href="#code" class="navigation view-source"><img src="../common/icons/source.gif" alt="" >View page source</a>
+            </div>
+            <link rel="stylesheet" type="text/css" href="../../codebase/dhtmlxcalendar.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/skins/dhtmlxcalendar_dhx_skyblue.css">
+	<script src="../../codebase/dhtmlxcalendar.js"></script>
+	<style>
+		input#date_from, input#date_to {
+			font-family: Tahoma;
+			font-size: 12px;
+			background-color: #fafafa;
+			border: #c0c0c0 1px solid;
+			width: 100px;
+		}
+		span.label {
+			font-family: Tahoma;
+			font-size: 12px;
+		}
+	</style>
+	<script>
+		var myCalendar;
+		function doOnLoad() {
+			myCalendar = new dhtmlXCalendarObject(["date_from","date_to"]);
+			myCalendar.setDate("2013-03-10");
+			myCalendar.hideTime();
+			// init values
+			var t = new Date();
+			byId("date_from").value = "2013-03-05";
+			byId("date_to").value = "2013-03-15";
+		}
+		
+		function setSens(id, k) {
+			// update range
+			if (k == "min") {
+				myCalendar.setSensitiveRange(byId(id).value, null);
+			} else {
+				myCalendar.setSensitiveRange(null, byId(id).value);
+			}
+		}
+		function byId(id) {
+			return document.getElementById(id);
+		}
+	</script>
+
+
+	<span class="label">From</span> <input type="text" id="date_from" onclick="setSens('date_to', 'max');" readonly="true">
+	<span class="label">Till</span> <input type="text" id="date_to" onclick="setSens('date_from', 'min');" readonly="true">
+			
+			
+         </div>
+    <div style="clear:both;"></div>
+    <div class="source">
+        <div class="teg">Source</div>
+        <div class="code" id="code">
+		<div class="hl-main"><pre><span class="hl-brackets">&lt;</span><span class="hl-reserved">link</span><span class="hl-code"> </span><span class="hl-var">rel</span><span class="hl-code">=</span><span class="hl-quotes">&quot;</span><span class="hl-string">stylesheet</span><span class="hl-quotes">&quot;</span><span class="hl-code"> </span><span class="hl-var">type</span><span class="hl-code">=</span><span class="hl-quotes">&quot;</span><span class="hl-string">text/css</span><span class="hl-quotes">&quot;</span><span class="hl-code"> </span><span class="hl-var">href</span><span class="hl-code">=</span><span class="hl-quotes">&quot;</span><span class="hl-string">../../codebase/dhtmlxcalendar.css</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">&gt;</span><span class="hl-code">
+    </span><span class="hl-brackets">&lt;</span><span class="hl-reserved">link</span><span class="hl-code"> </span><span class="hl-var">rel</span><span class="hl-code">=</span><span class="hl-quotes">&quot;</span><span class="hl-string">stylesheet</span><span class="hl-quotes">&quot;</span><span class="hl-code"> </span><span class="hl-var">type</span><span class="hl-code">=</span><span class="hl-quotes">&quot;</span><span class="hl-string">text/css</span><span class="hl-quotes">&quot;</span><span class="hl-code"> </span><span class="hl-var">href</span><span class="hl-code">=</span><span class="hl-quotes">&quot;</span><span class="hl-string">../../codebase/skins/dhtmlxcalendar_dhx_skyblue.css</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">&gt;</span><span class="hl-code">
+    </span><span class="hl-brackets">&lt;</span><span class="hl-reserved">script</span><span class="hl-code"> </span><span class="hl-var">src</span><span class="hl-code">=</span><span class="hl-quotes">&quot;</span><span class="hl-string">../../codebase/dhtmlxcalendar.js</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">&gt;</span><span class="hl-brackets">&lt;/</span><span class="hl-reserved">script</span><span class="hl-brackets">&gt;</span><span class="hl-code">
+    </span><span class="hl-brackets">&lt;</span><span class="hl-reserved">style</span><span class="hl-brackets">&gt;</span><span class="hl-code">
+        input#date_from, input#date_to {
+            font-family: Tahoma;
+            font-size: 12px;
+            background-color: #fafafa;
+            border: #c0c0c0 1px solid;
+            width: 100px;
+        }
+        span.label {
+            font-family: Tahoma;
+            font-size: 12px;
+        }
+    </span><span class="hl-brackets">&lt;/</span><span class="hl-reserved">style</span><span class="hl-brackets">&gt;</span><span class="hl-code">
+    </span><span class="hl-brackets">&lt;</span><span class="hl-reserved">script</span><span class="hl-brackets">&gt;</span><span class="hl-code"><div class="hl-main"><pre><span class="hl-reserved">var</span><span class="hl-code"> </span><span class="hl-identifier">myCalendar</span><span class="hl-code">;
+</span><span class="hl-reserved">function</span><span class="hl-code"> </span><span class="hl-identifier">doOnLoad</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+    </span><span class="hl-identifier">myCalendar</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">dhtmlXCalendarObject</span><span class="hl-brackets">(</span><span class="hl-brackets">[</span><span class="hl-quotes">&quot;</span><span class="hl-string">date_from</span><span class="hl-quotes">&quot;</span><span class="hl-code">, </span><span class="hl-quotes">&quot;</span><span class="hl-string">date_to</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">]</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-identifier">myCalendar</span><span class="hl-code">.</span><span class="hl-identifier">setDate</span><span class="hl-brackets">(</span><span class="hl-quotes">&quot;</span><span class="hl-string">2013-03-10</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-identifier">myCalendar</span><span class="hl-code">.</span><span class="hl-identifier">hideTime</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-comment">//</span><span class="hl-comment"> init values</span><span class="hl-comment"></span><span class="hl-code">
+    </span><span class="hl-reserved">var</span><span class="hl-code"> </span><span class="hl-identifier">t</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-builtin">Date</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-identifier">byId</span><span class="hl-brackets">(</span><span class="hl-quotes">&quot;</span><span class="hl-string">date_from</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">)</span><span class="hl-code">.</span><span class="hl-identifier">value</span><span class="hl-code"> = </span><span class="hl-quotes">&quot;</span><span class="hl-string">2013-03-05</span><span class="hl-quotes">&quot;</span><span class="hl-code">;
+    </span><span class="hl-identifier">byId</span><span class="hl-brackets">(</span><span class="hl-quotes">&quot;</span><span class="hl-string">date_to</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">)</span><span class="hl-code">.</span><span class="hl-identifier">value</span><span class="hl-code"> = </span><span class="hl-quotes">&quot;</span><span class="hl-string">2013-03-15</span><span class="hl-quotes">&quot;</span><span class="hl-code">;
+</span><span class="hl-brackets">}</span><span class="hl-code">
+ 
+</span><span class="hl-reserved">function</span><span class="hl-code"> </span><span class="hl-identifier">setSens</span><span class="hl-brackets">(</span><span class="hl-identifier">id</span><span class="hl-code">, </span><span class="hl-identifier">k</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+    </span><span class="hl-comment">//</span><span class="hl-comment"> update range</span><span class="hl-comment"></span><span class="hl-code">
+    </span><span class="hl-reserved">if</span><span class="hl-code"> </span><span class="hl-brackets">(</span><span class="hl-identifier">k</span><span class="hl-code"> == </span><span class="hl-quotes">&quot;</span><span class="hl-string">min</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+        </span><span class="hl-identifier">myCalendar</span><span class="hl-code">.</span><span class="hl-identifier">setSensitiveRange</span><span class="hl-brackets">(</span><span class="hl-identifier">byId</span><span class="hl-brackets">(</span><span class="hl-identifier">id</span><span class="hl-brackets">)</span><span class="hl-code">.</span><span class="hl-identifier">value</span><span class="hl-code">, </span><span class="hl-reserved">null</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-brackets">}</span><span class="hl-code"> </span><span class="hl-reserved">else</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+        </span><span class="hl-identifier">myCalendar</span><span class="hl-code">.</span><span class="hl-identifier">setSensitiveRange</span><span class="hl-brackets">(</span><span class="hl-reserved">null</span><span class="hl-code">, </span><span class="hl-identifier">byId</span><span class="hl-brackets">(</span><span class="hl-identifier">id</span><span class="hl-brackets">)</span><span class="hl-code">.</span><span class="hl-identifier">value</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-brackets">}</span><span class="hl-code">
+</span><span class="hl-brackets">}</span><span class="hl-code">
+</span><span class="hl-reserved">function</span><span class="hl-code"> </span><span class="hl-identifier">byId</span><span class="hl-brackets">(</span><span class="hl-identifier">id</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+    </span><span class="hl-reserved">return</span><span class="hl-code"> </span><span class="hl-builtin">document</span><span class="hl-code">.</span><span class="hl-identifier">getElementById</span><span class="hl-brackets">(</span><span class="hl-identifier">id</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-brackets">}</span></pre></div></span><span class="hl-brackets">&lt;/</span><span class="hl-reserved">script</span><span class="hl-brackets">&gt;</span><span class="hl-code">
+ 
+ 
+    </span><span class="hl-brackets">&lt;</span><span class="hl-reserved">span</span><span class="hl-code"> </span><span class="hl-var">class</span><span class="hl-code">=</span><span class="hl-quotes">&quot;</span><span class="hl-string">label</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">&gt;</span><span class="hl-code">From</span><span class="hl-brackets">&lt;/</span><span class="hl-reserved">span</span><span class="hl-brackets">&gt;</span><span class="hl-code"> </span><span class="hl-brackets">&lt;</span><span class="hl-reserved">input</span><span class="hl-code"> </span><span class="hl-var">type</span><span class="hl-code">=</span><span class="hl-quotes">&quot;</span><span class="hl-string">text</span><span class="hl-quotes">&quot;</span><span class="hl-code"> </span><span class="hl-var">id</span><span class="hl-code">=</span><span class="hl-quotes">&quot;</span><span class="hl-string">date_from</span><span class="hl-quotes">&quot;</span><span class="hl-code"> </span><span class="hl-var">onclick</span><span class="hl-code">=</span><span class="hl-quotes">&quot;</span><span class="hl-string">setSens('date_to', 'max');</span><span class="hl-quotes">&quot;</span><span class="hl-code"> </span><span class="hl-var">readonly</span><span class="hl-code">=</span><span class="hl-quotes">&quot;</span><span class="hl-string">true</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">&gt;</span><span class="hl-code">
+    </span><span class="hl-brackets">&lt;</span><span class="hl-reserved">span</span><span class="hl-code"> </span><span class="hl-var">class</span><span class="hl-code">=</span><span class="hl-quotes">&quot;</span><span class="hl-string">label</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">&gt;</span><span class="hl-code">Till</span><span class="hl-brackets">&lt;/</span><span class="hl-reserved">span</span><span class="hl-brackets">&gt;</span><span class="hl-code"> </span><span class="hl-brackets">&lt;</span><span class="hl-reserved">input</span><span class="hl-code"> </span><span class="hl-var">type</span><span class="hl-code">=</span><span class="hl-quotes">&quot;</span><span class="hl-string">text</span><span class="hl-quotes">&quot;</span><span class="hl-code"> </span><span class="hl-var">id</span><span class="hl-code">=</span><span class="hl-quotes">&quot;</span><span class="hl-string">date_to</span><span class="hl-quotes">&quot;</span><span class="hl-code"> </span><span class="hl-var">onclick</span><span class="hl-code">=</span><span class="hl-quotes">&quot;</span><span class="hl-string">setSens('date_from', 'min');</span><span class="hl-quotes">&quot;</span><span class="hl-code"> </span><span class="hl-var">readonly</span><span class="hl-code">=</span><span class="hl-quotes">&quot;</span><span class="hl-string">true</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">&gt;</span></pre></div>
+        </div>
+    <div class="footer">
+        <div class="footer-logo"></div>
+        <div class="copyright">Copyright &copy; 1998-2012 DHTMLX LTD.<br />All rights reserved.</div>
+    </div>
+	</body>
+</html>
