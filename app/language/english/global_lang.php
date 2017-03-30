@@ -22,7 +22,7 @@ $lang = array(
 	'global:version' => 'App :1',
 	'global:allrelatedmediacopyright' => 'Yggdrasil is Copyright :1 :2',
 	'global:insecure_action' => 'Insecure action was attempted but caught',
-	'global:maps' => 'Media Map',   
+	'global:maps' => 'Map',   
 	'global:enter' => 'Enter',    	  
 	'global:upload_failed' => 'There was a problem uploading your file. Please try again. If the problem persists, please contact support@thunderbeaardesign.com.',
 	'global:upload_not_allowed' => 'The file type of the file you were trying to upload is not allowed. If you need to upload a file of that type, please compress it into a .zip or any other archive format you might find appropriate.',
@@ -104,7 +104,9 @@ $lang = array(
 	'global:groups'			=>	'User Groups',	
 
 	/** IT Reports **/
-	'global:itreports'			=>	'CDN Usage',	
+	'global:itreports'			=>	'CDN Usage',
+
+
 
 	/** End Dashboard **/
 

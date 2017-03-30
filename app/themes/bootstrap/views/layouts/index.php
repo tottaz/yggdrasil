@@ -133,6 +133,11 @@
 					</li>
 				<?php endif ?>
 
+				<?php if (is_sadmin() or isset($this->permissions['maps'])): ?>
+					<li><?php echo anchor('maps', __('global:maps')); ?> 
+					</li>
+				<?php endif ?>
+
 				<?php if (is_sadmin() or isset($this->permissions['system'])): ?> 
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('system:system'); ?> <b class="caret"></b></a>
